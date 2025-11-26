@@ -1,5 +1,9 @@
-# The Open Governance Schema (OGS)
+# 🏛️ The Open Governance Schema (OGS)
+> The "HTML" for Business Logic.
 
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()
+[![Standard](https://img.shields.io/badge/standard-OGS_v1.0-blue)]()
+[![Maintained by](https://img.shields.io/badge/maintained%20by-QuirkySwirl-orange)](https://definitions.quirkyswirl.com)
 **The open standard for "Headless" Data Governance.**
 
 [](https://opensource.org/licenses/MIT) [](https://json.org)
