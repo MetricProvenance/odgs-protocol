@@ -7,7 +7,8 @@
 [![Maintained by](https://img.shields.io/badge/maintained%20by-QuirkySwirl-orange)](https://definitions.quirkyswirl.com)
 
 [](https://opensource.org/licenses/MIT) [](https://json.org)
-![Headless Data Governance](https://res.cloudinary.com/dcfadz2uh/image/upload/v1764172903/headless-data-governance_tbli5k.png)
+![Infographic](https://res.cloudinary.com/dcfadz2uh/image/upload/v1764178689/infographic-bdm_srl43z.png)
+
 ## 📉 The Problem: Definition Drift
 
 In the modern data stack, business logic is fragmented. The definition of `Gross Margin` in dbt often conflicts with the DAX formula in Power BI, which differs from the calculation in Tableau.
@@ -15,6 +16,8 @@ In the modern data stack, business logic is fragmented. The definition of `Gross
 **Result:** Executives don't trust the dashboard, and Data Engineers spend 40% of their time debugging "why the numbers don't match."
 
 ## 🚀 The Solution: Write Once, Sync Everywhere
+![Headless Data Governance](https://res.cloudinary.com/dcfadz2uh/image/upload/v1764172903/headless-data-governance_tbli5k.png)
+
 ```mermaid
 graph TD
     subgraph PROBLEM ["❌ The Problem: Definition Drift"]
