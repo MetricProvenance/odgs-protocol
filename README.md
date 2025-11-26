@@ -1,9 +1,9 @@
-# 🏛️ The Open Governance Schema (OGS)
-> **The Open Standard for Headless Metric Definitions**  
+# 🏛️ The Open Data Governance Schema (ODGS)
+> **The Open Standard for Headless Data Governance**  
 > Decouples Business Logic from BI Tools
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()
-[![Standard](https://img.shields.io/badge/standard-OGS_v1.0-blue)]()
+[![Standard](https://img.shields.io/badge/standard-ODGS_v1.0-blue)]()
 [![Maintained by](https://img.shields.io/badge/maintained%20by-QuirkySwirl-orange)](https://definitions.quirkyswirl.com)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -42,7 +42,7 @@ graph TD
     style SOLUTION fill:#ccffcc,stroke:#333,stroke-width:1px
 ```
 
-The **Open Governance Schema (OGS)** is a vendor-neutral JSON protocol that acts as the "API" for your business definitions. By decoupling the **Definition** (The "What") from the **Tool** (The "How"), you achieve Headless Governance.
+The **Open Data Governance Schema (ODGS)** is a vendor-neutral JSON protocol that acts as the "API" for your business definitions. By decoupling the **Definition** (The "What") from the **Tool** (The "How"), you achieve Headless Governance.
 
 ### How it works
 
