@@ -17,6 +17,7 @@ In the modern data stack, business logic is fragmented. The definition of `Gross
 **Result:** Executives don't trust the dashboard, and Data Engineers spend 40% of their time debugging "why the numbers don't match."
 
 ## 🚀 The Solution: Write Once, Sync Everywhere
+```mermaid
 graph TD
     subgraph PROBLEM ["❌ The Problem: Definition Drift"]
         A[CFO: 'Gross Margin' in Excel] -->|Disconnect| B[dbt: SQL Logic]
@@ -36,6 +37,8 @@ graph TD
     style D fill:#f9f,stroke:#333,stroke-width:4px,color:black
     style PROBLEM fill:#ffcccc,stroke:#333,stroke-width:1px
     style SOLUTION fill:#ccffcc,stroke:#333,stroke-width:1px
+```
+
 The **Open Governance Schema (OGS)** is a vendor-neutral JSON protocol that acts as the "API" for your business definitions. By decoupling the **Definition** (The "What") from the **Tool** (The "How"), you achieve Headless Governance.
 
 ### How it works
