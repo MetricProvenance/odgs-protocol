@@ -8,8 +8,8 @@
 
 
 
-[](https://opensource.org/licenses/MIT) [](https://json.org)
-
+[OGS](https://opensource.org/licenses/MIT) [JSON](https://json.org)
+![Headless Data Governance](https://res.cloudinary.com/dcfadz2uh/image/upload/v1764172903/headless-data-governance_tbli5k.png)
 ## 📉 The Problem: Definition Drift
 
 In the modern data stack, business logic is fragmented. The definition of `Gross Margin` in dbt often conflicts with the DAX formula in Power BI, which differs from the calculation in Tableau.
