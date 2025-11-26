@@ -7,7 +7,7 @@
 [![Maintained by](https://img.shields.io/badge/maintained%20by-QuirkySwirl-orange)](https://definitions.quirkyswirl.com)
 
 [](https://opensource.org/licenses/MIT) [](https://json.org)
-![Infographic](https://res.cloudinary.com/dcfadz2uh/image/upload/v1764179267/infographic-bdm_cpdnhh.png)
+![Infographic](https://res.cloudinary.com/dcfadz2uh/image/upload/v1764179467/infographic-bdm_poo64c.jpg)
 
 ## 📉 The Problem: Definition Drift
 
