@@ -16,7 +16,7 @@ In the modern data stack, business logic is fragmented. The definition of `Gross
 **Result:** Executives don't trust the dashboard, and Data Engineers spend 40% of their time debugging "why the numbers don't match."
 
 ## 🚀 The Solution: Write Once, Sync Everywhere
-![Headless Data Governance](https://res.cloudinary.com/dcfadz2uh/image/upload/v1764172903/headless-data-governance_tbli5k.png)
+![Headless Data Governance](https://res.cloudinary.com/dcfadz2uh/image/upload/v1764179267/infographic-bdm_cpdnhh.png)
 
 ```mermaid
 graph TD
