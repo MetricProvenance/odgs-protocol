@@ -8,7 +8,7 @@
 [![Standard](https://img.shields.io/badge/standard-ODGS_v1.0-blue)]()
 [![Maintained by](https://img.shields.io/badge/maintained%20by-QuirkySwirl-orange)](https://definitions.quirkyswirl.com)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![JSON](https://img.shields.io/badge/format-JSON-lightgrey)](https://json.org)
 
 ## 📉 The Problem: Definition Drift
@@ -115,13 +115,23 @@ Fork this repository. Use these JSON files as the configuration layer in your CI
 
 ### Option B: The Reference Implementation
 
-If you prefer a managed "Headless Governance" layer that natively supports ODGS and handles the sync to Power BI/dbt automatically, feel free to see the art of possible -  with **[Chartr Project](https://chartr.quirkyswirl.com/)** (Commercially Managed Services - coming soon). 
+If you prefer a managed "Headless Governance" layer that natively supports ODGS and handles the sync to Power BI/dbt automatically, feel free to see the art of possible with these end-state applications built with the same data:
+
+*   **[Clavis](https://clavis.iyer.dev/)** (Plain HTML, CSS, JS)
+*   **[Chartr](https://chartr.quirkyswirl.com/)** (React v2)
+
+These examples demonstrate the end outcome for the business user of what the Open Data Governance Schema can do.
+
+## Commercial Managed Service Partners
+
+For commercial managed services, please visit:
+*   **[QuirkySwirl](https://quirkyswirl.netlify.app/about)** 
 
 -----
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **Apache License 2.0** - see the [LICENSE](LICENSE) file for details.
 
 Copyright © 2025 [Authentic Intelligence Labs](https://github.com/Authentic-Intelligence-Labs)
 
