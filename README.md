@@ -26,13 +26,25 @@ Our Sync Engine then compiles that definition into:
 * DAX for Power BI  
 * **Semantic Context for your AI Agents**
 
+# ODGS: The Open Data Governance Standard
+> **The Protocol for "AI Safety" and "Algorithmic Accountability".**
+
+## 📢 The Problem: Semantic Hallucinations
+When AI agents or LLMs query your database, they guess the meaning of columns. This leads to **Semantic Hallucinations**—where the AI confidently returns the "Net Profit" but calculated it wrong because it didn't know your specific accounting rules.
+
+## 🛡️ The Solution: ODGS
+ODGS is a **machine-readable protocol** (JSON Schema) that explicitly defines your business logic. It serves as the "Ground Truth" for both Humans, AI Agents, and Regulators (EU AI Act).
+
+It's not just documentation; it compiles into:
+*   **dbt Tests** (for engineering reliability)
+*   **Power BI/Tableau** (for BI consistency)
+*   **AI Context** (so Copilots don't lie)
+
 ### **The Killer Feature: Metric Provenance**
 
-Generative AI is a "Reasoning Engine," not a "Knowledge Base." It is great at syntax, but terrible at facts.  When an executive asks, _"What was our Churn last month?"_, the AI hallucinates because it sees three different "Churn" columns in your warehouse.  
+Generative AI is a "Reasoning Engine," not a "Knowledge Base." It is great at syntax, but terrible at facts.  When an executive asks, _"What was our Churn last month?"_, the AI hallucinates because it sees three different "Churn" columns in your warehouse.
 
 ODGS provides **Metric Provenance**. It forces the AI to look up the _human-codified definition_ first. It provides the **Chain of Custody** for your business logic, ensuring that every AI answer can be traced back to a specific, version-controlled definition in your Git repo.
-![metric provenance](https://res.cloudinary.com/drsprx7wk/image/upload/v1764513291/MetricProvenanceFlow_tq90mh.png)
-### **Why "Authentic Intelligence"?**
 
 We believe AI is only as good as the rules you give it.
 

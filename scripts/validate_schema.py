@@ -14,6 +14,27 @@ def load_json(filename):
         print(f"❌ Error: Could not find {filename} at {path}")
         raise
 
+def validate_logic_determinism(metric):
+    """
+    AI Safety Check: Ensures calculation logic is deterministic and free from
+    'Semantic Hallucinations' (ambiguous definitions).
+    """
+    issues = []
+    if "calculation_logic" in metric:
+        logic = metric["calculation_logic"]
+        if not isinstance(logic, dict):
+            return ["calculation_logic must be an object"]
+        
+        # Check 1: Abstract logic must exist (The "Human" Truth)
+        if "abstract" not in logic or not logic["abstract"]:
+            issues.append("Missing 'abstract' logic - Source of Truth undefined.")
+            
+        # Check 2: SQL Standard must exist (The "Machine" Truth)
+        if "sql_standard" not in logic:
+            issues.append("Missing 'sql_standard' - Implementation ambiguous.")
+            
+    return issues
+
 def validate_metric(metric):
     required_fields = ["metric_id", "name", "domain", "calculation_logic", "owner"]
     issues = []
@@ -21,14 +42,9 @@ def validate_metric(metric):
         if field not in metric:
             issues.append(f"Missing required field: {field}")
             
-    # Validate calculation_logic structure
-    if "calculation_logic" in metric:
-        logic = metric["calculation_logic"]
-        if not isinstance(logic, dict):
-             issues.append("calculation_logic must be an object")
-        else:
-            if "abstract" not in logic:
-                issues.append("calculation_logic missing 'abstract' field")
+    # AI Safety / Determinism Check
+    safety_issues = validate_logic_determinism(metric)
+    issues.extend(safety_issues)
                 
     return issues
 
@@ -41,19 +57,19 @@ def validate_data_rule(rule):
     return issues
 
 def validate_all():
-    print("🔍 Running Open Governance Schema Validator...")
+    print("🔍 Running ODGS AI Safety Protocol Validator...")
     has_error = False
     
     # Validate Standard Metrics
     try:
         metrics = load_json('standard_metrics.json')
             
-        print(f"✅ Loaded {len(metrics)} metrics.")
+        print(f"✅ Loaded {len(metrics)} metrics for Anti-Hallucination check.")
         
         for m in metrics:
             issues = validate_metric(m)
             if issues:
-                print(f"❌ Error in metric '{m.get('name', 'Unknown')}': {', '.join(issues)}")
+                print(f"❌ Safety Violation in metric '{m.get('name', 'Unknown')}': {', '.join(issues)}")
                 has_error = True
                 
     except Exception as e:
