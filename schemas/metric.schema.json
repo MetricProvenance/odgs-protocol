@@ -3,25 +3,31 @@
     "type": "object",
     "properties": {
         "metric_id": {
-            "type": "string"
+            "type": "string",
+            "description": "Unique identifier for the metric"
         },
         "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Human-readable name of the metric"
         },
         "domain": {
-            "type": "string"
+            "type": "string",
+            "description": "Functional area (e.g., Finance, HR)"
         },
         "calculation_logic": {
             "type": "object",
             "properties": {
                 "abstract": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Platform-agnostic logic description"
                 },
                 "sql_standard": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Standard ANSI SQL implementation"
                 },
                 "dax_pattern": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Power BI DAX implementation"
                 }
             },
             "required": [
@@ -29,7 +35,37 @@
             ]
         },
         "owner": {
-            "type": "string"
+            "type": "string",
+            "description": "Team or Role responsible for this definition"
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "Draft",
+                "Active",
+                "Deprecated"
+            ],
+            "default": "Draft"
+        },
+        "definition": {
+            "type": "string",
+            "description": "Detailed functional description"
+        },
+        "icon": {
+            "type": "string",
+            "description": "Bootstrap Icon class"
+        },
+        "targetIndustries": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "criticalDqDimensionIds": {
+            "type": "array",
+            "items": {
+                "type": "integer"
+            }
         }
     },
     "required": [
@@ -37,6 +73,7 @@
         "name",
         "domain",
         "calculation_logic",
-        "owner"
+        "owner",
+        "definition"
     ]
 }

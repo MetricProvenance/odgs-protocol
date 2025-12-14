@@ -39,7 +39,7 @@ def init(
     os.makedirs(os.path.join(base_path, "schemas"), exist_ok=True)
     os.makedirs(os.path.join(base_path, "adapters"), exist_ok=True)
     
-    # Create sample standard_metrics.json
+    # Create standard_metrics.json
     sample_metric = {
         "metric_id": "KPI_001",
         "name": "Sample_Metric",
@@ -49,11 +49,25 @@ def init(
             "sql_standard": "SUM(a) + SUM(b)"
         },
         "owner": "Data_Team",
-        "quality_threshold": "99.0%"
+        "quality_threshold": "99.0%",
+        "status": "Active"
     }
-    
     with open(os.path.join(base_path, "standard_metrics.json"), "w") as f:
         json.dump([sample_metric], f, indent=2)
+
+    # Create other protocol files
+    protocol_files = [
+        "standard_dq_dimensions.json",
+        "standard_data_rules.json",
+        "root_cause_factors.json",
+        "business_process_maps.json",
+        "physical_data_map.json",
+        "ontology_graph.json"
+    ]
+    
+    for p_file in protocol_files:
+        with open(os.path.join(base_path, p_file), "w") as f:
+            json.dump([], f, indent=2)
 
     # Create odgs.json config
     config = {
