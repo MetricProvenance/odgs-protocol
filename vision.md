@@ -1,4 +1,5 @@
 # The Strategic Vision for ODGS
+![Strategic Vision](https://res.cloudinary.com/drsprx7wk/image/upload/v1765870414/Gemini_Generated_Image_7aijq97aijq97aij_m9nure.png)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Status](https://img.shields.io/badge/Status-Production%20Ready-success)]()
 [![AI Safety](https://img.shields.io/badge/AI%20Safety-EU%20AI%20Act%20Compliant-blueviolet)]()

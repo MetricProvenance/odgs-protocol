@@ -80,8 +80,6 @@ End-to-end journey from concept to implementation. Includes quickstart, schema r
 The business case for ODGS: Market opportunity, AI Safety compliance, academic partnerships, and the "Swiss Army Knife" thesis.
 
 ---
-![Strategic Vision](https://res.cloudinary.com/drsprx7wk/image/upload/v1765870414/Gemini_Generated_Image_7aijq97aijq97aij_m9nure.png)
----
 
 ## The 7 Core Schemas
 

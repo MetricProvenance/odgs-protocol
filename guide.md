@@ -1,4 +1,5 @@
 # The Complete ODGS Guide
+![ODGS Guide](https://res.cloudinary.com/drsprx7wk/image/upload/v1765401982/Headless-ODGS_iklck3.png)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Status](https://img.shields.io/badge/Status-Production%20Ready-success)]()
 [![AI Safety](https://img.shields.io/badge/AI%20Safety-EU%20AI%20Act%20Compliant-blueviolet)]()
