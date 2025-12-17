@@ -1,11 +1,12 @@
 # Contributing to ODGS
-
-Thank you for your interest in contributing to the Open Data Governance Schema (ODGS)! We welcome contributions from researchers, engineers, and domain experts.
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Status](https://img.shields.io/badge/Status-Production%20Ready-success)]()
 [![AI Safety](https://img.shields.io/badge/AI%20Safety-EU%20AI%20Act%20Compliant-blueviolet)]()
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)]()
 [![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
+
+Thank you for your interest in contributing to the Open Data Governance Schema (ODGS)! We welcome contributions from researchers, engineers, and domain experts.
+
 
 > **"The Protocol for Algorithmic Accountability"**
 ## 🎯 How to Contribute
