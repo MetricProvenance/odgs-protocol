@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - name: "Kartik Iyer"
+    email: "partner@metricprovenance.com"
+title: "Open Data Governance Schema (ODGS)"
+abstract: "The Open Data Governance Schema (ODGS) is a vendor-neutral JSON protocol that serves as the single source of truth for business logic, designed to enable AI Safety and EU AI Act compliance through Metric Provenance."
+version: 1.2.1
+date-released: 2026-01-08
+license: Apache-2.0
+url: "https://github.com/Authentic-Intelligence-Labs/headless-data-governance"
+repository-code: "https://github.com/Authentic-Intelligence-Labs/headless-data-governance"
+keywords:
+  - "data-governance"
+  - "schema"
+  - "metrics"
+  - "kpi"
+  - "data-quality"
+  - "ai-safety"
+  - "eu-ai-act"
