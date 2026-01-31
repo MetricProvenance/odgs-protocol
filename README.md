@@ -110,4 +110,4 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 Apache License 2.0 - see [LICENSE](LICENSE) for details.
 
-**Copyright © 2025 [Authentic Intelligence Labs](https://github.com/Authentic-Intelligence-Labs)**
+**Copyright © 2025 [Metric Provenance](https://github.com/MetricProvenance)**
