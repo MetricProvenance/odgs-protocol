@@ -14,7 +14,9 @@ function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = window.location.hostname === "localhost"
+  ? "http://localhost:8000"
+  : "https://odgs-alpha.onrender.com";
 
 const SECTORS = [
   "Critical Infrastructure", "Biometrics", "Education",
