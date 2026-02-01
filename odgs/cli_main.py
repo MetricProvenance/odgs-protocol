@@ -11,6 +11,7 @@ from rich.panel import Panel
 # Note: sys.path hack removed as we are now a proper package
 
 from .scripts.validate_schema import validate_all
+from .scripts.hashing import generate_project_hash
 from .adapters.dbt.generate_seeds import generate_seeds
 from .adapters.dbt.generate_tests import generate_tests
 from .adapters.dbt.generate_semantic_models import generate_dbt_semantic_models
@@ -143,6 +144,56 @@ def add(
 
     console.print(f"✅ Added [bold cyan]{name}[/bold cyan] to {metrics_file}")
 
+def get_registry_path():
+    # Helper to find registry.json. Checks CWD then package root.
+    cwd_reg = os.path.join(os.getcwd(), "registry.json")
+    if os.path.exists(cwd_reg):
+        return cwd_reg
+    
+    # Fallback to package root (dev mode)
+    package_reg = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "registry.json")
+    if os.path.exists(package_reg):
+        return package_reg
+        
+    return None
+
+@app.command()
+def hash(
+    verify: bool = typer.Option(False, "--verify", help="Check if current hash matches the registry")
+):
+    """
+    Generate SHA-256 Governance Hash for the current project state.
+    """
+    console.print(Panel("🔐 Generating Deterministic Semantic Hash..."))
+    
+    result = generate_project_hash(os.getcwd())
+    master_hash = result["master_hash"]
+    
+    console.print(f"Master Hash: [bold yellow]{master_hash}[/bold yellow]")
+    console.print("\nComponent Hashes:")
+    for file, h in result["components"].items():
+        status = "[green]OK[/green]" if "MISSING" not in h and "ERROR" not in h else "[red]FAIL[/red]"
+        console.print(f"  {file}: {status} ({h[:8]}...)")
+
+    if verify:
+        reg_path = get_registry_path()
+        if not reg_path:
+             console.print("\n[bold red]Registry Verification Failed:[/bold red] registry.json not found.")
+             raise typer.Exit(code=1)
+             
+        with open(reg_path, 'r') as f:
+            registry = json.load(f)
+            
+        latest = registry.get("latest_verified_hash", "")
+        if master_hash == latest:
+            console.print("\n✅ [bold green]Systems Nominal. Hash matches Registry ledger.[/bold green]")
+        else:
+            console.print("\n🛑 [bold red]COMPLIANCE ALERT: Hash Mismatch![/bold red]")
+            console.print(f"  Expected: {latest}")
+            console.print(f"  Actual:   {master_hash}")
+            console.print("  [dim]Data Drift Detected. Execution halted.[/dim]")
+            raise typer.Exit(code=1)
+
 @app.command()
 def validate():
     """
@@ -150,12 +201,26 @@ def validate():
     """
     console.print("🛡️  Running ODGS AI Safety Protocol Checks...")
     console.print("   [dim]Verifying Semantic Hallucination safeguards...[/dim]")
+    
+    # Step 1: Structural Validation
     try:
         validate_all()
-        console.print("✅ All systems go. Data stack is EU AI ACT Compliant.")
     except Exception as e:
-        console.print(f"❌ Validation Failed: {e}")
+        console.print(f"❌ Structural Validation Failed: {e}")
         raise typer.Exit(code=1)
+        
+    # Step 2: Hash Integrity Check (The "Hard Stop")
+    console.print("\n   [dim]Verifying Registry Integrity...[/dim]")
+    try:
+        hash(verify=True)
+    except typer.Exit:
+         # hash verify raises Exit(1) on failure, re-raise it
+         raise
+    except Exception as e:
+         console.print(f"❌ Registry Check Failed: {e}")
+         raise typer.Exit(code=1)
+         
+    console.print("✅ All systems go. Data stack is EU AI ACT Compliant.")
 
 @app.command()
 def build():

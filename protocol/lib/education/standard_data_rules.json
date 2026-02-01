@@ -1,0 +1,16 @@
+[
+  {
+    "rule_id": "urn:odgs:rule:bias_threshold_check",
+    "name": "Admissions Bias Threshold",
+    "domain": "Compliance",
+    "calculation_logic": "metric_value >= 0.8 AND metric_value <= 1.25",
+    "owner": "Legal Counsel"
+  },
+  {
+    "rule_id": "urn:odgs:rule:completeness_sla",
+    "name": "High-Risk Data Completeness SLA",
+    "domain": "Data Quality",
+    "calculation_logic": "metric_value > 0.98",
+    "owner": "Data Governance Manager"
+  }
+]

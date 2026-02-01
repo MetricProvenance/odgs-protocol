@@ -1,0 +1,19 @@
+[
+  {
+    "metric_id": "KPI_CI_001",
+    "name": "Grid_Uptime_Percentage",
+    "domain": "Operations",
+    "definition": "Percentage of time the energy grid is operational without interruption.",
+    "calculation_logic": {
+      "abstract": "(Total Hours - Downtime) / Total Hours",
+      "sql_standard": "AVG(CASE WHEN status = 'active' THEN 1 ELSE 0 END)"
+    },
+    "owner": "Ops_Director",
+    "status": "Active",
+    "compliance": {
+      "ai_risk_level": "High",
+      "gdpr_pii": false,
+      "data_classification": "Critical"
+    }
+  }
+]

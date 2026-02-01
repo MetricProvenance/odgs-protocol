@@ -1,0 +1,22 @@
+[
+  {
+    "rule_id": "urn:odgs:rule:ai_model_drift_threshold",
+    "name": "AI Model Performance Stability Rule",
+    "domain": "AI Governance",
+    "calculation_logic": {
+      "abstract": "Triggers a validation failure if the yield prediction accuracy deviates by more than 15% from the training baseline over a 30-day window.",
+      "sql_standard": "SELECT CASE WHEN (ABS(baseline_accuracy - current_accuracy) / baseline_accuracy) > 0.15 THEN 'FAIL' ELSE 'PASS' END FROM monitor.model_performance_logs"
+    },
+    "owner": "AI Engineering Manager"
+  },
+  {
+    "rule_id": "urn:odgs:rule:farmer_pii_anonymization",
+    "name": "Farm Location Spatial Privacy Rule",
+    "domain": "Data Privacy",
+    "calculation_logic": {
+      "abstract": "Ensures that GPS coordinates are rounded to 3 decimal places to mask specific farm ownership in public-facing sustainability reports as per GDPR Recital 26.",
+      "sql_standard": "UPDATE gold.public_agri_stats SET latitude = ROUND(latitude, 3), longitude = ROUND(longitude, 3)"
+    },
+    "owner": "Data Protection Officer"
+  }
+]

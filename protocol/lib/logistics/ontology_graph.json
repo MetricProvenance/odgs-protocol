@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "standard": "ODGS-Logistics-Ext"
+  },
+  "graph_edges": [
+    {
+      "source_urn": "urn:odgs:metric:delivery_delay_probability",
+      "target_urn": "urn:odgs:rule:ai_accuracy_threshold_01",
+      "relationship": "VALIDATED_BY"
+    },
+    {
+      "source_urn": "urn:odgs:metric:delivery_delay_probability",
+      "target_urn": "urn:odgs:rule:bias_mitigation_routing",
+      "relationship": "VALIDATED_BY"
+    },
+    {
+      "source_urn": "urn:odgs:metric:driver_fatigue_index",
+      "target_urn": "urn:odgs:rule:gdpr_anonymization_logistics",
+      "relationship": "VALIDATED_BY"
+    }
+  ]
+}

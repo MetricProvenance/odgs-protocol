@@ -12,6 +12,17 @@
 
 **ODGS** is an open-source, vendor-neutral JSON protocol that serves as the **single source of truth** for your business logic. It solves the "Metric Drift" problem—where "Revenue" means three different things in three different tools—by defining metrics **once** and compiling them to **Snowflake**, **Power BI**, **dbt**, and **AI Agents** automatically.
 
+---
+
+## ⚡ Recent Milestone: The V2 Protocol Forge
+We have recently integrated **Gemini 3.0 Flash** to evolve ODGS from a static schema into an **Autonomous Governance Forge**.
+
+- **Full Protocol Generation**: Generate interconnected 4-file bundles (Metrics, Rules, Ontology, Data Map) for any industry sector in seconds.
+- **Deterministic Integrity**: Every generated artifact is sealed with a **Digital Fingerprint (SHA-256)** to enable drift detection and AI grounding.
+- **Governance Console**: A professional explorer to visualize the "Self-Annealing" process and business impact metrics.
+
+---
+
 Think of it as the **"Universal Remote for Data"**. Instead of programming the same metric into multiple tools, you define it once in ODGS, and it syncs everywhere.
 
 ### Why It Matters

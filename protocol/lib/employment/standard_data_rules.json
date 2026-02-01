@@ -1,0 +1,42 @@
+[
+  {
+    "rule_id": "RULE_EMP_001",
+    "name": "Mandatory Human-in-the-Loop (HITL) Validation",
+    "domain": "Accuracy",
+    "calculation_logic": {
+      "abstract": "Ensures every high-risk AI recruitment recommendation has a corresponding reviewer_id and timestamp before finalization.",
+      "sql_standard": "SELECT decision_id FROM ai_recommendations WHERE risk_level = 'High' AND (reviewer_id IS NULL OR review_timestamp IS NULL)"
+    },
+    "owner": "HR Operations Lead"
+  },
+  {
+    "rule_id": "RULE_EMP_002",
+    "name": "Sensitive Attribute Masking",
+    "domain": "Validity",
+    "calculation_logic": {
+      "abstract": "Checks that protected attributes (race, religion, health) are not passed as features directly to the model training pipeline.",
+      "sql_standard": "SELECT column_name FROM information_schema.columns WHERE table_name = 'model_training_input' AND column_name IN ('race', 'religion', 'sexual_orientation', 'disability_status')"
+    },
+    "owner": "Lead Data Scientist"
+  },
+  {
+    "rule_id": "RULE_EMP_003",
+    "name": "AI Transparency Notice Validity",
+    "domain": "Completeness",
+    "calculation_logic": {
+      "abstract": "Ensures every candidate processed by an AI system has signed a specific disclosure consent form.",
+      "sql_standard": "SELECT applicant_id FROM applicants WHERE processed_by_ai = TRUE AND ai_disclosure_accepted = FALSE"
+    },
+    "owner": "Compliance Officer"
+  },
+  {
+    "rule_id": "RULE_EMP_004",
+    "name": "Dataset Representativeness Check",
+    "domain": "Consistency",
+    "calculation_logic": {
+      "abstract": "Verify that training data distribution for age groups does not deviate more than 10% from the actual labor market census data.",
+      "sql_standard": "SELECT age_group, ABS(training_pct - market_pct) as variance FROM age_distribution_audit WHERE variance > 0.10"
+    },
+    "owner": "ML Ops Engineer"
+  }
+]

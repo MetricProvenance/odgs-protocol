@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "warehouse_type": "Snowflake",
+    "environment": "Production"
+  },
+  "mappings": [
+    {
+      "concept_urn": "urn:odgs:metric:edu_bias_disparate_impact",
+      "concept_name": "Student Admission Bias Ratio",
+      "bindings": [
+        {
+          "platform": "Snowflake",
+          "database": "EDU_PROD",
+          "schema": "AI_AUDIT",
+          "table": "FACT_ADMISSIONS_BIAS",
+          "column_mapping": {
+            "metric_value": "impact_ratio",
+            "timestamp": "calculation_dt"
+          }
+        }
+      ]
+    },
+    {
+      "concept_urn": "urn:odgs:metric:edu_data_completeness",
+      "concept_name": "Dataset Completeness for Grading AI",
+      "bindings": [
+        {
+          "platform": "Databricks",
+          "database": "gold_layer",
+          "schema": "governance",
+          "table": "ai_training_quality_metrics",
+          "column_mapping": {
+            "metric_value": "completeness_score",
+            "feature_group": "grading_engine_v1"
+          }
+        }
+      ]
+    }
+  ]
+}

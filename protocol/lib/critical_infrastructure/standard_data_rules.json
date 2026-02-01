@@ -1,0 +1,12 @@
+[
+  {
+    "rule_id": "RULE_CI_001",
+    "name": "Voltage_Range_Check",
+    "domain": "Safety",
+    "calculation_logic": {
+      "abstract": "Voltage must be between 220V and 240V",
+      "sql_standard": "voltage BETWEEN 220 AND 240"
+    },
+    "owner": "Safety_Team"
+  }
+]

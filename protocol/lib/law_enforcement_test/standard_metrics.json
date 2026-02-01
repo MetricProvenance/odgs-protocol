@@ -1,0 +1,53 @@
+[
+  {
+    "metric_id": "KPI_LE_001",
+    "name": "Predictive_Bias_Disparity_Ratio",
+    "domain": "AI_Fairness_Governance",
+    "definition": "Measures the ratio of false positive rates between different protected demographic groups in predictive policing models to comply with EU AI Act Article 10(2).",
+    "calculation_logic": {
+      "abstract": "The ratio of the False Positive Rate (FPR) of the demographic group with the highest error rate compared to the demographic group with the lowest error rate.",
+      "sql_standard": "SELECT MAX(fpr) / NULLIF(MIN(fpr), 0) FROM (SELECT demographic_group, (SUM(CASE WHEN prediction = 1 AND actual = 0 THEN 1 ELSE 0 END) * 1.0 / NULLIF(SUM(CASE WHEN actual = 0 THEN 1 ELSE 0 END), 0)) as fpr FROM model_evaluation_logs GROUP BY demographic_group)"
+    },
+    "owner": "Data_Ethics_Officer",
+    "status": "Active",
+    "compliance": {
+      "ai_risk_level": "High",
+      "gdpr_pii": true,
+      "data_classification": "Restricted"
+    }
+  },
+  {
+    "metric_id": "KPI_LE_002",
+    "name": "Human_Oversight_Intervention_Rate",
+    "domain": "Operational_Transparency",
+    "definition": "The percentage of AI-generated law enforcement recommendations that were reviewed and either confirmed or overridden by a human officer, as per Article 14.",
+    "calculation_logic": {
+      "abstract": "Count of incidents with a documented human 'override' or 'approval' status divided by total AI recommendations.",
+      "sql_standard": "SELECT (COUNT(CASE WHEN human_review_status IN ('Approved', 'Overridden') THEN 1 END) * 100.0 / COUNT(*)) FROM ai_decision_audit_trail"
+    },
+    "owner": "Chief_Compliance_Officer",
+    "status": "Active",
+    "compliance": {
+      "ai_risk_level": "High",
+      "gdpr_pii": false,
+      "data_classification": "Internal"
+    }
+  },
+  {
+    "metric_id": "KPI_LE_003",
+    "name": "Model_Accuracy_Drift_Score",
+    "domain": "Technical_Robustness",
+    "definition": "Tracks the deviation of model precision over time in biometric identification systems to ensure reliability requirements of Article 15.",
+    "calculation_logic": {
+      "abstract": "Difference between baseline precision (at training) and current window precision.",
+      "sql_standard": "SELECT (baseline_precision - current_precision) FROM model_performance_metrics WHERE model_type = 'Biometric_ID' ORDER BY evaluation_timestamp DESC LIMIT 1"
+    },
+    "owner": "Lead_AI_Engineer",
+    "status": "Active",
+    "compliance": {
+      "ai_risk_level": "High",
+      "gdpr_pii": false,
+      "data_classification": "Confidential"
+    }
+  }
+]
