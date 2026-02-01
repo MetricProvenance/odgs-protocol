@@ -3,6 +3,8 @@ dist/
 build/
 *.egg-info/
 *.tgz
+*.env
+.env
 
 # Python
 __pycache__/
