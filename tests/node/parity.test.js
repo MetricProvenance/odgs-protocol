@@ -5,7 +5,8 @@ import scenarios from '../fixtures/standard_scenarios.json';
 
 describe('Protocol Parity (Node.js)', () => {
     const interceptor = new OdgsInterceptor();
-    const processUrn = "urn:odgs:process:test";
+    // Use a real blocked process from ontology_graph.json (Rule 2021 blocks O2C_S03)
+    const processUrn = "urn:odgs:process:O2C_S03";
 
     scenarios.forEach((scenario) => {
         it(`Scenario ${scenario.id}: Should ${scenario.expected_result}`, () => {

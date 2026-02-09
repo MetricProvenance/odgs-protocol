@@ -1,4 +1,10 @@
 # ODGS Protocol v2.0.0
+
+> [!IMPORTANT]
+> **Looking for the Flat JSON Version?**
+> If you need the lightweight, non-cryptographic version for AI Chatbots or RAG Copilots (v1.2.x), please visit the [Core Repository](https://github.com/MetricProvenance/odgs-core).
+> *   **Install v1:** `pip install "odgs<2"`
+> *   **Install v2 (This Repo):** `pip install odgs`
 ### The Sovereign Engine for Semantic Integrity in High-Risk AI Systems
 
 > **Legal Reference**: Compliant with **Regulation (EU) 2024/1689 (EU AI Act)**, Article 10 (Data Governance) and Article 12 (Record-Keeping).

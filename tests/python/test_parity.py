@@ -27,8 +27,8 @@ def test_protocol_parity(scenario):
     rule_id = scenario["rule_id"]
     expected = scenario["expected_result"]
     
-    # Mock process URN for testing
-    process_urn = "urn:odgs:process:test"
+    # Use a real blocked process from ontology_graph.json (Rule 2021 blocks O2C_S03)
+    process_urn = "urn:odgs:process:O2C_S03"
     
     if expected == "PASS":
         # Should not raise exception

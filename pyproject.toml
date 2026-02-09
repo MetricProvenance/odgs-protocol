@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "odgs"
-version = "2.0.0"
+version = "2.0.1"
 description = "Internal build of the ODGS Protocol"
 readme = "README.md"
 requires-python = ">=3.8"
