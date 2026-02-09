@@ -1,0 +1,15 @@
+# .npmignore - The Firewall
+# Strictly block Python source and dev assets from the NPM package
+
+src/
+tests/python/
+scripts/
+pyproject.toml
+requirements.txt
+MANIFEST.in
+*.py
+*.pyc
+__pycache__/
+.venv/
+.git/
+.github/

@@ -1,8 +1,0 @@
-fastapi
-uvicorn
-google-generativeai
-python-dotenv
-sse-starlette
-pydantic
-typer
-rich

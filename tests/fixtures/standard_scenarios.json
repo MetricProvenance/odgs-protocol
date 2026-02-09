@@ -1,0 +1,18 @@
+[
+    {
+        "id": "2021-valid",
+        "rule_id": "2021",
+        "input": {
+            "container_id": "BICU1234567"
+        },
+        "expected_result": "PASS"
+    },
+    {
+        "id": "2021-invalid",
+        "rule_id": "2021",
+        "input": {
+            "container_id": "BAD-ID"
+        },
+        "expected_result": "BLOCK"
+    }
+]

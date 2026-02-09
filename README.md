@@ -1,124 +1,140 @@
-# Open Data Governance Schema (ODGS)
-![Explainer ODGS](https://res.cloudinary.com/drsprx7wk/image/upload/v1765951443/ODGS-explainer_ugwrqz.png)
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Status](https://img.shields.io/badge/Status-Production%20Ready-success)]()
-[![AI Safety](https://img.shields.io/badge/AI%20Safety-EU%20AI%20Act%20Compliant-blueviolet)]()
+# ODGS Protocol v2.0.0
+### The Sovereign Engine for Semantic Integrity in High-Risk AI Systems
 
-> **"The Protocol for Algorithmic Accountability"**
+> **Legal Reference**: Compliant with **Regulation (EU) 2024/1689 (EU AI Act)**, Article 10 (Data Governance) and Article 12 (Record-Keeping).
 
----
-
-## What is ODGS?
-
-**ODGS** is an open-source, vendor-neutral JSON protocol that serves as the **single source of truth** for your business logic. It solves the "Metric Drift" problem—where "Revenue" means three different things in three different tools—by defining metrics **once** and compiling them to **Snowflake**, **Power BI**, **dbt**, and **AI Agents** automatically.
+![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg) ![Status](https://img.shields.io/badge/Status-Reference_Implementation-green.svg) ![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act_High_Risk-yellow.svg)
 
 ---
 
-## ⚡ Recent Milestone: The V2 Protocol Forge
-We have recently integrated **Gemini 3.0 Flash** to evolve ODGS from a static schema into an **Autonomous Governance Forge**.
+## 🚀 Quick Start
 
-- **Full Protocol Generation**: Generate interconnected 4-file bundles (Metrics, Rules, Ontology, Data Map) for any industry sector in seconds.
-- **Deterministic Integrity**: Every generated artifact is sealed with a **Digital Fingerprint (SHA-256)** to enable drift detection and AI grounding.
-- **Governance Console**: A professional explorer to visualize the "Self-Annealing" process and business impact metrics.
+The ODGS Protocol is a "Hub & Spoke" toolchain.
+*   **The Hub (Python)**: The Definition Engine & CLI. Used to define, hash, and sign protocols.
+*   **The Spoke (Node.js)**: The Runtime Client. Used to enforce protocols in JS/React apps.
+
+### 1. Installation
+
+**For Data Engineers & Architects (The Hub):**
+```bash
+pip install odgs
+```
+
+**For App Developers (The Spoke):**
+```bash
+npm install odgs
+# Optional: Install Python CLI for project scaffolding
+pip install odgs
+```
+
+### 2. Usage
+
+#### Initialize a Sovereign Protocol
+```bash
+odgs init my_protocol
+cd my_protocol
+# Created: /legislative, /executive, /judiciary
+```
+
+#### Hash & Bind (The Cryptographic Handshake)
+```bash
+odgs hash
+# Output: [INFO] Legislative Plane Hash: sha256:7f9a2b90...
+```
 
 ---
 
-Think of it as the **"Universal Remote for Data"**. Instead of programming the same metric into multiple tools, you define it once in ODGS, and it syncs everywhere.
+## 1. Abstract
+The Open Data Governance Standard (ODGS) is a vendor-neutral protocol for the **cryptographic enforcement of Semantic Integrity**.
 
-### Why It Matters
+Unlike traditional data catalogs that passively observe metadata ("The Phonebook"), ODGS functions as a **Runtime Interceptor** ("The Border Control"). It binds data payloads to their legal definitions at the millisecond of execution, throwing a `ProcessBlockedException` (Hard Stop) if the semantic binding is violated.
 
-- **For Enterprises**: Achieve **EU AI Act compliance** through Metric Provenance
-- **For Data Teams**: Write definitions once, eliminate copy-paste SQL across tools  
-- **For AI Engineers**: Prevent "Semantic Hallucinations" by grounding LLMs in structured, verifiable context
-
-![EU AI Act Compliance](https://res.cloudinary.com/drsprx7wk/image/upload/v1765402023/EU-AI-Act-ODGS_ce3wuo.png)
 ---
 
-## Architecture
+## 2. The 3-Plane Architecture
+ODGS enforces the separation of powers required by sovereign data ecosystems.
+
+| Plane | Role | Function |
+| :--- | :--- | :--- |
+| **🏛️ Legislative** | **The Definition** | Defines *WHAT* must be governed (KPIs, Relationships, Quality Standards). |
+| **⚖️ Judiciary** | **The Enforcer** | Defines *HOW* to validate it (Logic, Limits, Failure Diagnosis). |
+| **⚔️ Executive** | **The Execution** | Defines *WHERE* it applies (Lifecycle Stage, Database Bindings). |
+
+---
+
+## 3. The Sequence of Denial (How it Works)
+The ODGS Interceptor performs a **Cryptographic Handshake** before allowing data consumption.
 
 ```mermaid
-graph LR
-    ODGS[("ODGS Protocol
-    (JSON Truth)")] -->|Compiles to| dbt["dbt Semantic Layer"]
-    ODGS -->|Compiles to| PBI["Power BI (TMSL)"]
-    ODGS -->|Compiles to| Tableau["Tableau (TDS)"]
-    ODGS -->|Feeds Context| AI["AI Agents (RAG)"]
+sequenceDiagram
+    participant AI as AI Agent / Application
+    participant G as ODGS Guard (Interceptor)
+    participant L as Legislative Plane (JSON)
     
-    style ODGS fill:#4CAF50,color:white,stroke:#333,stroke-width:3px
-```
-
-**Headless Governance** means decoupling the *Definition* (your business rules) from the *Tool* (Tableau, Power BI, etc.). ODGS acts as the compilation layer that transforms abstract logic into tool-native code.
-
-### Authentic vs. Artificial Intelligence
-
-We believe AI is only as good as the rules you give it.
-
-- **Artificial Intelligence** guesses the answer based on probability
-- **Authentic Intelligence** knows the answer based on codified human expertise
-
-ODGS captures the *Authentic Intelligence* of your domain experts—the nuances, the exceptions, the business rules—and codifies them into a standard that AI can respect.
-
-> **"The Table Format War is over. The Semantic War has just begun. Don't build another silo. Build on the Standard."**
-
-![ODGS Protocol Architecture](https://res.cloudinary.com/drsprx7wk/image/upload/v1764513291/headless-architecure_ilnqfx.png)
----
-
-## Quick Start
-
-```bash
-# Install
-pip install odgs
-
-# Initialize a project
-odgs init my-governance-layer
-cd my-governance-layer
-
-# Validate your schemas
-odgs validate
-
-# Build artifacts for all downstream tools
-odgs build --target all
+    AI->>G: 1. Request Data (Payload + ContextID)
+    G->>L: 2. Fetch Immutable Definition & Hash
+    L-->>G: 3. Return Hash (e.g., sha256:7f9a...)
+    G->>G: 4. VALIDATE BINDING (Hash Match?)
+    
+    alt SEMANTIC DRIFT DETECTED
+        G-->>AI: 5. ⛔ HARD STOP (ProcessBlockedException)
+        G->>Log: 6. Write to Audit Log (Art. 12)
+    else CLEAN HANDSHAKE
+        G-->>AI: 5. 🟢 PASS (Signed Data Object)
+    end
 ```
 
 ---
 
-## Documentation
+## 4. Code Examples
 
-📘 **[Complete Guide](guide.md)**  
-End-to-end journey from concept to implementation. Includes quickstart, schema reference, CLI commands, and adapter examples.
+### Python (The Engine)
+```python
+from odgs import OdgsInterceptor, ProcessBlockedException
 
-🎯 **[Strategic Vision](vision.md)**  
-The business case for ODGS: Market opportunity, AI Safety compliance, academic partnerships, and the "Swiss Army Knife" thesis.
+guard = OdgsInterceptor()
+
+try:
+    guard.intercept(
+        process_urn="urn:odgs:process:O2C_S03", 
+        required_integrity_hash="sha256:7f9a2b90cc...", 
+        data_context={"container_id": "INVALID 123"}
+    )
+except ProcessBlockedException as e:
+    print(f"⛔ HARD STOP: {e}")
+    sys.exit(1)
+```
+
+### Node.js (The Client)
+```javascript
+import { OdgsInterceptor, ProcessBlockedException } from 'odgs';
+
+const guard = new OdgsInterceptor();
+
+try {
+  guard.intercept(
+    "urn:odgs:process:O2C_S03", 
+    { container_id: "BAD_ID" },
+    "sha256:7f9a2b90cc..."
+  );
+} catch (e) {
+  console.error("⛔ JS HARD STOP: Blocked by ODGS Protocol.");
+}
+```
 
 ---
 
-## The 7 Core Schemas
+## 5. Reference Artifacts
 
-| Schema | Purpose |
-|:---|:---|
-| [standard_metrics.json](../protocol/lib/standard_metrics.json) | KPI definitions (logic, ownership, compliance tags) |
-| [standard_data_rules.json](../protocol/lib/standard_data_rules.json) | Validation rules (regex, nulls, ranges) |
-| [standard_dq_dimensions.json](../protocol/lib/standard_dq_dimensions.json) | Data quality categories (Accuracy, Timeliness) |
-| [root_cause_factors.json](../protocol/lib/root_cause_factors.json) | Taxonomy for data failures (Process Gap, Integration Failure) |
-| [business_process_maps.json](../protocol/lib/business_process_maps.json) | Process workflows (Order-to-Cash, Procure-to-Pay) |
-| [physical_data_map.json](../protocol/lib/physical_data_map.json) | Mapping logic to database tables/columns |
-| [ontology_graph.json](../protocol/lib/ontology_graph.json) | Knowledge graph (Customer *has* Orders) |
+| Artifact | EU AI Act Alignment |
+| --- | --- |
+| `/legislative/standard_metrics.json` | **Art. 10**: Data Governance & Management |
+| `/schemas/audit_log_v1.json` | **Art. 12**: Technical Documentation & Logs |
 
 ---
 
-## Contributing
+## ⚠️ Legal Disclaimer
 
-We welcome contributions! Whether you're:
-- **Researchers**: Expanding the DQ Dimensions taxonomy  
-- **Engineers**: Building adapters for new tools (Looker, Qlik)  
-- **Domain Experts**: Refining the Root Cause taxonomy
+**ODGS provides the technical capability for Article 10 & 12 compliance; it does not guarantee legal immunity.**
 
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
----
-
-## License
-
-Apache License 2.0 - see [LICENSE](LICENSE) for details.
-
-**Copyright © 2025 [Metric Provenance](https://github.com/MetricProvenance)**
+The Organization (User) remains the sole Liability Holder. ODGS is the mechanism (The Lock); the Organization is responsible for the policy (The Key). This software is provided "as is," without warranty of any kind, express or implied.

@@ -1,17 +1,17 @@
-# Build artifacts
-dist/
-build/
-*.egg-info/
-*.tgz
-*.env
-.env
-
 # Python
 __pycache__/
 *.py[cod]
+*$py.class
+.venv/
+env/
+dist/
+build/
+*.egg-info/
 
 # Node
 node_modules/
+npm-debug.log
 
-# System
-.DS_Store
+# ODGS Generated
+*.log
+lib/schemas/

@@ -1,0 +1,16 @@
+# MANIFEST.in - The Firewall
+# Strictly block Node source and dev assets from the PyPI package
+
+graft src
+include README.md
+include LICENSE
+include pyproject.toml
+
+# THE FIREWALL
+prune lib
+prune tests/node
+exclude package.json
+exclude package-lock.json
+global-exclude *.js
+global-exclude *.ts
+global-exclude node_modules

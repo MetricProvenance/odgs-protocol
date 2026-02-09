@@ -6,8 +6,8 @@ authors:
     email: "partner@metricprovenance.com"
 title: "Open Data Governance Schema (ODGS)"
 abstract: "The Open Data Governance Schema (ODGS) is a vendor-neutral JSON protocol that serves as the single source of truth for business logic, designed to enable AI Safety and EU AI Act compliance through Metric Provenance."
-version: 1.2.1
-date-released: 2026-01-08
+version: 2.2.0
+date-released: 2026-02-09
 license: Apache-2.0
 url: "https://github.com/Authentic-Intelligence-Labs/headless-data-governance"
 repository-code: "https://github.com/Authentic-Intelligence-Labs/headless-data-governance"
