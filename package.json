@@ -1,0 +1,39 @@
+{
+  "name": "odgs",
+  "version": "3.3.0",
+  "description": "ODGS Protocol — Sovereign Reference Implementation (Node.js)",
+  "author": "Metric Provenance <partner@metricprovenance.com>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetricProvenance/odgs-protocol.git"
+  },
+  "homepage": "https://metricprovenance.com",
+  "keywords": [
+    "data-governance",
+    "eu-ai-act",
+    "sovereign",
+    "compliance",
+    "interceptor"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "main": "lib/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "prepublishOnly": "python3 ./scripts/sync_schemas.py",
+    "postinstall": "node scripts/banner.js"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "expr-eval": "^2.0.2"
+  },
+  "devDependencies": {
+    "vitest": "^1.0.0"
+  }
+}

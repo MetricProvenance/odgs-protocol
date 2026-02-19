@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "urn:odgs:schema:metric",
+    "title": "ODGS Standard Metric",
+    "description": "Schema for validating individual metric definitions in the Legislative plane.",
+    "type": "object",
+    "required": [
+        "metric_id",
+        "name",
+        "domain"
+    ],
+    "properties": {
+        "metric_id": {
+            "type": "string"
+        },
+        "urn": {
+            "type": "string",
+            "pattern": "^urn:odgs:metric:"
+        },
+        "name": {
+            "type": "string",
+            "minLength": 1
+        },
+        "domain": {
+            "type": "string",
+            "minLength": 1
+        },
+        "definition": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "icon": {
+            "type": "string"
+        },
+        "owner": {
+            "type": "string"
+        },
+        "calculation_logic": {
+            "type": "object"
+        },
+        "abstract_calculation": {
+            "type": "string"
+        },
+        "sql_pattern": {
+            "type": "string"
+        },
+        "dax_pattern": {
+            "type": "string"
+        },
+        "example": {
+            "type": "string"
+        },
+        "interpretation": {
+            "type": "string"
+        },
+        "targetIndustries": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "criticalDqDimensionIds": {
+            "type": "array",
+            "items": {
+                "type": [
+                    "string",
+                    "integer"
+                ]
+            }
+        }
+    },
+    "additionalProperties": false
+}

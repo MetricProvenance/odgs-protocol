@@ -1,0 +1,1366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+    <!ENTITY odgs "https://metricprovenance.com/odgs/ontology#">
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#">
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+    <!ENTITY dcterms "http://purl.org/dc/terms/">
+    <!ENTITY prov "http://www.w3.org/ns/prov#">
+]>
+<rdf:RDF
+    xmlns:odgs="&odgs;"
+    xmlns:owl="&owl;"
+    xmlns:rdf="&rdf;"
+    xmlns:rdfs="&rdfs;"
+    xmlns:xsd="&xsd;"
+    xmlns:dcterms="&dcterms;"
+    xmlns:prov="&prov;">
+
+    <!-- ================================================================== -->
+    <!-- ODGS ONTOLOGY — W3C OWL/RDF Formal Specification                   -->
+    <!-- Version: 3.3.0 (Generated from canonical JSON — 19 Feb 2026)       -->
+    <!-- Standard: EU AI Act (2024/1689), ISO/IEC 42001, NEN 381 525        -->
+    <!-- ================================================================== -->
+
+    <owl:Ontology rdf:about="&odgs;">
+        <dcterms:title xml:lang="en">Open Data Governance Standard Ontology</dcterms:title>
+        <dcterms:description xml:lang="en">
+            Formal ontology for the ODGS Constitutional Stack. Defines the semantic
+            relationships between Metrics, Rules, Processes, Factors, Dimensions,
+            and Sovereign Definitions in a 5-Plane governance architecture.
+            Contains 72 Metrics, 50 Rules, 60 Dimensions,
+            8 Factors, 42 Process Stages,
+            and 43 Sovereign Definitions from 5 regulatory domains.
+        </dcterms:description>
+        <dcterms:creator>Kartik Iyer</dcterms:creator>
+        <dcterms:license rdf:resource="https://www.apache.org/licenses/LICENSE-2.0"/>
+        <owl:versionInfo>3.3.0</owl:versionInfo>
+        <dcterms:conformsTo>EU AI Act (2024/1689) Articles 10, 12</dcterms:conformsTo>
+        <dcterms:conformsTo>ISO/IEC 42001:2023</dcterms:conformsTo>
+        <dcterms:conformsTo>NEN 381 525</dcterms:conformsTo>
+    </owl:Ontology>
+
+    <!-- ================================================================== -->
+    <!-- CLASSES — The 6 Domain Types of the Constitutional Stack            -->
+    <!-- ================================================================== -->
+    <owl:Class rdf:about="&odgs;Metric">
+        <rdfs:label xml:lang="en">Metric</rdfs:label>
+        <rdfs:comment xml:lang="en">A quantitative business measure. Lives in the Legislative Plane.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="&odgs;"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="&odgs;Rule">
+        <rdfs:label xml:lang="en">Data Governance Rule</rdfs:label>
+        <rdfs:comment xml:lang="en">An enforceable data validation rule. Lives in the Judiciary Plane.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="&odgs;"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="&odgs;Process">
+        <rdfs:label xml:lang="en">Business Process Stage</rdfs:label>
+        <rdfs:comment xml:lang="en">A stage in a business process lifecycle. Lives in the Executive Plane.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="&odgs;"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="&odgs;Factor">
+        <rdfs:label xml:lang="en">Root Cause Factor</rdfs:label>
+        <rdfs:comment xml:lang="en">An environmental factor causing data quality issues.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="&odgs;"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="&odgs;Dimension">
+        <rdfs:label xml:lang="en">Data Quality Dimension</rdfs:label>
+        <rdfs:comment xml:lang="en">A DAMA DMBOK data quality dimension.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="&odgs;"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="&odgs;SovereignDefinition">
+        <rdfs:label xml:lang="en">Sovereign Definition</rdfs:label>
+        <rdfs:comment xml:lang="en">An immutable, SHA-256-hashed legal definition. Content-addressed.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="&odgs;"/>
+    </owl:Class>
+
+    <!-- ================================================================== -->
+    <!-- OBJECT PROPERTIES — The 8 Relationship Types                        -->
+    <!-- ================================================================== -->
+    <owl:ObjectProperty rdf:about="&odgs;dependsOn">
+        <rdfs:label xml:lang="en">depends on</rdfs:label>
+        <rdfs:comment xml:lang="en">Calculation dependency.</rdfs:comment>
+        <rdfs:domain rdf:resource="&odgs;Metric"/>
+        <rdfs:range rdf:resource="&odgs;Metric"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&odgs;validatedBy">
+        <rdfs:label xml:lang="en">validated by</rdfs:label>
+        <rdfs:comment xml:lang="en">A metric is protected by a rule.</rdfs:comment>
+        <rdfs:domain rdf:resource="&odgs;Metric"/>
+        <rdfs:range rdf:resource="&odgs;Rule"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&odgs;impactsMetric">
+        <rdfs:label xml:lang="en">impacts metric</rdfs:label>
+        <rdfs:comment xml:lang="en">A factor negatively affects a metric.</rdfs:comment>
+        <rdfs:domain rdf:resource="&odgs;Factor"/>
+        <rdfs:range rdf:resource="&odgs;Metric"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&odgs;occursIn">
+        <rdfs:label xml:lang="en">occurs in</rdfs:label>
+        <rdfs:comment xml:lang="en">A factor occurs in this process stage.</rdfs:comment>
+        <rdfs:domain rdf:resource="&odgs;Factor"/>
+        <rdfs:range rdf:resource="&odgs;Process"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&odgs;measuresDimension">
+        <rdfs:label xml:lang="en">measures dimension</rdfs:label>
+        <rdfs:comment xml:lang="en">Measures a data quality dimension.</rdfs:comment>
+        <rdfs:range rdf:resource="&odgs;Dimension"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&odgs;isDefinedBy">
+        <rdfs:label xml:lang="en">is defined by</rdfs:label>
+        <rdfs:comment xml:lang="en">Legally defined by a Sovereign Definition.</rdfs:comment>
+        <rdfs:range rdf:resource="&odgs;SovereignDefinition"/>
+        <rdfs:subPropertyOf rdf:resource="&prov;wasDerivedFrom"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&odgs;wasDerivedFrom">
+        <rdfs:label xml:lang="en">was derived from</rdfs:label>
+        <rdfs:comment xml:lang="en">Derivation of another concept.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&prov;wasDerivedFrom"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&odgs;blocksProcess">
+        <rdfs:label xml:lang="en">blocks process</rdfs:label>
+        <rdfs:comment xml:lang="en">A rule failure stops this process stage.</rdfs:comment>
+        <rdfs:domain rdf:resource="&odgs;Rule"/>
+        <rdfs:range rdf:resource="&odgs;Process"/>
+    </owl:ObjectProperty>
+
+    <!-- ================================================================== -->
+    <!-- DATATYPE PROPERTIES                                                 -->
+    <!-- ================================================================== -->
+    <owl:DatatypeProperty rdf:about="&odgs;urn">
+        <rdfs:label xml:lang="en">URN</rdfs:label>
+        <rdfs:comment xml:lang="en">Uniform Resource Name.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&odgs;weight">
+        <rdfs:label xml:lang="en">relationship weight</rdfs:label>
+        <rdfs:comment xml:lang="en">Strength (0.0–1.0).</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&odgs;contentHash">
+        <rdfs:label xml:lang="en">content hash</rdfs:label>
+        <rdfs:comment xml:lang="en">SHA-256 hash.</rdfs:comment>
+        <rdfs:domain rdf:resource="&odgs;SovereignDefinition"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&odgs;severity">
+        <rdfs:label xml:lang="en">severity</rdfs:label>
+        <rdfs:comment xml:lang="en">HARD_STOP, WARNING, or INFO.</rdfs:comment>
+        <rdfs:domain rdf:resource="&odgs;Rule"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&odgs;logicExpression">
+        <rdfs:label xml:lang="en">logic expression</rdfs:label>
+        <rdfs:comment xml:lang="en">Executable rule expression.</rdfs:comment>
+        <rdfs:domain rdf:resource="&odgs;Rule"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&odgs;effectiveFrom">
+        <rdfs:label xml:lang="en">effective from</rdfs:label>
+        <rdfs:comment xml:lang="en">Start date.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&odgs;effectiveUntil">
+        <rdfs:label xml:lang="en">effective until</rdfs:label>
+        <rdfs:comment xml:lang="en">End date.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <!-- ================================================================== -->
+    <!-- INDIVIDUALS — 72 Metrics (Legislative Plane)           -->
+    <!-- ================================================================== -->
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Net Profit Margin</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Return on Invested Capital (ROIC)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Free Cash Flow (FCF)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">EBITDA Margin</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Gross Profit Margin</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Working Capital Ratio</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Employee Turnover Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Lost Time Injury Frequency Rate (LTIFR)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Training Hours Per Employee</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Absenteeism Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">IT System Uptime</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Mean Time To Repair (MTTR)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Cybersecurity Incident Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Warehouse Dwell Time (Import)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Dock Moves Per Hour (BMPH)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Truck Turnaround Time</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">On-Time Performance (Transport Unit/Flight/Truck)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Cargo Damage Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Transport Unit Turnaround Time</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Fleet Utilization Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Fuel Efficiency (MPG or L/100km)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Overall Equipment Effectiveness (OEE)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Manufacturing Cycle Time</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">First Pass Yield (FPY)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Scrap Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Production Capacity Utilization</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Downtime Percentage</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Changeover Time</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Maintenance Cost as % of Asset Value</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Asset Uptime</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Production Volume (Barrels/Day, MWh)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Mean Time Between Failures (MTBF)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Energy Intensity</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Generation Reliability</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Emissions Rate (CO2/Unit)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Water Usage Efficiency</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Inventory Turnover</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Perfect Order Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Days of Supply (DOS)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Order Fill Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Stockout Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Cash-to-Cash Cycle Time</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Supplier On-Time Delivery</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Forecast Accuracy</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Ore Recovery Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Tons Per Operating Hour</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Haul Truck Cycle Time</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Project Schedule Performance Index (SPI)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Construction Cost Performance Index (CPI)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Rework Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Crop Yield Per Acre</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Feed Conversion Ratio</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Customer Satisfaction Score (CSAT)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Net Promoter Score (NPS)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">First Call Resolution Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Regulatory Compliance Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Audit Findings Per Period</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Carbon Footprint Per Product</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Waste Diversion Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Renewable Energy Percentage</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Warranty Claim Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Customer Retention Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Labor Productivity</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Schedule Adherence</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Equipment Reliability Factor</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Quality Defect Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Process Capability Index (Cpk)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Mean Time To Detect (MTTD)</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Asset Utilization Rate</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Revenue Per Employee</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Backlog-to-Revenue Ratio</rdfs:label>
+    </odgs:Metric>
+    <odgs:Metric rdf:about="&odgs;metric_?">
+        <odgs:urn>urn:odgs:metric:?</odgs:urn>
+        <rdfs:label xml:lang="en">Pipeline Integrity Index</rdfs:label>
+    </odgs:Metric>
+
+    <!-- ================================================================== -->
+    <!-- INDIVIDUALS — 50 Rules (Judiciary Plane)                 -->
+    <!-- ================================================================== -->
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">ISO 3166-1 Country Code Standard</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">ISO 4217 Currency Code Standard</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Address Validation Service (e.g., USPS/Loqate)</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">RFC 5322 Email Format Standard</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Unique Equipment Identifier (Master Data)</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">ISO 6346 Shipping Package ID Standard</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+        <odgs:logicExpression>regex_match(r&#x27;^[A-Z]{4}[0-9]{7}$&#x27;, value)</odgs:logicExpression>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Standard Carrier Alpha Code (SCAC)</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Bill of Materials (BOM) Version Control</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Wellbore Unique Identifier (WUID/UWI)</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">E.164 International Phone Number Format</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">ISO 8601 Date-Time Format</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Positive Numeric Values Only</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+        <odgs:logicExpression>value &gt; 0</odgs:logicExpression>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Mandatory Field Completeness</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Unique Identifier Non-Reuse Policy</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Unit of Measure Standardization</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Hazmat Classification Validation</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Customer Credit Limit Validation</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Duplicate Record Prevention</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Date Range Validation</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Referential Integrity Enforcement</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Latitude/Longitude Precision Standard</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Material Safety Data Sheet (MSDS) Linkage</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Timestamp Immutability Rule</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Percentage Field Range Validation</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+        <odgs:logicExpression>value &gt;= 0 and value &lt;= 100</odgs:logicExpression>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Price Precision Standard (2 Decimal Places)</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">SKU Format Standardization</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Serial Number Uniqueness Global</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Temperature Range Validation</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Future Date Prohibition (Transaction Dates)</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+        <odgs:logicExpression>parse_date(value) &lt;= today()</odgs:logicExpression>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Product Category Classification</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Tax ID Format Validation</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Weight/Volume Consistency Check</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Transport Unit IMO Number Validation</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Port UNLOCODE Validation</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Incoterms® Validation</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">HS Code Validation (Harmonized System)</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Batch/Lot Number Traceability</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Asset Criticality Classification</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Calibration Due Date Enforcement</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Customer Master Golden Record</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Chart of Accounts Validation</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Permit/License Expiry Tracking</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Numeric Precision for Measurements</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Work Order Status Lifecycle Validation</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Vendor Master Completeness</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Inventory Count Reconciliation Rule</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Geofence Boundary Validation</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Inspection Frequency Compliance</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Password Strength Requirements</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+    <odgs:Rule rdf:about="&odgs;rule_?">
+        <odgs:urn>urn:odgs:rule:?</odgs:urn>
+        <rdfs:label xml:lang="en">Shift Code Standardization</rdfs:label>
+        <odgs:severity>INFO</odgs:severity>
+    </odgs:Rule>
+
+    <!-- ================================================================== -->
+    <!-- INDIVIDUALS — 60 Dimensions                               -->
+    <!-- ================================================================== -->
+    <odgs:Dimension rdf:about="&odgs;dimension_6">
+        <odgs:urn>urn:odgs:dimension:6</odgs:urn>
+        <rdfs:label xml:lang="en">Ability to represent null values</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_1">
+        <odgs:urn>urn:odgs:dimension:1</odgs:urn>
+        <rdfs:label xml:lang="en">Access security</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_2">
+        <odgs:urn>urn:odgs:dimension:2</odgs:urn>
+        <rdfs:label xml:lang="en">Accessibility</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_3">
+        <odgs:urn>urn:odgs:dimension:3</odgs:urn>
+        <rdfs:label xml:lang="en">Accuracy</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_4">
+        <odgs:urn>urn:odgs:dimension:4</odgs:urn>
+        <rdfs:label xml:lang="en">Appropriateness</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_5">
+        <odgs:urn>urn:odgs:dimension:5</odgs:urn>
+        <rdfs:label xml:lang="en">Availability</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_7">
+        <odgs:urn>urn:odgs:dimension:7</odgs:urn>
+        <rdfs:label xml:lang="en">Clarity</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_8">
+        <odgs:urn>urn:odgs:dimension:8</odgs:urn>
+        <rdfs:label xml:lang="en">Coherence</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_9">
+        <odgs:urn>urn:odgs:dimension:9</odgs:urn>
+        <rdfs:label xml:lang="en">Comparability of populations</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_10">
+        <odgs:urn>urn:odgs:dimension:10</odgs:urn>
+        <rdfs:label xml:lang="en">Comparability over time</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_11">
+        <odgs:urn>urn:odgs:dimension:11</odgs:urn>
+        <rdfs:label xml:lang="en">Completeness (Attributes)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_12">
+        <odgs:urn>urn:odgs:dimension:12</odgs:urn>
+        <rdfs:label xml:lang="en">Completeness (Records)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_13">
+        <odgs:urn>urn:odgs:dimension:13</odgs:urn>
+        <rdfs:label xml:lang="en">Completeness (Data files)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_14">
+        <odgs:urn>urn:odgs:dimension:14</odgs:urn>
+        <rdfs:label xml:lang="en">Completeness (Data values)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_15">
+        <odgs:urn>urn:odgs:dimension:15</odgs:urn>
+        <rdfs:label xml:lang="en">Completeness (Data values of an attribute)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_16">
+        <odgs:urn>urn:odgs:dimension:16</odgs:urn>
+        <rdfs:label xml:lang="en">Completeness (Metadata)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_17">
+        <odgs:urn>urn:odgs:dimension:17</odgs:urn>
+        <rdfs:label xml:lang="en">Compliance with laws, regulations, or standards (Data)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_18">
+        <odgs:urn>urn:odgs:dimension:18</odgs:urn>
+        <rdfs:label xml:lang="en">Compliance with laws, regulations, or standards (Composition of datasets)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_19">
+        <odgs:urn>urn:odgs:dimension:19</odgs:urn>
+        <rdfs:label xml:lang="en">Confidentiality</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_20">
+        <odgs:urn>urn:odgs:dimension:20</odgs:urn>
+        <rdfs:label xml:lang="en">Consistency (Data values)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_21">
+        <odgs:urn>urn:odgs:dimension:21</odgs:urn>
+        <rdfs:label xml:lang="en">Consistency (Temporal)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_22">
+        <odgs:urn>urn:odgs:dimension:22</odgs:urn>
+        <rdfs:label xml:lang="en">Consistency (Across Datasets)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_23">
+        <odgs:urn>urn:odgs:dimension:23</odgs:urn>
+        <rdfs:label xml:lang="en">Consistency (Cross-Record)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_24">
+        <odgs:urn>urn:odgs:dimension:24</odgs:urn>
+        <rdfs:label xml:lang="en">Consistency (Record-Level)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_25">
+        <odgs:urn>urn:odgs:dimension:25</odgs:urn>
+        <rdfs:label xml:lang="en">Credibility</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_26">
+        <odgs:urn>urn:odgs:dimension:26</odgs:urn>
+        <rdfs:label xml:lang="en">Currency</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_27">
+        <odgs:urn>urn:odgs:dimension:27</odgs:urn>
+        <rdfs:label xml:lang="en">Equivalence</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_28">
+        <odgs:urn>urn:odgs:dimension:28</odgs:urn>
+        <rdfs:label xml:lang="en">Granularity (Attributes)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_29">
+        <odgs:urn>urn:odgs:dimension:29</odgs:urn>
+        <rdfs:label xml:lang="en">Granularity (Records)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_30">
+        <odgs:urn>urn:odgs:dimension:30</odgs:urn>
+        <rdfs:label xml:lang="en">Integrity</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_31">
+        <odgs:urn>urn:odgs:dimension:31</odgs:urn>
+        <rdfs:label xml:lang="en">Interpretability</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_32">
+        <odgs:urn>urn:odgs:dimension:32</odgs:urn>
+        <rdfs:label xml:lang="en">Latency</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_33">
+        <odgs:urn>urn:odgs:dimension:33</odgs:urn>
+        <rdfs:label xml:lang="en">Linkability</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_34">
+        <odgs:urn>urn:odgs:dimension:34</odgs:urn>
+        <rdfs:label xml:lang="en">Metadata compliance</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_35">
+        <odgs:urn>urn:odgs:dimension:35</odgs:urn>
+        <rdfs:label xml:lang="en">Naturalness</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_36">
+        <odgs:urn>urn:odgs:dimension:36</odgs:urn>
+        <rdfs:label xml:lang="en">Objectivity</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_37">
+        <odgs:urn>urn:odgs:dimension:37</odgs:urn>
+        <rdfs:label xml:lang="en">Obtainability</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_38">
+        <odgs:urn>urn:odgs:dimension:38</odgs:urn>
+        <rdfs:label xml:lang="en">Plausibility</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_39">
+        <odgs:urn>urn:odgs:dimension:39</odgs:urn>
+        <rdfs:label xml:lang="en">Portability (Data)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_40">
+        <odgs:urn>urn:odgs:dimension:40</odgs:urn>
+        <rdfs:label xml:lang="en">Portability (Format)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_41">
+        <odgs:urn>urn:odgs:dimension:41</odgs:urn>
+        <rdfs:label xml:lang="en">Precision (1 - Recording Accuracy)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_42">
+        <odgs:urn>urn:odgs:dimension:42</odgs:urn>
+        <rdfs:label xml:lang="en">Precision (2 - Statistical Spread)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_43">
+        <odgs:urn>urn:odgs:dimension:43</odgs:urn>
+        <rdfs:label xml:lang="en">Punctuality</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_44">
+        <odgs:urn>urn:odgs:dimension:44</odgs:urn>
+        <rdfs:label xml:lang="en">Reasonability</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_45">
+        <odgs:urn>urn:odgs:dimension:45</odgs:urn>
+        <rdfs:label xml:lang="en">Recoverability</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_46">
+        <odgs:urn>urn:odgs:dimension:46</odgs:urn>
+        <rdfs:label xml:lang="en">Redundancy</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_47">
+        <odgs:urn>urn:odgs:dimension:47</odgs:urn>
+        <rdfs:label xml:lang="en">Referential integrity</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_48">
+        <odgs:urn>urn:odgs:dimension:48</odgs:urn>
+        <rdfs:label xml:lang="en">Relevance</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_49">
+        <odgs:urn>urn:odgs:dimension:49</odgs:urn>
+        <rdfs:label xml:lang="en">Reliability</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_50">
+        <odgs:urn>urn:odgs:dimension:50</odgs:urn>
+        <rdfs:label xml:lang="en">Reproducibility</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_51">
+        <odgs:urn>urn:odgs:dimension:51</odgs:urn>
+        <rdfs:label xml:lang="en">Reputation</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_52">
+        <odgs:urn>urn:odgs:dimension:52</odgs:urn>
+        <rdfs:label xml:lang="en">Retention period</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_53">
+        <odgs:urn>urn:odgs:dimension:53</odgs:urn>
+        <rdfs:label xml:lang="en">Timeliness</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_54">
+        <odgs:urn>urn:odgs:dimension:54</odgs:urn>
+        <rdfs:label xml:lang="en">Traceability</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_55">
+        <odgs:urn>urn:odgs:dimension:55</odgs:urn>
+        <rdfs:label xml:lang="en">Uniqueness (Objects)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_56">
+        <odgs:urn>urn:odgs:dimension:56</odgs:urn>
+        <rdfs:label xml:lang="en">Uniqueness (Records)</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_57">
+        <odgs:urn>urn:odgs:dimension:57</odgs:urn>
+        <rdfs:label xml:lang="en">Validity</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_58">
+        <odgs:urn>urn:odgs:dimension:58</odgs:urn>
+        <rdfs:label xml:lang="en">Value</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_59">
+        <odgs:urn>urn:odgs:dimension:59</odgs:urn>
+        <rdfs:label xml:lang="en">Variety</rdfs:label>
+    </odgs:Dimension>
+    <odgs:Dimension rdf:about="&odgs;dimension_60">
+        <odgs:urn>urn:odgs:dimension:60</odgs:urn>
+        <rdfs:label xml:lang="en">Volatility</rdfs:label>
+    </odgs:Dimension>
+
+    <!-- ================================================================== -->
+    <!-- INDIVIDUALS — 8 Factors                                -->
+    <!-- ================================================================== -->
+    <odgs:Factor rdf:about="&odgs;factor_ENV_001">
+        <odgs:urn>urn:odgs:factor:ENV_001</odgs:urn>
+        <rdfs:label xml:lang="en">Lack of Clear System of Record (SoR)</rdfs:label>
+    </odgs:Factor>
+    <odgs:Factor rdf:about="&odgs;factor_ENV_002">
+        <odgs:urn>urn:odgs:factor:ENV_002</odgs:urn>
+        <rdfs:label xml:lang="en">Prevalence of &#x27;Excel Hell&#x27; / Shadow IT</rdfs:label>
+    </odgs:Factor>
+    <odgs:Factor rdf:about="&odgs;factor_ENV_003">
+        <odgs:urn>urn:odgs:factor:ENV_003</odgs:urn>
+        <rdfs:label xml:lang="en">Absence or Inconsistent Application of Data Standards</rdfs:label>
+    </odgs:Factor>
+    <odgs:Factor rdf:about="&odgs;factor_ENV_004">
+        <odgs:urn>urn:odgs:factor:ENV_004</odgs:urn>
+        <rdfs:label xml:lang="en">Data Silos Between Departments/Systems</rdfs:label>
+    </odgs:Factor>
+    <odgs:Factor rdf:about="&odgs;factor_ENV_005">
+        <odgs:urn>urn:odgs:factor:ENV_005</odgs:urn>
+        <rdfs:label xml:lang="en">Immature or Informal Data Governance</rdfs:label>
+    </odgs:Factor>
+    <odgs:Factor rdf:about="&odgs;factor_ENV_006">
+        <odgs:urn>urn:odgs:factor:ENV_006</odgs:urn>
+        <rdfs:label xml:lang="en">Reliance on Legacy Systems</rdfs:label>
+    </odgs:Factor>
+    <odgs:Factor rdf:about="&odgs;factor_ENV_007">
+        <odgs:urn>urn:odgs:factor:ENV_007</odgs:urn>
+        <rdfs:label xml:lang="en">High Degree of Manual Data Processes</rdfs:label>
+    </odgs:Factor>
+    <odgs:Factor rdf:about="&odgs;factor_ENV_008">
+        <odgs:urn>urn:odgs:factor:ENV_008</odgs:urn>
+        <rdfs:label xml:lang="en">Lack of Data-Aware Culture / Low Data Literacy</rdfs:label>
+    </odgs:Factor>
+
+    <!-- ================================================================== -->
+    <!-- INDIVIDUALS — 42 Process Stages (Executive Plane)           -->
+    <!-- ================================================================== -->
+    <odgs:Process rdf:about="&odgs;process_O2C_S01">
+        <odgs:urn>urn:odgs:process:O2C_S01</odgs:urn>
+        <rdfs:label xml:lang="en">Order to Cash (O2C) — Customer Inquiry &amp; Quotation</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_O2C_S02">
+        <odgs:urn>urn:odgs:process:O2C_S02</odgs:urn>
+        <rdfs:label xml:lang="en">Order to Cash (O2C) — Order Entry &amp; Management</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_O2C_S03">
+        <odgs:urn>urn:odgs:process:O2C_S03</odgs:urn>
+        <rdfs:label xml:lang="en">Order to Cash (O2C) — Order Fulfillment &amp; Shipping</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_O2C_S04">
+        <odgs:urn>urn:odgs:process:O2C_S04</odgs:urn>
+        <rdfs:label xml:lang="en">Order to Cash (O2C) — Invoicing &amp; Billing</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_O2C_S05">
+        <odgs:urn>urn:odgs:process:O2C_S05</odgs:urn>
+        <rdfs:label xml:lang="en">Order to Cash (O2C) — Payment Collection &amp; Reconciliation</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_O2C_S06">
+        <odgs:urn>urn:odgs:process:O2C_S06</odgs:urn>
+        <rdfs:label xml:lang="en">Order to Cash (O2C) — Returns &amp; Dispute Management</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_P2P_S01">
+        <odgs:urn>urn:odgs:process:P2P_S01</odgs:urn>
+        <rdfs:label xml:lang="en">Procure to Pay (P2P) — Requisition &amp; Need Identification</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_P2P_S02">
+        <odgs:urn>urn:odgs:process:P2P_S02</odgs:urn>
+        <rdfs:label xml:lang="en">Procure to Pay (P2P) — Supplier Selection &amp; Purchase Order Creation</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_P2P_S03">
+        <odgs:urn>urn:odgs:process:P2P_S03</odgs:urn>
+        <rdfs:label xml:lang="en">Procure to Pay (P2P) — Goods/Service Receipt &amp; Inspection</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_P2P_S04">
+        <odgs:urn>urn:odgs:process:P2P_S04</odgs:urn>
+        <rdfs:label xml:lang="en">Procure to Pay (P2P) — Invoice Processing &amp; Verification</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_P2P_S05">
+        <odgs:urn>urn:odgs:process:P2P_S05</odgs:urn>
+        <rdfs:label xml:lang="en">Procure to Pay (P2P) — Payment &amp; Reconciliation</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_P2P_S06">
+        <odgs:urn>urn:odgs:process:P2P_S06</odgs:urn>
+        <rdfs:label xml:lang="en">Procure to Pay (P2P) — Supplier Relationship Management</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_H2R_S01">
+        <odgs:urn>urn:odgs:process:H2R_S01</odgs:urn>
+        <rdfs:label xml:lang="en">Hire to Retire (H2R) / Employee Lifecycle — Recruitment &amp; Talent Acquisition</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_H2R_S02">
+        <odgs:urn>urn:odgs:process:H2R_S02</odgs:urn>
+        <rdfs:label xml:lang="en">Hire to Retire (H2R) / Employee Lifecycle — Onboarding &amp; Integration</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_H2R_S03">
+        <odgs:urn>urn:odgs:process:H2R_S03</odgs:urn>
+        <rdfs:label xml:lang="en">Hire to Retire (H2R) / Employee Lifecycle — Performance Management &amp; Development</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_H2R_S04">
+        <odgs:urn>urn:odgs:process:H2R_S04</odgs:urn>
+        <rdfs:label xml:lang="en">Hire to Retire (H2R) / Employee Lifecycle — Compensation &amp; Benefits Administration</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_H2R_S05">
+        <odgs:urn>urn:odgs:process:H2R_S05</odgs:urn>
+        <rdfs:label xml:lang="en">Hire to Retire (H2R) / Employee Lifecycle — Employee Engagement &amp; Relations</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_H2R_S06">
+        <odgs:urn>urn:odgs:process:H2R_S06</odgs:urn>
+        <rdfs:label xml:lang="en">Hire to Retire (H2R) / Employee Lifecycle — Offboarding &amp; Separation</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_R2R_S01">
+        <odgs:urn>urn:odgs:process:R2R_S01</odgs:urn>
+        <rdfs:label xml:lang="en">Record to Report (R2R) — Transaction Recording &amp; Data Capture</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_R2R_S02">
+        <odgs:urn>urn:odgs:process:R2R_S02</odgs:urn>
+        <rdfs:label xml:lang="en">Record to Report (R2R) — Period-End Close &amp; Consolidation</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_R2R_S03">
+        <odgs:urn>urn:odgs:process:R2R_S03</odgs:urn>
+        <rdfs:label xml:lang="en">Record to Report (R2R) — Financial Reporting &amp; Analysis</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_R2R_S04">
+        <odgs:urn>urn:odgs:process:R2R_S04</odgs:urn>
+        <rdfs:label xml:lang="en">Record to Report (R2R) — Budgeting &amp; Forecasting</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_R2R_S05">
+        <odgs:urn>urn:odgs:process:R2R_S05</odgs:urn>
+        <rdfs:label xml:lang="en">Record to Report (R2R) — Audit &amp; Compliance</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_I2M_S01">
+        <odgs:urn>urn:odgs:process:I2M_S01</odgs:urn>
+        <rdfs:label xml:lang="en">Idea to Market / New Product Development (NPD) — Ideation &amp; Concept Generation</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_I2M_S02">
+        <odgs:urn>urn:odgs:process:I2M_S02</odgs:urn>
+        <rdfs:label xml:lang="en">Idea to Market / New Product Development (NPD) — Feasibility Study &amp; Business Case Development</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_I2M_S03">
+        <odgs:urn>urn:odgs:process:I2M_S03</odgs:urn>
+        <rdfs:label xml:lang="en">Idea to Market / New Product Development (NPD) — Design &amp; Development</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_I2M_S04">
+        <odgs:urn>urn:odgs:process:I2M_S04</odgs:urn>
+        <rdfs:label xml:lang="en">Idea to Market / New Product Development (NPD) — Testing &amp; Validation</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_I2M_S05">
+        <odgs:urn>urn:odgs:process:I2M_S05</odgs:urn>
+        <rdfs:label xml:lang="en">Idea to Market / New Product Development (NPD) — Launch &amp; Commercialization</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_I2M_S06">
+        <odgs:urn>urn:odgs:process:I2M_S06</odgs:urn>
+        <rdfs:label xml:lang="en">Idea to Market / New Product Development (NPD) — Post-Launch Review &amp; Lifecycle Management</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_CRM_S01">
+        <odgs:urn>urn:odgs:process:CRM_S01</odgs:urn>
+        <rdfs:label xml:lang="en">Customer Relationship Management (CRM) Lifecycle — Lead Generation &amp; Acquisition</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_CRM_S02">
+        <odgs:urn>urn:odgs:process:CRM_S02</odgs:urn>
+        <rdfs:label xml:lang="en">Customer Relationship Management (CRM) Lifecycle — Lead Nurturing &amp; Qualification</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_CRM_S03">
+        <odgs:urn>urn:odgs:process:CRM_S03</odgs:urn>
+        <rdfs:label xml:lang="en">Customer Relationship Management (CRM) Lifecycle — Sales Conversion &amp; Opportunity Management</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_CRM_S04">
+        <odgs:urn>urn:odgs:process:CRM_S04</odgs:urn>
+        <rdfs:label xml:lang="en">Customer Relationship Management (CRM) Lifecycle — Customer Onboarding &amp; Service Delivery</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_CRM_S05">
+        <odgs:urn>urn:odgs:process:CRM_S05</odgs:urn>
+        <rdfs:label xml:lang="en">Customer Relationship Management (CRM) Lifecycle — Customer Support &amp; Issue Resolution</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_CRM_S06">
+        <odgs:urn>urn:odgs:process:CRM_S06</odgs:urn>
+        <rdfs:label xml:lang="en">Customer Relationship Management (CRM) Lifecycle — Customer Retention &amp; Loyalty Building</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_OPS_S01">
+        <odgs:urn>urn:odgs:process:OPS_S01</odgs:urn>
+        <rdfs:label xml:lang="en">Operations &amp; Execution Management — Demand &amp; Capacity Planning</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_OPS_S02">
+        <odgs:urn>urn:odgs:process:OPS_S02</odgs:urn>
+        <rdfs:label xml:lang="en">Operations &amp; Execution Management — Production / Service Execution</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_OPS_S03">
+        <odgs:urn>urn:odgs:process:OPS_S03</odgs:urn>
+        <rdfs:label xml:lang="en">Operations &amp; Execution Management — Inventory &amp; Materials Management</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_OPS_S04">
+        <odgs:urn>urn:odgs:process:OPS_S04</odgs:urn>
+        <rdfs:label xml:lang="en">Operations &amp; Execution Management — Quality Control &amp; Assurance</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_OPS_S05">
+        <odgs:urn>urn:odgs:process:OPS_S05</odgs:urn>
+        <rdfs:label xml:lang="en">Operations &amp; Execution Management — Maintenance &amp; Asset Management</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_OPS_S06">
+        <odgs:urn>urn:odgs:process:OPS_S06</odgs:urn>
+        <rdfs:label xml:lang="en">Operations &amp; Execution Management — Logistics &amp; Distribution (Outbound)</rdfs:label>
+    </odgs:Process>
+    <odgs:Process rdf:about="&odgs;process_OPS_S07">
+        <odgs:urn>urn:odgs:process:OPS_S07</odgs:urn>
+        <rdfs:label xml:lang="en">Operations &amp; Execution Management — Operational Performance Monitoring &amp; Reporting</rdfs:label>
+    </odgs:Process>
+
+    <!-- ================================================================== -->
+    <!-- INDIVIDUALS — 43 Sovereign Definitions                     -->
+    <!-- ================================================================== -->
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_liquidity_coverage_ratio_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:liquidity_coverage_ratio:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_non_performing_loan_ratio_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:non_performing_loan_ratio:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_know_your_customer_completion_rate_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:know_your_customer_completion_rate:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_net_interest_margin_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:net_interest_margin:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_capital_adequacy_ratio_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:capital_adequacy_ratio:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_suspicious_activity_reporting_latency_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:suspicious_activity_reporting_latency:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_cost_to_income_ratio_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:cost_to_income_ratio:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_loan_to_value_ratio_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:loan_to_value_ratio:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_transactional_data_encryption_rate_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:transactional_data_encryption_rate:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_digital_banking_system_uptime_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:digital_banking_system_uptime:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_customer_churn_rate_retail_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:customer_churn_rate_retail:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_mean_time_to_remediate_audit_findings_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:mean_time_to_remediate_audit_findings:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_fraud_loss_to_revenue_ratio_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:fraud_loss_to_revenue_ratio:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_loan_origination_cycle_time_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:loan_origination_cycle_time:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_ai_synthetic_regulatory_report_first_pass_accuracy_v1">
+        <odgs:urn>urn:odgs:def:ai_synthetic:regulatory_report_first_pass_accuracy:v1</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_bis_basel3_cet1_v2024">
+        <odgs:urn>urn:odgs:def:bis:basel3:cet1:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_bis_basel3_frtb_v2024">
+        <odgs:urn>urn:odgs:def:bis:basel3:frtb:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_bis_basel3_irrbb_v2024">
+        <odgs:urn>urn:odgs:def:bis:basel3:irrbb:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_bis_basel3_lcr_v2024">
+        <odgs:urn>urn:odgs:def:bis:basel3:lcr:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_bis_basel3_leverageratio_v2024">
+        <odgs:urn>urn:odgs:def:bis:basel3:leverageratio:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_bis_basel3_nsfr_v2024">
+        <odgs:urn>urn:odgs:def:bis:basel3:nsfr:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_bis_basel3_oprisk_v2024">
+        <odgs:urn>urn:odgs:def:bis:basel3:oprisk:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_eu_gdpr_art_17_v2016">
+        <odgs:urn>urn:odgs:def:eu:gdpr:art_17:v2016</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_eu_gdpr_art_25_v2016">
+        <odgs:urn>urn:odgs:def:eu:gdpr:art_25:v2016</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_eu_gdpr_art_30_v2016">
+        <odgs:urn>urn:odgs:def:eu:gdpr:art_30:v2016</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_eu_gdpr_art_35_v2016">
+        <odgs:urn>urn:odgs:def:eu:gdpr:art_35:v2016</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_eu_gdpr_art_5_v2016">
+        <odgs:urn>urn:odgs:def:eu:gdpr:art_5:v2016</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_eu_gdpr_art_6_v2016">
+        <odgs:urn>urn:odgs:def:eu:gdpr:art_6:v2016</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_eu_gdpr_art_83_v2016">
+        <odgs:urn>urn:odgs:def:eu:gdpr:art_83:v2016</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_fibo_debtinstrument_v2024">
+        <odgs:urn>urn:odgs:def:fibo:debtinstrument:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_fibo_financialinstrument_v2024">
+        <odgs:urn>urn:odgs:def:fibo:financialinstrument:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_fibo_interestrate_v2024">
+        <odgs:urn>urn:odgs:def:fibo:interestrate:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_fibo_loan_v2024">
+        <odgs:urn>urn:odgs:def:fibo:loan:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_fibo_regulatoryagency_v2024">
+        <odgs:urn>urn:odgs:def:fibo:regulatoryagency:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_iso_42001_10_2_v2023">
+        <odgs:urn>urn:odgs:def:iso:42001_10_2:v2023</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_iso_42001_4_1_v2023">
+        <odgs:urn>urn:odgs:def:iso:42001_4_1:v2023</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_iso_42001_4_2_v2023">
+        <odgs:urn>urn:odgs:def:iso:42001_4_2:v2023</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_iso_42001_6_1_v2023">
+        <odgs:urn>urn:odgs:def:iso:42001_6_1:v2023</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_iso_42001_8_4_v2023">
+        <odgs:urn>urn:odgs:def:iso:42001_8_4:v2023</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_iso_42001_9_1_v2023">
+        <odgs:urn>urn:odgs:def:iso:42001_9_1:v2023</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_nl_gov_awb_art_1_3_v2024">
+        <odgs:urn>urn:odgs:def:nl_gov:awb:art_1_3:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_nl_gov_awb_art_3_4_v2024">
+        <odgs:urn>urn:odgs:def:nl_gov:awb:art_3_4:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+    <odgs:SovereignDefinition rdf:about="&odgs;def_nl_gov_awb_art_4_8_v2024">
+        <odgs:urn>urn:odgs:def:nl_gov:awb:art_4_8:v2024</odgs:urn>
+        <rdfs:label xml:lang="en"></rdfs:label>
+    </odgs:SovereignDefinition>
+
+</rdf:RDF>

@@ -1,0 +1,36 @@
+{
+  "urn": "urn:odgs:def:iso:42001_9_1:v2023",
+  "metadata": {
+    "authority_id": "ISO",
+    "authority_name": "International Organization for Standardization",
+    "document_ref": "ISO/IEC 42001:2023 — AI Management Systems",
+    "source_uri": "https://www.iso.org/standard/81230.html#clause-9.1",
+    "content_hash": "93a3620af16b9559a9e17fa5828b714f09531ca762169f0dc3d666736283e006",
+    "hierarchy": {
+      "level": "section",
+      "parent_ref": "ISO/IEC 42001:2023",
+      "local_id": "9.1"
+    },
+    "harvested_at": "2026-02-18T22:30:46.766329Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "Clause 9.1: Monitoring, measurement, analysis and evaluation\n\nThe organisation shall determine what needs to be monitored and measured, including AI system performance and AI system risks.",
+    "language": "en-US",
+    "format": "TEXT",
+    "structured_data": [
+      {
+        "key": "clause_number",
+        "value": "9.1"
+      },
+      {
+        "key": "clause_title",
+        "value": "Monitoring, measurement, analysis and evaluation"
+      }
+    ]
+  },
+  "interpretation": {
+    "summary": "Monitoring, measurement, analysis and evaluation",
+    "applicability": "Maps to ODGS audit log obligations and the sovereign_audit.log pattern."
+  }
+}

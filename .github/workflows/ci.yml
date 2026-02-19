@@ -1,0 +1,42 @@
+name: ODGS Protocol CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  schema-validation:
+    name: 🔐 Schema Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install jsonschema
+      - run: python src/odgs/system/scripts/validate_schemas.py .
+
+  python-tests:
+    name: 🐍 Python Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e .
+      - run: pip install pytest
+      - run: python -m pytest tests/ -v --tb=short
+
+  node-tests:
+    name: 📦 Node.js Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm install
+      - run: npx vitest run

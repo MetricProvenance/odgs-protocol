@@ -1,0 +1,34 @@
+{
+  "urn": "urn:odgs:def:bis:basel3:nsfr:v2024",
+  "metadata": {
+    "authority_id": "BIS_BCBS",
+    "authority_name": "Bank for International Settlements — Basel Committee on Banking Supervision",
+    "document_ref": "BCBS d295 (January 2013)",
+    "source_uri": "https://www.bis.org/bcbs/publ/d295.htm",
+    "hierarchy": {
+      "level": "regulatory_definition",
+      "framework": "Basel III — Liquidity",
+      "local_id": "NSFR"
+    },
+    "content_hash": "132d496e42e48c63722c33ad5bd88c67d785156d96df16a45ccb8f2af2bb3627",
+    "harvested_at": "2026-02-18T22:30:46.767289Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "The Net Stable Funding Ratio (NSFR) requires banks to maintain a stable funding profile in relation to the composition of their assets and off-balance sheet activities. NSFR = Available Stable Funding (ASF) / Required Stable Funding (RSF) >= 100%. ASF includes capital, preferred stock, and deposits with maturities exceeding one year.",
+    "title": "Net Stable Funding Ratio",
+    "language": "en",
+    "format": "TEXT",
+    "structured_data": {
+      "standard": "Basel III",
+      "concept": "NSFR",
+      "framework_area": "Basel III — Liquidity",
+      "standard_reference": "BCBS d295 (January 2013)",
+      "relevance_to_odgs": "Long-term funding stability — governs asset-liability matching in ODGS financial process maps"
+    }
+  },
+  "interpretation": {
+    "summary": "Basel III: Net Stable Funding Ratio",
+    "applicability": "Banking and Financial Institutions"
+  }
+}

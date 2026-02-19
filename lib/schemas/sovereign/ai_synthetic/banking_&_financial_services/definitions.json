@@ -1,0 +1,482 @@
+[
+  {
+    "urn": "urn:odgs:def:ai_synthetic:liquidity_coverage_ratio:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447323Z",
+      "source_uri": null,
+      "content_hash": "567f945e37781886744949744deb440b94fec1b1103dc66b6cee2b5dc8a07c69",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:106"
+      }
+    ],
+    "content": {
+      "verbatim_text": "The Liquidity Coverage Ratio (LCR) refers to the proportion of high-quality liquid assets held by financial institutions, which ensure their ongoing ability to meet short-term obligations. This metric is a cornerstone of the Basel III regulatory framework, designed to safeguard banks against sudden liquidity drains during economic stress. Data governance must ensure the high-frequency accuracy of underlying asset valuations to prevent regulatory breaches.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "Measures the ability of a bank to survive a significant 30-day liquidity stress scenario.",
+      "applicability": "Applicable to all Tier 1 and Tier 2 banking institutions under Basel III oversight."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:non_performing_loan_ratio:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447341Z",
+      "source_uri": null,
+      "content_hash": "0bec56c4ed7de392fcf67688e99013dcb645485f1d98c207ecbf85c2718e5567",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:2004"
+      }
+    ],
+    "content": {
+      "verbatim_text": "The Non-Performing Loan (NPL) Ratio measures the total value of loans in default or close to default as a percentage of the total loan portfolio. High NPL ratios indicate poor credit risk management and can lead to significant financial instability or bankruptcy for the institution. Reliable data lineage from loan origination to collection status is essential for accurate risk reporting and provisioning.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "Indicator of credit portfolio health and potential losses from borrower defaults.",
+      "applicability": "Used by risk management and regulatory bodies to assess the creditworthiness of a bank's balance sheet."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:know_your_customer_completion_rate:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447345Z",
+      "source_uri": null,
+      "content_hash": "288ae8dea58735126fc013bfc51c43f950e902a7ea451d5d047df4f745d70057",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:2003"
+      }
+    ],
+    "content": {
+      "verbatim_text": "Know Your Customer (KYC) Completion Rate tracks the percentage of customer accounts that have successfully undergone mandatory identity verification and risk profiling. Compliance with Anti-Money Laundering (AML) and Counter-Terrorist Financing (CTF) laws requires 100% completion before account activation. Data quality rules must validate that all required documentation is present, legible, and verified against government databases.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "Percentage of customers successfully verified according to AML/CTF regulations.",
+      "applicability": "Critical for compliance departments and operational risk managers during onboarding."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:net_interest_margin:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447348Z",
+      "source_uri": null,
+      "content_hash": "ee829ec7d38c1aa0aaa901abcb120883404b8d3af7a34f80a1f0d4817ac39fd6",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:101"
+      }
+    ],
+    "content": {
+      "verbatim_text": "Net Interest Margin (NIM) is a performance metric that examines the difference between the interest income generated by banks and the amount of interest paid out to lenders, relative to their assets. It serves as a primary indicator of a bank's profitability and the efficiency of its investment decisions. Data governance ensures that interest rate data across various product systems is consolidated accurately for this calculation.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "A measure of the difference between interest income and interest expense, expressed as a percentage of earning assets.",
+      "applicability": "Key metric for financial reporting and executive strategic planning."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:capital_adequacy_ratio:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447351Z",
+      "source_uri": null,
+      "content_hash": "fe59897c03d139c6e7df6cbf564062fc22809b2c96f0a9d96efee7af01b4a2b7",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:102"
+      }
+    ],
+    "content": {
+      "verbatim_text": "The Capital Adequacy Ratio (CAR) is a measurement of a bank's available capital expressed as a percentage of its risk-weighted credit exposures. This ratio ensures that the bank can absorb a reasonable amount of loss and complies with statutory capital requirements. High-quality data regarding asset risk-weights is critical for calculating this ratio in accordance with regulatory mandates.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "Measures the bank's capital relative to its risks to ensure solvency.",
+      "applicability": "Regulatory requirement under the Basel framework to protect depositors and the financial system."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:suspicious_activity_reporting_latency:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447354Z",
+      "source_uri": null,
+      "content_hash": "fbc8aa54e373f0182e255bf6714f73f0c7760fd4248a68489e5297953acb6878",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:1004"
+      }
+    ],
+    "content": {
+      "verbatim_text": "Suspicious Activity Reporting (SAR) Latency measures the time elapsed between the detection of a potentially fraudulent transaction and the official filing of the report with financial authorities. Regulators mandate specific filing windows, and failure to meet these deadlines can result in massive fines. Governance frameworks must prioritize the automation of the SAR workflow to minimize human error and delay.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "The speed at which financial institutions report suspicious behavior to regulatory bodies.",
+      "applicability": "Mandatory for compliance monitoring and reporting under FinCEN and international equivalents."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:cost_to_income_ratio:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447358Z",
+      "source_uri": null,
+      "content_hash": "c767f25cdd8ecca0e4e89940a69d452d3a013d8d7dc5825a95720a5c3c478e27",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:104"
+      }
+    ],
+    "content": {
+      "verbatim_text": "The Cost-to-Income Ratio is used to measure the efficiency of a bank by comparing its operating costs to its total income. Lower ratios generally indicate that a bank is operating more efficiently and has better control over its overheads. Data governance focuses on the accurate categorization of operating expenses and income streams across diverse business units.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "A efficiency metric showing operating costs as a percentage of total operating income.",
+      "applicability": "Used by investors and management to assess operational leaness and profitability."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:loan_to_value_ratio:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447360Z",
+      "source_uri": null,
+      "content_hash": "82b229fbe8bf010d7e489915e55d34e227eb263e6fc13928ec79884f7df6c597",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:106"
+      }
+    ],
+    "content": {
+      "verbatim_text": "Loan-to-Value (LTV) Ratio is a risk assessment used by lenders before approving a mortgage or credit facility, representing the loan amount divided by the appraised value of the asset. Higher LTV ratios indicate higher risk for the lender, potentially requiring higher interest rates or private mortgage insurance. Data integrity of property valuations is a critical governance control for this CDE.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "The ratio of a loan to the value of an asset purchased, typically in real estate.",
+      "applicability": "Essential for mortgage underwriting and credit risk management."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:transactional_data_encryption_rate:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447363Z",
+      "source_uri": null,
+      "content_hash": "c948537b4e8e0f30b9950eefd5d4572073d11f55bc1fe3dd78c7269e7af36bd1",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:603"
+      }
+    ],
+    "content": {
+      "verbatim_text": "The Transactional Data Encryption Rate measures the percentage of customer financial transactions that are encrypted at rest and in transit. This is a critical indicator of compliance with PCI-DSS and other data privacy regulations. Governance policies must mandate end-to-end encryption for all Personally Identifiable Information (PII) to prevent data exfiltration and fraud.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "A security KPI measuring the coverage of encryption across sensitive financial data flows.",
+      "applicability": "Core metric for Cybersecurity and IT Governance teams."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:digital_banking_system_uptime:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447366Z",
+      "source_uri": null,
+      "content_hash": "2e5341204f00b47178a6e3b1e3c1c360e56632102b7241664276b6e5f7d68977",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:601"
+      }
+    ],
+    "content": {
+      "verbatim_text": "Digital Banking System Uptime measures the availability of online and mobile banking platforms for customer use. In the modern financial era, any downtime results in lost transactions, reputational damage, and potential regulatory scrutiny from bodies like the OCC or FCA. Data governance oversight must include real-time monitoring of system health and availability logs.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "Percentage of time digital services are operational and accessible to clients.",
+      "applicability": "Critical for IT operations and customer experience management."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:customer_churn_rate_retail:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447368Z",
+      "source_uri": null,
+      "content_hash": "47f95e3c9549c0e0fda5cbbdad2ad6d3f1a4cb56cf625b7f9c05eae397a9bda8",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:501"
+      }
+    ],
+    "content": {
+      "verbatim_text": "Customer Churn Rate in retail banking measures the percentage of customers who close their accounts or cease using the bank's services within a given period. High churn rates can indicate poor customer service, uncompetitive interest rates, or better offerings from fintech competitors. Data governance is required to ensure consistent customer status tracking across disparate CRM and core banking systems.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "Rate at which customers leave the bank.",
+      "applicability": "Primary indicator for marketing, product development, and customer retention strategies."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:mean_time_to_remediate_audit_findings:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447371Z",
+      "source_uri": null,
+      "content_hash": "2145d0a963822ba1b27e439b378770794d922440c6c88764696a4b111d7be013",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:602"
+      }
+    ],
+    "content": {
+      "verbatim_text": "Mean Time to Remediate (MTTR) Audit Findings tracks the average duration between the identification of a governance or control failure by internal/external audit and its final resolution. Prolonged remediation timelines increase the bank's exposure to operational risk and regulatory penalties. Data governance platforms should track remediation progress and evidence for audit trails.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "Efficiency metric for resolving internal and external audit issues.",
+      "applicability": "Used by Internal Audit and Compliance to monitor risk mitigation responsiveness."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:fraud_loss_to_revenue_ratio:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447374Z",
+      "source_uri": null,
+      "content_hash": "f4ff9a2243c225b0d1d6a0bcd11c7a17292a6f77a4e90ddb3b6c63b3e8d7174d",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:2004"
+      }
+    ],
+    "content": {
+      "verbatim_text": "The Fraud Loss to Revenue Ratio measures the total financial loss resulting from fraudulent activities relative to the bank's total revenue. This includes credit card fraud, identity theft, and internal embezzlement. Governance of transaction data and the application of machine learning for fraud detection are vital to keep this ratio within acceptable thresholds.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "A measure of the impact of fraud on the bank's bottom line.",
+      "applicability": "Critical for Fraud Prevention and Risk Management units."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:loan_origination_cycle_time:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447376Z",
+      "source_uri": null,
+      "content_hash": "37ec8260dee46380d511374cf306f6d2dd7435fc80bb700c48b4146f340ba0f9",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:2002"
+      }
+    ],
+    "content": {
+      "verbatim_text": "Loan Origination Cycle Time measures the duration from the initial loan application submission to the final disbursement of funds. In a competitive lending market, speed of execution is a major differentiator. Data governance ensures that timestamps across the application, credit check, underwriting, and closing phases are captured accurately and consistently.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "The time it takes to process a loan from start to finish.",
+      "applicability": "Used for operational efficiency benchmarking in commercial and retail lending."
+    }
+  },
+  {
+    "urn": "urn:odgs:def:ai_synthetic:regulatory_report_first_pass_accuracy:v1",
+    "metadata": {
+      "authority_id": "AI_SYNTHETIC",
+      "authority_name": "ODGS AI Factory",
+      "document_ref": "AI-Generated Governance Bundle",
+      "harvested_at": "2026-02-19T14:32:07.447378Z",
+      "source_uri": null,
+      "content_hash": "548b486bc81adb30662e6bb0d2a8a4392400c45e6ac7d551adafc70567e3e51b",
+      "hierarchy": {
+        "level": "concept",
+        "parent_ref": null,
+        "local_id": null
+      }
+    },
+    "relations": [
+      {
+        "type": "isDefinedBy",
+        "target_urn": "urn:odgs:metric:2003"
+      }
+    ],
+    "content": {
+      "verbatim_text": "Regulatory Report First Pass Accuracy measures the percentage of reports submitted to regulators (e.g., Call Reports, FR Y-9C) that are accepted without requiring revision or correction. Errors in these reports can lead to audits, fines, and reputational damage. Robust data quality controls and automated validation rules are essential to achieve high first-pass accuracy.",
+      "language": "en-US",
+      "format": "TEXT",
+      "structured_data": null
+    },
+    "interpretation": {
+      "summary": "Quality KPI measuring the correctness of data submitted to financial authorities.",
+      "applicability": "Applicable to Regulatory Reporting and Data Governance teams."
+    }
+  }
+]

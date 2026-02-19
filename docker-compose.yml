@@ -1,0 +1,39 @@
+# ODGS Demo — Docker Compose
+# Deploys Streamlit dashboard behind Caddy reverse proxy with auto-SSL.
+# Designed to coexist with n8n on the same VPS.
+
+services:
+  odgs-demo:
+    build: .
+    container_name: odgs-demo
+    restart: unless-stopped
+    env_file:
+      - .env
+    expose:
+      - "8501"
+    networks:
+      - odgs-net
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: odgs-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - odgs-net
+    depends_on:
+      - odgs-demo
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  odgs-net:
+    driver: bridge

@@ -1,0 +1,86 @@
+{
+  "urn": "urn:odgs:def:fibo:financialinstrument:v2024",
+  "metadata": {
+    "authority_id": "FIBO",
+    "authority_name": "Financial Industry Business Ontology",
+    "document_ref": "FIBO Master",
+    "source_uri": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/FinancialInstrument",
+    "module": "FBC/FinancialInstruments/FinancialInstruments",
+    "hierarchy": {
+      "level": "concept",
+      "local_id": "FinancialInstrument"
+    },
+    "content_hash": "f1ce13735cd883c14260166a4ae81c32cf3310b2afee85a1562edc4244e4df07",
+    "harvested_at": "2026-02-18T22:30:52.259878Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "Concept: FinancialInstrument (https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/FinancialInstrument)",
+    "language": "en-US",
+    "format": "JSON_LD",
+    "structured_data": {
+      "@id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/FinancialInstrument",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+        {
+          "@id": "_:b16"
+        },
+        {
+          "@id": "_:b13"
+        },
+        {
+          "@id": "_:b17"
+        },
+        {
+          "@id": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/WrittenContract"
+        },
+        {
+          "@id": "_:b18"
+        },
+        {
+          "@id": "_:b5"
+        },
+        {
+          "@id": "_:b19"
+        }
+      ],
+      "https://www.omg.org/spec/Commons/AnnotationVocabulary/explanatoryNote": [
+        {
+          "@value": "A financial instrument can be thought of as a template that defines an arrangement structure that remains to be fleshed out with terms and parameters in order to establish a specific instance of the contract."
+        }
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+        {
+          "@id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/"
+        }
+      ],
+      "http://www.w3.org/2004/02/skos/core#example": [
+        {
+          "@value": "Examples of financial instruments include: cash, evidence of an ownership interest in an entity, or a contractual right to receive (or deliver) cash, or another financial instrument."
+        }
+      ],
+      "http://www.w3.org/2004/02/skos/core#definition": [
+        {
+          "@value": "written contract that gives rise to both a financial asset of one entity and a financial liability of another entity"
+        }
+      ],
+      "https://www.omg.org/spec/Commons/AnnotationVocabulary/adaptedFrom": [
+        {
+          "@value": "https://www.ifrs.org/content/dam/ifrs/publications/pdf-standards/english/2021/issued/part-a/ias-32-financial-instruments-presentation.pdf",
+          "@type": "http://www.w3.org/2001/XMLSchema#anyURI"
+        }
+      ],
+      "@type": [
+        "http://www.w3.org/2002/07/owl#Class"
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#label": [
+        {
+          "@value": "financial instrument"
+        }
+      ]
+    }
+  },
+  "interpretation": {
+    "summary": "FIBO definition of FinancialInstrument",
+    "applicability": "Financial Sector"
+  }
+}

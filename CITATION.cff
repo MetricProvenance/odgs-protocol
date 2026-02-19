@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - name: "Kartik Iyer"
+    email: "partner@metricprovenance.com"
+title: "Open Data Governance Schema (ODGS)"
+abstract: "The Open Data Governance Standard (ODGS) is a vendor-neutral protocol that resolves the Definition-Execution Gap in High-Risk AI systems through Semantic Binding, Tri-Partite Audit, and the Sovereign Handshake, enabling EU AI Act compliance through Metric Provenance."
+version: 3.3.0
+date-released: 2026-02-19
+license: Apache-2.0
+url: "https://github.com/MetricProvenance/odgs-protocol"
+repository-code: "https://github.com/MetricProvenance/odgs-protocol"
+doi: "10.5281/zenodo.18564270"
+keywords:
+  - "data-governance"
+  - "schema"
+  - "metrics"
+  - "kpi"
+  - "data-quality"
+  - "ai-safety"
+  - "eu-ai-act"
+  - "owl-ontology"

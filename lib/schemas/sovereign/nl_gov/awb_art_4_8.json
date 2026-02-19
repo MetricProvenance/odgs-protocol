@@ -1,0 +1,27 @@
+{
+  "urn": "urn:odgs:def:nl_gov:awb:art_4_8:v2024",
+  "metadata": {
+    "authority_id": "NL_GOV",
+    "authority_name": "Government of the Netherlands",
+    "document_ref": "Algemene wet bestuursrecht (AwB)",
+    "source_uri": "https://repository.officiele-overheidspublicaties.nl/bwb/BWBR0005537/2024-01-01_0/xml/BWBR0005537_2024-01-01_0.xml#art_4:8",
+    "hierarchy": {
+      "level": "article",
+      "parent_ref": "AwB",
+      "local_id": "4:8"
+    },
+    "content_hash": "cf1d8676d50a9f7390a9c7c63532bcc2e36ede9867f689d5a8ebd2c38d4192ef",
+    "harvested_at": "2026-02-19T14:46:57.408761Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "Lid 1: Voordat een bestuursorgaan een beschikking geeft waartegen een belanghebbende die de beschikking niet heeft aangevraagd naar verwachting bedenkingen zal hebben, stelt het die belanghebbende in de gelegenheid zijn zienswijze naar voren te brengen indien:\nLid 2: Het eerste lid geldt niet indien de belanghebbende niet heeft voldaan aan een wettelijke verplichting gegevens te verstrekken.",
+    "language": "nl-NL",
+    "format": "XML_FRAGMENT",
+    "structured_data": {}
+  },
+  "interpretation": {
+    "summary": "Auto-harvested definition \u2014 AwB Artikel 4:8.",
+    "applicability": "General Administrative Law"
+  }
+}

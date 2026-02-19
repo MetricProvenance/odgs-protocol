@@ -1,0 +1,40 @@
+{
+  "urn": "urn:odgs:def:fibo:regulatoryagency:v2024",
+  "metadata": {
+    "authority_id": "FIBO",
+    "authority_name": "Financial Industry Business Ontology",
+    "document_ref": "FIBO Master",
+    "source_uri": "https://www.omg.org/spec/Commons/RegulatoryAgencies/RegulatoryAgency",
+    "module": "FBC/FunctionalEntities/RegulatoryAgencies",
+    "hierarchy": {
+      "level": "concept",
+      "local_id": "RegulatoryAgency"
+    },
+    "content_hash": "70b0d239caf83c84af4cddf49a2cd27836e4852ffa90f8fee8c2d7aa6f1d84c1",
+    "harvested_at": "2026-02-18T22:30:52.851482Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "Concept: RegulatoryAgency (https://www.omg.org/spec/Commons/RegulatoryAgencies/RegulatoryAgency)",
+    "language": "en-US",
+    "format": "JSON_LD",
+    "structured_data": {
+      "@id": "https://www.omg.org/spec/Commons/RegulatoryAgencies/RegulatoryAgency",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+        {
+          "@id": "_:b8"
+        },
+        {
+          "@id": "_:b17"
+        }
+      ],
+      "@type": [
+        "http://www.w3.org/2002/07/owl#Class"
+      ]
+    }
+  },
+  "interpretation": {
+    "summary": "FIBO definition of RegulatoryAgency",
+    "applicability": "Financial Sector"
+  }
+}

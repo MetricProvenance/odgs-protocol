@@ -1,0 +1,33 @@
+{
+  "urn": "urn:odgs:def:eu:gdpr:art_35:v2016",
+  "metadata": {
+    "authority_id": "EU_GDPR",
+    "authority_name": "EU General Data Protection Regulation (2016/679)",
+    "document_ref": "GDPR Article 35",
+    "source_uri": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679#d1e3546-1-1",
+    "hierarchy": {
+      "level": "article",
+      "chapter": "Chapter IV — Controller and Processor",
+      "local_id": "Art_35"
+    },
+    "content_hash": "598b6a255dbb9761396e380ad3bd8d214fbe596368fb1aef8a29bbc04f2e337e",
+    "harvested_at": "2026-02-18T22:30:46.765020Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "Where a type of processing in particular using new technologies, and taking into account the nature, scope, context and purposes of the processing, is likely to result in a high risk to the rights and freedoms of natural persons, the controller shall, prior to the processing, carry out an assessment of the impact of the envisaged processing operations on the protection of personal data.",
+    "title": "Data protection impact assessment",
+    "language": "en",
+    "format": "TEXT",
+    "structured_data": {
+      "regulation": "GDPR (2016/679)",
+      "article_number": 35,
+      "chapter": "Chapter IV — Controller and Processor",
+      "relevance_to_odgs": "Risk assessment — the precursor to ODGS Compliance Shield scoring for high-risk data operations"
+    }
+  },
+  "interpretation": {
+    "summary": "GDPR Art. 35: Data protection impact assessment",
+    "applicability": "All organizations processing personal data of EU residents"
+  }
+}

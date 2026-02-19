@@ -1,0 +1,33 @@
+{
+  "urn": "urn:odgs:def:eu:gdpr:art_83:v2016",
+  "metadata": {
+    "authority_id": "EU_GDPR",
+    "authority_name": "EU General Data Protection Regulation (2016/679)",
+    "document_ref": "GDPR Article 83",
+    "source_uri": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679#d1e6226-1-1",
+    "hierarchy": {
+      "level": "article",
+      "chapter": "Chapter VIII — Remedies, Liability and Penalties",
+      "local_id": "Art_83"
+    },
+    "content_hash": "6a51bd2b6e7ea0f26c787b56cb98548c56612b234634e5ad528632505f0f9a03",
+    "harvested_at": "2026-02-18T22:30:46.765099Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "Each supervisory authority shall ensure that the imposition of administrative fines shall in each individual case be effective, proportionate and dissuasive. Fines up to EUR 20,000,000 or 4% of annual worldwide turnover, whichever is higher, for infringements of the basic principles for processing, data subjects' rights, and transfers to third countries.",
+    "title": "General conditions for imposing administrative fines",
+    "language": "en",
+    "format": "TEXT",
+    "structured_data": {
+      "regulation": "GDPR (2016/679)",
+      "article_number": 83,
+      "chapter": "Chapter VIII — Remedies, Liability and Penalties",
+      "relevance_to_odgs": "Penalty framework — quantifies the financial risk that ODGS governance is designed to mitigate"
+    }
+  },
+  "interpretation": {
+    "summary": "GDPR Art. 83: General conditions for imposing administrative fines",
+    "applicability": "All organizations processing personal data of EU residents"
+  }
+}

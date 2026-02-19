@@ -1,0 +1,134 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "SovereignDefinition",
+    "type": "object",
+    "properties": {
+        "urn": {
+            "type": "string",
+            "description": "Unique global ID. Format: urn:odgs:def:<authority>:<external_id>:<version>",
+            "pattern": "^urn:odgs:def:[a-z0-9_]+:[a-z0-9_]+:v[0-9.]+$",
+            "example": "urn:odgs:def:nl_gov:awb_art_1_3_lid_1:v2024"
+        },
+        "metadata": {
+            "type": "object",
+            "required": [
+                "authority_id",
+                "document_ref"
+            ],
+            "properties": {
+                "authority_id": {
+                    "type": "string",
+                    "example": "NL_GOV"
+                },
+                "authority_name": {
+                    "type": "string",
+                    "example": "Government of the Netherlands"
+                },
+                "document_ref": {
+                    "type": "string",
+                    "example": "Algemene wet bestuursrecht (AwB)"
+                },
+                "harvested_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "source_uri": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "content_hash": {
+                    "type": "string",
+                    "description": "SHA-256 of the verbatim_text."
+                },
+                "hierarchy": {
+                    "type": "object",
+                    "description": "Location within the source document's structure.",
+                    "properties": {
+                        "level": {
+                            "type": "string",
+                            "enum": [
+                                "document",
+                                "chapter",
+                                "section",
+                                "article",
+                                "paragraph",
+                                "concept"
+                            ]
+                        },
+                        "parent_ref": {
+                            "type": "string",
+                            "description": "Reference ID of the parent node"
+                        },
+                        "local_id": {
+                            "type": "string",
+                            "description": "The ID at this specific level (e.g. '3' for Paragraph 3)"
+                        }
+                    }
+                }
+            }
+        },
+        "relations": {
+            "type": "array",
+            "description": "Ontological or structural relationships extracted from the source.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "subClassOf",
+                            "partOf",
+                            "isDefinedBy",
+                            "relatedTo"
+                        ]
+                    },
+                    "target_urn": {
+                        "type": "string",
+                        "description": "The URN of the related Sovereign Definition"
+                    }
+                }
+            }
+        },
+        "content": {
+            "type": "object",
+            "properties": {
+                "verbatim_text": {
+                    "type": "string"
+                },
+                "language": {
+                    "type": "string",
+                    "example": "nl-NL"
+                },
+                "format": {
+                    "enum": [
+                        "TEXT",
+                        "XML_FRAGMENT",
+                        "JSON_LD",
+                        "MARKDOWN"
+                    ]
+                },
+                "structured_data": {
+                    "type": "object",
+                    "description": "Raw properties preserved from source (e.g. XML attributes or JSON-LD keys)"
+                }
+            }
+        },
+        "interpretation": {
+            "type": "object",
+            "description": "The 'ODGS Translation'. How this law maps to our internal concepts.",
+            "properties": {
+                "summary": {
+                    "type": "string"
+                },
+                "applicability": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "required": [
+        "urn",
+        "metadata",
+        "content"
+    ]
+}

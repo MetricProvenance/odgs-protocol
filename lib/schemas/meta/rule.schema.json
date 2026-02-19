@@ -1,0 +1,81 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "urn:odgs:schema:rule",
+    "title": "ODGS Standard Data Rule",
+    "description": "Schema for validating individual rule definitions in the Judiciary plane.",
+    "type": "object",
+    "required": [
+        "rule_id",
+        "name"
+    ],
+    "properties": {
+        "rule_id": {
+            "type": "string"
+        },
+        "urn": {
+            "type": "string",
+            "pattern": "^urn:odgs:rule:"
+        },
+        "name": {
+            "type": "string",
+            "minLength": 1
+        },
+        "definition": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "domain": {
+            "type": "string"
+        },
+        "businessRule": {
+            "type": "string"
+        },
+        "severity": {
+            "type": "string",
+            "enum": [
+                "HARD_STOP",
+                "WARNING",
+                "INFO"
+            ]
+        },
+        "logic_expression": {
+            "type": "string"
+        },
+        "calculation_logic": {
+            "type": "string"
+        },
+        "requires_human_review": {
+            "type": "boolean"
+        },
+        "icon": {
+            "type": "string"
+        },
+        "owner": {
+            "type": "string"
+        },
+        "exampleGood": {
+            "type": "string"
+        },
+        "examplePoor": {
+            "type": "string"
+        },
+        "targetIndustries": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "improvesDqDimensionIds": {
+            "type": "array",
+            "items": {
+                "type": [
+                    "string",
+                    "integer"
+                ]
+            }
+        }
+    },
+    "additionalProperties": false
+}

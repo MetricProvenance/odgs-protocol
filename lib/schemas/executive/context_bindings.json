@@ -1,0 +1,261 @@
+{
+    "contexts": [
+        {
+            "context_id": "urn:odgs:process:O2C_S01",
+            "description": "Order to Cash — Customer Inquiry & Quotation: Validate customer identity and contact data at first touch.",
+            "required_metrics": [
+                "urn:odgs:metric:8001",
+                "urn:odgs:metric:8002"
+            ],
+            "rules": [
+                "urn:odgs:rule:2004",
+                "urn:odgs:rule:2005",
+                "urn:odgs:rule:2001"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:O2C_S02",
+            "description": "Order to Cash — Order Entry & Management: Validate order data, credit limits, and product identifiers.",
+            "required_metrics": [
+                "urn:odgs:metric:4002",
+                "urn:odgs:metric:4004"
+            ],
+            "rules": [
+                "urn:odgs:rule:2013",
+                "urn:odgs:rule:2024",
+                "urn:odgs:rule:2008"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:O2C_S03",
+            "description": "Order to Cash — Order Fulfillment & Shipping: Validate container IDs, carrier codes, and shipping addresses.",
+            "required_metrics": [
+                "urn:odgs:metric:1004",
+                "urn:odgs:metric:1001"
+            ],
+            "rules": [
+                "urn:odgs:rule:2021",
+                "urn:odgs:rule:2022",
+                "urn:odgs:rule:2035"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:O2C_S04",
+            "description": "Order to Cash — Invoicing & Billing: Validate financial precision, currency codes, and tax IDs.",
+            "required_metrics": [
+                "urn:odgs:metric:101",
+                "urn:odgs:metric:103"
+            ],
+            "rules": [
+                "urn:odgs:rule:2002",
+                "urn:odgs:rule:2023",
+                "urn:odgs:rule:2029"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:O2C_S05",
+            "description": "Order to Cash — Payment Collection & Reconciliation: Validate payment dates and amounts.",
+            "required_metrics": [
+                "urn:odgs:metric:4006",
+                "urn:odgs:metric:106"
+            ],
+            "rules": [
+                "urn:odgs:rule:2027",
+                "urn:odgs:rule:2007",
+                "urn:odgs:rule:2006"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:P2P_S01",
+            "description": "Procure to Pay — Requisition: Validate purchase requests, chart of accounts, and vendor completeness.",
+            "required_metrics": [
+                "urn:odgs:metric:4001",
+                "urn:odgs:metric:4007"
+            ],
+            "rules": [
+                "urn:odgs:rule:2040",
+                "urn:odgs:rule:2045",
+                "urn:odgs:rule:2008"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:P2P_S03",
+            "description": "Procure to Pay — Goods Receipt: Validate batch/lot traceability, units of measure, and quantities.",
+            "required_metrics": [
+                "urn:odgs:metric:14001",
+                "urn:odgs:metric:2003"
+            ],
+            "rules": [
+                "urn:odgs:rule:2036",
+                "urn:odgs:rule:2011",
+                "urn:odgs:rule:2007"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:H2R_S01",
+            "description": "Hire to Retire — Recruitment: Validate candidate contact data and identity documents.",
+            "required_metrics": [
+                "urn:odgs:metric:501",
+                "urn:odgs:metric:503"
+            ],
+            "rules": [
+                "urn:odgs:rule:2004",
+                "urn:odgs:rule:2005",
+                "urn:odgs:rule:2006"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:R2R_S02",
+            "description": "Record to Report — Journal Entry: Validate GL codes, amounts, and date compliance.",
+            "required_metrics": [
+                "urn:odgs:metric:101",
+                "urn:odgs:metric:102"
+            ],
+            "rules": [
+                "urn:odgs:rule:2040",
+                "urn:odgs:rule:2007",
+                "urn:odgs:rule:2006"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:I2M_S02",
+            "description": "Idea to Market — Product Development: Validate BOM versioning, material classification, and safety data.",
+            "required_metrics": [
+                "urn:odgs:metric:2003",
+                "urn:odgs:metric:6003"
+            ],
+            "rules": [
+                "urn:odgs:rule:2031",
+                "urn:odgs:rule:2012",
+                "urn:odgs:rule:2018"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:CRM_S01",
+            "description": "Customer Relationship — Onboarding: Validate golden record, de-duplication, and master data completeness.",
+            "required_metrics": [
+                "urn:odgs:metric:8001",
+                "urn:odgs:metric:11002"
+            ],
+            "rules": [
+                "urn:odgs:rule:2039",
+                "urn:odgs:rule:2014",
+                "urn:odgs:rule:2004"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:OPS_S02",
+            "description": "Operations — Asset Maintenance: Validate work orders, calibration dates, inspection compliance, and criticality.",
+            "required_metrics": [
+                "urn:odgs:metric:3001",
+                "urn:odgs:metric:3003",
+                "urn:odgs:metric:2001"
+            ],
+            "rules": [
+                "urn:odgs:rule:2044",
+                "urn:odgs:rule:2038",
+                "urn:odgs:rule:2048",
+                "urn:odgs:rule:2037"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:P2P_S02",
+            "description": "Procure to Pay — Supplier Selection & PO: Validate vendor master data, payment terms, and purchase order completeness.",
+            "required_metrics": [
+                "urn:odgs:metric:4007",
+                "urn:odgs:metric:4001"
+            ],
+            "rules": [
+                "urn:odgs:rule:2045",
+                "urn:odgs:rule:2008",
+                "urn:odgs:rule:2002"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:P2P_S04",
+            "description": "Procure to Pay — Invoice 3-Way Match: Validate invoice amounts against PO and goods receipt, enforce currency and price precision.",
+            "required_metrics": [
+                "urn:odgs:metric:101",
+                "urn:odgs:metric:4006"
+            ],
+            "rules": [
+                "urn:odgs:rule:2002",
+                "urn:odgs:rule:2023",
+                "urn:odgs:rule:2007"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:R2R_S01",
+            "description": "Record to Report — Transaction Recording: Validate transaction dates, mandatory fields, and GL account codes at capture.",
+            "required_metrics": [
+                "urn:odgs:metric:9002",
+                "urn:odgs:metric:9001"
+            ],
+            "rules": [
+                "urn:odgs:rule:2006",
+                "urn:odgs:rule:2008",
+                "urn:odgs:rule:2040"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:R2R_S03",
+            "description": "Record to Report — Financial Reporting: Validate GL balances, amounts, and date compliance before consolidation.",
+            "required_metrics": [
+                "urn:odgs:metric:101",
+                "urn:odgs:metric:104"
+            ],
+            "rules": [
+                "urn:odgs:rule:2040",
+                "urn:odgs:rule:2007",
+                "urn:odgs:rule:2027"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        },
+        {
+            "context_id": "urn:odgs:process:OPS_S01",
+            "description": "Operations — Demand & Capacity Planning: Validate forecast data, resource availability, and scheduling parameters.",
+            "required_metrics": [
+                "urn:odgs:metric:4008",
+                "urn:odgs:metric:2005"
+            ],
+            "rules": [
+                "urn:odgs:rule:2008",
+                "urn:odgs:rule:2007",
+                "urn:odgs:rule:2006"
+            ],
+            "effective_from": "2024-01-01",
+            "effective_until": null
+        }
+    ]
+}

@@ -1,0 +1,94 @@
+{
+  "edges": [
+    {
+      "source": "urn:odgs:def:ai_synthetic:liquidity_coverage_ratio:v1",
+      "target": "urn:odgs:metric:106",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:non_performing_loan_ratio:v1",
+      "target": "urn:odgs:metric:2004",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:know_your_customer_completion_rate:v1",
+      "target": "urn:odgs:metric:2003",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:net_interest_margin:v1",
+      "target": "urn:odgs:metric:101",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:capital_adequacy_ratio:v1",
+      "target": "urn:odgs:metric:102",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:suspicious_activity_reporting_latency:v1",
+      "target": "urn:odgs:metric:1004",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:cost_to_income_ratio:v1",
+      "target": "urn:odgs:metric:104",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:loan_to_value_ratio:v1",
+      "target": "urn:odgs:metric:106",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:transactional_data_encryption_rate:v1",
+      "target": "urn:odgs:metric:603",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:digital_banking_system_uptime:v1",
+      "target": "urn:odgs:metric:601",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:customer_churn_rate_retail:v1",
+      "target": "urn:odgs:metric:501",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:mean_time_to_remediate_audit_findings:v1",
+      "target": "urn:odgs:metric:602",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:fraud_loss_to_revenue_ratio:v1",
+      "target": "urn:odgs:metric:2004",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:loan_origination_cycle_time:v1",
+      "target": "urn:odgs:metric:2002",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    },
+    {
+      "source": "urn:odgs:def:ai_synthetic:regulatory_report_first_pass_accuracy:v1",
+      "target": "urn:odgs:metric:2003",
+      "relation": "isDefinedBy",
+      "provenance": "AI_SYNTHETIC"
+    }
+  ]
+}

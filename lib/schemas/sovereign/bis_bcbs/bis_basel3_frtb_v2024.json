@@ -1,0 +1,34 @@
+{
+  "urn": "urn:odgs:def:bis:basel3:frtb:v2024",
+  "metadata": {
+    "authority_id": "BIS_BCBS",
+    "authority_name": "Bank for International Settlements — Basel Committee on Banking Supervision",
+    "document_ref": "BCBS d457 (January 2019)",
+    "source_uri": "https://www.bis.org/bcbs/publ/d457.htm",
+    "hierarchy": {
+      "level": "regulatory_definition",
+      "framework": "Basel III — Market Risk",
+      "local_id": "FRTB"
+    },
+    "content_hash": "9066a7ba4f44273184d8a3870772b7b94fb5d17e6f47f66a4db6d86559459d96",
+    "harvested_at": "2026-02-18T22:30:46.767445Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "FRTB introduces a revised boundary between the trading book and banking book, and a new standardised approach and internal models approach for calculating market risk capital. Key changes include: Expected Shortfall (ES) replacing Value-at-Risk (VaR), desk-level model approval, and non-modellable risk factors (NMRFs).",
+    "title": "Fundamental Review of the Trading Book",
+    "language": "en",
+    "format": "TEXT",
+    "structured_data": {
+      "standard": "Basel III",
+      "concept": "FRTB",
+      "framework_area": "Basel III — Market Risk",
+      "standard_reference": "BCBS d457 (January 2019)",
+      "relevance_to_odgs": "Market risk measurement standard — defines how derivatives and trading positions must be governed"
+    }
+  },
+  "interpretation": {
+    "summary": "Basel III: Fundamental Review of the Trading Book",
+    "applicability": "Banking and Financial Institutions"
+  }
+}

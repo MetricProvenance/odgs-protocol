@@ -1,0 +1,34 @@
+{
+  "urn": "urn:odgs:def:bis:basel3:leverageratio:v2024",
+  "metadata": {
+    "authority_id": "BIS_BCBS",
+    "authority_name": "Bank for International Settlements — Basel Committee on Banking Supervision",
+    "document_ref": "BCBS d424 (December 2017)",
+    "source_uri": "https://www.bis.org/bcbs/publ/d424.htm",
+    "hierarchy": {
+      "level": "regulatory_definition",
+      "framework": "Basel III — Pillar 1",
+      "local_id": "LeverageRatio"
+    },
+    "content_hash": "8f6a5b04626b5a310f764685784a0fd691cda5f17a72f4e90016e73adf9ec978",
+    "harvested_at": "2026-02-18T22:30:46.767366Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "The leverage ratio is a non-risk-based measure defined as: Tier 1 Capital / Total Exposure Measure >= 3%. The exposure measure includes on-balance sheet items, derivatives, securities financing transactions, and off-balance sheet items. Unlike risk-weighted ratios, the leverage ratio provides a simple, transparent backstop.",
+    "title": "Leverage Ratio",
+    "language": "en",
+    "format": "TEXT",
+    "structured_data": {
+      "standard": "Basel III",
+      "concept": "LeverageRatio",
+      "framework_area": "Basel III — Pillar 1",
+      "standard_reference": "BCBS d424 (December 2017)",
+      "relevance_to_odgs": "Capital adequacy backstop — non-risk-weighted constraint for ODGS financial stability metrics"
+    }
+  },
+  "interpretation": {
+    "summary": "Basel III: Leverage Ratio",
+    "applicability": "Banking and Financial Institutions"
+  }
+}
