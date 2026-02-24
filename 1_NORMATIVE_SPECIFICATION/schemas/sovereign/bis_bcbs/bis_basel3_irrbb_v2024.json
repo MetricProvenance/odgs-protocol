@@ -1,0 +1,34 @@
+{
+  "urn": "urn:odgs:def:bis:basel3:irrbb:v2024",
+  "metadata": {
+    "authority_id": "BIS_BCBS",
+    "authority_name": "Bank for International Settlements — Basel Committee on Banking Supervision",
+    "document_ref": "BCBS d368 (April 2016)",
+    "source_uri": "https://www.bis.org/bcbs/publ/d368.htm",
+    "hierarchy": {
+      "level": "regulatory_definition",
+      "framework": "Basel III — Pillar 2",
+      "local_id": "IRRBB"
+    },
+    "content_hash": "5763e821c08ef933f6d7bc34964708779da1fbd485fb2e1ee9bec8608db4e73a",
+    "harvested_at": "2026-02-24T20:24:28.769485Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "IRRBB refers to the current or prospective risk to the bank's capital and earnings arising from adverse movements in interest rates that affect banking book positions. Banks must measure the impact using Economic Value of Equity (EVE) and Net Interest Income (NII) approaches under prescribed shock scenarios.",
+    "title": "Interest Rate Risk in the Banking Book",
+    "language": "en",
+    "format": "TEXT",
+    "structured_data": {
+      "standard": "Basel III",
+      "concept": "IRRBB",
+      "framework_area": "Basel III — Pillar 2",
+      "standard_reference": "BCBS d368 (April 2016)",
+      "relevance_to_odgs": "Interest rate governance — the regulatory basis for ODGS interest rate sensitivity metrics"
+    }
+  },
+  "interpretation": {
+    "summary": "Basel III: Interest Rate Risk in the Banking Book",
+    "applicability": "Banking and Financial Institutions"
+  }
+}

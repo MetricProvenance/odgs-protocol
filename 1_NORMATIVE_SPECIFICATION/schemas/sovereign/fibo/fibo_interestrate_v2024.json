@@ -1,0 +1,60 @@
+{
+  "urn": "urn:odgs:def:fibo:interestrate:v2024",
+  "metadata": {
+    "authority_id": "FIBO",
+    "authority_name": "Financial Industry Business Ontology",
+    "document_ref": "FIBO Master",
+    "source_uri": "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/InterestRate",
+    "module": "FND/Accounting/CurrencyAmount",
+    "hierarchy": {
+      "level": "concept",
+      "local_id": "InterestRate"
+    },
+    "content_hash": "fd822561900fcc1fcddf674c0297fc7716da7c7db9301337f70b8bb115b4dce3",
+    "harvested_at": "2026-02-24T20:24:31.467784Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "Concept: InterestRate (https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/InterestRate)",
+    "language": "en-US",
+    "format": "JSON_LD",
+    "structured_data": {
+      "@id": "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/InterestRate",
+      "https://www.omg.org/spec/Commons/AnnotationVocabulary/explanatoryNote": [
+        {
+          "@value": "Interest rates are typically noted on an annual basis, known as the annual percentage rate (APR). The assets borrowed could include cash, consumer goods, and large assets such as a vehicle or building. The rate is derived by dividing the amount of interest by the amount of principal borrowed. Interest rates are quoted on bills, notes, bonds, credit cards, and many kinds of consumer and business loans."
+        }
+      ],
+      "http://www.w3.org/2004/02/skos/core#definition": [
+        {
+          "@value": "amount charged, expressed as a percentage of principal, in exchange for the use of assets"
+        }
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+        {
+          "@id": "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/"
+        }
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#label": [
+        {
+          "@value": "interest rate"
+        }
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+        {
+          "@id": "_:b14"
+        },
+        {
+          "@id": "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/PercentageMonetaryAmount"
+        }
+      ],
+      "@type": [
+        "http://www.w3.org/2002/07/owl#Class"
+      ]
+    }
+  },
+  "interpretation": {
+    "summary": "FIBO definition of InterestRate",
+    "applicability": "Financial Sector"
+  }
+}

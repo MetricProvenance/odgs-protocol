@@ -1,0 +1,27 @@
+{
+  "urn": "urn:odgs:def:nl_gov:awb:art_3_4:v2024",
+  "metadata": {
+    "authority_id": "NL_GOV",
+    "authority_name": "Government of the Netherlands",
+    "document_ref": "Algemene wet bestuursrecht (AwB)",
+    "source_uri": "https://repository.officiele-overheidspublicaties.nl/bwb/BWBR0005537/2024-01-01_0/xml/BWBR0005537_2024-01-01_0.xml#art_3:4",
+    "hierarchy": {
+      "level": "article",
+      "parent_ref": "AwB",
+      "local_id": "3:4"
+    },
+    "content_hash": "1685342709bbc847f5f64f22d28350591b9a4ddb083698e5d06f05ea076437cc",
+    "harvested_at": "2026-02-24T20:24:30.155383Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "Lid 1: Het bestuursorgaan weegt de rechtstreeks bij het besluit betrokken belangen af, voor zover niet uit een wettelijk voorschrift of uit de aard van de uit te oefenen bevoegdheid een beperking voortvloeit.\nLid 2: De voor een of meer belanghebbenden nadelige gevolgen van een besluit mogen niet onevenredig zijn in verhouding tot de met het besluit te dienen doelen.",
+    "language": "nl-NL",
+    "format": "XML_FRAGMENT",
+    "structured_data": {}
+  },
+  "interpretation": {
+    "summary": "Auto-harvested definition — AwB Artikel 3:4.",
+    "applicability": "General Administrative Law"
+  }
+}

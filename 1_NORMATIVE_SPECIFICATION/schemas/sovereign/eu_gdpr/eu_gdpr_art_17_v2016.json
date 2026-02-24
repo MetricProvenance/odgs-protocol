@@ -1,0 +1,33 @@
+{
+  "urn": "urn:odgs:def:eu:gdpr:art_17:v2016",
+  "metadata": {
+    "authority_id": "EU_GDPR",
+    "authority_name": "EU General Data Protection Regulation (2016/679)",
+    "document_ref": "GDPR Article 17",
+    "source_uri": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679#d1e2589-1-1",
+    "hierarchy": {
+      "level": "article",
+      "chapter": "Chapter III — Rights of the Data Subject",
+      "local_id": "Art_17"
+    },
+    "content_hash": "b6d577f34f9137907c7ffd3da6ece587f833b334376820cf102e1f78bb6440e4",
+    "harvested_at": "2026-02-24T20:24:28.763474Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "The data subject shall have the right to obtain from the controller the erasure of personal data concerning him or her without undue delay and the controller shall have the obligation to erase personal data without undue delay where one of the following grounds applies: (a) the personal data are no longer necessary; (b) the data subject withdraws consent; (c) the data subject objects to the processing; (d) the personal data have been unlawfully processed; (e) compliance with a legal obligation; (f) data collected in relation to information society services.",
+    "title": "Right to erasure ('right to be forgotten')",
+    "language": "en",
+    "format": "TEXT",
+    "structured_data": {
+      "regulation": "GDPR (2016/679)",
+      "article_number": 17,
+      "chapter": "Chapter III — Rights of the Data Subject",
+      "relevance_to_odgs": "Data retention governance — impacts ODGS storage limitation dimensions and archival rules"
+    }
+  },
+  "interpretation": {
+    "summary": "GDPR Art. 17: Right to erasure ('right to be forgotten')",
+    "applicability": "All organizations processing personal data of EU residents"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "urn": "urn:odgs:def:bis:basel3:lcr:v2024",
+  "metadata": {
+    "authority_id": "BIS_BCBS",
+    "authority_name": "Bank for International Settlements — Basel Committee on Banking Supervision",
+    "document_ref": "BCBS d295 (January 2013)",
+    "source_uri": "https://www.bis.org/publ/bcbs238.htm",
+    "hierarchy": {
+      "level": "regulatory_definition",
+      "framework": "Basel III — Liquidity",
+      "local_id": "LCR"
+    },
+    "content_hash": "a330381118de07d7d6786d1a467eed52aa98dc23d47c16185554f542ffaa4ff1",
+    "harvested_at": "2026-02-24T20:24:28.768778Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "The Liquidity Coverage Ratio (LCR) requires banks to hold a stock of high-quality liquid assets (HQLA) sufficient to cover net cash outflows over a 30-day stress period. LCR = Stock of HQLA / Total net cash outflows over 30 days >= 100%. HQLA are classified into Level 1 (cash, central bank reserves, sovereign debt) and Level 2 assets (corporate bonds, covered bonds).",
+    "title": "Liquidity Coverage Ratio",
+    "language": "en",
+    "format": "TEXT",
+    "structured_data": {
+      "standard": "Basel III",
+      "concept": "LCR",
+      "framework_area": "Basel III — Liquidity",
+      "standard_reference": "BCBS d295 (January 2013)",
+      "relevance_to_odgs": "Liquidity risk measurement — the regulatory basis for ODGS liquidity and cash flow metrics"
+    }
+  },
+  "interpretation": {
+    "summary": "Basel III: Liquidity Coverage Ratio",
+    "applicability": "Banking and Financial Institutions"
+  }
+}

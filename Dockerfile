@@ -12,7 +12,7 @@ COPY pyproject.toml .
 COPY README.md .
 COPY src/ src/
 COPY lib/ lib/
-COPY specifications/ specifications/
+COPY 1_NORMATIVE_SPECIFICATION/schemas/ 1_NORMATIVE_SPECIFICATION/schemas/
 COPY .streamlit/ .streamlit/
 
 # Install the package

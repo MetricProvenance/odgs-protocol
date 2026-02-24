@@ -12,6 +12,18 @@
 
 ---
 
+### 🏛️ Standards Refactor: ISO/IEC Candidate Standard (v3.3.0)
+
+**Notice to all Contributors and Adopters (24 Feb 2026):**
+The repository structure has been formally reorganized into a Candidate Standard format to support ongoing review by the **ISO/IEC JTC 1/SC 42 (Artificial Intelligence)** committee for Working Group 2 (Data) or Working Group 3 (Trustworthiness).
+
+To strictly enforce the semantic decoupling of policy from execution, all materials are now divided into:
+1. `1_NORMATIVE_SPECIFICATION/`: Mandatory cryptographic schemas, rules, and W3C OWL ontologies.
+2. `2_INFORMATIVE_REFERENCE/`: The software implementation (`odgs` engine), adapters, and documentation.
+
+*This structure ensures our technical architecture mirrors the legal separation of powers required by sovereign data regulations.*
+
+---
 ### 📢 Sovereign Node Notice (19 Feb 2026)
 
 **To the 240+ Sovereign Nodes currently running ODGS (v3.0.0):**
@@ -44,22 +56,22 @@ This repository contains the **Reference Implementation (v3.3.0)**, featuring th
 
 **Semantic Certificate** — Every sovereign definition carries a cryptographic fingerprint bound to its issuing authority. The data equivalent of a TLS certificate.
 
-![Semantic Certificate — cryptographic fingerprint bound to the Government of the Netherlands, with VALID status badge and SHA-256 content hash](docs/images/ui_semantic_certificate.png)
+![Semantic Certificate — cryptographic fingerprint bound to the Government of the Netherlands, with VALID status badge and SHA-256 content hash](2_INFORMATIVE_REFERENCE/architecture/images/ui_semantic_certificate.png)
 
 <details>
 <summary><b>📊 More Screenshots</b> — Compliance Matrix · Sovereign Brake · Harvester Sources</summary>
 
 **Sovereign Compliance Matrix** — Real-time governance status across 72 business metrics, aligned with EU AI Act Art. 10 & 12.
 
-![Sovereign Compliance Matrix showing 72 business metrics, domain filters, and Naked vs Sovereign status](docs/images/ui_compliance_matrix.png)
+![Sovereign Compliance Matrix showing 72 business metrics, domain filters, and Naked vs Sovereign status](2_INFORMATIVE_REFERENCE/architecture/images/ui_compliance_matrix.png)
 
 **Sovereign Brake — Live Interceptor** — When data does not match its statutory definition, the system *refuses to proceed*. This is the "Administrative Recusal" principle.
 
-![Sovereign Brake showing HARD_STOP enforcement rules with regex validation](docs/images/ui_sovereign_brake.png)
+![Sovereign Brake showing HARD_STOP enforcement rules with regex validation](2_INFORMATIVE_REFERENCE/architecture/images/ui_sovereign_brake.png)
 
 **Sovereign Harvester — Authoritative Sources** — Definitions harvested from trusted regulatory bodies and international standards organisations.
 
-![Harvester Sources showing Dutch Administrative Law, FIBO, ISO 42001, and GDPR with live API status](docs/images/ui_harvester_sources.png)
+![Harvester Sources showing Dutch Administrative Law, FIBO, ISO 42001, and GDPR with live API status](2_INFORMATIVE_REFERENCE/architecture/images/ui_harvester_sources.png)
 
 </details>
 
@@ -101,9 +113,9 @@ graph TD
     style Phy fill:#ddd,stroke:#333,stroke-width:2px
 ```
 
-**[> Read the Full Architecture Specification](/docs/architecture.md)**
+**[> Read the Full Architecture Specification](/2_INFORMATIVE_REFERENCE/architecture/architecture.md)**
 
-**🦉 [W3C OWL Ontology](/specifications/ontology_graph.owl)** — 275 individuals (72 metrics, 50 rules, 60 dimensions, 42 process stages, 43 sovereign definitions) formally specified in OWL/RDF with W3C PROV provenance chains.
+**🦉 [W3C OWL Ontology](/1_NORMATIVE_SPECIFICATION/ontology/ontology_graph.owl)** — 275 individuals (72 metrics, 50 rules, 60 dimensions, 42 process stages, 43 sovereign definitions) formally specified in OWL/RDF with W3C PROV provenance chains.
 
 ---
 
@@ -140,12 +152,12 @@ Use the new `harvest` command to pull authoritative legal definitions:
 # Harvest Dutch Administrative Law (Article 1:3)
 odgs harvest nl_awb 1:3
 # > [SUCCESS] Verified Signature.
-# > Saved Immutable Definition: lib/schemas/sovereign/nl_gov/awb_art_1_3.json
+# > Saved Immutable Definition: 1_NORMATIVE_SPECIFICATION/schemas/sovereign/nl_gov/awb_art_1_3.json
 
 # Harvest Finance Ontology (Interest Rate)
 odgs harvest fibo InterestRate
 # > [SUCCESS] Verified Signature.
-# > Saved Immutable Definition: lib/schemas/sovereign/fibo/interestrate_v2024.json
+# > Saved Immutable Definition: 1_NORMATIVE_SPECIFICATION/schemas/sovereign/fibo/interestrate_v2024.json
 ```
 
 **3. Define a Metric (The Law)**
@@ -161,15 +173,15 @@ odgs add metric "ROIC" --definition "urn:odgs:def:fibo:interestrate:v2024"
 
 ## 6. Documentation & Contribution
 
-> 📚 **[Full Documentation Map →](docs/index.md)** — All docs organized by audience (Executive, Compliance, Engineering, Research).
+> 📚 **[Full Documentation Map →](2_INFORMATIVE_REFERENCE/architecture/index.md)** — All docs organized by audience (Executive, Compliance, Engineering, Research).
 > 🎯 **[Live Demo →](https://demo.metricprovenance.com)** — Interactive dashboard with live governance metrics.
 
 | Start Here | If You Are |
 |---|---|
-| [Plain Language Guide](docs/eli5_guide.md) | Executive, CDO, General |
-| [Compliance Report](docs/compliance_report.md) | Compliance Officer, Regulator |
-| [Adapter Guide](docs/adapter_guide.md) | Data Engineer |
-| [Technical Note v3.3](docs/research/technical_note_v33.md) | Academic, Researcher |
+| [Plain Language Guide](2_INFORMATIVE_REFERENCE/architecture/eli5_guide.md) | Executive, CDO, General |
+| [Compliance Report](2_INFORMATIVE_REFERENCE/architecture/compliance_report.md) | Compliance Officer, Regulator |
+| [Adapter Guide](2_INFORMATIVE_REFERENCE/architecture/adapter_guide.md) | Data Engineer |
+| [Technical Note v3.3](2_INFORMATIVE_REFERENCE/architecture/research/technical_note_v33.md) | Academic, Researcher |
 
 ### Contribute
 

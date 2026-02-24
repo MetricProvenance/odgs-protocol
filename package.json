@@ -19,15 +19,16 @@
   "engines": {
     "node": ">=18"
   },
-  "main": "lib/index.js",
+  "main": "2_INFORMATIVE_REFERENCE/src/index.js",
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "prepublishOnly": "python3 ./scripts/sync_schemas.py",
-    "postinstall": "node scripts/banner.js"
+    "prepublishOnly": "python3 2_INFORMATIVE_REFERENCE/src/scripts/sync_schemas.py",
+    "postinstall": "node 2_INFORMATIVE_REFERENCE/src/scripts/banner.js"
   },
   "files": [
-    "lib"
+    "1_NORMATIVE_SPECIFICATION",
+    "2_INFORMATIVE_REFERENCE/src"
   ],
   "dependencies": {
     "ajv": "^8.12.0",

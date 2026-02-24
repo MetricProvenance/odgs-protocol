@@ -111,7 +111,7 @@ docker compose up -d --build
 | SSL cert not provisioning | Ensure DNS A record resolves. Check `docker compose logs caddy` |
 | Streamlit blank page | Check `docker compose logs odgs-demo` for Python errors |
 | Port 80/443 in use | Stop n8n or use Option B above |
-| Git errors in container | The Dockerfile initializes a local git repo; ensure `lib/` is copied |
+| Git errors in container | The Dockerfile initializes a local git repo; ensure `2_INFORMATIVE_REFERENCE/src/lib/` is copied |
 
 ---
 

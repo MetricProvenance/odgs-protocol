@@ -54,8 +54,8 @@ To serve as a Reference Standard for the public sector, this coalition maintains
 ## 5. Join the Conversation
 We are building this standard in the open.
 
-*   **For Academics:** Contribute to the `specifications/` to align them with legal theory.
-*   **For Regulators:** Review the `docs/technical_annex.md` to assess compliance viability.
+*   **For Academics:** Contribute to the `2_INFORMATIVE_REFERENCE/architecture/` to align them with legal theory.
+*   **For Regulators:** Review the `2_INFORMATIVE_REFERENCE/architecture/technical_annex.md` to assess compliance viability.
 *   **For Developers:** Help refine the Reference Implementation in `src/`.
 
 *Ideally suited for collaboration with NEN Standards Committee 381 525 and similar ISO working groups.*

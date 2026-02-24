@@ -49,19 +49,22 @@ Documentation = "https://github.com/MetricProvenance/odgs-protocol/tree/main/doc
 odgs = "odgs.cli:app"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/odgs"]
+packages = ["2_INFORMATIVE_REFERENCE/src/odgs"]
 exclude = [
-    "src/odgs/ui/",
-    "src/odgs/factory/",
-    "src/odgs/audit_logs/",
-    "src/odgs/sovereign_audit.log",
+    "2_INFORMATIVE_REFERENCE/src/odgs/ui/",
+    "2_INFORMATIVE_REFERENCE/src/odgs/factory/",
+    "2_INFORMATIVE_REFERENCE/src/odgs/audit_logs/",
+    "2_INFORMATIVE_REFERENCE/src/odgs/sovereign_audit.log",
 ]
+
+[tool.hatch.build.targets.wheel.sources]
+"2_INFORMATIVE_REFERENCE/src" = ""
 
 [tool.hatch.build.targets.sdist]
 exclude = [
-    "src/odgs/ui/",
-    "src/odgs/factory/",
-    "src/odgs/audit_logs/",
+    "2_INFORMATIVE_REFERENCE/src/odgs/ui/",
+    "2_INFORMATIVE_REFERENCE/src/odgs/factory/",
+    "2_INFORMATIVE_REFERENCE/src/odgs/audit_logs/",
     ".env",
     "deploy/",
     "docker-compose.yml",

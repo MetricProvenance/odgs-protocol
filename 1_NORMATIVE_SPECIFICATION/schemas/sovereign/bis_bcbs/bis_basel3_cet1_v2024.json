@@ -1,0 +1,34 @@
+{
+  "urn": "urn:odgs:def:bis:basel3:cet1:v2024",
+  "metadata": {
+    "authority_id": "BIS_BCBS",
+    "authority_name": "Bank for International Settlements — Basel Committee on Banking Supervision",
+    "document_ref": "BCBS d424 (December 2017)",
+    "source_uri": "https://www.bis.org/bcbs/publ/d424.htm",
+    "hierarchy": {
+      "level": "regulatory_definition",
+      "framework": "Basel III — Pillar 1",
+      "local_id": "CET1"
+    },
+    "content_hash": "61f090390a31a0c429819b5c886784ab09b3a9e6d654433624d60a6f4a7261c2",
+    "harvested_at": "2026-02-24T20:24:28.768548Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "The Common Equity Tier 1 (CET1) capital ratio is the ratio of a bank's core equity capital to its total risk-weighted assets (RWAs). CET1 capital consists of: common shares, retained earnings, other comprehensive income, qualifying minority interests, and regulatory adjustments. The minimum CET1 ratio is 4.5%, with a capital conservation buffer of 2.5%, bringing the effective minimum to 7%.",
+    "title": "Common Equity Tier 1 Capital Ratio",
+    "language": "en",
+    "format": "TEXT",
+    "structured_data": {
+      "standard": "Basel III",
+      "concept": "CET1",
+      "framework_area": "Basel III — Pillar 1",
+      "standard_reference": "BCBS d424 (December 2017)",
+      "relevance_to_odgs": "Defines the denominator for financial health metrics — directly governs how ODGS financial metrics calculate capital adequacy"
+    }
+  },
+  "interpretation": {
+    "summary": "Basel III: Common Equity Tier 1 Capital Ratio",
+    "applicability": "Banking and Financial Institutions"
+  }
+}

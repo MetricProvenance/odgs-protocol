@@ -28,10 +28,10 @@ This ensures your Engineering Leads receive an immediate GitHub notification bef
 ---
 
 ## Step 1: Backup Your Data
-Before running any scripts, ensure your current `lib/schemas` directory is backed up.
+Before running any scripts, ensure your current `1_NORMATIVE_SPECIFICATION/schemas` directory is backed up.
 
 ```bash
-cp -r lib/schemas lib/schemas_backup_v3_0
+cp -r 1_NORMATIVE_SPECIFICATION/schemas 1_NORMATIVE_SPECIFICATION/schemas_backup_v3_0
 ```
 
 ## Step 2: Run the Migration Script
@@ -50,13 +50,13 @@ python scripts/migrate_v3_0_to_v3_2.py
 Loading Dimensions...
 Building URN Map...
 Migrating Rules...
-Updated lib/schemas/judiciary/standard_data_rules.json
+Updated 1_NORMATIVE_SPECIFICATION/schemas/judiciary/standard_data_rules.json
 Migrating Factors...
-Updated lib/schemas/judiciary/root_cause_factors.json
+Updated 1_NORMATIVE_SPECIFICATION/schemas/judiciary/root_cause_factors.json
 ```
 
 ## Step 3: Verify Data Integrity
-Open `lib/schemas/judiciary/standard_data_rules.json` and check a Rule entry.
+Open `1_NORMATIVE_SPECIFICATION/schemas/judiciary/standard_data_rules.json` and check a Rule entry.
 
 **v3.0 (Old):**
 ```json
@@ -81,6 +81,6 @@ The migration script determines URNs for *Rules* and *Factors*, but you must man
 ## Rollback
 If the migration fails or breaks downstream systems:
 
-1.  Delete the corrupted `lib/schemas`.
-2.  Restore from backup: `cp -r lib/schemas_backup_v3_0 lib/schemas`.
+1.  Delete the corrupted `1_NORMATIVE_SPECIFICATION/schemas`.
+2.  Restore from backup: `cp -r 1_NORMATIVE_SPECIFICATION/schemas_backup_v3_0 1_NORMATIVE_SPECIFICATION/schemas`.
 3.  Pin your dependency to v3.0: `pip install "odgs<3.1"`.

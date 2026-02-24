@@ -1,0 +1,52 @@
+{
+  "urn": "urn:odgs:def:fibo:debtinstrument:v2024",
+  "metadata": {
+    "authority_id": "FIBO",
+    "authority_name": "Financial Industry Business Ontology",
+    "document_ref": "FIBO Master",
+    "source_uri": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/DebtInstrument",
+    "module": "SEC/Debt/DebtInstruments",
+    "hierarchy": {
+      "level": "concept",
+      "local_id": "DebtInstrument"
+    },
+    "content_hash": "12bf0813b1e0ba6cc46fae18e24ea076a8719f588f92933c8fe52485c4c3b548",
+    "harvested_at": "2026-02-24T20:24:36.255059Z"
+  },
+  "relations": [],
+  "content": {
+    "verbatim_text": "Concept: DebtInstrument (https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/DebtInstrument)",
+    "language": "en-US",
+    "format": "JSON_LD",
+    "structured_data": {
+      "@id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/DebtInstrument",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+        {
+          "@id": "_:b4"
+        },
+        {
+          "@id": "_:b5"
+        },
+        {
+          "@id": "_:b6"
+        },
+        {
+          "@id": "_:b7"
+        },
+        {
+          "@id": "_:b8"
+        },
+        {
+          "@id": "_:b9"
+        }
+      ],
+      "@type": [
+        "http://www.w3.org/2002/07/owl#Class"
+      ]
+    }
+  },
+  "interpretation": {
+    "summary": "FIBO definition of DebtInstrument",
+    "applicability": "Financial Sector"
+  }
+}
