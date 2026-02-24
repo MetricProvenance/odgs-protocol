@@ -1,3 +1,0 @@
-demo.metricprovenance.com {
-    reverse_proxy odgs-demo:8501
-}
