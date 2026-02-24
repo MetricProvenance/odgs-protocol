@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install jsonschema
-      - run: python src/odgs/system/scripts/validate_schemas.py .
+      - run: python 2_INFORMATIVE_REFERENCE/src/odgs/system/scripts/validate_schemas.py .
 
   python-tests:
     name: 🐍 Python Tests
@@ -28,7 +28,7 @@ jobs:
           python-version: "3.11"
       - run: pip install -e .
       - run: pip install pytest
-      - run: python -m pytest tests/ -v --tb=short
+      - run: python -m pytest 2_INFORMATIVE_REFERENCE/tests/ -v --tb=short
 
   node-tests:
     name: 📦 Node.js Tests
