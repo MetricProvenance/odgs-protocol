@@ -12,16 +12,16 @@
 
 ---
 
-### 🏛️ Standards Refactor: ISO/IEC Candidate Standard (v3.3.0)
+### 🏛️ Standards Refactor: CEN/CENELEC Candidate Standard (v3.3.0)
 
 **Notice to all Contributors and Adopters (24 Feb 2026):**
-The repository structure has been formally reorganized into a Candidate Standard format to support ongoing review by the **ISO/IEC JTC 1/SC 42 (Artificial Intelligence)** committee for Working Group 2 (Data) or Working Group 3 (Trustworthiness).
+The repository structure has been formally reorganized into a Candidate Standard format to support ongoing review by the **European CEN/CENELEC JTC 25 (Data & Cloud)** committee for Working Group 1 (Data Management) and Working Group 4 (Cloud and Edge). This aligns the protocol directly with the EU AI Act compliance mandates required by JTC 21.
 
 To strictly enforce the semantic decoupling of policy from execution, all materials are now divided into:
 1. `1_NORMATIVE_SPECIFICATION/`: Mandatory cryptographic schemas, rules, and W3C OWL ontologies.
 2. `2_INFORMATIVE_REFERENCE/`: The software implementation (`odgs` engine), adapters, and documentation.
 
-*This structure ensures our technical architecture mirrors the legal separation of powers required by sovereign data regulations.*
+*This structure ensures our technical architecture mirrors the legal separation of powers required by European sovereign data regulations.*
 
 ---
 ### 📢 Sovereign Node Notice (19 Feb 2026)
