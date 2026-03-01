@@ -1,4 +1,5 @@
 from fastapi import FastAPI, BackgroundTasks, HTTPException, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sse_starlette.sse import EventSourceResponse
 import asyncio
@@ -44,7 +45,7 @@ if project_root not in sys.path:
 # Load environment variables
 load_dotenv(os.path.join(project_root, ".env"))
 
-from odgs.executive.interceptor import OdgsInterceptor, ProcessBlockedException, SecurityException
+from odgs.executive.interceptor import OdgsInterceptor, ProcessBlockedException, SecurityException, MissingRuleException
 from odgs.system.scripts.hashing import get_deterministic_json_hash, generate_project_hash
 
 # Factory imports are optional — the API server should start even without google-genai
@@ -309,23 +310,56 @@ async def intercept_process(req: InterceptRequest):
         
         return {
             "status": "GRANTED",
-            "message": "Access Granted. Semantic Checks Passed."
+            "message": "Access Granted. Semantic Checks Passed.",
+            "s_cert_status": "NOT_ISSUED",
+            "warning": "This validation was strictly local. No cryptographic S-Cert (Semantic Certificate: Zero-Knowledge Proof) was generated for the Metric Provenance Root Registry. This execution lacks third-party non-repudiation."
         }
 
     except SecurityException as e:
         # 403 Forbidden for Security/Hash Failures
-        return {
-            "status": "BLOCKED",
-            "reason": "SECURITY_EXCEPTION",
-            "message": str(e)
-        }
+        return JSONResponse(
+            status_code=403,
+            content={
+                "status": "BLOCKED",
+                "reason": "SECURITY_EXCEPTION",
+                "message": str(e)
+            }
+        )
+    except MissingRuleException as e:
+        # 428 Precondition Required for Missing Commercial Law Packs
+        return JSONResponse(
+            status_code=428,
+            content={
+                "error": "Missing Statutory Configuration",
+                "detail": str(e),
+                "action_required": "Proceed to the Metric Provenance Enterprise Portal to provision commercial Law Packs.",
+                "portal_url": "https://platform.metricprovenance.com"
+            }
+        )
     except ProcessBlockedException as e:
         # 400 Bad Request for Rule Violations (Business Logic)
-        return {
-            "status": "BLOCKED",
-            "reason": "RULE_VIOLATION",
-            "message": str(e)
-        }
+        return JSONResponse(
+            status_code=400,
+            content={
+                "status": "BLOCKED",
+                "reason": "RULE_VIOLATION",
+                "message": str(e)
+            }
+        )
+    except MissingRuleException as e:
+        # 428 Precondition Required for missing commercial laws
+        return JSONResponse(
+            status_code=428,
+            content={
+              "status": "HARD_STOP",
+              "reason": "MISSING_CRYPTOGRAPHIC_LAW_PACK",
+              "details": {
+                "requested_urn": req.process_urn,
+                "resolution": "This node requires a commercial Law Pack to execute statutory enforcement.",
+                "action_url": "https://platform.metricprovenance.com/upgrade"
+              }
+            }
+        )
     except Exception as e:
         # 500 for unexpected system errors
         raise HTTPException(status_code=500, detail=str(e))

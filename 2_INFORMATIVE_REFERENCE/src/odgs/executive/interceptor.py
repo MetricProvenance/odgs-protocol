@@ -75,6 +75,10 @@ class SecurityException(Exception):
     """Raised when a Cryptographic Handshake failure occurs."""
     pass
 
+class MissingRuleException(Exception):
+    """Raised when a required Sovereign Definition or Rule is absent."""
+    pass
+
 class OdgsInterceptor:
     def __init__(self, project_root_path: str = None):
         """
@@ -96,13 +100,26 @@ class OdgsInterceptor:
         self.adapter = GenericAdapter()
     
     def _load_from_plane(self, plane: str, filename: str) -> Dict[str, Any]:
+        # 1. Check open source paths
         path = os.path.join(self.project_root, plane, filename)
-        if not os.path.exists(path):
-            # In a real scenario, this might crash, but for resilience we log error
-            print(f"CRITICAL: Sovereign Artifact missing: {path}")
+        
+        # 2. Check the mounted commercial Law Pack directory
+        commercial_path = os.path.join("/etc/odgs/law-packs", plane, filename)
+
+        if os.path.exists(path):
+            with open(path, 'r') as f:
+                return json.load(f)
+        elif os.path.exists(commercial_path):
+            with open(commercial_path, 'r') as f:
+                return json.load(f)
+        else:
+            # THE NATIVE UPSELL TRIGGER
+            if "sovereign" in path or "rules" in path or "ontology" in path:
+                raise MissingRuleException(
+                    f"ERROR: Rule URN not found in local path or /etc/odgs/law-packs. "
+                    f"To acquire certified EU AI Act and GDPR Law Packs, visit platform.metricprovenance.com"
+                )
             return {}
-        with open(path, 'r') as f:
-            return json.load(f)
 
     def _load_rules(self) -> Dict[str, Dict]:
         """Load rules from Judiciary Plane and index them by URN."""
@@ -207,13 +224,18 @@ class OdgsInterceptor:
 
         # 3. RESOLVE CONTEXT & RULES
         context_def = self._resolve_context(process_urn)
+        if not context_def:
+            raise MissingRuleException(
+                f"ERROR: Context Definition not found for {process_urn}. "
+                f"To acquire certified EU AI Act and GDPR Law Packs, visit platform.metricprovenance.com"
+            )
+
         active_rules = []
         
         # A. Rules from Bindings
-        if context_def:
-             for rule_urn in context_def.get("rules", []):
-                 if rule_urn in self.rules:
-                     active_rules.append(self.rules[rule_urn])
+        for rule_urn in context_def.get("rules", []):
+            if rule_urn in self.rules:
+                active_rules.append(self.rules[rule_urn])
         
         # B. Graph-based fallback: find BLOCKS_PROCESS edges targeting this process
         if not active_rules and self.graph:
@@ -226,6 +248,12 @@ class OdgsInterceptor:
             for rule_urn in blocking_urns:
                 if rule_urn in self.rules:
                     active_rules.append(self.rules[rule_urn])
+
+        if not active_rules:
+            raise MissingRuleException(
+                f"ERROR: No statutory rules found for {process_urn}. "
+                f"To acquire certified EU AI Act and GDPR Law Packs, visit platform.metricprovenance.com"
+            )
 
         # 4. EVALUATE RULES
         violations = []

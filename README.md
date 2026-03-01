@@ -42,6 +42,18 @@ However, this release introduces **breaking changes** that may halt your product
 
 This ensures your Engineering Leads receive an immediate notification if a Schema Breaking Change is merged. This is the only channel we will use to broadcast critical compliance patches.
 
+### 🛡️ Sovereign Configuration & Enterprise Enforcement
+The core ODGS engine operates as a stateless validation router. To execute binding regulatory assertions (e.g., EU AI Act Art. 10/12, GDPR Art. 30), the engine requires the presence of Statutory Configuration Files (Law Packs) in the host environment.
+
+By default, the open-source Community Edition attempts to mount these definitions at `/etc/odgs/law-packs`.
+
+If the required statutory definitions are missing for a requested URN, the engine will enforce a hard stop to prevent the issuance of an invalid Semantic Certificate (S-Cert), returning an HTTP 428 Precondition Required exception.
+
+**Enterprise Node Provisioning:**
+Commercial Law Packs and cryptographic S-Cert Registry access are currently in closed Beta for select design partners and Tier-1 financial institutions, pending final CEN-CENELEC standardization.
+
+To request architectural clearance for your organization's compliance deployment, please consult the [Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+
 **Migration:** If upgrading from v3.0, run `odgs migrate` and see [MIGRATION_GUIDE.md](/MIGRATION_GUIDE.md).
 
 ## 1. The Standard
