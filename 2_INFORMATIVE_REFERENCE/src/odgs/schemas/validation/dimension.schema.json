@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://odgs.org/schemas/dimension.schema.json",
+    "title": "ODGS DQ Dimension",
+    "description": "Schema for an ODGS Data Quality Dimension",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": [
+                    "integer",
+                    "string"
+                ]
+            },
+            "damaId": {
+                "type": "integer"
+            },
+            "name": {
+                "type": "string"
+            },
+            "category": {
+                "type": "string"
+            },
+            "definition": {
+                "type": "string"
+            },
+            "unitOfMeasure": {
+                "type": "string"
+            },
+            "icon": {
+                "type": "string"
+            },
+            "examplePoor": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "exampleGood": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "potentialBusinessImpacts": {
+                "type": "object",
+                "properties": {
+                    "positive": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "negative": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "illustrativeKpis": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            }
+        },
+        "required": [
+            "id",
+            "name",
+            "category",
+            "definition"
+        ]
+    }
+}

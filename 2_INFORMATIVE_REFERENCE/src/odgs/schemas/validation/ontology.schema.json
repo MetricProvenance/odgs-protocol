@@ -1,0 +1,112 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://odgs.org/schemas/ontology.schema.json",
+    "title": "ODGS Master Ontology",
+    "description": "Schema for the ODGS Ontology Graph",
+    "type": "object",
+    "properties": {
+        "meta": {
+            "type": "object",
+            "properties": {
+                "schema_version": {
+                    "type": "string"
+                },
+                "project_name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "urn_format": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "project_name"
+            ]
+        },
+        "domains": {
+            "type": "object",
+            "patternProperties": {
+                "^.*$": {
+                    "type": "object",
+                    "properties": {
+                        "source_file": {
+                            "type": "string"
+                        },
+                        "urn_prefix": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "urn_prefix"
+                    ]
+                }
+            }
+        },
+        "relationship_types": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type"
+                ]
+            }
+        },
+        "graph_edges": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "comment": {
+                        "type": "string"
+                    },
+                    "link_id": {
+                        "type": "string"
+                    },
+                    "source_urn": {
+                        "type": "string"
+                    },
+                    "target_urn": {
+                        "type": "string"
+                    },
+                    "relationship": {
+                        "type": "string"
+                    },
+                    "weight": {
+                        "type": "number"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "anyOf": [
+                    {
+                        "required": [
+                            "comment"
+                        ]
+                    },
+                    {
+                        "required": [
+                            "link_id",
+                            "source_urn",
+                            "target_urn",
+                            "relationship"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "graph_edges"
+    ]
+}

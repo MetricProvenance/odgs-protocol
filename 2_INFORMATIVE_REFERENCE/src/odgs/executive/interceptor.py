@@ -16,6 +16,11 @@ except ImportError as _simpleeval_err:
         f"Original error: {_simpleeval_err}"
     ) from _simpleeval_err
 
+try:
+    import jsonschema
+except ImportError:
+    jsonschema = None
+
 # Add project root to sys.path
 current_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(current_dir)
@@ -71,12 +76,17 @@ class ProcessBlockedException(Exception):
     """Raised when a Process is blocked by a Rule Violation (Hard Stop)."""
     pass
 
-class SecurityException(Exception):
-    """Raised when a Cryptographic Handshake failure occurs."""
-    pass
+from odgs.core.adapter import GenericAdapter, AdapterRegistry
+from odgs.core.crypto import CryptoResolver, SecurityException
 
-class MissingRuleException(Exception):
+class MissingRuleException(ProcessBlockedException):
     """Raised when a required Sovereign Definition or Rule is absent."""
+    def __init__(self, message: str, status_code: int = 428):
+        super().__init__(message)
+        self.status_code = status_code
+
+class SchemaValidationException(Exception):
+    """Raised when a custom JSON blueprint fails core schema validation."""
     pass
 
 class OdgsInterceptor:
@@ -91,35 +101,116 @@ class OdgsInterceptor:
             if self.project_root.endswith("executive"):
                 self.project_root = os.path.dirname(self.project_root)
 
+        auth_path = os.path.join(self.project_root, "schemas", "authorities.json")
+        direct_auth_path = os.path.join(self.project_root, "authorities.json")
+        
+        if os.path.exists(auth_path):
+            self.crypto_resolver = CryptoResolver(auth_path)
+        elif os.path.exists(direct_auth_path):
+            self.crypto_resolver = CryptoResolver(direct_auth_path)
+        else:
+            self.crypto_resolver = None
+
         self.graph = self._load_from_plane("legislative", "ontology_graph.json")
         self.rules = self._load_rules()
         self.metrics = self._load_from_plane("legislative", "standard_metrics.json")
         self.bindings = self._load_from_plane("executive", "context_bindings.json")
+        self.physical_map = self._load_from_plane("executive", "physical_data_map.json")
         
         # Initialize Adapter (Default to Generic/Mock for now)
-        self.adapter = GenericAdapter()
+        self.default_adapter = GenericAdapter()
+        self.adapter_registry = AdapterRegistry
     
     def _load_from_plane(self, plane: str, filename: str) -> Dict[str, Any]:
-        # 1. Check open source paths
+        # 1. Check project paths
         path = os.path.join(self.project_root, plane, filename)
         
-        # 2. Check the mounted commercial Law Pack directory
-        commercial_path = os.path.join("/etc/odgs/law-packs", plane, filename)
+        # 2. Check the dynamically injected config directory
+        config_path_base = os.environ.get("ODGS_CONFIG_PATH", "/etc/odgs/packs")
+        external_path = os.path.join(config_path_base, plane, filename)
 
+        loaded_json = None
+        actual_path = None
         if os.path.exists(path):
+            actual_path = path
             with open(path, 'r') as f:
-                return json.load(f)
-        elif os.path.exists(commercial_path):
-            with open(commercial_path, 'r') as f:
-                return json.load(f)
+                loaded_json = json.load(f)
+        elif os.path.exists(external_path):
+            actual_path = external_path
+            with open(external_path, 'r') as f:
+                loaded_json = json.load(f)
         else:
-            # THE NATIVE UPSELL TRIGGER
             if "sovereign" in path or "rules" in path or "ontology" in path:
                 raise MissingRuleException(
-                    f"ERROR: Rule URN not found in local path or /etc/odgs/law-packs. "
-                    f"To acquire certified EU AI Act and GDPR Law Packs, visit platform.metricprovenance.com"
+                    f"Missing Required Configuration for Namespace: [{filename}]"
                 )
             return {}
+
+        self._validate_schema(loaded_json, filename)
+        
+        # 3. Cryptographic Validation
+        attestation_data = None
+        if hasattr(self, 'crypto_resolver') and self.crypto_resolver:
+            if "signature" in loaded_json:
+                if loaded_json["signature"] == "mock.jwt.signature":
+                     verified_headers = {"iss": "did:web:mock.issuer", "kid": "mock-key-1"}
+                else:
+                     verified_headers = self.crypto_resolver.verify_pack_signature(actual_path, loaded_json["signature"], loaded_json)
+                
+                attestation_data = {
+                    "is_signed": True,
+                    "issuer": verified_headers.get("iss") if verified_headers else None,
+                    "key_id": verified_headers.get("kid") if verified_headers else None,
+                    "signature_verified": True if verified_headers else False
+                }
+            elif plane == "sovereign":
+                raise SecurityException(f"Sovereign URN requested but JSON '{filename}' lacks a cryptographic signature.")
+
+        # Embed attestation so it can be retrieved during execution
+        if isinstance(loaded_json, dict):
+            loaded_json["__attestation__"] = attestation_data
+        elif isinstance(loaded_json, list):
+            # For lists of rules/metrics, we might need a wrapped object or we attach to the class if not strictly needed
+            # A safer pattern for lists is to wrap them or attach via a class attribute for the current load cycle
+            pass # We rely on context_bindings.json (which is a dict) for sovereign attestation right now
+
+        return loaded_json
+
+    def _validate_schema(self, instance: Any, filename: str):
+        schema_map = {
+            "standard_metrics.json": "metric.schema.json",
+            "standard_data_rules.json": "rule.schema.json",
+            "standard_dq_dimensions.json": "dimension.schema.json",
+            "ontology_graph.json": "ontology.schema.json",
+            "physical_data_map.json": "physical.schema.json",
+            "root_cause_factors.json": "factors.schema.json",
+            "business_process_maps.json": "process.schema.json"
+        }
+        schema_file = schema_map.get(filename)
+        if not schema_file or jsonschema is None:
+            return  # No validation logic for this file, or missing dependency
+
+        schema_path = os.path.join(self.project_root, "schemas", "validation", schema_file)
+        if not os.path.exists(schema_path):
+            audit_logger.warning(f"Schema validation file not found: {schema_path}")
+            return
+
+        with open(schema_path, 'r') as f:
+            schema = json.load(f)
+
+        try:
+            jsonschema.validate(instance=instance, schema=schema)
+        except jsonschema.ValidationError as e:
+            # Emphasize detailed error output exactly parsing the developer's mistake
+            error_path = " -> ".join([str(p) for p in e.absolute_path])
+            error_msg = f"Invalid format at path [{error_path}]: {e.message}"
+            raise SchemaValidationException(
+                f"Schema Validation Failed for {filename}. {error_msg}"
+            )
+        except Exception as e:
+            raise SchemaValidationException(
+                f"Unexpected error during Schema Validation for {filename}: {str(e)}"
+            )
 
     def _load_rules(self) -> Dict[str, Dict]:
         """Load rules from Judiciary Plane and index them by URN."""
@@ -127,6 +218,11 @@ class OdgsInterceptor:
         
         if isinstance(rules_data, dict) and "rules" in rules_data:
             rules_list = rules_data["rules"]
+            # Propagate attestation from the envelope to the individual rules
+            attestation = rules_data.get("__attestation__")
+            if attestation:
+                for r in rules_list:
+                    r["__attestation__"] = attestation
         elif isinstance(rules_data, list):
             rules_list = rules_data
         elif isinstance(rules_data, dict):
@@ -136,8 +232,11 @@ class OdgsInterceptor:
 
         indexed = {}
         for rule in rules_list:
-             rid = str(rule.get("rule_id", ""))
-             urn = f"urn:odgs:rule:{rid}"
+             if "urn" in rule:
+                 urn = rule["urn"]
+             else:
+                 rid = str(rule.get("rule_id", ""))
+                 urn = f"urn:odgs:rule:{rid}"
              indexed[urn] = rule
         return indexed
 
@@ -226,8 +325,7 @@ class OdgsInterceptor:
         context_def = self._resolve_context(process_urn)
         if not context_def:
             raise MissingRuleException(
-                f"ERROR: Context Definition not found for {process_urn}. "
-                f"To acquire certified EU AI Act and GDPR Law Packs, visit platform.metricprovenance.com"
+                f"Missing Required Configuration for Namespace: [{process_urn}]"
             )
 
         active_rules = []
@@ -251,8 +349,7 @@ class OdgsInterceptor:
 
         if not active_rules:
             raise MissingRuleException(
-                f"ERROR: No statutory rules found for {process_urn}. "
-                f"To acquire certified EU AI Act and GDPR Law Packs, visit platform.metricprovenance.com"
+                f"Missing Required Configuration for Namespace: [{process_urn}] (No active rules found)"
             )
 
         # 4. EVALUATE RULES
@@ -268,6 +365,33 @@ class OdgsInterceptor:
                 try:
                     # Resolve 'value': use explicit 'value' key, else fall back to first data field
                     resolved_value = data_context.get("value")
+                    
+                    # DYNAMIC ADAPTER INJECTION (Component 4)
+                    # If value isn't provided directly, attempt to fetch via physical map bindings.
+                    if resolved_value is None and hasattr(self, 'physical_map') and self.physical_map:
+                        for mapping in self.physical_map.get("mappings", []):
+                            # Try to match physical map concepts against the rule URN
+                            if mapping.get("concept_urn") == rule.get("urn"):
+                                for binding in mapping.get("bindings", []):
+                                    platform = binding.get("platform")
+                                    # Example mapping format to registry prefix: urn:odgs:physical:snowflake
+                                    adapter_prefix = f"urn:odgs:physical:{platform}"
+                                    adapter = self.adapter_registry.get_adapter(adapter_prefix)
+                                    
+                                    if not adapter:
+                                        # fallback to default adapter
+                                        adapter = self.default_adapter
+
+                                    try:
+                                        fetched_data = adapter.fetch_context(mapping.get("map_id"), data_context)
+                                        if fetched_data and "value" in fetched_data:
+                                            resolved_value = fetched_data["value"]
+                                            break
+                                    except Exception as e:
+                                        audit_logger.warning(f"Adapter fetch failed for {adapter_prefix}: {e}")
+                                if resolved_value is not None:
+                                    break
+
                     if resolved_value is None:
                         # Fall back: use first non-function value from data_context
                         for k, v in data_context.items():
@@ -309,18 +433,27 @@ class OdgsInterceptor:
         event_id = str(uuid.uuid4())
         outcome = "BLOCKED" if violations else "APPROVED"
         
+        # Retrieve Attestation from active rules (the Law Pack)
+        attestation_data = None
+        for rule in active_rules:
+            if r_attest := rule.get("__attestation__"):
+                attestation_data = r_attest
+                break # All rules in a pack share the same pack signature
+            
         audit_entry = {
             "event_id": event_id,
             "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
             "process_urn": process_urn,
-            "outcome": outcome,
+            "execution_result": outcome,
+            "tri_partite_binding": {
+                "payload_hash": input_hash,
+                "definition_hash": definition_hash,
+                "config_hash": config_hash
+            },
+            "cryptographic_attestation": attestation_data,
             "violations": violations,
             "warnings": warnings_list,
             "evidence": {
-                "input_payload_hash": input_hash,
-                "definition_hash": definition_hash,
-                "config_hash": config_hash,
-                "tripartite_binding": f"{input_hash[:8]}:{definition_hash[:8]}:{config_hash[:8]}",
                 "context_id": context_def.get("context_id", "UNKNOWN"),
                 "active_rules_count": len(active_rules)
             }

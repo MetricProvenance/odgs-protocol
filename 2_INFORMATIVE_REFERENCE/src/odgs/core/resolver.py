@@ -4,6 +4,7 @@ import os
 import json
 import logging
 from typing import Optional, Dict, Any
+from odgs.core.routing import NamespaceRouter
 
 _audit_logger = logging.getLogger("sovereign_audit")
 
@@ -21,8 +22,9 @@ class SovereignResolver:
     Ensures that every URN resolution is legally deterministic.
     """
     
-    def __init__(self, data_root: str = "../1_NORMATIVE_SPECIFICATION/schemas"):
-        self.data_root = data_root
+    def __init__(self, data_root: str = None):
+        # Now defaults to none, routing relies on NamespaceRouter environment hooks
+        self.router = NamespaceRouter(base_config_dir=data_root)
 
     def resolve(self, urn: str, as_of_date: Optional[date] = None, force_latest: bool = False) -> Dict[str, Any]:
         """
@@ -44,7 +46,7 @@ class SovereignResolver:
         
         # Case 1: Pinned Version (Safe)
         if parsed['version']:
-            return self._fetch_specific_version(parsed)
+            return self._fetch_specific_version(parsed, urn)
             
         # Case 2: Naked URN (Unsafe)
         if as_of_date is None and not force_latest:
@@ -59,7 +61,7 @@ class SovereignResolver:
             )
 
         # Case 3: Time-Travel Resolution
-        return self._resolve_by_date(parsed, as_of_date)
+        return self._resolve_by_date(parsed, as_of_date, urn)
 
     def _parse_urn(self, urn: str) -> Dict[str, str]:
         """Parses URN into components.
@@ -79,50 +81,42 @@ class SovereignResolver:
             raise ValueError(f"Invalid URN format: {urn}")
         return match.groupdict()
 
-    def _fetch_specific_version(self, parsed: Dict[str, str]) -> Dict[str, Any]:
+    def _fetch_specific_version(self, parsed: Dict[str, str], original_urn: str) -> Dict[str, Any]:
         """Fetches the exact file for a versioned URN."""
-        # Implementation assumes a standard file path structure
-        # lib/data/sovereign/<domain>/<id>_<version>.json
-        # This is a placeholder for the actual storage logic.
-        file_path = os.path.join(
-            self.data_root, 
-            "sovereign", # Assuming storage in sovereign dir
-            parsed['domain'], 
-            f"{parsed['id']}_{parsed['version']}.json"
-        ).replace(":", "_")
+        base_dir = self.router.get_path(original_urn)
+        if not base_dir:
+            return self._fetch_standard_schema(parsed, original_urn)
+
+        # Structure inside the routed dir: <id>_<version>.json
+        file_name = f"{parsed['id']}_{parsed['version']}.json".replace(":", "_")
+        file_path = os.path.join(base_dir, file_name)
         
         if not os.path.exists(file_path):
-            # Check if it's a schema/meta definition (e.g. Metric 101)
-            # which are currently single files.
-            # Fallback to standard schemas for non-sovereign types.
-            return self._fetch_standard_schema(parsed)
+            return self._fetch_standard_schema(parsed, original_urn)
 
         with open(file_path, 'r') as f:
             return json.load(f)
 
-    def _resolve_by_date(self, parsed: Dict[str, str], target_date: Optional[date]) -> Dict[str, Any]:
+    def _resolve_by_date(self, parsed: Dict[str, str], target_date: Optional[date], original_urn: str) -> Dict[str, Any]:
         """
         Finds the version effective on the given date.
-        Scans the sovereign/<domain>/ directory for versioned files,
+        Scans the routed directory for versioned files,
         sorts by version date, and selects the latest version ≤ target_date.
         """
-        sovereign_dir = os.path.join(
-            self.data_root, "sovereign", parsed['domain']
-        )
+        base_dir = self.router.get_path(original_urn)
         
-        if not os.path.isdir(sovereign_dir):
-            # No versioned sovereign directory exists — fall back to standard schema
+        if not base_dir or not os.path.isdir(base_dir):
             _audit_logger.info(
-                f"No sovereign versioned directory for '{parsed['domain']}'. "
+                f"No routed directory for '{original_urn}'. "
                 f"Falling back to standard schema."
             )
-            return self._fetch_standard_schema(parsed)
+            return self._fetch_standard_schema(parsed, original_urn)
         
         # Pattern: <id>_v<YYYY>.<MM>.json or <id>_v<YYYY>.json
         prefix = parsed['id'].replace(":", "_")
         candidates = []
         
-        for fname in os.listdir(sovereign_dir):
+        for fname in os.listdir(base_dir):
             if not fname.startswith(prefix) or not fname.endswith(".json"):
                 continue
             # Extract version from filename
@@ -136,10 +130,10 @@ class SovereignResolver:
         
         if not candidates:
             _audit_logger.info(
-                f"No versioned files found for '{parsed['id']}' in sovereign dir. "
+                f"No versioned files found for '{parsed['id']}' in routed dir. "
                 f"Falling back to standard schema."
             )
-            return self._fetch_standard_schema(parsed)
+            return self._fetch_standard_schema(parsed, original_urn)
         
         # Sort by date descending, filter to those ≤ target_date
         candidates.sort(key=lambda x: x[0], reverse=True)
@@ -158,7 +152,7 @@ class SovereignResolver:
             f"(requested: {effective_date})."
         )
         
-        filepath = os.path.join(sovereign_dir, chosen_file)
+        filepath = os.path.join(base_dir, chosen_file)
         with open(filepath, 'r') as f:
             return json.load(f)
 
@@ -167,7 +161,8 @@ class SovereignResolver:
         Resolves a context binding with temporal awareness.
         Returns the context that is effective for the given date.
         """
-        bindings_path = os.path.join(self.data_root, "executive", "context_bindings.json")
+        base_dir = self.router.get_path("urn:odgs:process:") or os.path.join(self.router.base_dir, "executive")
+        bindings_path = os.path.join(base_dir, "context_bindings.json")
         if not os.path.exists(bindings_path):
             return None
         
@@ -198,18 +193,23 @@ class SovereignResolver:
         
         return None
 
-    def _fetch_standard_schema(self, parsed: Dict[str, str]) -> Dict[str, Any]:
+    def _fetch_standard_schema(self, parsed: Dict[str, str], original_urn: str) -> Dict[str, Any]:
         """Fallback to fetching from the core schemas (Metrics, Rules, Dimensions)."""
         domain_files = {
-            "metric": "legislative/standard_metrics.json",
-            "rule": "judiciary/standard_data_rules.json",
-            "dimension": "legislative/standard_dq_dimensions.json"
+            "metric": "standard_metrics.json",
+            "rule": "standard_data_rules.json",
+            "dimension": "standard_dq_dimensions.json"
         }
         
         if parsed['domain'] not in domain_files:
              raise ResourceNotFoundError(f"Unknown domain: {parsed['domain']}")
              
-        path = os.path.join(self.data_root, domain_files[parsed['domain']])
+        # Resolve via router using a specific dummy namespace if needed, or by prefix
+        base_dir = self.router.get_path(original_urn)
+        if not base_dir:
+            base_dir = self.router.base_dir
+            
+        path = os.path.join(base_dir, domain_files[parsed['domain']])
         
         try:
             with open(path, 'r') as f:

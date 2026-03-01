@@ -9,9 +9,10 @@ from rich.panel import Panel
 
 # Add project root to path to allow imports
 current_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.dirname(current_dir)
-if project_root not in sys.path:
-    sys.path.append(project_root)
+# current_dir is src/odgs/system, we want to add src to sys.path
+src_dir = os.path.dirname(os.path.dirname(current_dir))
+if src_dir not in sys.path:
+    sys.path.insert(0, src_dir)
 
 # Imports from the Sovereign System
 # Note: These paths assume we are running from project root or installed as package
@@ -337,27 +338,17 @@ def harvest(
       gdpr       — EU General Data Protection Regulation (eur-lex.europa.eu)
       basel      — Basel III/IV Framework (bis.org)
     """
-    from odgs.harvester.blueprints.nl_awb import AwBHarvester
-    from odgs.harvester.blueprints.fibo import FIBOHarvester
-    from odgs.harvester.blueprints.iso_42001 import ISO42001Harvester
-    from odgs.harvester.blueprints.gdpr import GDPRHarvester
-    from odgs.harvester.blueprints.basel import BaselHarvester
+    from odgs.harvester.factory import HarvesterFactory
     from odgs.harvester.core import HarvesterException
     
-    BLUEPRINTS = {
-        "nl_awb": AwBHarvester,
-        "fibo": FIBOHarvester,
-        "iso_42001": ISO42001Harvester,
-        "gdpr": GDPRHarvester,
-        "basel": BaselHarvester,
-    }
+    factory = HarvesterFactory()
     
     console.print(Panel(f"🌾 [bold green]Sovereign Harvester[/bold green] | Blueprint: [cyan]{blueprint}[/cyan]"))
     
     try:
-        harvester_cls = BLUEPRINTS.get(blueprint)
+        harvester_cls = factory.get_harvester(blueprint)
         if not harvester_cls:
-            available = ", ".join(BLUEPRINTS.keys())
+            available = ", ".join(factory.list_blueprints())
             console.print(f"[bold red]Error:[/bold red] Unknown blueprint '{blueprint}'. Available: {available}")
             raise typer.Exit(code=1)
         
@@ -501,6 +492,61 @@ def register(
     console.print(f"   Identity: {email}")
     console.print(f"   Status:   [bold green]Active Node[/bold green]")
     console.print(f"   Access:   Critical Security Feed Enabled.")
+
+@app.command()
+def migrate(
+    target_version: str = typer.Argument(..., help="The target version to migrate to (e.g., 'v4')")
+):
+    """
+    Migrate ODGS configuration files to a new version to ensure backwards compatibility.
+    """
+    if target_version.lower() != "v4":
+        console.print(f"[bold red]Error:[/bold red] Only 'v4' migration is currently supported.")
+        raise typer.Exit(code=1)
+
+    console.print(Panel("🔄 [bold cyan]ODGS Migration Utility[/bold cyan] | Target: [bold]v4.0.0 (Universal Engine)[/bold]", border_style="cyan"))
+    
+    base_path = os.getcwd()
+    planes = ["legislative", "judiciary", "executive"]
+    migrated_count = 0
+
+    with console.status("Scanning and migrating configuration files...", spinner="dots"):
+        for plane in planes:
+            plane_path = os.path.join(base_path, plane)
+            if not os.path.exists(plane_path):
+                continue
+            
+            for filename in os.listdir(plane_path):
+                if not filename.endswith(".json"):
+                    continue
+                
+                filepath = os.path.join(plane_path, filename)
+                try:
+                    with open(filepath, "r") as f:
+                        content = f.read()
+                    
+                    # 1. Migrate hardcoded paths to dynamic references
+                    # Note: We do this at string level to catch it anywhere
+                    updated_content = content.replace('"/etc/odgs/law-packs', '"{ODGS_CONFIG_PATH}')
+                    
+                    # 2. Migrate legacy URNs to Universal URNs (example pattern)
+                    # "urn:quirkyswirl:scert" -> "urn:odgs:sov"
+                    updated_content = updated_content.replace('"urn:quirkyswirl:scert', '"urn:odgs:sov')
+                    
+                    # 3. Migrate specific rule URN references if needed
+                    # (Add more regex/replace logic here as v3.3 to v4.0 mapping clarifies)
+                    
+                    if content != updated_content:
+                        with open(filepath, "w") as f:
+                            f.write(updated_content)
+                        migrated_count += 1
+                        console.print(f"   [yellow]Migrated:[/yellow] {plane}/{filename}")
+                        
+                except Exception as e:
+                    console.print(f"   [red]Failed to migrate {filename}:[/red] {e}")
+
+    console.print(f"\n✅ [bold green]Migration Complete.[/bold green] Updated {migrated_count} file(s).")
+    console.print("   Please review the changes and commit them to version control.")
 
 if __name__ == "__main__":
     app()

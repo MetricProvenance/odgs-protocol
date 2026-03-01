@@ -1,0 +1,72 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://odgs.org/schemas/metric.schema.json",
+    "title": "ODGS Standard Metric",
+    "description": "Schema for an ODGS Data Metric",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "metric_id": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "domain": {
+                "type": "string"
+            },
+            "calculation_logic": {
+                "type": "object",
+                "properties": {
+                    "abstract": {
+                        "type": "string"
+                    },
+                    "sql_standard": {
+                        "type": "string"
+                    },
+                    "dax_pattern": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "abstract"
+                ]
+            },
+            "owner": {
+                "type": "string"
+            },
+            "targetIndustries": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "icon": {
+                "type": "string"
+            },
+            "definition": {
+                "type": "string"
+            },
+            "interpretation": {
+                "type": "string"
+            },
+            "example": {
+                "type": "string"
+            },
+            "criticalDqDimensionIds": {
+                "type": "array",
+                "items": {
+                    "type": "integer"
+                }
+            }
+        },
+        "required": [
+            "metric_id",
+            "name",
+            "domain",
+            "calculation_logic",
+            "definition"
+        ]
+    }
+}

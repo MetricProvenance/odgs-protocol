@@ -1,0 +1,64 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://odgs.org/schemas/rule.schema.json",
+    "title": "ODGS Standard Data Rule",
+    "description": "Schema for an ODGS Data Rule",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "rule_id": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "domain": {
+                "type": "string"
+            },
+            "calculation_logic": {
+                "type": "string"
+            },
+            "logic_expression": {
+                "type": "string"
+            },
+            "owner": {
+                "type": "string"
+            },
+            "targetIndustries": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "icon": {
+                "type": "string"
+            },
+            "definition": {
+                "type": "string"
+            },
+            "businessRule": {
+                "type": "string"
+            },
+            "exampleGood": {
+                "type": "string"
+            },
+            "examplePoor": {
+                "type": "string"
+            },
+            "improvesDqDimensionIds": {
+                "type": "array",
+                "items": {
+                    "type": "integer"
+                }
+            }
+        },
+        "required": [
+            "rule_id",
+            "name",
+            "domain",
+            "calculation_logic",
+            "definition"
+        ]
+    }
+}

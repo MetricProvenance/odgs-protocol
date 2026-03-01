@@ -71,8 +71,7 @@ class GitAuditLogger:
                 self.repo.index.add([filepath])
                 
                 # Commit with metadata
-                event_id = entry.get("event_id", "unknown")
-                outcome = entry.get("outcome", "unknown")
+                outcome = entry.get("execution_result", "unknown")
                 msg = f"Audit: {outcome} [Event: {event_id}]"
                 
                 commit = self.repo.index.commit(msg)

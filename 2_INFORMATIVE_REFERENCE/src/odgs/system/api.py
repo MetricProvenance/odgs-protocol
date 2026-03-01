@@ -310,9 +310,7 @@ async def intercept_process(req: InterceptRequest):
         
         return {
             "status": "GRANTED",
-            "message": "Access Granted. Semantic Checks Passed.",
-            "s_cert_status": "NOT_ISSUED",
-            "warning": "This validation was strictly local. No cryptographic S-Cert (Semantic Certificate: Zero-Knowledge Proof) was generated for the Metric Provenance Root Registry. This execution lacks third-party non-repudiation."
+            "message": "Access Granted. Semantic Checks Passed."
         }
 
     except SecurityException as e:
@@ -330,10 +328,9 @@ async def intercept_process(req: InterceptRequest):
         return JSONResponse(
             status_code=428,
             content={
-                "error": "Missing Statutory Configuration",
+                "error": "Missing Required Configuration",
                 "detail": str(e),
-                "action_required": "Proceed to the Metric Provenance Enterprise Portal to provision commercial Law Packs.",
-                "portal_url": "https://platform.metricprovenance.com"
+                "action_required": "Please provision the required Governance Configurations or Policy Packs."
             }
         )
     except ProcessBlockedException as e:
@@ -346,20 +343,7 @@ async def intercept_process(req: InterceptRequest):
                 "message": str(e)
             }
         )
-    except MissingRuleException as e:
-        # 428 Precondition Required for missing commercial laws
-        return JSONResponse(
-            status_code=428,
-            content={
-              "status": "HARD_STOP",
-              "reason": "MISSING_CRYPTOGRAPHIC_LAW_PACK",
-              "details": {
-                "requested_urn": req.process_urn,
-                "resolution": "This node requires a commercial Law Pack to execute statutory enforcement.",
-                "action_url": "https://platform.metricprovenance.com/upgrade"
-              }
-            }
-        )
+
     except Exception as e:
         # 500 for unexpected system errors
         raise HTTPException(status_code=500, detail=str(e))

@@ -44,3 +44,35 @@ class GenericAdapter(OdgsAdapter):
 
     def resolve_reference(self, urn: str) -> Any:
         return self.store.get(urn)
+
+class AdapterRegistry:
+    """
+    Registry for dynamic Physical Plane injections.
+    Allows external applications to map URN prefixes (e.g., 'urn:odgs:physical:dbt')
+    to specific OdgsAdapter instances or lazy-load them via importlib strings.
+    """
+    _adapters: Dict[str, OdgsAdapter] = {}
+
+    @classmethod
+    def register(cls, prefix: str, adapter: OdgsAdapter):
+        """Register an instantiated adapter against a URN prefix."""
+        cls._adapters[prefix] = adapter
+
+    @classmethod
+    def get_adapter(cls, urn: str) -> Optional[OdgsAdapter]:
+        """Find the matching adapter for a given target URN."""
+        # Find the most specific prefix match
+        best_match = None
+        best_match_len = -1
+        
+        for prefix, adapter in cls._adapters.items():
+            if urn.startswith(prefix) and len(prefix) > best_match_len:
+                best_match = adapter
+                best_match_len = len(prefix)
+                
+        return best_match
+    
+    @classmethod
+    def clear(cls):
+        """Clear all registered adapters (primarily for testing)."""
+        cls._adapters.clear()

@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://odgs.org/schemas/factors.schema.json",
+    "title": "ODGS Root Cause Factors",
+    "description": "Schema for ODGS Root Cause Factors",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "factorId": {
+                "type": "string"
+            },
+            "factorName": {
+                "type": "string"
+            },
+            "description": {
+                "type": "string"
+            },
+            "typicalSymptomsInOrg": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "dqDimensionsImpactedDamaIds": {
+                "type": "array",
+                "items": {
+                    "type": "integer"
+                }
+            },
+            "potentialSolutionsTeaser": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            }
+        },
+        "required": [
+            "factorId",
+            "factorName",
+            "description"
+        ]
+    }
+}

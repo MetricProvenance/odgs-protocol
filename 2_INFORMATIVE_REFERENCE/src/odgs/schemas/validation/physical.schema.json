@@ -1,0 +1,111 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://odgs.org/schemas/physical.schema.json",
+    "title": "ODGS Physical Data Map",
+    "description": "Schema for the ODGS Physical Data Mapping Layer",
+    "type": "object",
+    "properties": {
+        "meta": {
+            "type": "object",
+            "properties": {
+                "project_name": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "last_updated": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "project_name"
+            ]
+        },
+        "mappings": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "map_id": {
+                        "type": "string"
+                    },
+                    "concept_urn": {
+                        "type": "string"
+                    },
+                    "concept_name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "vector_embedding_hint": {
+                        "type": "string"
+                    },
+                    "bindings": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "platform": {
+                                    "type": "string"
+                                },
+                                "connection_id": {
+                                    "type": "string"
+                                },
+                                "database": {
+                                    "type": "string"
+                                },
+                                "catalog": {
+                                    "type": "string"
+                                },
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "table": {
+                                    "type": "string"
+                                },
+                                "column_mapping": {
+                                    "type": "object",
+                                    "patternProperties": {
+                                        "^.*$": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "granularity": {
+                                    "type": "string"
+                                },
+                                "filters": {
+                                    "type": "string"
+                                },
+                                "privacy_level": {
+                                    "type": "string"
+                                },
+                                "freshness_sla": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "platform",
+                                "connection_id",
+                                "table"
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "map_id",
+                    "concept_urn",
+                    "bindings"
+                ]
+            }
+        }
+    },
+    "required": [
+        "mappings"
+    ]
+}

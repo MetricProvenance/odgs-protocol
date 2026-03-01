@@ -340,7 +340,7 @@ with st.sidebar:
     v3.3.0 &nbsp;·&nbsp; Sovereign Edition
   </div>
   <div style="font-size:0.68em; color:#97A0AF; margin-top:4px;">
-    EU AI Act · ISO 42001 · NEN 381 525
+    EU AI Act · ISO 42001 · Enterprise Policies
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -400,7 +400,7 @@ with tab1:
 <div class="eu-header">
     <div>
         <span class="eu-title"><span class="eu-flag"></span> Sovereign Compliance Matrix</span>
-        <div class="eu-subtitle">Real-time governance status across all data assets · Aligned with EU AI Act Art. 10 & 12</div>
+        <div class="eu-subtitle">Real-time governance status across all data assets · Aligned with Sovereign Frameworks & Policies</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -515,7 +515,7 @@ with tab2:
 <div class="eu-header">
     <div>
         <span class="eu-title"><span class="eu-flag"></span> Sovereign Lens Explorer</span>
-        <div class="eu-subtitle">Trace the semantic chain: Business Definition → Enforcement Logic → Sovereign Law</div>
+        <div class="eu-subtitle">Trace the semantic chain: Business Definition → Enforcement Logic → Sovereign Policy</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -590,7 +590,7 @@ with tab2:
             # 3. Sovereign Law
             with c3:
                 with st.container(border=True):
-                    st.subheader("⚖️ Law")
+                    st.subheader("⚖️ Framework")
                     if definition:
                         auth = definition.get("metadata", {}).get("authority_id", "Unknown")
                         urn = definition.get("urn")
@@ -649,7 +649,7 @@ with tab3:
 <div class="eu-header">
     <div>
         <span class="eu-title"><span class="eu-flag"></span> Sovereign Harvester — Authoritative Sources</span>
-        <div class="eu-subtitle">Definitions harvested from trusted regulatory bodies and international standards organisations</div>
+        <div class="eu-subtitle">Definitions harvested from trusted regulatory bodies, standards organizations, and private contracts</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
