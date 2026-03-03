@@ -153,6 +153,15 @@ Each harvested definition is:
 3. **Bound to metrics** via the Ontology Graph
 4. **Version-stamped** for time-travel resolution
 
+### 4.3 Air-Gapped Execution & Stateless Cryptography (JWKS)
+
+The ODGS Universal Engine is strictly built for **Zero Telemetry** operations; it does not "phone home." This architecture is critical for Enterprise CISOs managing air-gapped, highly restricted, or sovereign cloud environments.
+
+To ensure runtime integrity without active network dependency, the Engine verifies the provenance of Configuration Packs (Law Packs) locally using standard **Ed25519 JWKS (JSON Web Key Set)** public keys.
+
+* **Stateless Integrity:** The Engine securely caches the public keys from a JWKS endpoint on startup. It then mathematically verifies the signature of every loaded policy package (e.g., EU AI Act) without conducting external database lookups during processing.
+* **Decentralized Custody:** Organizations are explicitly encouraged to host their own internal JWKS registries for their proprietary, internal rules (`urn:odgs:custom:*`). This ensures the protocol remains 100% neutral and decentralized. Organizations rely on the Metric Provenance Root Authority *solely* for official, statutory Sovereign URNs (`urn:odgs:sov:*`).
+
 ---
 
 ## 5. FORENSIC AUDITABILITY (ARTICLE 12 COMPLIANCE)

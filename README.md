@@ -144,7 +144,18 @@ ODGS is headless. Using the `AdapterRegistry`, you can inject custom Python hook
 
 ---
 
-## 5. Audit Ledgers: Cryptographic Verifiability & Zero-Knowledge
+## 5. Air-Gapped Execution & Stateless Cryptography (JWKS)
+
+The ODGS Universal Engine operates with **Zero Telemetry** and does not "phone home". It is designed for strict air-gapped enterprise environments.
+
+To ensure metric authenticity without requiring active network connections to a central database, ODGS implements stateless cryptography using standard **Ed25519 JWKS (JSON Web Key Set)** public keys.
+
+* **Stateless Verification:** When the Engine loads a Configuration Pack (e.g., EU AI Act, FIBO), it cryptographically verifies the signature against the cached JWKS public key. If the signature is valid, the engine guarantees the rules are authentic and untampered.
+* **100% Neutral & Decentralized:** Organizations can seamlessly host their own internal JWKS registries for proprietary, internal rules (`urn:odgs:custom:*`). The Metric Provenance Root Authority is relied upon *solely* for statutory Sovereign URNs (`urn:odgs:sov:*`), ensuring the protocol remains fundamentally decentralized.
+
+---
+
+## 6. Audit Ledgers: Cryptographic Verifiability & Zero-Knowledge
 
 ODGS outputs an agnostic `cryptographic_attestation` JSON schema to satisfy **EU AI Act Article 12 (Forensic Logging)** without exposing third-party data.
 
@@ -153,7 +164,7 @@ ODGS outputs an agnostic `cryptographic_attestation` JSON schema to satisfy **EU
 
 ---
 
-## 6. Enterprise Deployment (Kubernetes / Helm)
+## 7. Enterprise Deployment (Kubernetes / Helm)
 
 For organization-wide policy enforcement, Sovereign Nodes can deploy ODGS as an active sidecar container routing mesh traffic.
 
@@ -172,7 +183,7 @@ To request architectural clearance for your organization's compliance deployment
 
 ---
 
-## 7. Documentation & Contribution
+## 8. Documentation & Contribution
 
 > 📚 **[Full Documentation Map →](2_INFORMATIVE_REFERENCE/architecture/index.md)**
 > 🎯 **[Live Demo →](https://demo.metricprovenance.com)**
