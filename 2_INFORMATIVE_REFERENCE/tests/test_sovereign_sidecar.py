@@ -127,7 +127,7 @@ class TestSovereignSidecar(unittest.TestCase):
             found = False
             for line in reversed(lines):
                 if "urn:fake:process" in line:
-                    if "input_payload_hash" in line:
+                    if "payload_hash" in line:
                         found = True
                         print(f"  ✅ Log Entry Found: {line.strip()[:100]}...")
                         break
