@@ -6,12 +6,12 @@ build-backend = "hatchling.build"
 [project]
 name = "odgs"
 version = "4.0.0"
-description = "Open Data Governance Standard — Sovereign Reference Implementation"
+description = "Open Data Governance Standard — Universal Validation Primitive"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "Apache-2.0"}
 authors = [{name = "Metric Provenance", email = "partner@metricprovenance.com"}]
-keywords = ["data-governance", "eu-ai-act", "sovereign", "compliance", "ai-safety"]
+keywords = ["data-governance", "sovereign", "compliance", "ai-safety"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -27,20 +27,19 @@ dependencies = [
     "simpleeval==0.9.13",
     "typer>=0.9.0",
     "rich>=13.0.0",
-    "uvicorn>=0.20.0",
-    "fastapi>=0.95.0",
     "pydantic>=2.0.0",
     "python-dotenv>=1.0.0",
-    "GitPython>=3.1.0",
     "certifi>=2024.2.2",
     "jsonschema>=4.21.1",
     "PyJWT[crypto]>=2.8.0",
 ]
 
 [project.optional-dependencies]
+server = ["fastapi>=0.95.0", "uvicorn>=0.20.0"]
+audit = ["GitPython>=3.1.0"]
 demo = ["streamlit>=1.30.0", "streamlit-agraph>=0.0.45", "pandas>=2.0.0"]
 ai = ["google-genai>=1.0.0", "sse-starlette>=1.0.0"]
-all = ["odgs[demo,ai]"]
+all = ["odgs[demo,ai,server,audit]"]
 
 [project.urls]
 Homepage = "https://metricprovenance.com"
@@ -77,4 +76,8 @@ exclude = [
     "COMMERCIALIZATION_PLAN.md",
     "PACKAGE_RELEASE_AUDIT.md",
     "OPENSOURCE_RELEASE_CLEANUP.md",
+    ".pytest_cache/",
+    "tests/.pytest_cache/",
+    "**/*.log",
+    "**/audit_logs/",
 ]

@@ -8,11 +8,11 @@
 
 | Your Role | Start Here | Then Read |
 |---|---|---|
-| **Executive / Board** | [Plain Language Guide](eli5_guide.md) | [Technical Note v3.3](research/technical_note_v33.md) |
+| **Executive / Board** | [Plain Language Guide](eli5_guide.md) | [Technical Note v4.0](research/technical_note_v40.md) |
 | **Chief Data Officer** | [Plain Language Guide](eli5_guide.md) | [Technical Annex](technical_annex.md) |
 | **Compliance Officer** | [Compliance Report](compliance_report.md) | [Technical Annex](technical_annex.md) |
 | **Regulator / Auditor** | [Compliance Report](compliance_report.md) | [Architecture Spec](architecture.md) |
-| **Academic / Researcher** | [Technical Note v3.3](research/technical_note_v33.md) | [Technical Annex](technical_annex.md) |
+| **Academic / Researcher** | [Technical Note v4.0](research/technical_note_v40.md) | [Technical Annex](technical_annex.md) |
 | **Data Engineer** | [Adapter Guide](adapter_guide.md) | [Plain Language Guide](eli5_guide.md) |
 | **General Public** | [Plain Language Guide](eli5_guide.md) | [Comparison Matrix](comparison_matrix.md) |
 
@@ -36,7 +36,7 @@
 ### For Strategy
 | Document | Description |
 |---|---|
-| [Technical Note v3.3](research/technical_note_v33.md) | Sovereign Handshake, Tri-Partite Binding, Sovereign Harvester, OWL Ontology |
+| [Technical Note v4.0](research/technical_note_v40.md) | Universal Validation Primitive, Agnostic Tri-Partite Binding, BYOI/BYOB Extensibility |
 
 ### For Implementation
 | Document | Description |
@@ -56,7 +56,7 @@
 
 ```mermaid
 graph TD
-    ELI5["Plain Language Guide"] --> TN["Technical Note v3.3"]
+    ELI5["Plain Language Guide"] --> TN["Technical Note v4.0"]
     ELI5 --> AG["Adapter Guide"]
     ELI5 --> CR["Compliance Report"]
     TN --> TA["Technical Annex"]
@@ -73,4 +73,4 @@ graph TD
 
 ---
 
-*Protocol v3.3.0 · Sovereign Edition*
+*Protocol v4.0.0 · Universal Edition*

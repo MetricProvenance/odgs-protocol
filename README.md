@@ -1,68 +1,33 @@
 # Open Data Governance Standard (ODGS)
 
-[![Protocol](https://img.shields.io/badge/Protocol-v3.3_(Sovereign)-0055AA)](https://metricprovenance.com)
+[![Protocol](https://img.shields.io/badge/Protocol-v4.0.0_(Universal)-0055AA)](https://metricprovenance.com)
 [![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act_%7C_NEN_381_525-003399)](GOVERNANCE.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18564270.svg)](https://doi.org/10.5281/zenodo.18564270)
-
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs)
 [![npm Downloads](https://img.shields.io/npm/dm/odgs?label=npm%20Downloads&color=orange)](https://www.npmjs.com/package/odgs)
 [![License](https://img.shields.io/badge/License-Apache_2.0-lightgrey)](LICENSE)
 
-> **The Sovereign Reference Implementation for the EU AI Act.**
+> **The Universal Validation Engine for High-Risk Data (Candidate Standard for CEN/CENELEC).**
 
 ---
 
-### 🏛️ Standards Refactor: CEN/CENELEC Candidate Standard (v3.3.0)
+### 🏛️ Standards Refactor: Universal Engine Architecture (v4.0.0)
 
-**Notice to all Contributors and Adopters (24 Feb 2026):**
-The repository structure has been formally reorganized into a Candidate Standard format to support ongoing review by the **European CEN/CENELEC JTC 25 (Data & Cloud)** committee for Working Group 1 (Data Management) and Working Group 4 (Cloud and Edge). This aligns the protocol directly with the EU AI Act compliance mandates required by JTC 21.
+**Notice to all Data Engineers and Architects:**
+The repository structure has been formally reorganized to align with the structural directives of the **Royal Netherlands Standardization Institute (NEN)** and reflects the federated data sovereignty principles championed by leading European applied science institutes (e.g., TNO). 
 
 To strictly enforce the semantic decoupling of policy from execution, all materials are now divided into:
 1. `1_NORMATIVE_SPECIFICATION/`: Mandatory cryptographic schemas, rules, and W3C OWL ontologies.
-2. `2_INFORMATIVE_REFERENCE/`: The software implementation (`odgs` engine), adapters, and documentation.
+2. `2_INFORMATIVE_REFERENCE/`: The software implementation (`odgs` universal engine), adapters, and documentation.
 
-*This structure ensures our technical architecture mirrors the legal separation of powers required by European sovereign data regulations.*
+## 1. The Standard: Data Governance Without Compromise
 
----
-### 📢 Sovereign Node Notice (19 Feb 2026)
-
-**To the 240+ Sovereign Nodes currently running ODGS (v3.0.0):**
-
-We have observed a significant spike in "Blind Clones" (direct CI/CD deployments) adhering to the EU AI Act (Article 10) requirements. We recognize that many of you are operating inside strict corporate firewalls (Banking/Gov/Logistics) and cannot interact publicly.
-
-**We respect your sovereignty and do not track you.**
-
-However, this release introduces **breaking changes** that may halt your production pipelines:
-
-*   **URN Migration:** All integer IDs replaced with URN strings (`urn:odgs:metric:*`, `urn:odgs:rule:*`)
-*   **Sovereign Handshake:** Cryptographic integrity verification now required before rule evaluation
-*   **Tri-Partite Binding:** Audit logs now bind Input Hash + Definition Hash + Configuration Hash
-
-> ⚠️ **OPERATIONAL ADVISORY:** To prevent "Definition Drift" in your critical paths, please click the **Watch** button (top right) → select **Releases Only**.
-
-This ensures your Engineering Leads receive an immediate notification if a Schema Breaking Change is merged. This is the only channel we will use to broadcast critical compliance patches.
-
-### 🛡️ Sovereign Configuration & Enterprise Enforcement
-The core ODGS engine operates as a stateless validation router. To execute binding regulatory assertions (e.g., EU AI Act Art. 10/12, GDPR Art. 30), the engine requires the presence of Statutory Configuration Files (Law Packs) in the host environment.
-
-By default, the open-source Community Edition attempts to mount these definitions at `/etc/odgs/law-packs`.
-
-If the required statutory definitions are missing for a requested URN, the engine will enforce a hard stop to prevent the issuance of an invalid Semantic Certificate (S-Cert), returning an HTTP 428 Precondition Required exception.
-
-**Enterprise Node Provisioning:**
-Commercial Law Packs and cryptographic S-Cert Registry access are currently in closed Beta for select design partners and Tier-1 financial institutions, pending final CEN-CENELEC standardization.
-
-To request architectural clearance for your organization's compliance deployment, please consult the [Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
-
-**Migration:** If upgrading from v3.0, run `odgs migrate` and see [MIGRATION_GUIDE.md](/MIGRATION_GUIDE.md).
-
-## 1. The Standard
-The **Open Data Governance Standard (ODGS)** is a vendor-neutral protocol for **Sovereign Data Governance**. It resolves the "Definition-Execution Gap" in High-Risk AI Systems by creating a deterministic method for **Administrative Recusal**.
+The **Open Data Governance Standard (ODGS)** is a vendor-neutral protocol for **Universal Data Governance**. It resolves the "Definition-Execution Gap" in data pipelines by creating a deterministic method for **Administrative Recusal ("Hard Stop")**.
 
 > **"Silence over Error."** — The Core Philosophy.
-> If the semantic definition of data drifts from its legal meaning, the system must execute a **Hard Stop** rather than process an invalid inference.
+> If data drifts from its legal, contractual, or internal definition, the pipeline must mathematically **halt** rather than process an invalid inference.
 
-This repository contains the **Reference Implementation (v3.3.0)**, featuring the **Sovereign Handshake**, **Tri-Partite Binding**, and **86% enforceable rule coverage** for automated legislative compliance.
+ODGS parses any text-based agreement into mechanical constraints via Draft-7 JSON Schemas, verifying identities via JWKS cryptography, and outputting mathematically pure, vendor-neutral audit logs.
 
 ### See It In Action → [demo.metricprovenance.com](https://demo.metricprovenance.com)
 
@@ -89,21 +54,60 @@ This repository contains the **Reference Implementation (v3.3.0)**, featuring th
 
 ---
 
-## 2. Regulatory Alignment
-This standard is architected to satisfy the "Error-Free Data" and "Automatic Recording" mandates of the Digital State:
+## 2. Quick Start: The Data Engineer Workflow
 
-* **🇪🇺 EU AI Act (2024/1689)**
-    * **Article 10:** Validation of data provenance and semantic integrity.
-    * **Article 12:** Generation of immutable, forensically sound event logs.
-* **🇳🇱 NEN 381 525 (Data & Cloud)**
-    * **Sovereignty:** Ensures data processing logic remains portable and vendor-independent.
-* **🌐 ISO/IEC 42001 (AI Management)**
-    * **Control B.9:** Operational control of AI systems via runtime enforcement.
+Stop relying on generic analytics failures. Enforce your SLAs, SOC2 policies, and data quality checks directly in your Python transforms.
+
+### Install
+```bash
+pip install odgs==4.0.0
+```
+
+### Example: Halting a Pipeline in Python/dbt
+Inject ODGS directly into your data warehouse transforms, Airflow DAGs, or Databricks PySpark wrappers:
+
+```python
+from odgs.executive.interceptor import OdgsInterceptor
+from odgs.executive.exceptions import ProcessBlockedException
+
+engine = OdgsInterceptor()
+
+# The payload (e.g., a row from pandas or a dbt pre-hook validation)
+payload = {"transaction_value": 150000, "aml_flag": False}
+
+try:
+    # Evaluate against your internal threshold rules
+    engine.intercept("urn:odgs:custom:aml-check", payload)
+    print("Payload Validated. Proceeding with database insert.")
+    
+except ProcessBlockedException as e:
+    # The pipeline HALTS before bad data is merged or a model is trained
+    print(f"PIPELINE HALTED: {e}")
+```
 
 ---
 
-## 3. The 5-Plane Architecture (v3.3)
-ODGS implements a "Constitutional Stack" where mechanical execution is legally bound by semantic definitions via the **Sovereign Interceptor**.
+## 3. The Ecosystem: URN Namespace Routing
+
+ODGS v4.0.0 routes logic based on **Uniform Resource Names (URNs)**.
+
+### 🟢 Free & Internal (`urn:odgs:custom:*`)
+Completely free, offline namespaces for your internal developer usage (Data Quality, B2B SLAs, SOC2 limits, ETL checks).
+*   **Routing:** Automatically loads from your local workspace (`./schemas/custom/`).
+*   **Execution:** 100% free, local, with agnostic audit logging.
+
+### 🔵 The Sovereign Tier (`urn:odgs:sov:*`)
+Premium Sovereign configurations (EU AI Act, GDPR, DORA) cryptographically signed by the **Metric Provenance Root Authority**.
+*   **Routing:** Enforces the Sovereign Handshake and loads statutory packs from secure enterprise mounts (`/etc/odgs/law-packs/`).
+*   **Liability:** Provides immediate cryptographic proof and legal indemnity that your pipeline mathematically bounds its execution within the exact letter of the law.
+
+---
+
+## 4. Extensibility: Bring Your Own Architecture
+
+We built ODGS to be the "Linux of Data Governance". It injects anywhere.
+
+ODGS implements a "Constitutional Stack" where mechanical execution is legally bound by semantic definitions via the **Universal Interceptor**.
 
 ```mermaid
 graph TD
@@ -116,7 +120,7 @@ graph TD
         Ex -->|Contextualizes| Phy[5. Physical]
     end
     subgraph "The Audit Trail"
-        Phy -->|Logs Evidence| Anchor[Sovereign Trust Anchor]
+        Phy -->|Logs Evidence| Anchor[Trust Anchor]
     end
     style L fill:#f9f,stroke:#333,stroke-width:2px
     style Leg fill:#bbf,stroke:#333,stroke-width:2px
@@ -125,96 +129,56 @@ graph TD
     style Phy fill:#ddd,stroke:#333,stroke-width:2px
 ```
 
-**[> Read the Full Architecture Specification](/2_INFORMATIVE_REFERENCE/architecture/architecture.md)**
+### 🏭 The HarvesterFactory (Bring Your Own Blueprints)
+You don't just have to use our Law Packs. Your internal teams or engineering partners (e.g., Deloitte, Capgemini) can write custom Python blueprints to automatically harvest and serialize your proprietary PDF contracts, API specifications, or Notion pages into executable ODGS JSON rule schemas.
 
-**🦉 [W3C OWL Ontology](/1_NORMATIVE_SPECIFICATION/ontology/ontology_graph.owl)** — 275 individuals (72 metrics, 50 rules, 60 dimensions, 42 process stages, 43 sovereign definitions) formally specified in OWL/RDF with W3C PROV provenance chains.
+### 🔌 The AdapterRegistry (Bring Your Own Integrations)
+ODGS is headless. Using the `AdapterRegistry`, you can inject custom Python hooks to serialize rule execution plans back and forth to your proprietary systems (e.g., Rust backends, Kafka streams, Databricks clusters) without waiting for us to build the integration.
 
----
-
-## 4. Technical Implementation: The Sovereign Stack
-
-### 1. The Sovereign Harvester
-Automatically fetch Legislative Definitions (XML/JSON-LD) and convert them into immutable `SovereignDefinition` objects.
-*   **Dutch Law (AwB):** Harvests directly from `wetten.overheid.nl`.
-*   **Finance (FIBO):** Harvests from the EDM Council Ontology.
-
-### 2. Time-Travel Resolution
-The **Sovereign Resolver** ensures legal accuracy by resolving URNs to the exact version effective on a specific date, preventing the "Resolution Trap".
-
-### 3. The Interceptor (Python)
-*   **Role:** Heavy-duty Data Engineering & Runtime Enforcement.
-*   **Install:** `pip install odgs`
+> **[Read the Adapter Guide →](2_INFORMATIVE_REFERENCE/architecture/adapter_guide.md)**
 
 ---
 
-## 5. Quick Start (v3.3)
+## 5. Audit Ledgers: Cryptographic Verifiability
 
-**1. Initialize a Sovereign Project**
-
-```bash
-odgs init my-project
-cd my-project
-```
-
-**2. Harvest Sovereign Definitions**
-
-Use the new `harvest` command to pull authoritative legal definitions:
-
-```bash
-# Harvest Dutch Administrative Law (Article 1:3)
-odgs harvest nl_awb 1:3
-# > [SUCCESS] Verified Signature.
-# > Saved Immutable Definition: 1_NORMATIVE_SPECIFICATION/schemas/sovereign/nl_gov/awb_art_1_3.json
-
-# Harvest Finance Ontology (Interest Rate)
-odgs harvest fibo InterestRate
-# > [SUCCESS] Verified Signature.
-# > Saved Immutable Definition: 1_NORMATIVE_SPECIFICATION/schemas/sovereign/fibo/interestrate_v2024.json
-```
-
-**3. Define a Metric (The Law)**
-
-Link your metric to the harvested Sovereign URN:
-
-```bash
-odgs add metric "ROIC" --definition "urn:odgs:def:fibo:interestrate:v2024"
-# Links Return on Invested Capital to FIBO InterestRate (debt cost governs the denominator)
-```
+ODGS outputs an agnostic `cryptographic_attestation` JSON schema. By generating a **Tri-Partite Hash** (binding the Input Data Hash + the Rule Definition Hash + the Engine Configuration Hash), independent auditors, regulatory bodies, and civil society public watchdogs can mechanically verify the integrity of algorithmic decisions without exposing PI.
 
 ---
 
-## 6. Documentation & Contribution
+## 6. Enterprise Deployment (Kubernetes / Helm)
 
-> 📚 **[Full Documentation Map →](2_INFORMATIVE_REFERENCE/architecture/index.md)** — All docs organized by audience (Executive, Compliance, Engineering, Research).
-> 🎯 **[Live Demo →](https://demo.metricprovenance.com)** — Interactive dashboard with live governance metrics.
+For organization-wide policy enforcement, Sovereign Nodes can deploy ODGS as an active sidecar container routing mesh traffic.
 
-| Start Here | If You Are |
+```bash
+# Add the Official Metric Provenance Repository
+helm repo add metricprovenance https://charts.metricprovenance.com
+helm repo update
+
+# Install the Engine
+helm install odgs-cluster-agent metricprovenance/odgs-engine \
+  --set configuration.namespace="urn:odgs:sov" \
+  --set keys.jwks_url="https://platform.metricprovenance.com/.well-known/jwks.json"
+```
+
+To request architectural clearance for your organization's compliance deployment, please consult the [Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+
+---
+
+## 7. Documentation & Contribution
+
+> 📚 **[Full Documentation Map →](2_INFORMATIVE_REFERENCE/architecture/index.md)**
+> 🎯 **[Live Demo →](https://demo.metricprovenance.com)**
+
+| Guide | Description |
 |---|---|
-| [Plain Language Guide](2_INFORMATIVE_REFERENCE/architecture/eli5_guide.md) | Executive, CDO, General |
-| [Compliance Report](2_INFORMATIVE_REFERENCE/architecture/compliance_report.md) | Compliance Officer, Regulator |
-| [Adapter Guide](2_INFORMATIVE_REFERENCE/architecture/adapter_guide.md) | Data Engineer |
-| [Technical Note v3.3](2_INFORMATIVE_REFERENCE/architecture/research/technical_note_v33.md) | Academic, Researcher |
-
-### Contribute
-
-This is a **Coalition of the Willing**. We invite Legal Scholars and Public Administrators to contribute to the Standard.
-
-* **[Migration Guide (v3.0 -> v3.3)](/MIGRATION_GUIDE.md):** Critical instructions for upgrading.
-* **[Changelog](/CHANGELOG.md):** Detailed record of changes.
-* **[Governance Manifesto](/GOVERNANCE.md):** Principles of Regulatory Consensus.
+| [Migration Guide (v3.3 -> v4.0)](/MIGRATION_GUIDE.md) | Critical instructions for upgrading to URN Namespace Routing. |
+| [Adapter Guide](2_INFORMATIVE_REFERENCE/architecture/adapter_guide.md) | For Data Engineers connecting ODGS to custom infrastructures. |
+| [Harvester Guide](2_INFORMATIVE_REFERENCE/architecture/harvester_guide.md) | For implementing dynamic parsing blueprints. |
+| [Audit Ledger Guide](2_INFORMATIVE_REFERENCE/architecture/audit_ledger_guide.md) | For Big 4 Auditors verifying the Tri-Partite Hash. |
 
 ### License
-
 Released under the **Apache 2.0 License**.
 
 * **No Vendor Lock-in.**
 * **No Cloud Dependency.**
 * **100% Data Sovereignty.**
-
----
-> [!IMPORTANT]
-> **Looking for the Flat JSON Version?**
-> If you need the lightweight, non-cryptographic version (v1.2.x), visit the [Core Repository](https://github.com/MetricProvenance/odgs-core).
-> *   **Install v1:** `pip install "odgs<2"`
-> *   **Install v3 (This Repo):** `pip install odgs`
-

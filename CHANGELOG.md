@@ -5,6 +5,18 @@ All notable changes to the Open Data Governance Standard (ODGS) will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v4.0.0] - 2026-03-02
+
+### 🚀 Added
+- **Universal Validation Engine:** Transformed the core enforcement engine to be completely headless and agnostic, functioning as a "Linux of Data Governance" rather than a rigid RegTech tool.
+- **Universal URN Routing:** Introduced strict namespace separation (`urn:odgs:custom:*` vs `urn:odgs:sov:*`) allowing developers to execute free-form Internal Governance policies seamlessly on the exact same engine as high-risk compliance checks.
+- **Dynamic Extensibility:** Added `HarvesterFactory` (Bring Your Own Blueprints) and `AdapterRegistry` (Bring Your Own Integrations). Developers can now inject proprietary parsing or custom data sinks without altering the protocol's core standard.
+- **Ontology Repositioning:** Re-positioned `ontology_graph.owl` as a "Semantic Bridge for Agentic AI," providing autonomous agents with formal, mathematically verifiable boundaries for business rules.
+
+### 🔧 Changed
+- **Decoupled Policy from Mechanism:** The `OdgsInterceptor` no longer requires strictly formatted "Law Packs" to run, avoiding "System of Record" lock-in and allowing pure "System of Mechanism" utility.
+- **Documentation Overhaul:** Updated Architectural specification (`technical_annex.md`), `comparison_matrix.md`, and `eli5_guide.md` to cleanly reflect the Universal Primitive positioning.
+
 ## [v3.3.0] - 2026-02-19
 
 ### 🛡️ Security

@@ -1,6 +1,6 @@
 {
   "name": "odgs",
-  "version": "3.3.3",
+  "version": "4.0.0",
   "description": "ODGS Protocol — Sovereign Reference Implementation (Node.js)",
   "author": "Metric Provenance <partner@metricprovenance.com>",
   "license": "Apache-2.0",
@@ -21,14 +21,15 @@
   },
   "main": "2_INFORMATIVE_REFERENCE/src/index.js",
   "type": "module",
+  "types": "2_INFORMATIVE_REFERENCE/src/index.d.ts",
   "scripts": {
     "test": "vitest",
-    "prepublishOnly": "python3 2_INFORMATIVE_REFERENCE/src/scripts/sync_schemas.py",
-    "postinstall": "node 2_INFORMATIVE_REFERENCE/src/scripts/banner.js"
+    "prepublishOnly": "python3 2_INFORMATIVE_REFERENCE/src/scripts/sync_schemas.py"
   },
   "files": [
     "1_NORMATIVE_SPECIFICATION",
-    "2_INFORMATIVE_REFERENCE/src"
+    "2_INFORMATIVE_REFERENCE/src/**/*.js",
+    "2_INFORMATIVE_REFERENCE/src/**/*.d.ts"
   ],
   "dependencies": {
     "ajv": "^8.12.0",

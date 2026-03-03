@@ -1,86 +1,76 @@
-# ODGS v3.3 Migration Guide
+# ODGS v4.0.0 Migration Guide
 
-**WARNING:** This release contains **BREAKING CHANGES** from v3.0.
-Do not pull or deploy v3.3.0 without reading this guide.
-
-## Overview
-ODGS v3.3 introduces the **Sovereign Knowledge Graph**, **Sovereign Handshake** (integrity verification), and **Tri-Partite Binding** (3-hash audit trail). To achieve global uniqueness and time-travel capabilities, we have strictly enforced **URNs (Uniform Resource Names)** for all identifiers.
-
-**The Change:**
-*   **Old (v3.0):** Integer IDs (e.g., `damaId: 57`, `param_id: 101`)
-*   **New (v3.3):** URN Strings (e.g., `urn:odgs:dimension:timeliness`, `urn:odgs:metric:net-profit`)
-
-This affects `standard_data_rules.json`, `root_cause_factors.json`, and `standard_metrics.json`.
+**WARNING:** This release contains **BREAKING CHANGES** from v3.3.0.
+Do not deploy v4.0.0 without reading this guide. ODGS is now a **Universal Validation Engine**.
 
 ---
 
-## 🛡️ Stay Informed (Enterprise Nodes)
+## 🛑 Strict Deprecation Notice (Legacy v3.3 Users)
 
-**Why did my pipeline break?**
-You are likely pulling `latest` from PyPI/npm in a firewalled environment.
-v3.3 introduces Sovereign Schemas, Handshake verification, and Tri-Partite Binding to comply with EU AI Act Articles 10 & 12.
+Version 3.3 and earlier were designed as a strict "RegTech Tool" specifically for Sovereign Law enforcement. These versions hardcoded restrictive terminology ("EU AI Act", "Law Packs") and assumed all URNs required cryptographic identity verification from the Quirkyswirl authority. 
 
-**How do I prevent future breaks?**
-Click the **Watch** button (top right of this repository) → select **Releases Only**.
-
-This ensures your Engineering Leads receive an immediate GitHub notification before any schema-breaking change is merged. We do not track you — this is GitHub's native notification system.
+**v3.3 is officially deprecated.** We strongly encourage all Data Engineering and Compliance teams to migrate to v4.0.0 to unlock the completely free, agnostic, local evaluation capabilities (the "Linux of Data Governance").
 
 ---
 
-## Step 1: Backup Your Data
-Before running any scripts, ensure your current `1_NORMATIVE_SPECIFICATION/schemas` directory is backed up.
+## 1. URN Namespace Routing
+
+The most significant change in v4.0.0 is the introduction of a dynamic `NamespaceRouter`. Your engine's behavior now fundamentally shifts depending on the prefix of the URN it evaluates.
+
+### The Two Namespaces
+
+1.  **`urn:odgs:custom:*` (The Free, Local Tier)**
+    *   Use this for your internal data quality rules, B2B SLAs, and SOC2 checks.
+    *   **Routing:** The engine attempts to load these directly from `./schemas/custom/` in your local active directory.
+    *   **Enforcement:** It does **not** check for JWKS cryptographic signatures. It executes silently and locally for free.
+
+2.  **`urn:odgs:sov:*` (The Premium, Sovereign Tier)**
+    *   Use this for EU AI Act, GDPR, FIBO, and DORA compliance. 
+    *   **Routing:** The engine enforces the *Sovereign Handshake* and strictly loads statutory packs from enterprise mounts at `/etc/odgs/law-packs/`.
+    *   **Enforcement:** It mathematically verifies the cryptographic signature of the external JSON file before executing it. If it fails, the pipeline is hard-stopped with a `428 Precondition Required`.
+
+### Migration Action
+Review all instances of `interceptor.intercept("urn:...")`. If you were hacking v3.3 to evaluate internal data quality rules, change your URN prefix to `urn:odgs:custom:`. 
+
+---
+
+## 2. Strict JSON Schema Validation
+
+In v4.0.0, we introduced a Universal Verification Check. To protect internal corporate pipelines from crashing due to malformed logic, the engine now enforces strict **JSON Schema Draft-7** validation before loading any configuration into memory.
+
+### Migration Action
+Every custom JSON file you place in `./schemas/custom/` (e.g., your custom rules, metrics, or contexts) **must** now include a `$schema` property pointing to the relevant validation schemas.
+
+**Example: A Valid Custom Rule (v4.0.0)**
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/MetricProvenance/odgs-protocol/main/1_NORMATIVE_SPECIFICATION/schemas/validation/rule.schema.json",
+  "urn": "urn:odgs:custom:data-quality:no-nulls",
+  "name": "Strict non-null check for internal AML reporting",
+  "logic_expression": "transaction_value > 0",
+  "threshold_type": "boolean",
+  "threshold_value": "True",
+  "action_on_fail": "HARD_STOP"
+}
+```
+
+If your JSON does not conform to the schema (e.g., passing an integer when `threshold_value` expects a string), the payload will fail the "Validation Gate" and throw a `SchemaValidationException` detailing exactly which line is formatted incorrectly.
+
+---
+
+## 3. Backwards Compatibility (`odgs migrate v4`)
+
+If you are upgrading an existing v3.3 Sovereign Node project, you can use the built-in CLI migration utility to safely transition your existing integer/string maps into the new unified Namespace Architecture.
 
 ```bash
-cp -r 1_NORMATIVE_SPECIFICATION/schemas 1_NORMATIVE_SPECIFICATION/schemas_backup_v3_0
+# Analyze your v3.3 environment and prepare the migration matrix
+odgs migrate v4 --dry-run
+
+# Commit the migration changes to your active directory
+odgs migrate v4 --execute
 ```
-
-## Step 2: Run the Migration Script
-We have provided a "Data Rescue" script that automatically:
-1.  Reads your existing Dimensions to build a URN Map.
-2.  Rewrites `standard_data_rules.json` to replace `improvesDqDimensionIds` (integers) with `related_dimension_urns`.
-3.  Rewrites `root_cause_factors.json` to replace `dqDimensionsImpactedDamaIds` (integers) with `related_dimension_urns`.
-
-**Execute:**
-```bash
-python scripts/migrate_v3_0_to_v3_2.py
-```
-
-**Expected Output:**
-```text
-Loading Dimensions...
-Building URN Map...
-Migrating Rules...
-Updated 1_NORMATIVE_SPECIFICATION/schemas/judiciary/standard_data_rules.json
-Migrating Factors...
-Updated 1_NORMATIVE_SPECIFICATION/schemas/judiciary/root_cause_factors.json
-```
-
-## Step 3: Verify Data Integrity
-Open `1_NORMATIVE_SPECIFICATION/schemas/judiciary/standard_data_rules.json` and check a Rule entry.
-
-**v3.0 (Old):**
-```json
-"improvesDqDimensionIds": [ 15, 57 ]
-```
-
-**v3.3 (New):**
-```json
-"related_dimension_urns": [
-    "urn:odgs:dimension:accuracy",
-    "urn:odgs:dimension:timeliness"
-]
-```
-
-## Step 4: Update Your Metrics
-The migration script determines URNs for *Rules* and *Factors*, but you must manually link your *Metrics* to the new **Sovereign Definitions** you harvest.
-
-1.  Run `odgs harvest` to get your definitions.
-2.  Edit `standard_metrics.json`.
-3.  Populate the `sovereign_urn` field for each metric.
 
 ## Rollback
 If the migration fails or breaks downstream systems:
-
-1.  Delete the corrupted `1_NORMATIVE_SPECIFICATION/schemas`.
-2.  Restore from backup: `cp -r 1_NORMATIVE_SPECIFICATION/schemas_backup_v3_0 1_NORMATIVE_SPECIFICATION/schemas`.
-3.  Pin your dependency to v3.0: `pip install "odgs<3.1"`.
+1.  Restore from your git commit backup.
+2.  Pin your dependency to the legacy version: `pip install "odgs==3.3.0"`. Note that v3.3 will not receive any further non-critical security updates.

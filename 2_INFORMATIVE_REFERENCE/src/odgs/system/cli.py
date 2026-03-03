@@ -245,7 +245,7 @@ def validate():
          # We allow validation to pass even if registry is missing, but warn
          # raise typer.Exit(code=1)
 
-    console.print("✅ All systems go. Data stack is EU AI ACT Compliant.")
+    console.print("✅ All systems go. Data stack is fully compliant.")
 
 @app.command()
 def build():
@@ -471,7 +471,7 @@ def register(
         "email": email,
         "org": org,
         "timestamp": datetime.datetime.utcnow().isoformat(),
-        "version": "3.3.0",
+        "version": "4.0.0",
         "node_id": generate_project_hash(os.getcwd()).get("master_hash", "UNKNOWN")[:8]
     }
     
@@ -530,8 +530,8 @@ def migrate(
                     updated_content = content.replace('"/etc/odgs/law-packs', '"{ODGS_CONFIG_PATH}')
                     
                     # 2. Migrate legacy URNs to Universal URNs (example pattern)
-                    # "urn:quirkyswirl:scert" -> "urn:odgs:sov"
-                    updated_content = updated_content.replace('"urn:quirkyswirl:scert', '"urn:odgs:sov')
+                    # "urn:legacy:scert" -> "urn:odgs:sov"
+                    updated_content = updated_content.replace('"urn:legacy:scert', '"urn:odgs:sov')
                     
                     # 3. Migrate specific rule URN references if needed
                     # (Add more regex/replace logic here as v3.3 to v4.0 mapping clarifies)

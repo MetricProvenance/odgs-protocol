@@ -1,13 +1,13 @@
 
 # ODGS Technical Specification: 00 - Architecture
-**Status:** ISO/IEC 42001 Candidate Standard
-**Version:** 3.3.0
+**Status:** Universal Validation Engine
+**Version:** 4.0.0
 **Type:** Normative
 
 ## 1. Abstract
-The Open Data Governance Standard (ODGS) defines a **Hierarchical Constitutional Stack** for Data Governance. It strictly separates the Definition of Data (Legislative Plane) from the Execution of Data (Physical Plane), resolving the "Definition-Execution Gap" in High-Risk AI systems.
+The Open Data Governance Standard (ODGS) defines a **Hierarchical Constitutional Stack** for Data Governance. It strictly separates the Definition of Data (Legislative Plane) from the Execution of Data (Physical Plane), functioning as a headless **Universal Validation Primitive** that parses arbitrary text-based agreements into mechanical constraints.
 
-The core architectural pattern is the **"Sovereign Sidecar"**, where governance rules are enforced by a lightweight Interceptor that has *zero* hardcoded logic, relying entirely on immutable JSON configurations.
+The core architectural pattern is the **"Sovereign Sidecar"**, where governance rules are enforced by a lightweight Interceptor that has *zero* hardcoded logic, relying entirely on immutable JSON configurations and Draft-7 schemas.
 
 ## 2. The Five Planes
 The ODGS architecture is composed of five distinct planes of concern, flowing from human intent down to machine execution.

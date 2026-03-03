@@ -1,6 +1,6 @@
 # ODGS Competitive Comparison Matrix
 
-**Version:** 3.3.0
+**Version:** 4.0.0
 **Purpose:** Formal differentiation of ODGS from existing data governance frameworks.
 
 ---
@@ -16,8 +16,9 @@ No existing framework binds **data to its legal definition** at runtime with cry
 
 ## Feature Comparison
 
-| Capability | ODGS v3.3 | Great Expectations | dbt Tests | Soda Core | Open Lineage | Monte Carlo | W3C PROV |
+| Capability | ODGS v4.0 | Great Expectations | dbt Tests | Soda Core | Open Lineage | Monte Carlo | W3C PROV |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Universal URN Routing** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Semantic Binding** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Constitutional Stack** (5-Plane) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Tri-Partite Audit** (3-hash binding) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | Partial |

@@ -11,7 +11,7 @@ from odgs.factory.generator import generate_bundle, generate_with_gemini, write_
 
 # Set Page Config
 st.set_page_config(
-    page_title="ODGS Sovereign Interface — v3.3.0",
+    page_title="ODGS Universal Interface — v4.0.0",
     page_icon="🏛️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -337,7 +337,7 @@ with st.sidebar:
     ODGS Protocol
   </div>
   <div style="font-size:0.78em; color:#5E6C84; font-weight:600; margin-top:2px;">
-    v3.3.0 &nbsp;·&nbsp; Sovereign Edition
+    v4.0.0 &nbsp;·&nbsp; Universal Validation Engine
   </div>
   <div style="font-size:0.68em; color:#97A0AF; margin-top:4px;">
     EU AI Act · ISO 42001 · Enterprise Policies
@@ -1118,7 +1118,7 @@ with tab5:
                             stat_cols = st.columns(4)
                             stat_cols[0].metric("📊 Definitions", len(definitions))
                             stat_cols[1].metric("🤖 Model", metadata.get("model", "unknown"))
-                            stat_cols[2].metric("📋 Protocol", metadata.get("protocol_version", "3.3.0"))
+                            stat_cols[2].metric("📋 Protocol", metadata.get("protocol_version", "4.0.0"))
                             stat_cols[3].metric("🕐 Generated", metadata.get("generated_at", "")[:19])
 
                             # ── Bundle Preview Cards ──

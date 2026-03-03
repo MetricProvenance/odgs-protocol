@@ -175,7 +175,7 @@ When data does not match its statutory definition, the system refuses to proceed
 ## Getting Started
 
 ### If You're an Executive
-→ Read the [Technical Note v3.3](research/technical_note_v33.md) for the strategic case
+→ Read the [Technical Note v4.0](research/technical_note_v40.md) for the strategic case
 
 ### If You're a Technical Leader
 → Read the [Technical Annex](technical_annex.md) for architecture details

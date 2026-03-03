@@ -1,6 +1,8 @@
 # ODGS: Architectural Case Studies in Administrative Safety
 
-**Subject:** The Mechanics of Automated Legal Protection via the 5-Plane Architecture **Status:** Reference Implementation (Article 10 EU AI Act) **WHY** ODGS works for Tax, Traffic, Education, and Housing without changing a single line of source code.
+**Subject:** The Mechanics of Automated Legal Protection via the 5-Plane Architecture  
+**Status:** Reference Implementation (Universal Validation Engine, EU AI Act Art. 10)  
+**WHY** ODGS works for Tax, Traffic, Education, and Housing — it is a Universal Validation Primitive that requires zero source code to enforce disparate domain protocols.
 
 ---
 

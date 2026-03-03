@@ -12,3 +12,9 @@ deploy
 dist
 build
 .DS_Store
+
+# Logs and Caches
+**/sovereign_audit.log
+**/audit_logs/
+*.log
+.pytest_cache/

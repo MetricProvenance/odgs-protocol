@@ -1,6 +1,6 @@
 # ODGS Adapter Interface Guide
 
-**Version:** 3.3.0  
+**Version:** 4.0.0  
 **Source:** [`2_INFORMATIVE_REFERENCE/src/odgs/core/adapter.py`](file:///Users/kartik/Code/open-data-governance-protocol/odgs-protocol-main/2_INFORMATIVE_REFERENCE/src/odgs/core/adapter.py)
 
 ---
@@ -22,7 +22,7 @@ Every data platform integration (Snowflake, Databricks, PostgreSQL, Synapse, API
 │          │               │
 │          ▼               │
 │  ┌──────────────────┐    │
-│  │  OdgsAdapter ABC │    │
+│  │ AdapterRegistry  │    │
 │  └──────────────────┘    │
 │          │               │
 └──────────┼───────────────┘
@@ -47,13 +47,6 @@ class OdgsAdapter(ABC):
     def fetch_context(self, context_id: str, criteria: Dict[str, Any]) -> Dict[str, Any]:
         """
         Fetch context data for a given ID and criteria.
-        
-        Args:
-            context_id: The context identifier (e.g., "NHG_MARKET_VALUE")
-            criteria: Query parameters (e.g., {"zipcode": "1011AA", "house_type": "apartment"})
-        
-        Returns:
-            Dict with the resolved context values (e.g., {"market_value": 300000})
         """
         pass
 
@@ -61,107 +54,71 @@ class OdgsAdapter(ABC):
     def resolve_reference(self, urn: str) -> Any:
         """
         Resolve a URN to its underlying value or object.
-        
-        Args:
-            urn: A valid ODGS URN (e.g., "urn:odgs:metric:101")
-        
-        Returns:
-            The resolved value, definition object, or None if not found.
         """
         pass
 ```
 
 ---
 
-## Implementing an Adapter
+## The AdapterRegistry (Bring Your Own Integrations)
 
-### Example: Snowflake Adapter
+ODGS is headless. Using the `AdapterRegistry`, you can inject custom Python hooks to serialize rule execution plans back and forth to your proprietary systems (e.g., Rust backends, Kafka streams, Databricks clusters) without waiting for us to build the integration.
+
+### Dynamic Injection Tutorial
+
+Instead of hardcoding adapters into the core engine, you can write your own Python modules and dynamically load them into the Universal Validation Engine at runtime via Python's native `importlib`.
+
+**1. Create a Custom Adapter Class**
+Create a new file anywhere in your VPC, for example: `/usr/local/lib/odgs/kafka_adapter.py`.
 
 ```python
-import snowflake.connector
 from odgs.core.adapter import OdgsAdapter
+import json
 
-class SnowflakeAdapter(OdgsAdapter):
-    """Resolves ODGS contexts against a Snowflake warehouse."""
-    
-    def __init__(self, account: str, user: str, password: str, database: str):
-        self.conn = snowflake.connector.connect(
-            account=account,
-            user=user,
-            password=password,
-            database=database
-        )
-    
+class KafkaAdapter(OdgsAdapter):
+    name = "kafka"
+
     def fetch_context(self, context_id: str, criteria: dict) -> dict:
-        """
-        Maps ODGS context IDs to Snowflake views.
-        The physical_data_map.json defines the column-level mappings.
-        """
-        cursor = self.conn.cursor()
+        # In a real scenario, you might read the latest offset for a particular entity
+        return {"entity_status": "ACTIVE", "topic": "governance-pipeline"}
         
-        # Example: NHG_MARKET_VALUE → ANALYTICS.PROPERTY_VALUATIONS
-        query = f"""
-            SELECT market_value, valuation_date, source_authority
-            FROM ANALYTICS.PROPERTY_VALUATIONS
-            WHERE zipcode = %s AND house_type = %s
-            ORDER BY valuation_date DESC
-            LIMIT 1
-        """
-        cursor.execute(query, (criteria.get("zipcode"), criteria.get("house_type")))
-        row = cursor.fetchone()
-        
-        if row:
-            return {
-                "market_value": row[0],
-                "valuation_date": str(row[1]),
-                "source": row[2]
-            }
-        return {}
-    
     def resolve_reference(self, urn: str) -> any:
-        """Resolve a metric URN to its current calculated value."""
-        cursor = self.conn.cursor()
-        cursor.execute(
-            "SELECT current_value FROM GOVERNANCE.METRIC_REGISTRY WHERE urn = %s",
-            (urn,)
-        )
-        row = cursor.fetchone()
-        return row[0] if row else None
+        # Resolve a specific rule threshold dynamically via your streaming infra
+        return "100"
 ```
 
-### Example: PostgreSQL Adapter
+**2. Injecting via the Registry**
+The ODGS v4.0.0 engine exposes an `AdapterRegistry` that allows you to cleanly inject your Python class before initializing the Interceptor.
 
 ```python
-import psycopg2
-from odgs.core.adapter import OdgsAdapter
+from odgs.core.adapter import AdapterRegistry
+from odgs.executive.interceptor import OdgsInterceptor
+import importlib.util
 
-class PostgresAdapter(OdgsAdapter):
-    """Resolves ODGS contexts against PostgreSQL."""
-    
-    def __init__(self, connection_string: str):
-        self.conn = psycopg2.connect(connection_string)
-    
-    def fetch_context(self, context_id: str, criteria: dict) -> dict:
-        cursor = self.conn.cursor()
-        cursor.execute(
-            "SELECT data FROM odgs_contexts WHERE context_id = %s AND criteria @> %s::jsonb",
-            (context_id, json.dumps(criteria))
-        )
-        row = cursor.fetchone()
-        return row[0] if row else {}
-    
-    def resolve_reference(self, urn: str) -> any:
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT value FROM odgs_references WHERE urn = %s", (urn,))
-        row = cursor.fetchone()
-        return row[0] if row else None
+# 1. Dynamically load your Python file (no need to touch the core ODGS pip install)
+spec = importlib.util.spec_from_file_location("kafka_adapter", "/usr/local/lib/odgs/kafka_adapter.py")
+kafka_module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(kafka_module)
+
+# 2. Register your custom adapter
+registry = AdapterRegistry()
+registry.register("kafka", kafka_module.KafkaAdapter())
+
+# 3. Initialize the Engine
+interceptor = OdgsInterceptor(
+    project_root="./schemas",
+    adapter_registry=registry
+)
+
+# 4. Bind the active logic flow to your custom adapter
+active_adapter = registry.get("kafka")
 ```
 
 ---
 
 ## Using the GenericAdapter (Testing)
 
-For development and testing, ODGS ships a `GenericAdapter` that uses an in-memory dictionary:
+For development and local testing, ODGS ships a `GenericAdapter` that uses an in-memory dictionary. You can use this to mock out Databricks or Snowflake before pushing your pipeline to production.
 
 ```python
 from odgs.core.adapter import GenericAdapter
@@ -184,23 +141,13 @@ value = adapter.resolve_reference("urn:odgs:metric:101")
 
 ## Integration with the Interceptor
 
-The adapter is injected into the `OdgsInterceptor` during initialization. When the interceptor evaluates rules, it calls the adapter to hydrate data:
+The active adapter is fetched from the registry inside the `OdgsInterceptor`. When the interceptor evaluates rules, it calls the adapter to hydrate data. If the pipeline encounters missing or corrupt context, it throws a `ProcessBlockedException` ("Hard Stop").
 
 ```python
-from odgs.executive.interceptor import OdgsInterceptor
-
-# Initialize with your platform adapter
-interceptor = OdgsInterceptor(
-    project_root="./1_NORMATIVE_SPECIFICATION/schemas",
-    adapter=SnowflakeAdapter(...)
-)
-
-# The interceptor calls adapter.fetch_context() internally
-# during Step 4: Context Hydration
+# The interceptor uses the adapter to fetch live SQL/Kafka data during Step 4: Context Hydration.
 result = interceptor.intercept(
     process_urn="urn:odgs:process:O2C_S03",
-    data_context={"container_id": "MSKU1234567"},
-    required_integrity_hash="7e240de74fb1ed..."
+    data_context={"container_id": "MSKU1234567"}
 )
 ```
 
@@ -211,21 +158,14 @@ result = interceptor.intercept(
 | Platform | Adapter Class | Status |
 |----------|--------------|--------|
 | In-Memory (Testing) | `GenericAdapter` | ✅ Shipped |
-| Snowflake | `SnowflakeAdapter` | 📋 Example above |
-| PostgreSQL | `PostgresAdapter` | 📋 Example above |
+| Distributed Streaming (Kafka) | `Custom Implementation` | 📋 Covered in Tutorial |
+| Snowflake | `SnowflakeAdapter` | 📋 Community |
+| PostgreSQL | `PostgresAdapter` | 📋 Community |
 | Databricks (SQL Warehouse) | `DatabricksAdapter` | 📋 Community |
-| Azure Synapse | `SynapseAdapter` | 📋 Community |
 | REST API | `ApiAdapter` | 📋 Community |
 
-> **Contributing:** To add a new adapter, implement `OdgsAdapter` and submit a PR to the `adapters/` directory.
+> **Contributing:** To add a new adapter, implement the `OdgsAdapter` ABC and use the `AdapterRegistry` to seamlessly inject it into your internal Airflow or PySpark environments.
 
 ---
 
-## Normative References
-
-- **Physical Data Map:** [`1_NORMATIVE_SPECIFICATION/schemas/executive/physical_data_map.json`](/1_NORMATIVE_SPECIFICATION/schemas/executive/physical_data_map.json) defines column-level mappings
-- **Context Bindings:** [`1_NORMATIVE_SPECIFICATION/schemas/executive/context_bindings.json`](/1_NORMATIVE_SPECIFICATION/schemas/executive/context_bindings.json) defines which metrics/rules apply to each process
-- **Architecture:** [`2_INFORMATIVE_REFERENCE/architecture/architecture.md`](/2_INFORMATIVE_REFERENCE/architecture/architecture.md) Section 3 (The Sovereign Sidecar)
-
----
 [< Back to README](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)

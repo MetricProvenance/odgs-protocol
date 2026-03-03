@@ -322,7 +322,7 @@ def generate_with_gemini(industry: str, api_key: str) -> Optional[Dict[str, Any]
             "industry": industry,
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "model": settings.GEMINI_MODEL_NAME,
-            "protocol_version": "3.3.0",
+            "protocol_version": "4.0.0",
             "total_definitions": len(definitions)
         }
     }
@@ -390,8 +390,8 @@ def run_agent_chat(prompt: str, files: List[str], api_key: str) -> str:
 
     system_persona = """You are the ODGS Sovereign Governance AI — an expert system
 that operates within the Open Data Governance Standard (ODGS) protocol.
-You understand EU AI Act compliance, GDPR data quality requirements,
-ISO 42001, Basel III/IV, and FIBO ontology concepts.
+You understand regulatory compliance and data quality requirements,
+along with structured ontology concepts.
 You reference ODGS concepts: Sovereign Definitions, Tri-Partite Bindings,
 Semantic Certificates, and the 5-Plane Architecture."""
 

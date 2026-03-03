@@ -133,7 +133,7 @@ async def agent_audit(industry: str):
         os.path.join(global_dir, "standard_dq_dimensions.json")
     ]
     
-    prompt = "Perform a deep semantic audit. Look for logic errors, missing fields, and EU AI Act risks."
+    prompt = "Perform a deep semantic audit. Look for logic errors, missing fields, and regulatory compliance risks."
     response = run_agent_chat(prompt, files, api_key)
     return {"audit_report": response}
 

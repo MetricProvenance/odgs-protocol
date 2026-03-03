@@ -41,17 +41,17 @@ class SovereignMetadata(BaseModel):
 
     @model_validator(mode='after')
     def enforce_provenance(self) -> 'SovereignMetadata':
-        """EU AI Act Art. 10: non-synthetic definitions must record origin and integrity hash."""
+        """Regulatory requirement: non-synthetic definitions must record origin and integrity hash."""
         if self.authority_id != "AI_SYNTHETIC":
             if self.source_uri is None:
                 raise ValueError(
                     f"source_uri is required for authority '{self.authority_id}' "
-                    "(EU AI Act Art. 10 — data provenance). Use authority_id='AI_SYNTHETIC' to exempt."
+                    "(strict data provenance). Use authority_id='AI_SYNTHETIC' to exempt."
                 )
             if self.content_hash is None:
                 raise ValueError(
                     f"content_hash is required for authority '{self.authority_id}' "
-                    "(EU AI Act Art. 10 — integrity). Provide a SHA-256 hash of verbatim_text."
+                    "(strict data integrity). Provide a SHA-256 hash of verbatim_text."
                 )
         return self
 

@@ -19,7 +19,7 @@
 
     <!-- ================================================================== -->
     <!-- ODGS ONTOLOGY — W3C OWL/RDF Formal Specification                   -->
-    <!-- Version: 3.3.0 (Generated from canonical JSON — 19 Feb 2026)       -->
+    <!-- Version: 4.0.0 (Generated from canonical JSON)       -->
     <!-- Standard: EU AI Act (2024/1689), ISO/IEC 42001, NEN 381 525        -->
     <!-- ================================================================== -->
 
@@ -35,7 +35,7 @@
         </dcterms:description>
         <dcterms:creator>Kartik Iyer</dcterms:creator>
         <dcterms:license rdf:resource="https://www.apache.org/licenses/LICENSE-2.0"/>
-        <owl:versionInfo>3.3.0</owl:versionInfo>
+        <owl:versionInfo>4.0.0</owl:versionInfo>
         <dcterms:conformsTo>EU AI Act (2024/1689) Articles 10, 12</dcterms:conformsTo>
         <dcterms:conformsTo>ISO/IEC 42001:2023</dcterms:conformsTo>
         <dcterms:conformsTo>NEN 381 525</dcterms:conformsTo>

@@ -5,8 +5,8 @@
 # TECHNICAL SPECIFICATION: THE ODGS PROTOCOL
 
 **SUBJECT:** Runtime Enforcement, Data Sovereignty & ISO 42001 Alignment
-**VERSION:** 3.3.0 (Sovereign / ISO-Ready)
-**DATE:** February 2026
+**VERSION:** 4.0.0 (Universal Validation Engine)
+**DATE:** March 2026
 **DOI:** 10.5281/zenodo.18564270
 **CLASSIFICATION:** Public Specification
 
@@ -16,7 +16,7 @@
 
 The Open Data Governance Standard (ODGS) resolves the "Definition-Execution Gap" in High-Risk AI systems — the structural disconnect between what data governance *says* and what data pipelines *do*. It provides a vendor-neutral protocol to enforce **Administrative Safety** by strictly separating Policy (The Legislative Plane) from Execution (The Physical Plane).
 
-This document outlines the core architecture of the v3.3.0 release, focusing on the **"Sovereign Sidecar"** pattern with Tri-Partite Binding and Sovereign Handshake integrity verification, designed for alignment with:
+This document outlines the core architecture of the v4.0.0 release. It focuses on the transition to a Universal Validation Primitive that implements the "Sovereign Sidecar" pattern alongside agnostic JSON Schema routing, Tri-Partite Binding, and Sovereign Handshake integrity verification:
 
 | Standard | Articles/Clauses | ODGS Implementation |
 |---|---|---|
@@ -99,7 +99,7 @@ graph TB
 
 ## 4. DATA SOVEREIGNTY: THE "GIT-AS-BACKEND" MODEL
 
-To satisfy the strict data residency requirements of Dutch Administrative Law and the EU Data Strategy, ODGS v3.3.0 operates on a **"Privacy-Native"** architecture.
+To satisfy the strict data residency requirements of Dutch Administrative Law and the EU Data Strategy, ODGS v4.0.0 operates on a completely headless, **"Privacy-Native"** architecture that evaluates rules entirely offline.
 
 ### 4.1 The Sovereign Sidecar Pattern
 
@@ -157,7 +157,7 @@ Each harvested definition is:
 
 ## 5. FORENSIC AUDITABILITY (ARTICLE 12 COMPLIANCE)
 
-To satisfy the **"Automatic Recording of Events"** requirement (EU AI Act Art. 12), the Interceptor generates a standardized JSON Audit Log for every inference event using the **Tri-Partite Binding**.
+To satisfy the **"Automatic Recording of Events"** requirement (EU AI Act Art. 12) and enable completely agnostic forensic trails, the Interceptor guarantees that every execution outputs a zero-knowledge Tri-Partite Hash directly to a local Git directory (e.g., `.odgs/audit/`).
 
 ### 5.1 The Binding Schema
 
@@ -240,7 +240,7 @@ The ODGS knowledge graph is published as a **W3C OWL/RDF formal ontology** (`1_N
 
 ## 8. CONCLUSION
 
-The ODGS Protocol v3.3.0 offers a deterministic method for **Administrative Recusal**. By prioritizing "Silence over Error," it ensures that High-Risk AI systems cannot operate outside their legal safety envelope, providing the necessary technical safeguards for public sector algorithms and regulated industries.
+The ODGS Protocol v4.0.0 offers a universal validation layer and deterministic method for **Administrative Recusal**. By prioritizing "Silence over Error," it ensures that High-Risk AI systems cannot operate outside their legal safety envelope, providing the necessary technical safeguards for public sector algorithms and regulated industries.
 
 The protocol is:
 - **Vendor-neutral** — JSON configuration, adapter pattern for any platform

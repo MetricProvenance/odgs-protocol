@@ -1,9 +1,9 @@
 
-# ODGS Protocol v3.3.0: ISO/NEN Compliance Report
+# ODGS Protocol v4.0.0: ISO/NEN Compliance Report
 
 **Document ID:** ODGS-CR-2026-001
-**Date:** February 18, 2026
-**Version:** 3.3.0 (Sovereign)
+**Date:** March 2026
+**Version:** 4.0.0 (Universal)
 **Status:** SUBMITTED TO NEN COMMITTEE 381 525
 **Authors:** Kartik Iyer, Metric Provenance B.V.
 **Classification:** Public
@@ -12,14 +12,14 @@
 
 ## 1. Executive Summary
 
-The Open Data Governance Standard (ODGS) Protocol v3.3.0 has been audited for compliance with:
+The Open Data Governance Standard (ODGS) Protocol v4.0.0 has been audited for compliance with:
 
 - **NEN Standards Committee 381 525** (Data, Data Management, Cloud and Edge)
 - **EU AI Act** (Regulation 2024/1689), Articles 10 and 12
 - **ISO/IEC 42001:2023** (Artificial Intelligence — Management System)
 - **GDPR** (Regulation 2016/679), Articles 5, 25, and 30
 
-The v3.3.0 release implements the **"Sovereign Sidecar"** architecture — a privacy-native, vendor-neutral enforcement layer that provides:
+The v4.0.0 release implements a **"Universal Validation Primitive"** architecture — a headless, privacy-native, vendor-neutral enforcement layer that provides:
 
 | Capability | Implementation | Standard Reference |
 |---|---|---|
@@ -40,17 +40,17 @@ The v3.3.0 release implements the **"Sovereign Sidecar"** architecture — a pri
 | Standard Directory Layout | ✅ | `1_NORMATIVE_SPECIFICATION/schemas/` (The Standard) vs `src/` (The Implementation) |
 | Build System | ✅ | PEP 517 compliant (`pyproject.toml` + `hatchling`) |
 | Dependency Management | ✅ | Zero proprietary dependencies. Open source only. |
-| Version Alignment | ✅ | v3.3.0 across all 7 canonical version locations |
+| Version Alignment | ✅ | v4.0.0 across all canonical version locations |
 | W3C OWL/RDF Ontology | ✅ | `1_NORMATIVE_SPECIFICATION/ontology/ontology_graph.owl` — machine-readable formal ontology |
 
 ### 📜 Documentation & Metadata
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| CITATION.cff | ✅ | Valid CFF v1.2.0 schema, version 3.3.0, DOI: 10.5281/zenodo.18564270 |
+| CITATION.cff | ✅ | Valid CFF v1.2.0 schema, version 4.0.0, DOI: 10.5281/zenodo.18564270 |
 | CONTRIBUTING.md | ✅ | Professional guidelines, correct links to MetricProvenance |
 | Architecture Spec | ✅ | `1_NORMATIVE_SPECIFICATION/schemas/00-architecture-5-plane.md` — Single Source of Truth |
-| CHANGELOG.md | ✅ | Retroactive entries from v3.0.0 through v3.3.0 |
+| CHANGELOG.md | ✅ | Retroactive entries from v3.0.0 through v4.0.0 |
 | Comparison Matrix | ✅ | 7 competitors, 14 dimensions of analysis |
 
 ### 🛡️ ISO/IEC 42001 (AI Safety) Alignment
@@ -127,7 +127,7 @@ The ODGS Harvester can ingest definitions from 5 authoritative sources:
 
 The repository is **CERTIFIED PREPARED** for review by NEN Standards Committee 381 525.
 
-The ODGS Protocol v3.3.0 provides a complete, auditable, vendor-neutral governance framework for High-Risk AI systems, with cryptographic integrity verification, immutable audit trails, and formal W3C OWL/RDF ontological grounding.
+The ODGS Protocol v4.0.0 provides a complete, auditable, vendor-neutral governance framework for High-Risk AI systems, with cryptographic integrity verification, immutable audit trails, and formal W3C OWL/RDF ontological grounding.
 
 ---
 [< Back to README.md](/README.md)

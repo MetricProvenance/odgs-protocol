@@ -13,3 +13,9 @@ __pycache__/
 .venv/
 .git/
 .github/
+
+# Runtime audit logs & testing cache
+**/sovereign_audit.log
+**/audit_logs/
+*.log
+.pytest_cache/
