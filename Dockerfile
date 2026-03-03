@@ -2,21 +2,21 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# System deps for git operations
+# System deps for git operations and curl for healthcheck
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy project files
 COPY pyproject.toml .
 COPY README.md .
-COPY src/ src/
-COPY lib/ lib/
-COPY 1_NORMATIVE_SPECIFICATION/schemas/ 1_NORMATIVE_SPECIFICATION/schemas/
+COPY 2_INFORMATIVE_REFERENCE/ 2_INFORMATIVE_REFERENCE/
+COPY 1_NORMATIVE_SPECIFICATION/ 1_NORMATIVE_SPECIFICATION/
 COPY .streamlit/ .streamlit/
 
-# Install the package
-RUN pip install --no-cache-dir .
+# Install the package with all optional dependencies including 'demo' (streamlit)
+RUN pip install --no-cache-dir .[all]
 
 # Initialize a git repo so GitPython can work
 RUN git config --global user.email "odgs@metricprovenance.com" && \
@@ -37,4 +37,4 @@ EXPOSE 8501
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
     CMD curl -f http://localhost:8501/_stcore/health || exit 1
 
-CMD ["streamlit", "run", "src/odgs/ui/dashboard.py"]
+CMD ["streamlit", "run", "2_INFORMATIVE_REFERENCE/src/odgs/ui/dashboard.py"]
