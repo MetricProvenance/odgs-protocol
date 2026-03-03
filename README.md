@@ -7,8 +7,13 @@
 [![npm Downloads](https://img.shields.io/npm/dm/odgs?label=npm%20Downloads&color=orange)](https://www.npmjs.com/package/odgs)
 [![License](https://img.shields.io/badge/License-Apache_2.0-lightgrey)](LICENSE)
 
-> **The Universal Validation Engine for High-Risk Data (Candidate Standard for CEN/CENELEC).**
-
+> **The Universal Validation Engine for High-Risk Data.**
+---
+> [!IMPORTANT]
+> **EU AI Act & NEN 381 525 Compliance Notice (v4.0.0)**
+> This Universal Engine enforces **Administrative Recusal** ("Hard Stop") for High-Risk AI.
+> * **Standardization:** Candidate Reference Implementation for CEN/CENELEC JTC 21/25.
+> * **Enforcement:** Strictly decouples statutory Law Packs (`urn:odgs:sov:*`) from local logic.
 ---
 
 ### 🏛️ Standards Refactor: Universal Engine Architecture (v4.0.0)
@@ -139,9 +144,12 @@ ODGS is headless. Using the `AdapterRegistry`, you can inject custom Python hook
 
 ---
 
-## 5. Audit Ledgers: Cryptographic Verifiability
+## 5. Audit Ledgers: Cryptographic Verifiability & Zero-Knowledge
 
-ODGS outputs an agnostic `cryptographic_attestation` JSON schema. By generating a **Tri-Partite Hash** (binding the Input Data Hash + the Rule Definition Hash + the Engine Configuration Hash), independent auditors, regulatory bodies, and civil society public watchdogs can mechanically verify the integrity of algorithmic decisions without exposing PI.
+ODGS outputs an agnostic `cryptographic_attestation` JSON schema to satisfy **EU AI Act Article 12 (Forensic Logging)** without exposing third-party data.
+
+* **Git-as-Backend:** ODGS utilizes a privacy-native logging architecture. Forensic logs are written directly to your private enterprise Git repository. **Zero data ever leaves your perimeter.**
+* **The Tri-Partite Hash:** The engine generates a cryptographic proof binding the Input Data Hash + Rule Definition Hash + Engine Configuration Hash. Independent auditors and regulatory bodies can mechanically verify the integrity of algorithmic decisions without exposing PII.
 
 ---
 
@@ -176,9 +184,19 @@ To request architectural clearance for your organization's compliance deployment
 | [Harvester Guide](2_INFORMATIVE_REFERENCE/architecture/harvester_guide.md) | For implementing dynamic parsing blueprints. |
 | [Audit Ledger Guide](2_INFORMATIVE_REFERENCE/architecture/audit_ledger_guide.md) | For Big 4 Auditors verifying the Tri-Partite Hash. |
 
+---
+
+### Support & Community
+* **Bug Reports & Feature Requests:** Please use the [GitHub Issues](https://github.com/MetricProvenance/odgs-protocol/issues) tracker.
+* **Enterprise Compliance Deployments:** For architectural clearance, SLA support, or custom Law Packs, please contact us via the [Enterprise Portal](https://platform.metricprovenance.com).
+
+---
+
 ### License
 Released under the **Apache 2.0 License**.
 
-* **No Vendor Lock-in.**
-* **No Cloud Dependency.**
-* **100% Data Sovereignty.**
+> * **No Vendor Lock-in.**
+> * **No Cloud Dependency.**
+> * **100% Data Sovereignty.**
+---
+ODGS | Developed by [Metric Provenance](https://platform.metricprovenance.com) | The Hague, NL 🇳🇱
