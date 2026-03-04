@@ -22,7 +22,7 @@ jobs:
                   python -m pip install --upgrade pip
                   pip install requests google-cloud-bigquery
 
-            - name: Run Telemetry Archiver
+            - name: Run GitHub Traffic Archiver
               env:
                   # A Personal Access Token (PAT) with `repo` scope is required because the default
                   # GITHUB_TOKEN does not have access to clone/traffic APIs for the repository.
@@ -30,3 +30,8 @@ jobs:
                   # The JSON service account key containing BigQuery access
                   GCP_SA_KEY: ${{ secrets.GCP_TELEMETRY_SA_KEY }}
               run: python .github/scripts/archive_github_traffic.py
+
+            - name: Run PyPI Downloads Archiver
+              env:
+                  GCP_SA_KEY: ${{ secrets.GCP_TELEMETRY_SA_KEY }}
+              run: python .github/scripts/archive_pypi_downloads.py
