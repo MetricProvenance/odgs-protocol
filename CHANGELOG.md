@@ -5,6 +5,16 @@ All notable changes to the Open Data Governance Standard (ODGS) will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v4.0.1] - 2026-03-07
+
+### 🚀 Added
+- **Audit Transparency:** Added `certification_status` field to all execution audit log entries. Sovereign packs with valid cryptographic attestation report `CERTIFIED`; internal custom rules report `LOCAL_ONLY`.
+- **Platform Bridges Ecosystem:** Announced bridge integrations for Collibra Business Glossary, Databricks Unity Catalog, and Snowflake Data Dictionary. Bridges transform passive data dictionaries into active ODGS runtime enforcement schemas.
+
+### 📦 Packaging
+- **Reduced sdist size:** Excluded architecture screenshots and research documents from PyPI source distribution (3.2 MB → ~200 KB).
+- **npm cleanup:** Added `.DS_Store` to `.npmignore`.
+
 ## [v4.0.0] - 2026-03-02
 
 ### 🚀 Added

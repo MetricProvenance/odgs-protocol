@@ -432,6 +432,7 @@ class OdgsInterceptor:
             "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
             "process_urn": process_urn,
             "execution_result": outcome,
+            "certification_status": "CERTIFIED" if attestation_data else "LOCAL_ONLY",
             "tri_partite_binding": {
                 "payload_hash": input_hash,
                 "definition_hash": definition_hash,

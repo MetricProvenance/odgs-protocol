@@ -1,6 +1,6 @@
 # Open Data Governance Standard (ODGS)
 
-[![Protocol](https://img.shields.io/badge/Protocol-v4.0.0_(Universal)-0055AA)](https://metricprovenance.com)
+[![Protocol](https://img.shields.io/badge/Protocol-v4.0.1_(Universal)-0055AA)](https://metricprovenance.com)
 [![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act_%7C_NEN_381_525-003399)](GOVERNANCE.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18564270.svg)](https://doi.org/10.5281/zenodo.18564270)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs)
@@ -65,7 +65,7 @@ Stop relying on generic analytics failures. Enforce your SLAs, SOC2 policies, an
 
 ### Install
 ```bash
-pip install odgs==4.0.0
+pip install odgs==4.0.1
 ```
 
 ### Example: Halting a Pipeline in Python/dbt
@@ -141,6 +141,20 @@ You don't just have to use our Law Packs. Your internal teams or engineering par
 ODGS is headless. Using the `AdapterRegistry`, you can inject custom Python hooks to serialize rule execution plans back and forth to your proprietary systems (e.g., Rust backends, Kafka streams, Databricks clusters) without waiting for us to build the integration.
 
 > **[Read the Adapter Guide →](2_INFORMATIVE_REFERENCE/architecture/adapter_guide.md)**
+
+---
+
+### 🌐 Platform Bridges
+
+ODGS bridges connect your existing data governance platform to the Universal Interceptor, transforming passive data dictionaries into active runtime enforcement.
+
+| Bridge | Source | Output | Status |
+|---|---|---|---|
+| [`odgs-collibra-bridge`](https://github.com/MetricProvenance/odgs-collibra-bridge) | Collibra Business Glossary | ODGS JSON Schemas | In Development |
+| [`odgs-databricks-bridge`](https://github.com/MetricProvenance/odgs-databricks-bridge) | Databricks Unity Catalog | ODGS JSON Schemas | Planned |
+| [`odgs-snowflake-bridge`](https://github.com/MetricProvenance/odgs-snowflake-bridge) | Snowflake Data Dictionary | ODGS JSON Schemas | Planned |
+
+> **Want to build a bridge?** ODGS is designed to be the enforcement layer for *any* data governance platform. [Open an issue](https://github.com/MetricProvenance/odgs-protocol/issues) or submit a PR.
 
 ---
 

@@ -1,6 +1,8 @@
 # .npmignore - The Firewall
 # Strictly block Python source and dev assets from the NPM package
 
+.DS_Store
+
 src/
 tests/python/
 scripts/
