@@ -150,9 +150,9 @@ ODGS bridges connect your existing data governance platform to the Universal Int
 
 | Bridge | Source | Output | Status |
 |---|---|---|---|
-| [`odgs-collibra-bridge`](https://github.com/MetricProvenance/odgs-collibra-bridge) | Collibra Business Glossary | ODGS JSON Schemas | In Development |
-| [`odgs-databricks-bridge`](https://github.com/MetricProvenance/odgs-databricks-bridge) | Databricks Unity Catalog | ODGS JSON Schemas | Planned |
-| [`odgs-snowflake-bridge`](https://github.com/MetricProvenance/odgs-snowflake-bridge) | Snowflake Data Dictionary | ODGS JSON Schemas | Planned |
+| [`odgs-collibra-bridge`](https://github.com/MetricProvenance/odgs-collibra-bridge) | Collibra Business Glossary | ODGS JSON Schemas | [![PyPI](https://img.shields.io/pypi/v/odgs-collibra-bridge)](https://pypi.org/project/odgs-collibra-bridge/) |
+| [`odgs-databricks-bridge`](https://github.com/MetricProvenance/odgs-databricks-bridge) | Databricks Unity Catalog | ODGS JSON Schemas | [![PyPI](https://img.shields.io/pypi/v/odgs-databricks-bridge)](https://pypi.org/project/odgs-databricks-bridge/) |
+| [`odgs-snowflake-bridge`](https://github.com/MetricProvenance/odgs-snowflake-bridge) | Snowflake Data Dictionary | ODGS JSON Schemas | v0.1.0 |
 
 > **Want to build a bridge?** ODGS is designed to be the enforcement layer for *any* data governance platform. [Open an issue](https://github.com/MetricProvenance/odgs-protocol/issues) or submit a PR.
 
