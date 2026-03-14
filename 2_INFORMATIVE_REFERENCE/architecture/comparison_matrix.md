@@ -1,6 +1,6 @@
 # ODGS Competitive Comparison Matrix
 
-**Version:** 4.0.0
+**Version:** 5.0.0
 **Purpose:** Formal differentiation of ODGS from existing data governance frameworks.
 
 ---
@@ -16,7 +16,7 @@ No existing framework binds **data to its legal definition** at runtime with cry
 
 ## Feature Comparison
 
-| Capability | ODGS v4.0 | Great Expectations | dbt Tests | Soda Core | Open Lineage | Monte Carlo | W3C PROV |
+| Capability | ODGS v5.0 | Great Expectations | dbt Tests | Soda Core | Open Lineage | Monte Carlo | W3C PROV |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **Universal URN Routing** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Semantic Binding** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -93,4 +93,6 @@ This binding satisfies **EU AI Act Article 12** (Automatic Recording) and **ISO/
 - **DAMA DMBOK v2:** Data Quality Dimensions Framework
 
 ---
+> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+
 [< Back to README](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)

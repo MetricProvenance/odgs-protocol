@@ -175,7 +175,7 @@ When data does not match its statutory definition, the system refuses to proceed
 ## Getting Started
 
 ### If You're an Executive
-→ Read the [Technical Note v4.0](research/technical_note_v40.md) for the strategic case
+→ Read the [Technical Note](research/technical_note_v40.md) for the strategic case
 
 ### If You're a Technical Leader
 → Read the [Technical Annex](technical_annex.md) for architecture details
@@ -210,5 +210,6 @@ A: The EU AI Act requires "High-Risk AI systems" to have documented data governa
 *Have questions? Visit [metricprovenance.com](https://metricprovenance.com) or read the full [Technical Specification](technical_annex.md).*
 
 ---
+> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
 
-📚 **All Documentation:** [Documentation Map →](index.md) · 🎯 **Live Demo:** [demo.metricprovenance.com](https://demo.metricprovenance.com)
+[< Back to README.md](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)

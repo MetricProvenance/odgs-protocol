@@ -1,6 +1,6 @@
 # ODGS Audit Ledger Guide
 
-**Version:** 4.0.0  
+**Version:** 5.0.0  
 **Source:** [`2_INFORMATIVE_REFERENCE/src/odgs/system/adapters/git_log_adapter.py`](file:///Users/kartik/Code/open-data-governance-protocol/odgs-protocol-main/2_INFORMATIVE_REFERENCE/src/odgs/system/adapters/git_log_adapter.py)
 
 ---
@@ -41,7 +41,7 @@ To independently verify the mechanical integrity of an algorithmic decision, an 
 
 1.  The `cryptographic_attestation.json` log from your repository.
 2.  The public Sovereign JSON Rule (`urn:odgs:sov:eu-ai-act:art10.json`).
-3.  The public source code of ODGS v4.0.0 at the specific Git Commit.
+3.  The public source code of ODGS v5.0.0 at the specific Git Commit.
 
 ### The Math:
 
@@ -65,14 +65,23 @@ If your pipeline fails compliance and is **Hard-Stopped**, the ledger accurately
 
 ## 3. Commercial Notarization (The S-Cert Registry)
 
-By default, the `cryptographic_attestation` is logged completely offline as a JSON file to your local drive.
+By default, the open-source `cryptographic_attestation` is logged completely offline as a JSON file to your local drive. This is sufficient for internal testing, but radically insufficient for regulatory audits.
 
-For strict regulatory reporting scenarios, enterprises require absolute proof that the JSON log itself was not maliciously edited retroactively by a rogue DBA prior to an audit.
+For strict regulatory reporting scenarios (e.g., EU AI Act, DORA), enterprises require absolute cryptographic proof that the JSON log itself was not maliciously edited retroactively by a rogue DBA prior to an auditor's arrival.
 
-If the engine is configured with `ODGS_REQUIRE_SCERT=True`, it takes the Tri-Partite Hash payload and transmits it over TLS to the **Metric Provenance S-Cert Registry**. 
+**The Commercial Upgrade:**
 
-The SaaS registry cryptographically wraps the hashes in its own private key, returning an immutable "S-Cert" link that your organization can publicly display on physical products (e.g., an MRI machine UI) or regulatory reports, providing immediate cryptographic proof that an independent 3rd party verified the internal log transaction.
+If the engine is securely bound to the **Metric Provenance Enterprise Portal** with `ODGS_REQUIRE_SCERT=True`, it physically prevents the pipeline from executing unless the Tri-Partite Hash payload is successfully transmitted over mutual TLS to the **Air-Gapped S-Cert Registry**.
+
+The SaaS/On-Premise registry cryptographically wraps the raw ODGS hashes in its own Sovereign Private Key, returning an immutable **"S-Cert" (Semantic Certificate)**. 
+
+Organizations can take this S-Cert URN and publicly display it on physical products (e.g., an MRI machine UI screen) or embed it within regulatory filings, providing immediate, zero-knowledge mathematical proof that an independent 3rd-party Certificate Authority verified the internal execution log transaction.
+
+👉 **Auditors require S-Certs, not text files. [Book a compliance consultation to deploy the Sovereign Node](https://platform.metricprovenance.com)**.
 
 ---
 
 [< Back to README](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)
+
+---
+> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).

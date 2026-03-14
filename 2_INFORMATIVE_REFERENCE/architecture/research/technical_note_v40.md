@@ -88,4 +88,6 @@ The entire ODGS knowledge graph is serialized as a W3C-standard OWL/RDF formal o
 
 ---
 
-[< Back to README](/README.md) | [Documentation Map →](../index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)
+> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+
+[< Back to README.md](/README.md) | [Documentation Map →](../index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)

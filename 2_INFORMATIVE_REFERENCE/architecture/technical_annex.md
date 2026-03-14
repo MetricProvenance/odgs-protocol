@@ -5,7 +5,7 @@
 # TECHNICAL SPECIFICATION: THE ODGS PROTOCOL
 
 **SUBJECT:** Runtime Enforcement, Data Sovereignty & ISO 42001 Alignment
-**VERSION:** 4.0.0 (Universal Validation Engine)
+**VERSION:** 5.0.0 (Universal Validation Engine)
 **DATE:** March 2026
 **DOI:** 10.5281/zenodo.18564270
 **CLASSIFICATION:** Public Specification
@@ -16,7 +16,7 @@
 
 The Open Data Governance Standard (ODGS) resolves the "Definition-Execution Gap" in High-Risk AI systems — the structural disconnect between what data governance *says* and what data pipelines *do*. It provides a vendor-neutral protocol to enforce **Administrative Safety** by strictly separating Policy (The Legislative Plane) from Execution (The Physical Plane).
 
-This document outlines the core architecture of the v4.0.0 release. It focuses on the transition to a Universal Validation Primitive that implements the "Sovereign Sidecar" pattern alongside agnostic JSON Schema routing, Tri-Partite Binding, and Sovereign Handshake integrity verification:
+This document outlines the core architecture of the v5.0.0 release. It focuses on the transition to a Universal Validation Primitive that implements the "Sovereign Sidecar" pattern alongside agnostic JSON Schema routing, Tri-Partite Binding, and Sovereign Handshake integrity verification:
 
 | Standard | Articles/Clauses | ODGS Implementation |
 |---|---|---|
@@ -99,7 +99,7 @@ graph TB
 
 ## 4. DATA SOVEREIGNTY: THE "GIT-AS-BACKEND" MODEL
 
-To satisfy the strict data residency requirements of Dutch Administrative Law and the EU Data Strategy, ODGS v4.0.0 operates on a completely headless, **"Privacy-Native"** architecture that evaluates rules entirely offline.
+To satisfy the strict data residency requirements of Dutch Administrative Law and the EU Data Strategy, ODGS v5.0.0 operates on a completely headless, **"Privacy-Native"** architecture that evaluates rules entirely offline.
 
 ### 4.1 The Sovereign Sidecar Pattern
 
@@ -249,7 +249,7 @@ The ODGS knowledge graph is published as a **W3C OWL/RDF formal ontology** (`1_N
 
 ## 8. CONCLUSION
 
-The ODGS Protocol v4.0.0 offers a universal validation layer and deterministic method for **Administrative Recusal**. By prioritizing "Silence over Error," it ensures that High-Risk AI systems cannot operate outside their legal safety envelope, providing the necessary technical safeguards for public sector algorithms and regulated industries.
+The ODGS Protocol v5.0.0 offers a universal validation layer and deterministic method for **Administrative Recusal**. By prioritizing "Silence over Error," it ensures that High-Risk AI systems cannot operate outside their legal safety envelope, providing the necessary technical safeguards for public sector algorithms and regulated industries.
 
 The protocol is:
 - **Vendor-neutral** — JSON configuration, adapter pattern for any platform
@@ -258,5 +258,6 @@ The protocol is:
 - **Formally specified** — W3C OWL/RDF ontology for machine-readable governance
 
 ---
-[< Back to README.md](/README.md)
- | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)
+> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+
+[< Back to README.md](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)

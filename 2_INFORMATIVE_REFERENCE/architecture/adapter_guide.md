@@ -1,6 +1,6 @@
 # ODGS Adapter Interface Guide
 
-**Version:** 4.0.0  
+**Version:** 5.0.0  
 **Source:** [`2_INFORMATIVE_REFERENCE/src/odgs/core/adapter.py`](file:///Users/kartik/Code/open-data-governance-protocol/odgs-protocol-main/2_INFORMATIVE_REFERENCE/src/odgs/core/adapter.py)
 
 ---
@@ -88,7 +88,7 @@ class KafkaAdapter(OdgsAdapter):
 ```
 
 **2. Injecting via the Registry**
-The ODGS v4.0.0 engine exposes an `AdapterRegistry` that allows you to cleanly inject your Python class before initializing the Interceptor.
+The ODGS v5.0.0 engine exposes an `AdapterRegistry` that allows you to cleanly inject your Python class before initializing the Interceptor.
 
 ```python
 from odgs.core.adapter import AdapterRegistry
@@ -167,5 +167,6 @@ result = interceptor.intercept(
 > **Contributing:** To add a new adapter, implement the `OdgsAdapter` ABC and use the `AdapterRegistry` to seamlessly inject it into your internal Airflow or PySpark environments.
 
 ---
+> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
 
 [< Back to README](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)

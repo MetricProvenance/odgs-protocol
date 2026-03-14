@@ -184,4 +184,6 @@ The ODGS Protocol is no longer just a conceptual framework — it is a **verifie
 6. Iyer, K. (2026). "The Quality-Liability Fallacy." *Metric Provenance Working Paper.*
 
 ---
-[< Back to README](/README.md) | [Documentation Map →](../index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)
+> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+
+[< Back to README.md](/README.md) | [Documentation Map →](../index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)
