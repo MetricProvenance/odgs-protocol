@@ -60,7 +60,7 @@ def test_tri_partite_hash_and_agnostic_output(audit_sandbox, monkeypatch):
     assert "config_hash" in tpb
     assert tpb["payload_hash"] != "HASH_ERROR_NON_SERIALIZABLE"
     
-    # Test 2: Agnostic Output (no S-Cert terminology, uses cryptographic_attestation)
+    # Test 2: Agnostic Output (no S-Cert terminology, uses cryptographic_attestations)
     assert "s_cert_status" not in last_log
-    assert "cryptographic_attestation" in last_log
-    assert last_log["cryptographic_attestation"] == {"issuer": "did:web:test"}
+    assert "cryptographic_attestations" in last_log
+    assert last_log["cryptographic_attestations"] == [{"issuer": "did:web:test"}]

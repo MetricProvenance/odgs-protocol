@@ -1,6 +1,6 @@
 {
   "name": "odgs",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "ODGS Protocol — Sovereign Reference Implementation (Node.js)",
   "author": "Metric Provenance <partner@metricprovenance.com>",
   "license": "Apache-2.0",

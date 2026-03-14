@@ -1,9 +1,31 @@
+# ODGS v5.0.0 Migration Guide
+
+**WARNING:** This release contains **BREAKING CHANGES** from v4.1.0 for users evaluating W3C JSON-LD rule structures.
+Do not deploy v5.0.0 without reading this guide. ODGS is now a **Polymorphic Validation Engine**.
+
+---
+
+## 1. Polymorphic Rule Ingestion (The 5-Plane Architecture)
+
+Version 5.0.0 fully realizes the 5-Plane Architecture by natively supporting two distinct execution models simultaneously without requiring separate engine processes.
+
+### Legacy v4 Schema Compatibility 
+If you are using the ODGS Enterprise Bridges (`odgs-databricks-bridge`, `odgs-snowflake-bridge`, `odgs-collibra-bridge`), absolutely **no changes** are required to your downstream ingestion. The v5 engine is 100% backwards compatible with the v4 schema (`https://metricprovenance.com/schemas/odgs/v4`). Standard `ProcessBlockedException` continues to be raised for standard `HARD_STOP` conditions.
+
+### The Legislative W3C JSON-LD Tier
+If you are integrating TNO FLINT, Sovereign Packs, or any rule claiming the `https://metricprovenance.com/schemas/odgs/v5` `@context` OR the `Legislative Compliance` domain:
+* **The New Hard Stop:** The engine will now escalate `HARD_STOP` conditions and violently halt the pipeline by raising an `AdministrativeRecusal` exception instead of a standard `ProcessBlockedException`. You must update your try/catch blocks if you are absorbing these errors natively.
+* **Audit Metadata:** Legislative halts now strictly enforce the inclusion of `provenance_metadata` and track `attempted_payload_drift` in the final JSON audit log seal.
+
+---
+
 # ODGS v4.0.0 Migration Guide
 
 **WARNING:** This release contains **BREAKING CHANGES** from v3.3.0.
 Do not deploy v4.0.0 without reading this guide. ODGS is now a **Universal Validation Engine**.
 
 ---
+
 
 ## 🛑 Strict Deprecation Notice (Legacy v3.3 Users)
 

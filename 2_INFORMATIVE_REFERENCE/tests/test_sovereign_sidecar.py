@@ -133,5 +133,65 @@ class TestSovereignSidecar(unittest.TestCase):
                         break
             self.assertTrue(found, "Did not find expected audit log entry with payload hash")
 
+    def test_dynamic_05_v4_1_0_features(self):
+        print("\nTesting v4.1.0 Features (Array Attestations & Metadata)...")
+        # Add Rules with metadata and attestations
+        rule_1 = {
+            "rule_id": "9001",
+            "name": "Sovereign Rule",
+            "logic_expression": "value == 'VALID'",
+            "metadata": {"collibra_asset_id": "C-12345"},
+            "__attestation__": {"is_signed": True, "key_id": "eu-ai-act-key"}
+        }
+        rule_2 = {
+            "rule_id": "9002",
+            "name": "Local Rule",
+            "logic_expression": "len(value) > 3",
+            "metadata": {"databricks_table": "gold_users"},
+            "__attestation__": {"is_signed": True, "key_id": "local-enterprise-key"}
+        }
+        
+        self.interceptor.rules["urn:odgs:rule:9001"] = rule_1
+        self.interceptor.rules["urn:odgs:rule:9002"] = rule_2
+        
+        # Mock Context Resolution
+        original_resolve = self.interceptor._resolve_context
+        self.interceptor._resolve_context = lambda urn: {
+            "context_id": urn,
+            "rules": ["urn:odgs:rule:9001", "urn:odgs:rule:9002"]
+        }
+        
+        from odgs.system.scripts.hashing import generate_project_hash
+        src_odgs_path = os.path.join(project_root, "src", "odgs")
+        real_hash = generate_project_hash(src_odgs_path)["master_hash"]
+        
+        # Process Pass
+        test_urn = "urn:fake:process_v4_1_0"
+        self.interceptor.intercept(test_urn, {"value": "VALID"}, required_integrity_hash=real_hash)
+        
+        log_path = os.path.join(project_root, "src", "odgs", "sovereign_audit.log")
+        with open(log_path, 'r') as f:
+            lines = f.readlines()
+            found = False
+            for line in reversed(lines):
+                if test_urn in line:
+                    json_str = line.split(" - ", 1)[1]
+                    entry = json.loads(json_str)
+                    # v4.1.0 Assertions
+                    self.assertIn("cryptographic_attestations", entry, "Missing multi-sign array")
+                    self.assertEqual(len(entry["cryptographic_attestations"]), 2, "Should aggregate exactly 2 signatures")
+                    self.assertIn("applied_metadata", entry, "Missing applied_metadata lineage object")
+                    self.assertEqual(entry["applied_metadata"]["9001"]["collibra_asset_id"], "C-12345")
+                    self.assertEqual(entry["applied_metadata"]["9002"]["databricks_table"], "gold_users")
+                    found = True
+                    print(f"  ✅ v4.1.0 Multi-Sign & Metadata correctly tracked in Audit Log.")
+                    break
+                    
+            self.assertTrue(found, "v4.1.0 Audit Log entry not found.")
+        
+        # Restore mock
+        self.interceptor._resolve_context = original_resolve
+
+
 if __name__ == '__main__':
     unittest.main()

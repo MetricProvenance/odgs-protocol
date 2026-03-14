@@ -75,6 +75,9 @@
                     "integer"
                 ]
             }
+        },
+        "metadata": {
+            "type": "object"
         }
     },
     "additionalProperties": false

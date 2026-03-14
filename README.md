@@ -1,6 +1,6 @@
 # Open Data Governance Standard (ODGS)
 
-[![Protocol](https://img.shields.io/badge/Protocol-v4.0.1_(Universal)-0055AA)](https://metricprovenance.com)
+[![Protocol](https://img.shields.io/badge/Protocol-v5.0.0_(Cryptographic_Engine)-0055AA)](https://platform.metricprovenance.com)
 [![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act_%7C_NEN_381_525-003399)](GOVERNANCE.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18564270.svg)](https://doi.org/10.5281/zenodo.18564270)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs)
@@ -10,31 +10,35 @@
 > **The Universal Validation Engine for High-Risk Data.**
 ---
 > [!IMPORTANT]
-> **EU AI Act & NEN 381 525 Compliance Notice (v4.0.0)**
-> This Universal Engine enforces **Administrative Recusal** ("Hard Stop") for High-Risk AI.
-> * **Standardization:** Candidate Reference Implementation for CEN/CENELEC JTC 21/25.
-> * **Enforcement:** Strictly decouples statutory Law Packs (`urn:odgs:sov:*`) from local logic.
+> **EU AI Act & CEN-CENELEC JTC 25 Candidate Standard (v5.0.0 Update)**
+> ODGS has been upgraded to a strict Polymorphic Execution Engine. It seamlessly evaluates your standard operational telemetry while natively ingesting authoritative W3C/JSON-LD legal ontologies (e.g., TNO FLINT) to enforce **Administrative Recusal** ("Hard Stop") in High-Risk AI pipelines.
 ---
 
-### 🏛️ Standards Refactor: Universal Engine Architecture (v4.0.0)
+### 🚀 What's New in v5.0.0: The Execution Plane
+In alignment with European Data Space architectures (NEN 381 525), ODGS v5 structurally repositions as the missing **Execution Plane** for Civic Tech and "Rules as Code" initiatives. 
 
-**Notice to all Data Engineers and Architects:**
-The repository structure has been formally reorganized to align with the structural directives of the **Royal Netherlands Standardization Institute (NEN)** and reflects the federated data sovereignty principles championed by leading European applied science institutes (e.g., TNO). 
+* **Deprecation of NLP Harvesters:** We are no longer trying to solve the problem of "Reading the Law." We are exclusively solving the problem of "Cryptographically Enforcing the Law."
+* **Authoritative JSON-LD Ingestion:** ODGS now natively delegates legal parsing to authoritative upstream sources (e.g., TNO FLINT). This eliminates vendor-specific legal interpretations and allows Sovereign States to act as their own Certificate Authorities.
+* **Cryptographic Seals (SHA-256):** Ingestion now generates a deterministic hash at the physical boundary. If the upstream authoritative source changes its JSON-LD definition, the downstream cryptographic execution seal is instantly invalidated.
 
-To strictly enforce the semantic decoupling of policy from execution, all materials are now divided into:
-1. `1_NORMATIVE_SPECIFICATION/`: Mandatory cryptographic schemas, rules, and W3C OWL ontologies.
-2. `2_INFORMATIVE_REFERENCE/`: The software implementation (`odgs` universal engine), adapters, and documentation.
+---
+### 🏢 Enterprise & Public Sector: EU AI Act Compliance
+This open-source package connects your physical data infrastructure to the ODGS validation engine. However, if you are operating a **High-Risk AI System** and require strict liability indemnification under the **EU AI Act (Articles 10 & 12)**, you need cryptographic provenance.
+
+**Metric Provenance** offers the commercial Enterprise Infrastructure for ODGS:
+* **Certified Sovereign Packs:** Pre-compiled, cryptographically signed Ed25519 rule bundles for DORA, EU AI Act, and Basel.
+* **The S-Cert Sovereign Registry:** An air-gapped Enterprise Certificate Authority that natively ingests ODGS telemetry to mint immutable, JWS-sealed audit logs.
+
+👉 **[Discover the Sovereign CA Enterprise Node & Packs](https://platform.metricprovenance.com)**
+
+---
 
 ## 1. The Standard: Data Governance Without Compromise
 
-The **Open Data Governance Standard (ODGS)** is a vendor-neutral protocol for **Universal Data Governance**. It resolves the "Definition-Execution Gap" in data pipelines by creating a deterministic method for **Administrative Recusal ("Hard Stop")**.
+The **Open Data Governance Standard (ODGS)** resolves the "Definition-Execution Gap" in data pipelines. 
 
 > **"Silence over Error."** — The Core Philosophy.
 > If data drifts from its legal, contractual, or internal definition, the pipeline must mathematically **halt** rather than process an invalid inference.
-
-ODGS parses any text-based agreement into mechanical constraints via Draft-7 JSON Schemas, verifying identities via JWKS cryptography, and outputting mathematically pure, vendor-neutral audit logs.
-
-### See It In Action → [demo.metricprovenance.com](https://demo.metricprovenance.com)
 
 **Semantic Certificate** — Every sovereign definition carries a cryptographic fingerprint bound to its issuing authority. The data equivalent of a TLS certificate.
 
@@ -61,98 +65,76 @@ ODGS parses any text-based agreement into mechanical constraints via Draft-7 JSO
 
 ## 2. Quick Start: The Data Engineer Workflow
 
-Stop relying on generic analytics failures. Enforce your SLAs, SOC2 policies, and data quality checks directly in your Python transforms.
+Stop relying on passive analytics dashboards. Enforce statutory rules directly in your Python transforms.
 
 ### Install
 ```bash
-pip install odgs==4.0.1
+pip install odgs==5.0.0
 ```
 
 ### Example: Halting a Pipeline in Python/dbt
+
 Inject ODGS directly into your data warehouse transforms, Airflow DAGs, or Databricks PySpark wrappers:
 
 ```python
 from odgs.executive.interceptor import OdgsInterceptor
-from odgs.executive.exceptions import ProcessBlockedException
+from odgs.executive.exceptions import AdministrativeRecusal
 
 engine = OdgsInterceptor()
 
-# The payload (e.g., a row from pandas or a dbt pre-hook validation)
+# The physical payload (e.g., an AI applicant profile or standard telemetry)
 payload = {"transaction_value": 150000, "aml_flag": False}
 
 try:
-    # Evaluate against your internal threshold rules
-    engine.intercept("urn:odgs:custom:aml-check", payload)
-    print("Payload Validated. Proceeding with database insert.")
+    # Evaluate against your internal checks or mathematically hashed W3C JSON-LD ontologies
+    engine.intercept("urn:odgs:sov:eu-ai-act:aml-threshold", payload)
+    print("Payload Validated. Proceeding to inference.")
     
-except ProcessBlockedException as e:
-    # The pipeline HALTS before bad data is merged or a model is trained
-    print(f"PIPELINE HALTED: {e}")
+except AdministrativeRecusal as e:
+    # The pipeline HALTS before an illegal decision is made.
+    print(f"HARD STOP EXECUTED: Data Drift Detected. {e}")
 ```
 
 ---
 
-## 3. The Ecosystem: URN Namespace Routing
+## 3. The 5-Plane Semantic Architecture (v5)
 
-ODGS v4.0.0 routes logic based on **Uniform Resource Names (URNs)**.
-
-### 🟢 Free & Internal (`urn:odgs:custom:*`)
-Completely free, offline namespaces for your internal developer usage (Data Quality, B2B SLAs, SOC2 limits, ETL checks).
-*   **Routing:** Automatically loads from your local workspace (`./schemas/custom/`).
-*   **Execution:** 100% free, local, with agnostic audit logging.
-
-### 🔵 The Sovereign Tier (`urn:odgs:sov:*`)
-Premium Sovereign configurations (EU AI Act, GDPR, DORA) cryptographically signed by the **Metric Provenance Root Authority**.
-*   **Routing:** Enforces the Sovereign Handshake and loads statutory packs from secure enterprise mounts (`/etc/odgs/law-packs/`).
-*   **Liability:** Provides immediate cryptographic proof and legal indemnity that your pipeline mathematically bounds its execution within the exact letter of the law.
-
----
-
-## 4. Extensibility: Bring Your Own Architecture
-
-We built ODGS to be the "Linux of Data Governance". It injects anywhere.
-
-ODGS implements a "Constitutional Stack" where mechanical execution is legally bound by semantic definitions via the **Universal Interceptor**.
+ODGS v5 implements a strict 5-Plane topology to guarantee the absolute sovereignty of legislative intent over physical execution pipelines.
 
 ```mermaid
 graph TD
-    subgraph "The Constitution (Policy)"
-        L[1. Governance] -->|Defines Intent| Leg[2. Legislative]
-        Leg -->|Defines Metrics| Jud[3. Judiciary]
+    subgraph Legislative_Plane ["I. Legislative Plane (Semantic Truth)"]
+        FLINT[TNO FLINT / W3C JSON-LD] --> |Semantic Hash| Definition(Statutory Definition)
     end
-    subgraph "The Machine (Execution)"
-        Jud -->|Enforces Rules| Ex[4. Executive]
-        Ex -->|Contextualizes| Phy[5. Physical]
+    
+    subgraph Physical_Plane ["II. Physical Plane (ODGS Execution Engine)"]
+        Definition -.-> |Cryptographic Tether| Boundary[Execution Boundary]
+        Boundary --> Eval{Constraint Evaluation}
+        
+        Pipeline[IV. Data Pipeline Plane] --> |Payload| Eval
+        
+        Eval --> |Compliant| Approved[Execution Authorized]
+        Eval --> |Data Drift Detected| Recusal[Administrative Recusal]
+        
+        Approved --> Audit[V. Forensic Audit Plane]
+        Recusal --> Audit
+        
+        Audit --> |Generates| SCert[S-Cert: Immutable JWS Provenance Log]
     end
-    subgraph "The Audit Trail"
-        Phy -->|Logs Evidence| Anchor[Trust Anchor]
-    end
-    style L fill:#f9f,stroke:#333,stroke-width:2px
-    style Leg fill:#bbf,stroke:#333,stroke-width:2px
-    style Jud fill:#bfb,stroke:#333,stroke-width:2px
-    style Ex fill:#ddd,stroke:#333,stroke-width:2px
-    style Phy fill:#ddd,stroke:#333,stroke-width:2px
 ```
-
-### 🏭 The HarvesterFactory (Bring Your Own Blueprints)
-You don't just have to use our Law Packs. Your internal teams or engineering partners (e.g., Deloitte, Capgemini) can write custom Python blueprints to automatically harvest and serialize your proprietary PDF contracts, API specifications, or Notion pages into executable ODGS JSON rule schemas.
-
-### 🔌 The AdapterRegistry (Bring Your Own Integrations)
-ODGS is headless. Using the `AdapterRegistry`, you can inject custom Python hooks to serialize rule execution plans back and forth to your proprietary systems (e.g., Rust backends, Kafka streams, Databricks clusters) without waiting for us to build the integration.
-
-> **[Read the Adapter Guide →](2_INFORMATIVE_REFERENCE/architecture/adapter_guide.md)**
 
 ---
 
-### 🌐 Platform Bridges
+## 4. Platform Bridges
 
-ODGS bridges connect your existing data governance platform to the Universal Interceptor, transforming passive data dictionaries into active runtime enforcement.
+ODGS bridges connect your existing data governance platform to the Execution Engine, transforming passive data dictionaries into active runtime enforcement.
 
-| Bridge | Source | Output | Status |
-|---|---|---|---|
-| [`odgs-collibra-bridge`](https://github.com/MetricProvenance/odgs-collibra-bridge) | Collibra Business Glossary | ODGS JSON Schemas | [![PyPI](https://img.shields.io/pypi/v/odgs-collibra-bridge)](https://pypi.org/project/odgs-collibra-bridge/) |
-| [`odgs-databricks-bridge`](https://github.com/MetricProvenance/odgs-databricks-bridge) | Databricks Unity Catalog | ODGS JSON Schemas | [![PyPI](https://img.shields.io/pypi/v/odgs-databricks-bridge)](https://pypi.org/project/odgs-databricks-bridge/) |
-| [`odgs-snowflake-bridge`](https://github.com/MetricProvenance/odgs-snowflake-bridge) | Snowflake Data Dictionary | ODGS JSON Schemas | [![PyPI](https://img.shields.io/pypi/v/odgs-snowflake-bridge)](https://pypi.org/project/odgs-snowflake-bridge/) |
+| Bridge | Function | Status |
+| --- | --- | --- |
+| [`odgs-flint-bridge-oss`](https://github.com/MetricProvenance/odgs-flint-bridge-oss) | **Legislative:** Ingests TNO FLINT JSON-LD into ODGS schema. | [PyPI](https://pypi.org/project/odgs-flint-bridge-oss/) |
+| [`odgs-collibra-bridge`](https://github.com/MetricProvenance/odgs-collibra-bridge) | **Physical:** Collibra Business Glossary integration. | [PyPI](https://pypi.org/project/odgs-collibra-bridge/) |
+| [`odgs-databricks-bridge`](https://github.com/MetricProvenance/odgs-databricks-bridge) | **Physical:** Databricks Unity Catalog integration. | [PyPI](https://pypi.org/project/odgs-databricks-bridge/) |
+| [`odgs-snowflake-bridge`](https://github.com/MetricProvenance/odgs-snowflake-bridge) | **Physical:** Snowflake Data Dictionary integration. | [PyPI](https://pypi.org/project/odgs-snowflake-bridge/) |
 
 > **Want to build a bridge?** ODGS is designed to be the enforcement layer for *any* data governance platform. [Open an issue](https://github.com/MetricProvenance/odgs-protocol/issues) or submit a PR.
 
@@ -160,12 +142,9 @@ ODGS bridges connect your existing data governance platform to the Universal Int
 
 ## 5. Air-Gapped Execution & Stateless Cryptography (JWKS)
 
-The ODGS Universal Engine operates with **Zero Telemetry** and does not "phone home". It is designed for strict air-gapped enterprise environments.
+The ODGS Engine operates with **Zero Telemetry** and does not "phone home". It is designed for strict air-gapped enterprise environments.
 
-To ensure metric authenticity without requiring active network connections to a central database, ODGS implements stateless cryptography using standard **Ed25519 JWKS (JSON Web Key Set)** public keys.
-
-* **Stateless Verification:** When the Engine loads a Configuration Pack (e.g., EU AI Act, FIBO), it cryptographically verifies the signature against the cached JWKS public key. If the signature is valid, the engine guarantees the rules are authentic and untampered.
-* **100% Neutral & Decentralized:** Organizations can seamlessly host their own internal JWKS registries for proprietary, internal rules (`urn:odgs:custom:*`). The Metric Provenance Root Authority is relied upon *solely* for statutory Sovereign URNs (`urn:odgs:sov:*`), ensuring the protocol remains fundamentally decentralized.
+To ensure metric authenticity, ODGS implements stateless cryptography using standard **Ed25519 JWKS (JSON Web Key Set)** public keys. When the Engine loads a Sovereign Pack, it cryptographically verifies the signature against the cached JWKS public key.
 
 ---
 
@@ -203,8 +182,8 @@ To request architectural clearance for your organization's compliance deployment
 > 🎯 **[Live Demo →](https://demo.metricprovenance.com)**
 
 | Guide | Description |
-|---|---|
-| [Migration Guide (v3.3 -> v4.0)](/MIGRATION_GUIDE.md) | Critical instructions for upgrading to URN Namespace Routing. |
+| --- | --- |
+| [Migration Guide (v4.0 -> v5.0)](MIGRATION_GUIDE.md) | Critical instructions for the Polymorphic Engine upgrade. |
 | [Adapter Guide](2_INFORMATIVE_REFERENCE/architecture/adapter_guide.md) | For Data Engineers connecting ODGS to custom infrastructures. |
 | [Harvester Guide](2_INFORMATIVE_REFERENCE/architecture/harvester_guide.md) | For implementing dynamic parsing blueprints. |
 | [Audit Ledger Guide](2_INFORMATIVE_REFERENCE/architecture/audit_ledger_guide.md) | For Big 4 Auditors verifying the Tri-Partite Hash. |
@@ -212,16 +191,20 @@ To request architectural clearance for your organization's compliance deployment
 ---
 
 ### Support & Community
+
 * **Bug Reports & Feature Requests:** Please use the [GitHub Issues](https://github.com/MetricProvenance/odgs-protocol/issues) tracker.
 * **Enterprise Compliance Deployments:** For architectural clearance, SLA support, or custom Law Packs, please contact us via the [Enterprise Portal](https://platform.metricprovenance.com).
 
 ---
 
 ### License
+
 Released under the **Apache 2.0 License**.
 
 > * **No Vendor Lock-in.**
 > * **No Cloud Dependency.**
 > * **100% Data Sovereignty.**
+
 ---
-ODGS | Developed by [Metric Provenance](https://platform.metricprovenance.com) | The Hague, NL 🇳🇱
+
+ODGS | Developed by [Metric Provenance](https://metricprovenance.com) | The Hague, NL 🇳🇱

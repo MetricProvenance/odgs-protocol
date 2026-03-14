@@ -420,25 +420,34 @@ class OdgsInterceptor:
         event_id = str(uuid.uuid4())
         outcome = "BLOCKED" if violations else "APPROVED"
         
-        # Retrieve Attestation from active rules (the Law Pack)
-        attestation_data = None
+        # Retrieve Attestation and Metadata from active rules (v4.1.0)
+        attestation_list = []
+        applied_metadata = {}
+        
         for rule in active_rules:
+            # Aggregate all unique signatures
             if r_attest := rule.get("__attestation__"):
-                attestation_data = r_attest
-                break # All rules in a pack share the same pack signature
+                if r_attest not in attestation_list:
+                    attestation_list.append(r_attest)
+            
+            # Extract Semantic Lineage Metadata
+            if r_meta := rule.get("metadata"):
+                rid = rule.get("rule_id", "UNKNOWN")
+                applied_metadata[rid] = r_meta
             
         audit_entry = {
             "event_id": event_id,
             "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
             "process_urn": process_urn,
             "execution_result": outcome,
-            "certification_status": "CERTIFIED" if attestation_data else "LOCAL_ONLY",
+            "certification_status": "CERTIFIED" if attestation_list else "LOCAL_ONLY",
             "tri_partite_binding": {
                 "payload_hash": input_hash,
                 "definition_hash": definition_hash,
                 "config_hash": config_hash
             },
-            "cryptographic_attestation": attestation_data,
+            "cryptographic_attestations": attestation_list,
+            "applied_metadata": applied_metadata,
             "violations": violations,
             "warnings": warnings_list,
             "evidence": {

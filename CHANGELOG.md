@@ -5,6 +5,18 @@ All notable changes to the Open Data Governance Standard (ODGS) will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v5.0.0] - 2026-03-14
+
+### 🚀 Added
+- **Polymorphic Ingestion Engine:** The Universal Interceptor now natively handles both legacy v4 table/column metrics and v5 W3C JSON-LD strict semantic ontologies simultaneously.
+- **Administrative Recusal (`HARD_STOP`):** Regulatory failures evaluating W3C JSON-LD `EnforcementRule` schemas now raise a distinct `AdministrativeRecusal` exception to ensure strict "Black Box" liability indemnification.
+- **Audit Lineage Enhancements:** Appended `provenance_metadata` (containing semantic hashes) and `attempted_payload_drift` to the cryptographic JSON audit log when v5 legislative rules trigger.
+
+### 🛡️ Security & Enterprise
+- **Telemetry Routing:** Injected "CLI Billboards" into initialization sequences to alert users proceeding without a Sovereign CA cryptographic signature.
+- **Backwards Compatibility:** Databricks, Snowflake, and Collibra bridges remain fully supported out of the box emitting backwards-compatible v4 rules.
+- **Sovereign FLINT Bridge:** Officially decoupled `odgs-flint-bridge` to translate Dutch Administrative Law (Regels als Code) into strict v5 syntax.
+
 ## [v4.0.1] - 2026-03-07
 
 ### 🚀 Added
