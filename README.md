@@ -45,7 +45,7 @@ The **Open Data Governance Standard (ODGS)** resolves the "Definition-Execution 
 ![Semantic Certificate — cryptographic fingerprint bound to the Government of the Netherlands, with VALID status badge and SHA-256 content hash](2_INFORMATIVE_REFERENCE/architecture/images/ui_semantic_certificate.png)
 
 <details>
-<summary><b>📊 More Screenshots</b> — Compliance Matrix · Sovereign Brake · Harvester Sources</summary>
+<summary><b>📊 More Screenshots</b> — Compliance Matrix · Sovereign Brake</summary>
 
 **Sovereign Compliance Matrix** — Real-time governance status across 72 business metrics, aligned with EU AI Act Art. 10 & 12.
 
@@ -54,10 +54,6 @@ The **Open Data Governance Standard (ODGS)** resolves the "Definition-Execution 
 **Sovereign Brake — Live Interceptor** — When data does not match its statutory definition, the system *refuses to proceed*. This is the "Administrative Recusal" principle.
 
 ![Sovereign Brake showing HARD_STOP enforcement rules with regex validation](2_INFORMATIVE_REFERENCE/architecture/images/ui_sovereign_brake.png)
-
-**Sovereign Harvester — Authoritative Sources** — Definitions harvested from trusted regulatory bodies and international standards organisations.
-
-![Harvester Sources showing Dutch Administrative Law, FIBO, ISO 42001, and GDPR with live API status](2_INFORMATIVE_REFERENCE/architecture/images/ui_harvester_sources.png)
 
 </details>
 
