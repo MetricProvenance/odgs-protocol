@@ -127,7 +127,7 @@ ODGS bridges connect your existing data governance platform to the Execution Eng
 
 | Bridge | Function | Status |
 | --- | --- | --- |
-| [`odgs-flint-bridge`](https://github.com/MetricProvenance/odgs-flint-bridge) | **Legislative:** Ingests TNO FLINT JSON-LD into ODGS schema. | [![PyPI](https://img.shields.io/pypi/v/odgs-flint-bridge)](https://pypi.org/project/odgs-flint-bridge/) |
+| [`odgs-flint-bridge`](https://github.com/MetricProvenance/odgs-flint-bridge) | **Legislative:** Ingests TNO FLINT JSON-LD into ODGS schema. | [![PyPI](https://img.shields.io/pypi/v/odgs-flint-bridge-oss)](https://pypi.org/project/odgs-flint-bridge-oss/) |
 | [`odgs-collibra-bridge`](https://github.com/MetricProvenance/odgs-collibra-bridge) | **Physical:** Collibra Business Glossary integration. | [![PyPI](https://img.shields.io/pypi/v/odgs-collibra-bridge)](https://pypi.org/project/odgs-collibra-bridge/) |
 | [`odgs-databricks-bridge`](https://github.com/MetricProvenance/odgs-databricks-bridge) | **Physical:** Databricks Unity Catalog integration. | [![PyPI](https://img.shields.io/pypi/v/odgs-databricks-bridge)](https://pypi.org/project/odgs-databricks-bridge/) |
 | [`odgs-snowflake-bridge`](https://github.com/MetricProvenance/odgs-snowflake-bridge) | **Physical:** Snowflake Data Dictionary integration. | [![PyPI](https://img.shields.io/pypi/v/odgs-snowflake-bridge)](https://pypi.org/project/odgs-snowflake-bridge/) |
