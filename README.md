@@ -127,10 +127,10 @@ ODGS bridges connect your existing data governance platform to the Execution Eng
 
 | Bridge | Function | Status |
 | --- | --- | --- |
-| [`odgs-flint-bridge-oss`](https://github.com/MetricProvenance/odgs-flint-bridge-oss) | **Legislative:** Ingests TNO FLINT JSON-LD into ODGS schema. | [PyPI](https://pypi.org/project/odgs-flint-bridge-oss/) |
-| [`odgs-collibra-bridge`](https://github.com/MetricProvenance/odgs-collibra-bridge) | **Physical:** Collibra Business Glossary integration. | [PyPI](https://pypi.org/project/odgs-collibra-bridge/) |
-| [`odgs-databricks-bridge`](https://github.com/MetricProvenance/odgs-databricks-bridge) | **Physical:** Databricks Unity Catalog integration. | [PyPI](https://pypi.org/project/odgs-databricks-bridge/) |
-| [`odgs-snowflake-bridge`](https://github.com/MetricProvenance/odgs-snowflake-bridge) | **Physical:** Snowflake Data Dictionary integration. | [PyPI](https://pypi.org/project/odgs-snowflake-bridge/) |
+| [`odgs-flint-bridge-oss`](https://github.com/MetricProvenance/odgs-flint-bridge-oss) | **Legislative:** Ingests TNO FLINT JSON-LD into ODGS schema. | [![PyPI](https://img.shields.io/pypi/v/odgs-flint-bridge-oss)](https://pypi.org/project/odgs-flint-bridge-oss/) |
+| [`odgs-collibra-bridge`](https://github.com/MetricProvenance/odgs-collibra-bridge) | **Physical:** Collibra Business Glossary integration. | [![PyPI](https://img.shields.io/pypi/v/odgs-collibra-bridge)](https://pypi.org/project/odgs-collibra-bridge/) |
+| [`odgs-databricks-bridge`](https://github.com/MetricProvenance/odgs-databricks-bridge) | **Physical:** Databricks Unity Catalog integration. | [![PyPI](https://img.shields.io/pypi/v/odgs-databricks-bridge)](https://pypi.org/project/odgs-databricks-bridge/) |
+| [`odgs-snowflake-bridge`](https://github.com/MetricProvenance/odgs-snowflake-bridge) | **Physical:** Snowflake Data Dictionary integration. | [![PyPI](https://img.shields.io/pypi/v/odgs-snowflake-bridge)](https://pypi.org/project/odgs-snowflake-bridge/) |
 
 > **Want to build a bridge?** ODGS is designed to be the enforcement layer for *any* data governance platform. [Open an issue](https://github.com/MetricProvenance/odgs-protocol/issues) or submit a PR.
 
@@ -181,7 +181,6 @@ To request architectural clearance for your organization's compliance deployment
 | --- | --- |
 | [Migration Guide (v4.0 -> v5.0)](MIGRATION_GUIDE.md) | Critical instructions for the Polymorphic Engine upgrade. |
 | [Adapter Guide](2_INFORMATIVE_REFERENCE/architecture/adapter_guide.md) | For Data Engineers connecting ODGS to custom infrastructures. |
-| [Harvester Guide](2_INFORMATIVE_REFERENCE/architecture/harvester_guide.md) | For implementing dynamic parsing blueprints. |
 | [Audit Ledger Guide](2_INFORMATIVE_REFERENCE/architecture/audit_ledger_guide.md) | For Big 4 Auditors verifying the Tri-Partite Hash. |
 
 ---
