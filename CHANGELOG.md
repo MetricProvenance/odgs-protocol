@@ -5,6 +5,31 @@ All notable changes to the Open Data Governance Standard (ODGS) will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v5.0.1] - 2026-03-16
+
+### 🔧 Fixed
+
+- **Audit Log Compatibility:** Re-added `s_cert_status` field to the `OdgsInterceptor` audit entry.
+  `s_cert_status` was removed during the v4→v5 migration when `certification_status` was introduced
+  as the canonical field. However, downstream commercial consumers (audit log parsers, S-Cert registry
+  integration tests, sovereign audit dashboards) still read `s_cert_status`. Both fields now coexist:
+  - `certification_status`: `"CERTIFIED"` / `"LOCAL_ONLY"` — the v5 canonical form
+  - `s_cert_status`: `"ISSUED_AND_VERIFIED"` / `"NOT_ISSUED"` — backward-compat alias
+
+- **Audit Log Compatibility:** Re-added `cryptographic_attestation` (singular dict) alongside the
+  existing `cryptographic_attestations` (list). The singular form exposes the first attestation for
+  consumers that pre-date the v5 multi-attestation model.
+
+- **Python 3.14 Forward Compatibility:** Replaced deprecated `datetime.datetime.utcnow()` with
+  `datetime.datetime.now(datetime.timezone.utc)` throughout the interceptor.
+  `utcnow()` is scheduled for removal in Python 3.14. 
+
+  > ⚠️ **Timestamp format change:** Audit log `timestamp` field changes from `"2026-03-16T08:00:00Z"`
+  > (naive UTC with trailing `Z`) to `"2026-03-16T08:00:00+00:00"` (timezone-aware ISO 8601).
+  > Both formats represent the same moment. Update any audit log consumers that match the literal `Z` suffix.
+
+---
+
 ## [v5.0.0] - 2026-03-14
 
 ### 🚀 Added

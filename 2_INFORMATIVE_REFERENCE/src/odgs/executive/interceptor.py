@@ -63,7 +63,11 @@ def parse_date(value):
         return datetime.datetime.min
 
 def today():
-    return datetime.datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+    # Use timezone-aware now() internally (avoids Python 3.14 removal of utcnow()),
+    # then strip tzinfo so rule expressions can compare against naive parse_date() results.
+    return datetime.datetime.now(datetime.timezone.utc).replace(
+        hour=0, minute=0, second=0, microsecond=0, tzinfo=None
+    )
 
 SAFE_FUNCTIONS = {
     "regex_match": regex_match,
@@ -435,18 +439,24 @@ class OdgsInterceptor:
                 rid = rule.get("rule_id", "UNKNOWN")
                 applied_metadata[rid] = r_meta
             
+        # Canonical s_cert_status for commercial audit log compatibility
+        s_cert_status = "ISSUED_AND_VERIFIED" if attestation_list else "NOT_ISSUED"
+
         audit_entry = {
             "event_id": event_id,
-            "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+            "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "process_urn": process_urn,
             "execution_result": outcome,
             "certification_status": "CERTIFIED" if attestation_list else "LOCAL_ONLY",
+            "s_cert_status": s_cert_status,
             "tri_partite_binding": {
                 "payload_hash": input_hash,
                 "definition_hash": definition_hash,
                 "config_hash": config_hash
             },
             "cryptographic_attestations": attestation_list,
+            # Backward compat: expose first attestation as singular field
+            "cryptographic_attestation": attestation_list[0] if attestation_list else None,
             "applied_metadata": applied_metadata,
             "violations": violations,
             "warnings": warnings_list,
