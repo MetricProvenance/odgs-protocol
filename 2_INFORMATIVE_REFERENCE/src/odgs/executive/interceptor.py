@@ -346,11 +346,37 @@ class OdgsInterceptor:
         # 4. EVALUATE RULES
         violations = []
         warnings_list = []
-        
+        log_only_events = []
+        evaluated_rule_ids = []
+        now_date = datetime.datetime.now(datetime.timezone.utc).date()
+
         for rule in active_rules:
             logic = rule.get("logic_expression")
             rule_id = rule.get("rule_id")
             severity = rule.get("severity", "HARD_STOP")
+
+            # --- TEMPORAL BOUNDS CHECK (Schema Requirements §2.5) ---
+            # Skip rule silently if today is outside its effective window.
+            effective_from_str = rule.get("effective_from")
+            effective_to_str = rule.get("effective_to")
+            if effective_from_str:
+                try:
+                    effective_from = datetime.date.fromisoformat(str(effective_from_str)[:10])
+                    if now_date < effective_from:
+                        audit_logger.info(f"Rule {rule_id} skipped: not yet effective (effective_from={effective_from_str})")
+                        continue
+                except (ValueError, TypeError):
+                    pass
+            if effective_to_str:
+                try:
+                    effective_to = datetime.date.fromisoformat(str(effective_to_str)[:10])
+                    if now_date > effective_to:
+                        audit_logger.info(f"Rule {rule_id} skipped: past effective_to date (effective_to={effective_to_str})")
+                        continue
+                except (ValueError, TypeError):
+                    pass
+
+            evaluated_rule_ids.append(str(rule_id) if rule_id else "UNKNOWN")
             
             if logic:
                 try:
@@ -401,10 +427,13 @@ class OdgsInterceptor:
                     
                     if not is_valid:
                         msg = f"Rule {rule_id} Failed: {rule.get('name')}"
-                        if severity == "HARD_STOP":
+                        if severity in ("HARD_STOP", None):
                             violations.append(msg)
                         elif severity == "WARNING":
                             warnings_list.append(msg)
+                        elif severity == "LOG_ONLY":
+                            # LOG_ONLY: records the non-conformance but does NOT block processing
+                            log_only_events.append(msg)
                         # INFO severity: logged but does not affect outcome
 
                 except NameNotDefined as e:
@@ -423,30 +452,51 @@ class OdgsInterceptor:
 
         event_id = str(uuid.uuid4())
         outcome = "BLOCKED" if violations else "APPROVED"
-        
-        # Retrieve Attestation and Metadata from active rules (v4.1.0)
+
+        # Retrieve Attestation and Metadata from active rules
         attestation_list = []
         applied_metadata = {}
-        
+        # Collect semantic_hash values from evaluated rules
+        rule_semantic_hashes = []
+
         for rule in active_rules:
             # Aggregate all unique signatures
             if r_attest := rule.get("__attestation__"):
                 if r_attest not in attestation_list:
                     attestation_list.append(r_attest)
-            
+
             # Extract Semantic Lineage Metadata
             if r_meta := rule.get("metadata"):
                 rid = rule.get("rule_id", "UNKNOWN")
                 applied_metadata[rid] = r_meta
-            
+
+            # Collect semantic_hash — either declared or UNATTESTED placeholder
+            sh = rule.get("semantic_hash", "UNATTESTED")
+            if sh and sh not in rule_semantic_hashes:
+                rule_semantic_hashes.append(sh)
+
         # Canonical s_cert_status for commercial audit log compatibility
         s_cert_status = "ISSUED_AND_VERIFIED" if attestation_list else "NOT_ISSUED"
 
+        # system_id — hostname or ODGS_SYSTEM_ID env var override
+        import socket
+        system_id = os.environ.get(
+            "ODGS_SYSTEM_ID",
+            socket.gethostname() or "UNKNOWN_HOST"
+        )
+
         audit_entry = {
+            # --- ODGS S-Cert mandatory fields (v5.1.0) ---
             "event_id": event_id,
             "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "process_urn": process_urn,
-            "execution_result": outcome,
+            "rule_id": ", ".join(evaluated_rule_ids) if evaluated_rule_ids else "NONE",
+            "semantic_hash": rule_semantic_hashes[0] if len(rule_semantic_hashes) == 1 else (rule_semantic_hashes if rule_semantic_hashes else "UNATTESTED"),
+            "verdict": outcome,  # APPROVED or BLOCKED
+            "system_id": system_id,
+            "payload_hash": input_hash,
+            # --- ODGS extended fields (beyond Annex A minimum) ---
+            "execution_result": outcome,  # backward compat alias
             "certification_status": "CERTIFIED" if attestation_list else "LOCAL_ONLY",
             "s_cert_status": s_cert_status,
             "tri_partite_binding": {
@@ -460,9 +510,11 @@ class OdgsInterceptor:
             "applied_metadata": applied_metadata,
             "violations": violations,
             "warnings": warnings_list,
+            "log_only_events": log_only_events,
             "evidence": {
                 "context_id": context_def.get("context_id", "UNKNOWN"),
-                "active_rules_count": len(active_rules)
+                "active_rules_count": len(active_rules),
+                "evaluated_rule_ids": evaluated_rule_ids
             }
         }
         

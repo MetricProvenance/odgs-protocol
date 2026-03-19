@@ -1,6 +1,6 @@
 # Open Data Governance Standard (ODGS)
 
-[![Protocol](https://img.shields.io/badge/Protocol-v5.0.1_(Cryptographic_Engine)-0055AA)](https://platform.metricprovenance.com)
+[![Protocol](https://img.shields.io/badge/Protocol-v5.1.0_(Cryptographic_Engine)-0055AA)](https://platform.metricprovenance.com)
 [![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act_%7C_NEN_381_525-003399)](GOVERNANCE.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18564270.svg)](https://doi.org/10.5281/zenodo.18564270)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs)
@@ -10,16 +10,16 @@
 > **The Universal Validation Engine for High-Risk Data.**
 ---
 > [!IMPORTANT]
-> **EU AI Act & CEN-CENELEC JTC 25 Candidate Standard (v5.0.0 Update)**
+> **EU AI Act & CEN-CENELEC JTC 25 Candidate Standard (v5.1.0 Update)**
 > ODGS has been upgraded to a strict Polymorphic Execution Engine. It seamlessly evaluates your standard operational telemetry while natively ingesting authoritative W3C/JSON-LD legal ontologies (e.g., TNO FLINT) to enforce **Administrative Recusal** ("Hard Stop") in High-Risk AI pipelines.
 ---
 
-### 🚀 What's New in v5.0.0: The Execution Plane
-In alignment with European Data Space architectures (NEN 381 525), ODGS v5 structurally repositions as the missing **Execution Plane** for Civic Tech and "Rules as Code" initiatives. 
+### 🚀 What's New in v5.1.0: Complete Semantic Certificates
+v5.1.0 upgrades the ODGS audit engine to emit a complete, tamper-evident **Semantic Certificate (S-Cert)** on every enforcement event.
 
-* **Deprecation of NLP Harvesters:** We are no longer trying to solve the problem of "Reading the Law." We are exclusively solving the problem of "Cryptographically Enforcing the Law."
-* **Authoritative JSON-LD Ingestion:** ODGS now natively delegates legal parsing to authoritative upstream sources (e.g., TNO FLINT). This eliminates vendor-specific legal interpretations and allows Sovereign States to act as their own Certificate Authorities.
-* **Cryptographic Seals (SHA-256):** Ingestion now generates a deterministic hash at the physical boundary. If the upstream authoritative source changes its JSON-LD definition, the downstream cryptographic execution seal is instantly invalidated.
+- **Complete S-Cert:** `rule_id`, `semantic_hash`, `verdict`, `system_id`, `payload_hash` are now top-level fields in every audit entry. No raw payload is ever recorded — only cryptographic hashes.
+- **`LOG_ONLY` severity:** A new non-blocking verdict mode — records violations without halting the pipeline. Ideal for monitoring-mode rollouts before switching to `HARD_STOP`.
+- **Rule lifecycle:** `effective_from` / `effective_to` on rules — pre-deploy rules ahead of a regulatory go-live date, or sunset expired rules automatically.
 
 ---
 ### 🏢 Enterprise & Public Sector: EU AI Act Compliance

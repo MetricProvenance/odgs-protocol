@@ -161,7 +161,7 @@
 
     <owl:DatatypeProperty rdf:about="&odgs;severity">
         <rdfs:label xml:lang="en">severity</rdfs:label>
-        <rdfs:comment xml:lang="en">HARD_STOP, WARNING, or INFO.</rdfs:comment>
+        <rdfs:comment xml:lang="en">HARD_STOP, WARNING, LOG_ONLY, INFO, ACT_CONSTRAINT, or METADATA_ONLY.</rdfs:comment>
         <rdfs:domain rdf:resource="&odgs;Rule"/>
         <rdfs:range rdf:resource="&xsd;string"/>
     </owl:DatatypeProperty>

@@ -51,7 +51,7 @@ class GitAuditLogger:
         """
         
         # 1. Determine File Path (Daily Rotation)
-        today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+        today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
         filename = f"audit_{today}.jsonl"
         filepath = os.path.join(self.log_dir, filename)
         

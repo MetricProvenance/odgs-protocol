@@ -5,7 +5,47 @@ All notable changes to the Open Data Governance Standard (ODGS) will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v5.1.0] - 2026-03-19
+
+### ✨ Added
+
+- **Complete S-Cert audit fields:** The audit log now emits all required fields at the top level of
+  every S-Cert entry:
+  - `rule_id` — identifier of the applied rule(s)
+  - `semantic_hash` — SHA-256 of the rule source text (`"UNATTESTED"` if not declared in rule)
+  - `verdict` — `"APPROVED"` / `"BLOCKED"`
+  - `system_id` — evaluating system instance (set via `ODGS_SYSTEM_ID` env var; falls back to hostname)
+  - `payload_hash` — SHA-256 of the canonical input JSON body (zero-knowledge; raw payload never logged)
+
+- **`LOG_ONLY` verdict type:** Rules can now be declared with `"severity": "LOG_ONLY"`. On failure,
+  the event is recorded in `log_only_events` in the audit entry but processing is **not blocked**.
+  Use for monitoring-mode rollouts before switching to `HARD_STOP`.
+
+- **Rule lifecycle — temporal bounds:** Rules may declare `effective_from` and/or `effective_to`
+  (ISO 8601 date strings). The enforcement engine silently skips rules outside their validity window.
+  Pre-deploy rules ahead of regulatory go-live dates, or sunset expired rules automatically.
+
+- **9 new unit tests** covering all v5.1.0 features in `tests/test_v5_1_0_features.py`.
+
+### 🔧 Fixed
+
+- **Python 3.14 forward compatibility:** Fixed last remaining `datetime.datetime.utcnow()` call
+  in `git_log_adapter.py` (line 54). All timestamp generation now uses timezone-aware
+  `datetime.datetime.now(datetime.timezone.utc)`.
+
+### ⚠️ Migration Notes
+
+All changes are **additive** — existing configurations continue to work without modification.
+
+- New S-Cert fields are appended to the existing structure; no existing fields removed.
+- `"severity": "LOG_ONLY"` is a new option; existing `HARD_STOP` and `WARNING` severities unchanged.
+- Rules without `effective_from`/`effective_to` are evaluated as before (always active).
+- `ODGS_SYSTEM_ID` env var is optional; falls back to `socket.gethostname()` if not set.
+
+---
+
 ## [v5.0.1] - 2026-03-16
+
 
 ### 🔧 Fixed
 
