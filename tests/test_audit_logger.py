@@ -60,7 +60,14 @@ def test_tri_partite_hash_and_agnostic_output(audit_sandbox, monkeypatch):
     assert "config_hash" in tpb
     assert tpb["payload_hash"] != "HASH_ERROR_NON_SERIALIZABLE"
     
-    # Test 2: Agnostic Output (no S-Cert terminology, uses cryptographic_attestations)
-    assert "s_cert_status" not in last_log
+    # Test 2: Agnostic Output — canonical field + v5.0.1 backward-compat alias
+    # v5.0.1 re-added s_cert_status as an alias alongside certification_status
+    # for downstream consumers that pre-date the v5 rename.
+    assert "certification_status" in last_log  # canonical v5 field
+    assert last_log["certification_status"] == "CERTIFIED"
+    assert "s_cert_status" in last_log  # backward-compat alias (re-added in 5.0.1)
+    assert last_log["s_cert_status"] == "ISSUED_AND_VERIFIED"
     assert "cryptographic_attestations" in last_log
     assert last_log["cryptographic_attestations"] == [{"issuer": "did:web:test"}]
+    # Singular alias also present for pre-v5 multi-attestation consumers
+    assert "cryptographic_attestation" in last_log
