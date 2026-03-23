@@ -497,7 +497,7 @@ class OdgsInterceptor:
             "payload_hash": input_hash,
             # --- ODGS extended fields (beyond Annex A minimum) ---
             "execution_result": outcome,  # backward compat alias
-            "certification_status": "CERTIFIED" if attestation_list else "LOCAL_ONLY",
+            "certification_status": "CERTIFIED" if attestation_list else "UNCERTIFIED",
             "s_cert_status": s_cert_status,
             "tri_partite_binding": {
                 "payload_hash": input_hash,

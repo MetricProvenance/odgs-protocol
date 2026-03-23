@@ -23,36 +23,41 @@ def generate_project_hash(project_root: str) -> Dict[str, str]:
     Returns a dict with individual file hashes and the global root hash.
     """
     
-    # The 7 Immutable Pillars of ODGS, mapped to their Plane
-    schema_map = {
-        "1_NORMATIVE_SPECIFICATION/schemas/legislative/standard_metrics.json": "standard_metrics.json",
-        "1_NORMATIVE_SPECIFICATION/schemas/legislative/standard_dq_dimensions.json": "standard_dq_dimensions.json",
-        "1_NORMATIVE_SPECIFICATION/schemas/legislative/ontology_graph.json": "ontology_graph.json",
-        "1_NORMATIVE_SPECIFICATION/schemas/judiciary/standard_data_rules.json": "standard_data_rules.json",
-        "1_NORMATIVE_SPECIFICATION/schemas/judiciary/root_cause_factors.json": "root_cause_factors.json",
-        "1_NORMATIVE_SPECIFICATION/schemas/executive/business_process_maps.json": "business_process_maps.json",
-        "1_NORMATIVE_SPECIFICATION/schemas/executive/physical_data_map.json": "physical_data_map.json"
-    }
+    # The 7 Immutable Pillars of ODGS, mapped by their Plane
+    schema_defs = [
+        ("legislative", "standard_metrics.json"),
+        ("legislative", "standard_dq_dimensions.json"),
+        ("legislative", "ontology_graph.json"),
+        ("judiciary", "standard_data_rules.json"),
+        ("judiciary", "root_cause_factors.json"),
+        ("executive", "business_process_maps.json"),
+        ("executive", "physical_data_map.json")
+    ]
     
     hashes = {}
     combo_string = ""
     
     # Process each file
-    for rel_path, filename in sorted(schema_map.items()):
-        full_path = os.path.join(project_root, rel_path)
+    for plane, filename in schema_defs:
+        normative_path = os.path.join(project_root, "1_NORMATIVE_SPECIFICATION", "schemas", plane, filename)
+        shallow_path = os.path.join(project_root, plane, filename)
         
-        if os.path.exists(full_path):
-            with open(full_path, 'r') as f:
+        path_to_check = shallow_path if os.path.exists(shallow_path) else normative_path
+        
+        if os.path.exists(path_to_check):
+            with open(path_to_check, 'r') as f:
                 try:
                     data = json.load(f)
                     file_hash = get_deterministic_json_hash(data)
                 except json.JSONDecodeError:
                     file_hash = "INVALID_JSON"
         else:
-            file_hash = "MISSING_FILE"
+            file_hash = "OPTIONAL_MISSING"
             
         hashes[filename] = file_hash
-        combo_string += file_hash
+        # Only mix valid / existent items into the master combo string for determinism
+        if file_hash not in ["OPTIONAL_MISSING", "INVALID_JSON"]:
+            combo_string += file_hash
         
     # Generate the Master Governance Hash
     # This is the single 256-bit proof of the entire governance state

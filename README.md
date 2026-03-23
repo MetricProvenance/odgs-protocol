@@ -1,6 +1,6 @@
 # Open Data Governance Standard (ODGS)
 
-[![Protocol](https://img.shields.io/badge/Protocol-v5.1.0_(Cryptographic_Engine)-0055AA)](https://platform.metricprovenance.com)
+[![Protocol](https://img.shields.io/badge/Protocol-v5.2.0_(Cryptographic_Engine)-0055AA)](https://platform.metricprovenance.com)
 [![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act_%7C_NEN_381_525-003399)](GOVERNANCE.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18564270.svg)](https://doi.org/10.5281/zenodo.18564270)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs)
@@ -10,16 +10,16 @@
 > **The Universal Validation Engine for High-Risk Data.**
 ---
 > [!IMPORTANT]
-> **EU AI Act & CEN-CENELEC JTC 25 Candidate Standard (v5.1.0 Update)**
+> **EU AI Act & CEN-CENELEC JTC 25 Candidate Standard (v5.2.0 Update)**
 > ODGS has been upgraded to a strict Polymorphic Execution Engine. It seamlessly evaluates your standard operational telemetry while natively ingesting authoritative W3C/JSON-LD legal ontologies (e.g., TNO FLINT) to enforce **Administrative Recusal** ("Hard Stop") in High-Risk AI pipelines.
 ---
 
-### 🚀 What's New in v5.1.0: Complete Semantic Certificates
-v5.1.0 upgrades the ODGS audit engine to emit a complete, tamper-evident **Semantic Certificate (S-Cert)** on every enforcement event.
+### 🚀 What's New in v5.2.0: Minimalist Tier & Deployment Telemetry
+v5.2.0 upgrades the ODGS initialization and runtime engine to support rapidly-scaling teams.
 
-- **Complete S-Cert:** `rule_id`, `semantic_hash`, `verdict`, `system_id`, `payload_hash` are now top-level fields in every audit entry. No raw payload is ever recorded — only cryptographic hashes.
-- **`LOG_ONLY` severity:** A new non-blocking verdict mode — records violations without halting the pipeline. Ideal for monitoring-mode rollouts before switching to `HARD_STOP`.
-- **Rule lifecycle:** `effective_from` / `effective_to` on rules — pre-deploy rules ahead of a regulatory go-live date, or sunset expired rules automatically.
+- **Minimalist Execution:** Initialize core Metric & Rule files via `odgs init --tier minimalist` without forcing complex ontology graphs or physical maps. Validations gracefully adapt to missing unrequired schemas.
+- **Deployment Status Telemetry:** The CLI validation output and audit logs now surface the deployment's certification status, giving teams clear visibility into whether their active rule packs are cryptographically signed or running as standard local deployments.
+- **Dynamic Version Mapping:** The CLI `version` and `init` commands dynamically extract the installed package version to ensure uniform synchronization across the standard.
 
 ---
 ### 🏢 Enterprise & Public Sector: EU AI Act Compliance
@@ -66,6 +66,15 @@ Stop relying on passive analytics dashboards. Enforce statutory rules directly i
 ### Install
 ```bash
 pip install odgs
+```
+
+### Create a Governance Project
+```bash
+# Standard 5-Plane Topology
+odgs init MyProject
+
+# Minimalist Topology (Fast Start for small teams)
+odgs init MyProject --tier minimalist
 ```
 
 ### Example: Halting a Pipeline in Python/dbt

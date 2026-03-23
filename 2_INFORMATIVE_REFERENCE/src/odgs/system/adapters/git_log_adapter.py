@@ -27,7 +27,7 @@ class GitAuditLogger:
         try:
             os.makedirs(self.log_dir, exist_ok=True)
         except OSError as e:
-            print(f"Server Warning: Could not create audit log directory {self.log_dir}: {e}")
+            self.logger.warning(f"Server Warning: Could not create audit log directory {self.log_dir}: {e}")
 
         # Initialize or Connect to Git Repo
         if HAS_GIT_PYTHON:
@@ -35,13 +35,13 @@ class GitAuditLogger:
                 try:
                     self.repo = git.Repo(self.repo_path)
                 except git.exc.InvalidGitRepositoryError:
-                    print(f"Notice: {repo_path} is not a valid git repo. logs will be written but not committed until `git init` is run.")
+                    self.logger.info(f"Notice: {repo_path} is not a valid git repo. logs will be written but not committed until `git init` is run.")
                     self.repo = None
             except Exception as e:
-                 print(f"Git Initialization Warning: {e}")
+                 self.logger.warning(f"Git Initialization Warning: {e}")
                  self.repo = None
         else:
-            print("Warning: `GitPython` not installed. Git features disabled. Logs will only be written to disk.")
+            self.logger.warning("Warning: `GitPython` not installed. Git features disabled. Logs will only be written to disk.")
             self.repo = None
 
     def write_entry(self, entry: Dict[str, Any]) -> str:
@@ -60,7 +60,7 @@ class GitAuditLogger:
             with open(filepath, "a") as f:
                 f.write(json.dumps(entry) + "\n")
         except Exception as e:
-            print(f"CRITICAL: Failed to write to audit log file: {e}")
+            self.logger.error(f"CRITICAL: Failed to write to audit log file: {e}")
             return None
 
         # 3. Git Commit
@@ -72,12 +72,13 @@ class GitAuditLogger:
                 
                 # Commit with metadata
                 outcome = entry.get("execution_result", "unknown")
+                event_id = entry.get("event_id", "unknown")
                 msg = f"Audit: {outcome} [Event: {event_id}]"
                 
                 commit = self.repo.index.commit(msg)
                 commit_hash = commit.hexsha
                 
             except Exception as e:
-                print(f"Git Commit Failed: {e}")
+                self.logger.warning(f"Git Commit Failed: {e}")
                 
         return commit_hash

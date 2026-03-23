@@ -5,6 +5,23 @@ All notable changes to the Open Data Governance Standard (ODGS) will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v5.2.0] - 2026-03-23
+
+### ✨ Added
+
+- **Tiered Governance Architecture (Minimalist Execution):** The `odgs init` CLI command now accepts a `--tier` flag. Using `odgs init <name> --tier minimalist` will scaffold a streamlined 3-file setup (`standard_metrics.json`, `standard_data_rules.json`, `runtime_config.json`) for startups and fast-moving teams.
+- **Graceful File Degradation:** The AI Safety Validator (`validate`) and Deterministic Hashing Engine (`hash`) now treat non-core legislative files as `OPTIONAL`, preventing false-positive failures in minimalist configurations.
+- **Deployment Status Telemetry:** The CLI validation output and audit logs now surface the deployment's certification status, giving teams clear visibility into whether their active rule packs are cryptographically signed or running as standard local deployments.
+- **Dynamic Version Mapping:** The CLI `version` and `init` commands now dynamically extract the installed package version natively via `importlib.metadata` to ensure standard sync.
+
+### 🔧 Fixed
+
+- **Validation Path Mismatch:** Corrected bug where `init` generated `legislative/` but `validate` searched the normative `1_NORMATIVE_SPECIFICATION/...` path. Dual-path resolution is now implemented.
+- **Noisy Telemetry:** Suppressed `GitPython` optional dependency warnings by migrating `print` statements to standardized python `logging` (`logger.warning`), preserving cleaner CLI output.
+- **Conflicting Terminal Reports:** Aligned structural checks text to `Schema Validation Passed!` to avoid confusion with `Registry Verification Failed` cryptographic hash failures.
+
+---
+
 ## [v5.1.0] - 2026-03-19
 
 ### ✨ Added

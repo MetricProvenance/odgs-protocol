@@ -6,13 +6,17 @@ import sys
 PROJECT_ROOT = os.getcwd()
 
 def load_from_plane(plane, filename):
-    path = os.path.join(PROJECT_ROOT, "1_NORMATIVE_SPECIFICATION", "schemas", plane, filename)
+    shallow_path = os.path.join(PROJECT_ROOT, plane, filename)
+    normative_path = os.path.join(PROJECT_ROOT, "1_NORMATIVE_SPECIFICATION", "schemas", plane, filename)
+    
+    path_to_load = shallow_path if os.path.exists(shallow_path) else normative_path
+
     try:
-        with open(path, 'r') as f:
+        with open(path_to_load, 'r') as f:
             return json.load(f)
     except FileNotFoundError:
-        print(f"❌ Error: Could not find {filename} in {plane} plane at {path}")
-        raise
+        # Don't print the error here; let validate_all handle it gracefully for optional files
+        raise FileNotFoundError(f"Could not find {filename} in {plane} plane at {shallow_path} or {normative_path}")
 def validate_logic_determinism(metric):
     """
     AI Safety Check: Ensures calculation logic is deterministic and free from
@@ -70,6 +74,8 @@ def validate_all():
                 print(f"❌ Safety Violation in metric '{m.get('name', 'Unknown')}': {', '.join(issues)}")
                 has_error = True
                 
+    except FileNotFoundError:
+        print("ℹ️  Skipped Standard Metrics (Not found, assuming Minimalist Tier)")
     except Exception as e:
         print(f"❌ Critical Error loading metrics: {str(e)}")
         has_error = True
@@ -86,6 +92,9 @@ def validate_all():
                 print(f"❌ Error in rule '{r.get('name', 'Unknown')}': {', '.join(issues)}")
                 has_error = True
                 
+    except FileNotFoundError:
+        print("❌ Critical Error: 'standard_data_rules.json' is missing but required for all tiers.")
+        has_error = True
     except Exception as e:
         print(f"❌ Critical Error loading data rules: {str(e)}")
         has_error = True
@@ -93,7 +102,7 @@ def validate_all():
     if has_error:
         raise Exception("Validation failed. See logs for details.")
     else:
-        print("🎉 All Governance Checks Passed!")
+        print("🎉 Schema Validation Passed!")
 
 if __name__ == "__main__":
     try:

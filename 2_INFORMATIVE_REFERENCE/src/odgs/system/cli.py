@@ -2,6 +2,7 @@ import typer
 import json
 import os
 import sys
+import importlib.metadata
 from typing import Optional
 from rich.console import Console
 from rich.prompt import Prompt
@@ -40,21 +41,28 @@ app = typer.Typer(
 )
 console = Console()
 
+def get_version():
+    try:
+        return importlib.metadata.version("odgs")
+    except importlib.metadata.PackageNotFoundError:
+        return "5.2.0"
+
 @app.command()
 def version():
     """
     Print the current ODGS version.
     """
-    console.print(Panel("ODGS Sovereign Engine v2.0.0", border_style="cyan"))
+    console.print(Panel(f"ODGS Sovereign Engine v{get_version()}", border_style="cyan"))
 
 @app.command()
 def init(
     name: str = typer.Argument(..., help="Name of the new governance project"),
+    tier: str = typer.Option("standard", "--tier", help="Governance Tier (e.g. 'minimalist' or 'standard')")
 ):
     """
     Initialize a new ODGS Sovereign Project (3-Plane Architecture).
     """
-    console.print(Panel(f"🚀 Initializing ODGS Sovereign Project: [bold cyan]{name}[/bold cyan]"))
+    console.print(Panel(f"🚀 Initializing ODGS Sovereign Project: [bold cyan]{name}[/bold cyan] (Tier: {tier})"))
 
     base_path = os.path.join(os.getcwd(), name)
     
@@ -62,8 +70,13 @@ def init(
         console.print(f"[bold red]Error:[/bold red] Directory '{name}' already exists.")
         raise typer.Exit(code=1)
 
+    is_minimalist = tier.lower() == "minimalist"
+
     # Create Sovereign Planes
-    planes = ["legislative", "judiciary", "executive", "system", "adapters"]
+    planes = ["legislative", "judiciary", "executive"]
+    if not is_minimalist:
+        planes.extend(["system", "adapters"])
+
     for plane in planes:
         os.makedirs(os.path.join(base_path, plane), exist_ok=True)
     
@@ -85,24 +98,29 @@ def init(
     with open(os.path.join(base_path, "legislative", "standard_metrics.json"), "w") as f:
         json.dump([sample_metric], f, indent=2)
     
-    for filename in ["standard_dq_dimensions.json", "ontology_graph.json"]:
-        with open(os.path.join(base_path, "legislative", filename), "w") as f:
-            json.dump([], f, indent=2)
+    if not is_minimalist:
+        for filename in ["standard_dq_dimensions.json", "ontology_graph.json"]:
+            with open(os.path.join(base_path, "legislative", filename), "w") as f:
+                json.dump([], f, indent=2)
 
     # --- Judiciary Plane (Rules) ---
-    for filename in ["standard_data_rules.json", "root_cause_factors.json"]:
-         with open(os.path.join(base_path, "judiciary", filename), "w") as f:
+    with open(os.path.join(base_path, "judiciary", "standard_data_rules.json"), "w") as f:
+        json.dump([], f, indent=2)
+            
+    if not is_minimalist:
+        with open(os.path.join(base_path, "judiciary", "root_cause_factors.json"), "w") as f:
             json.dump([], f, indent=2)
 
     # --- Executive Plane (Enforcement) ---
-    for filename in ["business_process_maps.json", "physical_data_map.json", "runtime_config.json"]:
+    exec_files = ["runtime_config.json"] if is_minimalist else ["business_process_maps.json", "physical_data_map.json", "runtime_config.json"]
+    for filename in exec_files:
          with open(os.path.join(base_path, "executive", filename), "w") as f:
             json.dump([], f, indent=2)
 
     # Create odgs.json config in root
     config = {
         "project_name": name,
-        "version": "2.0.0",
+        "version": get_version(),
         "architecture": "sovereign_v1"
     }
     with open(os.path.join(base_path, "odgs.json"), "w") as f:
@@ -197,7 +215,12 @@ def hash(
     console.print(f"Master Hash: [bold yellow]{master_hash}[/bold yellow]")
     console.print("\nComponent Hashes:")
     for file, h in result["components"].items():
-        status = "[green]OK[/green]" if "MISSING" not in h and "ERROR" not in h else "[red]FAIL[/red]"
+        if h == "OPTIONAL_MISSING":
+            status = "[dim]OPTIONAL[/dim]"
+        elif "INVALID_JSON" in h or "ERROR" in h:
+            status = "[red]FAIL[/red]"
+        else:
+            status = "[green]OK[/green]"
         console.print(f"  {file}: {status} ({h[:8]}...)")
 
     if verify:
@@ -218,6 +241,9 @@ def hash(
             console.print(f"  Actual:   {master_hash}")
             console.print("  [dim]Data Drift Detected. Execution halted.[/dim]")
             raise typer.Exit(code=1)
+    else:
+        console.print("\n[dim]This is an UNCERTIFIED local deployment. For enterprise-grade EU AI Act compliance,\n"
+                      "upgrade to a Certified Sovereign Pack: https://metricprovenance.com/certified[/dim]")
 
 @app.command()
 def validate():
@@ -246,6 +272,8 @@ def validate():
          # raise typer.Exit(code=1)
 
     console.print("✅ All systems go. Data stack is fully compliant.")
+    console.print("\n[dim]This is an UNCERTIFIED local deployment. For enterprise-grade EU AI Act compliance,\n"
+                  "upgrade to a Certified Sovereign Pack: https://metricprovenance.com/certified[/dim]")
 
 @app.command()
 def build():
