@@ -144,6 +144,7 @@ ODGS bridges connect your existing data governance platform to the Execution Eng
 
 | Bridge | Function | Status |
 | --- | --- | --- |
+| [`odgs-llm-bridge`](https://github.com/MetricProvenance/odgs-llm-bridge) | **🤖 AI / LLM:** Compile regulations into enforceable rules via sovereign LLM. | [![PyPI](https://img.shields.io/pypi/v/odgs-llm-bridge?label=PyPI&color=blueviolet)](https://pypi.org/project/odgs-llm-bridge/) |
 | [`odgs-flint-bridge`](https://github.com/MetricProvenance/odgs-flint-bridge) | **Legislative:** Ingests TNO FLINT JSON-LD into ODGS schema. | [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-flint-bridge?label=PyPI%20Downloads&color=blue)](https://pypi.org/project/odgs-flint-bridge/) |
 | [`odgs-collibra-bridge`](https://github.com/MetricProvenance/odgs-collibra-bridge) | **Physical:** Collibra Business Glossary integration. | [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-collibra-bridge?label=PyPI%20Downloads&color=blue)](https://pypi.org/project/odgs-collibra-bridge/) |
 | [`odgs-databricks-bridge`](https://github.com/MetricProvenance/odgs-databricks-bridge) | **Physical:** Databricks Unity Catalog integration. | [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-databricks-bridge?label=PyPI%20Downloads&color=blue)](https://pypi.org/project/odgs-databricks-bridge/) |
@@ -170,7 +171,7 @@ The **`odgs-llm-bridge`** extends the Sovereign Validation Engine with five AI-p
 
 ```
 Priority 1 → Ollama (gemma4:26b local)   # Zero data leaves your perimeter
-Priority 2 → Google GenAI (gemini-3.1-pro) # Cloud fallback
+Priority 2 → Google GenAI (gemini-3.1-flash-lite-preview) # Cloud fallback
 Priority 3 → OpenAI-compatible            # GPT-NL, Mistral, self-hosted
 Priority 4 → LiteLLM                      # Universal multi-model router
 ```
@@ -186,7 +187,7 @@ pip install odgs-llm-bridge[all]          # all providers
 odgs-llm compile-regulation --input regulation.txt --output rules.json
 ```
 
-> 📦 **[`odgs-llm-bridge` Documentation →](../odgs-llm-bridge/README.md)**
+> 📦 **[`odgs-llm-bridge` on PyPI →](https://pypi.org/project/odgs-llm-bridge/)** · **[GitHub →](https://github.com/MetricProvenance/odgs-llm-bridge)**
 
 ---
 
