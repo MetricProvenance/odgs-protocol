@@ -1,25 +1,33 @@
 # Open Data Governance Standard (ODGS)
 
-[![Protocol](https://img.shields.io/badge/Protocol-v5.2.0_(Cryptographic_Engine)-0055AA)](https://platform.metricprovenance.com)
+[![Protocol](https://img.shields.io/badge/Protocol-v6.0.0_(Sovereign_Engine)-0055AA)](https://platform.metricprovenance.com)
 [![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act_%7C_NEN_381_525-003399)](GOVERNANCE.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18564270.svg)](https://doi.org/10.5281/zenodo.18564270)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs)
 [![npm Downloads](https://img.shields.io/npm/dm/odgs?label=npm%20Downloads&color=orange)](https://www.npmjs.com/package/odgs)
 [![License](https://img.shields.io/badge/License-Apache_2.0-lightgrey)](LICENSE)
 
-> **The Universal Validation Engine for High-Risk Data.**
+> **The Sovereign Validation Engine for High-Risk Data.**
 ---
 > [!IMPORTANT]
-> **EU AI Act & CEN-CENELEC JTC 25 Candidate Standard (v5.2.0 Update)**
-> ODGS has been upgraded to a strict Polymorphic Execution Engine. It seamlessly evaluates your standard operational telemetry while natively ingesting authoritative W3C/JSON-LD legal ontologies (e.g., TNO FLINT) to enforce **Administrative Recusal** ("Hard Stop") in High-Risk AI pipelines.
+> **EU AI Act & CEN-CENELEC JTC 25 Candidate Standard (v6.0.0)**
+> ODGS v6 extends the Polymorphic Execution Engine with six deterministic enhancements:
+> `SOFT_STOP` override-able severity, batch evaluation, rule dependency chains (DAG),
+> webhook event emission, conformance self-checks, and rule versioning with provenance tracking.
+> All changes are normative-additive — existing v5.x deployments upgrade seamlessly.
 ---
 
-### 🚀 What's New in v5.2.0: Minimalist Tier & Deployment Telemetry
-v5.2.0 upgrades the ODGS initialization and runtime engine to support rapidly-scaling teams.
+### 🚀 What's New in v6.0.0: Sovereign Validation Engine
 
-- **Minimalist Execution:** Initialize core Metric & Rule files via `odgs init --tier minimalist` without forcing complex ontology graphs or physical maps. Validations gracefully adapt to missing unrequired schemas.
-- **Deployment Status Telemetry:** The CLI validation output and audit logs now surface the deployment's certification status, giving teams clear visibility into whether their active rule packs are cryptographically signed or running as standard local deployments.
-- **Dynamic Version Mapping:** The CLI `version` and `init` commands dynamically extract the installed package version to ensure uniform synchronization across the standard.
+| Enhancement | Description |
+|---|---|
+| **SOFT_STOP** | Overrideable block — halts the pipeline by default, but authorized callers can supply a cryptographic `override_token` to proceed. Override is always logged. |
+| **Batch Evaluation** | `intercept_batch()` evaluates multiple payloads in a single call with `fail_fast` support. |
+| **Dependency Chains** | Rules declare `depends_on` URNs. Engine uses Kahn's algorithm for DAG ordering. Failed dependencies cascade. |
+| **Webhook Events** | `BLOCKED`, `SOFT_STOP_OVERRIDE`, `SOFT_STOP_BLOCKED` events dispatched to configured endpoints via `odgs.json`. |
+| **Conformance Check** | `odgs conformance` CLI command verifies project meets L1/L2 conformance requirements. |
+| **Rule Versioning** | Rules declare `version` (semver). Versions tracked in every S-Cert audit for provenance. |
+| **Temporal Bounds** | Rules with `effective_from` / `effective_to` are auto-skipped outside their validity window. |
 
 ---
 ### 🏢 Enterprise & Public Sector: EU AI Act Compliance
@@ -102,9 +110,9 @@ except AdministrativeRecusal as e:
 
 ---
 
-## 3. The 5-Plane Semantic Architecture (v5)
+## 3. The 5-Plane Semantic Architecture
 
-ODGS v5 implements a strict 5-Plane topology to guarantee the absolute sovereignty of legislative intent over physical execution pipelines.
+ODGS implements a strict 5-Plane topology to guarantee the absolute sovereignty of legislative intent over physical execution pipelines.
 
 ```mermaid
 graph TD
@@ -142,6 +150,43 @@ ODGS bridges connect your existing data governance platform to the Execution Eng
 | [`odgs-snowflake-bridge`](https://github.com/MetricProvenance/odgs-snowflake-bridge) | **Physical:** Snowflake Data Dictionary integration. | [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-snowflake-bridge?label=PyPI%20Downloads&color=blue)](https://pypi.org/project/odgs-snowflake-bridge/) |
 
 > **Want to build a bridge?** ODGS is designed to be the enforcement layer for *any* data governance platform. [Open an issue](https://github.com/MetricProvenance/odgs-protocol/issues) or submit a PR.
+
+### 🧠 NEW — AI-Powered Governance: `odgs-llm-bridge`
+
+> [!TIP]
+> **Industry First:** ODGS is the first open data governance standard with a native LLM bridge that converts regulations into enforceable rules automatically — while keeping all AI output under deterministic schema validation before it enters the execution engine.
+
+The **`odgs-llm-bridge`** extends the Sovereign Validation Engine with five AI-powered governance capabilities, designed for teams that need to operationalise regulation at scale without manual rule authoring.
+
+| Capability | What it does |
+|---|---|
+| **Regulatory Compiler** | Paste regulation text (EU AI Act, DORA, Basel III) → get validated ODGS rule JSON. |
+| **Drift Watchdog** | Continuously scan legislative definitions for semantic staleness and recommend updates. |
+| **Conflict Detector** | Cross-reference rules from multiple regulatory sources to surface contradictions. |
+| **Audit Narrator** | Convert cryptographic S-Certs into plain-language narratives for stakeholders. |
+| **Binding Discoverer** | Point at a data catalog → auto-generate `physical_data_map.json` bindings. |
+
+**Sovereignty-first provider stack:**
+
+```
+Priority 1 → Ollama (gemma4:26b local)   # Zero data leaves your perimeter
+Priority 2 → Google GenAI (gemini-3.1-pro) # Cloud fallback
+Priority 3 → OpenAI-compatible            # GPT-NL, Mistral, self-hosted
+Priority 4 → LiteLLM                      # Universal multi-model router
+```
+
+All LLM output passes through a **JSON Schema Validation Gate** before entering the deterministic engine — probabilistic AI never touches your production pipeline directly.
+
+```bash
+pip install odgs-llm-bridge[ollama]       # sovereign local (recommended)
+pip install odgs-llm-bridge[google]       # Google GenAI
+pip install odgs-llm-bridge[all]          # all providers
+
+# Compile a regulation into enforceable rules
+odgs-llm compile-regulation --input regulation.txt --output rules.json
+```
+
+> 📦 **[`odgs-llm-bridge` Documentation →](../odgs-llm-bridge/README.md)**
 
 ---
 
@@ -188,7 +233,8 @@ To request architectural clearance for your organization's compliance deployment
 
 | Guide | Description |
 | --- | --- |
-| [Migration Guide (v4.0 -> v5.0)](MIGRATION_GUIDE.md) | Critical instructions for the Polymorphic Engine upgrade. |
+| [Migration Guide (v5.x → v6.0.0)](MIGRATION_GUIDE.md) | Non-breaking Sovereign Engine upgrade — all v5 configs work as-is. |
+| [Migration Guide (v4.0 → v5.0)](MIGRATION_GUIDE.md#odgs-v500-migration-guide) | Breaking changes for W3C JSON-LD rule structures. |
 | [Adapter Guide](2_INFORMATIVE_REFERENCE/architecture/adapter_guide.md) | For Data Engineers connecting ODGS to custom infrastructures. |
 | [Audit Ledger Guide](2_INFORMATIVE_REFERENCE/architecture/audit_ledger_guide.md) | For Big 4 Auditors verifying the Tri-Partite Hash. |
 

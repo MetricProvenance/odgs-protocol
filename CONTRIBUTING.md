@@ -43,7 +43,10 @@ We welcome contributions in three main areas:
 Run the full test suite:
 
 ```bash
-# Python tests (18 tests)
+# Python tests — core engine (v6 suite: 30+ tests)
+cd 2_INFORMATIVE_REFERENCE && python -m pytest tests/python/test_v6_engine.py -v
+
+# Python tests — legacy suite
 python -m pytest tests/ -v
 
 # Node.js tests (2 parity tests)

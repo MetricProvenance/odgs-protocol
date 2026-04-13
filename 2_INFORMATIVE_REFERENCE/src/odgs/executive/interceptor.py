@@ -6,7 +6,7 @@ import logging
 import datetime
 import hashlib
 import uuid
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 try:
     from simpleeval import simple_eval, NameNotDefined
 except ImportError as _simpleeval_err:
@@ -76,17 +76,137 @@ SAFE_FUNCTIONS = {
     "len": len,
 }
 
-from odgs.executive.exceptions import ProcessBlockedException, MissingRuleException, SchemaValidationException
+from odgs.executive.exceptions import (
+    ProcessBlockedException,
+    SoftStopException,
+    DependencyFailedException,
+    MissingRuleException,
+    SchemaValidationException,
+    ConformanceException,
+)
 
 from odgs.core.adapter import GenericAdapter, AdapterRegistry
 from odgs.core.crypto import CryptoResolver, SecurityException
 
 
+# ============================================================================
+# v6.0.0 Enhancement A.4: Webhook / Event Emitter
+# ============================================================================
+
+class OdgsEventEmitter:
+    """Emits governance events to configured webhook endpoints.
+
+    Configuration is loaded from the project's ``odgs.json`` file::
+
+        {
+            "webhooks": [
+                {
+                    "url": "https://soc.example.com/odgs",
+                    "events": ["BLOCKED", "SOFT_STOP_OVERRIDE"],
+                    "headers": {"Authorization": "Bearer ..."}
+                }
+            ]
+        }
+    """
+
+    def __init__(self, project_root: str):
+        self.webhooks: List[Dict[str, Any]] = []
+        self._load_config(project_root)
+
+    def _load_config(self, project_root: str):
+        config_path = os.path.join(project_root, "odgs.json")
+        if not os.path.exists(config_path):
+            return
+        try:
+            with open(config_path, "r") as f:
+                config = json.load(f)
+            self.webhooks = config.get("webhooks", [])
+        except Exception as e:
+            audit_logger.warning(f"Failed to load odgs.json webhook config: {e}")
+
+    def emit(self, event_type: str, payload: Dict[str, Any]):
+        """Dispatch event to matching webhooks. Fire-and-forget."""
+        for hook in self.webhooks:
+            subscribed_events = hook.get("events", [])
+            if event_type in subscribed_events or "*" in subscribed_events:
+                self._dispatch(hook, event_type, payload)
+
+    def _dispatch(self, hook: Dict[str, Any], event_type: str, payload: Dict[str, Any]):
+        """HTTP POST to webhook endpoint. Non-blocking, errors are logged not raised."""
+        url = hook.get("url")
+        if not url:
+            return
+        try:
+            import urllib.request
+            data = json.dumps({
+                "event_type": event_type,
+                "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                "payload": payload,
+            }).encode("utf-8")
+            headers = {"Content-Type": "application/json"}
+            headers.update(hook.get("headers", {}))
+            req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+            urllib.request.urlopen(req, timeout=5)
+        except Exception as e:
+            audit_logger.warning(f"Webhook dispatch failed to {url}: {e}")
+
+
+# ============================================================================
+# v6.0.0 Enhancement A.3: Topological Sort for Rule Dependency Chains
+# ============================================================================
+
+def _topological_sort(rules: List[Dict[str, Any]], all_rules_index: Dict[str, Dict]) -> List[Dict[str, Any]]:
+    """Sort rules respecting ``depends_on`` declarations (Kahn's algorithm).
+
+    Rules without dependencies come first. If a cycle is detected,
+    the remaining rules are appended in their original order with a
+    warning logged.
+    """
+    # Build URN → rule mapping for the active set
+    urn_map = {}
+    for r in rules:
+        urn = r.get("urn") or f"urn:odgs:rule:{r.get('rule_id', 'UNKNOWN')}"
+        urn_map[urn] = r
+
+    # Build adjacency (dependency → dependents) and in-degree counts
+    in_degree = {urn: 0 for urn in urn_map}
+    dependents = {urn: [] for urn in urn_map}
+
+    for urn, rule in urn_map.items():
+        for dep_urn in rule.get("depends_on", []):
+            if dep_urn in urn_map:
+                dependents[dep_urn].append(urn)
+                in_degree[urn] += 1
+
+    # Kahn's algorithm
+    queue = [urn for urn, deg in in_degree.items() if deg == 0]
+    sorted_urns = []
+
+    while queue:
+        current = queue.pop(0)
+        sorted_urns.append(current)
+        for dependent in dependents.get(current, []):
+            in_degree[dependent] -= 1
+            if in_degree[dependent] == 0:
+                queue.append(dependent)
+
+    if len(sorted_urns) < len(urn_map):
+        # Cycle detected — append remaining rules and warn
+        remaining = [urn for urn in urn_map if urn not in sorted_urns]
+        audit_logger.warning(f"Dependency cycle detected among rules: {remaining}")
+        sorted_urns.extend(remaining)
+
+    return [urn_map[urn] for urn in sorted_urns]
+
+
+# ============================================================================
+# Main Interceptor — v6.0.0
+# ============================================================================
 
 class OdgsInterceptor:
     def __init__(self, project_root_path: str = None):
         """
-        Initialize the Sovereign Interceptor.
+        Initialize the Sovereign Interceptor (v6.0.0).
         """
         if project_root_path:
             self.project_root = project_root_path
@@ -114,6 +234,9 @@ class OdgsInterceptor:
         # Initialize Adapter (Default to Generic/Mock for now)
         self.default_adapter = GenericAdapter()
         self.adapter_registry = AdapterRegistry
+
+        # v6.0.0: Event Emitter
+        self.event_emitter = OdgsEventEmitter(self.project_root)
     
     def _load_from_plane(self, plane: str, filename: str) -> Dict[str, Any]:
         # 1. Check project paths
@@ -279,14 +402,175 @@ class OdgsInterceptor:
         
         return True
 
-    def intercept(self, process_urn: str, data_context: Dict[str, Any], required_integrity_hash: str = None) -> bool:
+    # ================================================================
+    # v6.0.0 Enhancement A.2: Batch Evaluation
+    # ================================================================
+
+    def intercept_batch(
+        self,
+        items: List[Dict[str, Any]],
+        fail_fast: bool = False,
+    ) -> Dict[str, Any]:
+        """Evaluate multiple data payloads against the same governance context.
+
+        Each item in *items* should be a dict with at least:
+        - ``process_urn`` (str): The governance context to evaluate against.
+        - ``data_context`` (dict): The payload to validate.
+        - ``required_integrity_hash`` (str, optional): For sovereign handshake.
+        - ``override_token`` (str, optional): For SOFT_STOP overrides.
+
+        Returns a summary dict::
+
+            {
+                "total": int,
+                "passed": int,
+                "failed": int,
+                "results": [ { "index": int, "status": "APPROVED"|"BLOCKED", ... }, ... ]
+            }
+
+        When *fail_fast* is ``True``, evaluation stops at the first failure.
         """
-        The Active Logic (v3.3 — Tri-Partite Binding):
+        results = []
+        passed = 0
+        failed = 0
+
+        for idx, item in enumerate(items):
+            process_urn = item.get("process_urn", "")
+            data_context = item.get("data_context", {})
+            integrity_hash = item.get("required_integrity_hash")
+            override_token = item.get("override_token")
+
+            try:
+                self.intercept(
+                    process_urn=process_urn,
+                    data_context=data_context,
+                    required_integrity_hash=integrity_hash,
+                    override_token=override_token,
+                )
+                results.append({"index": idx, "status": "APPROVED", "error": None})
+                passed += 1
+            except (ProcessBlockedException, SoftStopException) as e:
+                results.append({"index": idx, "status": "BLOCKED", "error": str(e)})
+                failed += 1
+                if fail_fast:
+                    break
+            except Exception as e:
+                results.append({"index": idx, "status": "ERROR", "error": str(e)})
+                failed += 1
+                if fail_fast:
+                    break
+
+        return {
+            "total": len(items),
+            "evaluated": len(results),
+            "passed": passed,
+            "failed": failed,
+            "results": results,
+        }
+
+    # ================================================================
+    # v6.0.0 Enhancement A.5: Conformance Self-Check
+    # ================================================================
+
+    def conformance_check(self, level: str = "L1") -> Dict[str, Any]:
+        """Verify that the current ODGS project meets conformance requirements.
+
+        **L1 (Basic):**
+        - judiciary/standard_data_rules.json exists and is valid
+        - legislative/ontology_graph.json exists
+        - executive/context_bindings.json exists
+
+        **L2 (Full):**
+        - All L1 checks
+        - executive/physical_data_map.json exists
+        - All rule URNs referenced in bindings exist in the rule index
+        - Sovereign Handshake succeeds (integrity hash is consistent)
+        """
+        failures = []
+        checks_passed = []
+
+        # --- L1 ---
+        judiciary_path = os.path.join(self.project_root, "judiciary", "standard_data_rules.json")
+        legislative_path = os.path.join(self.project_root, "legislative", "ontology_graph.json")
+        executive_path = os.path.join(self.project_root, "executive", "context_bindings.json")
+
+        if os.path.exists(judiciary_path):
+            checks_passed.append("L1: judiciary/standard_data_rules.json exists")
+        else:
+            failures.append("L1: judiciary/standard_data_rules.json MISSING")
+
+        if os.path.exists(legislative_path):
+            checks_passed.append("L1: legislative/ontology_graph.json exists")
+        else:
+            failures.append("L1: legislative/ontology_graph.json MISSING")
+
+        if os.path.exists(executive_path):
+            checks_passed.append("L1: executive/context_bindings.json exists")
+        else:
+            failures.append("L1: executive/context_bindings.json MISSING")
+
+        # --- L2 ---
+        if level in ("L2", "l2"):
+            physical_path = os.path.join(self.project_root, "executive", "physical_data_map.json")
+            if os.path.exists(physical_path):
+                checks_passed.append("L2: executive/physical_data_map.json exists")
+            else:
+                failures.append("L2: executive/physical_data_map.json MISSING")
+
+            # Cross-reference: all rule URNs in bindings must exist in rule index
+            if self.bindings and "contexts" in self.bindings:
+                for ctx in self.bindings["contexts"]:
+                    for rule_urn in ctx.get("rules", []):
+                        if rule_urn in self.rules:
+                            checks_passed.append(f"L2: Rule {rule_urn} resolved")
+                        else:
+                            failures.append(f"L2: Rule {rule_urn} referenced in bindings but NOT found in judiciary")
+
+            # Sovereign Handshake consistency
+            try:
+                hash_result = generate_project_hash(self.project_root)
+                checks_passed.append(f"L2: Sovereign hash computed: {hash_result['master_hash'][:16]}...")
+            except Exception as e:
+                failures.append(f"L2: Sovereign hash computation failed: {e}")
+
+        result = {
+            "level": level,
+            "passed": len(checks_passed),
+            "failed": len(failures),
+            "checks_passed": checks_passed,
+            "failures": failures,
+            "conformant": len(failures) == 0,
+        }
+
+        if failures:
+            raise ConformanceException(
+                f"Conformance check {level} FAILED with {len(failures)} issue(s)",
+                level=level,
+                failures=failures,
+            )
+
+        return result
+
+    # ================================================================
+    # Main intercept — v6.0.0
+    # ================================================================
+
+    def intercept(
+        self,
+        process_urn: str,
+        data_context: Dict[str, Any],
+        required_integrity_hash: str = None,
+        override_token: str = None,
+    ) -> bool:
+        """
+        The Active Logic (v6.0.0 — Extended Tri-Partite Binding):
         1. Generate Input Hash
         2. Sovereign Handshake (Integrity Validation)
         3. Resolve Context (Bindings)
-        4. Enforce Rules (Logic)
-        5. Tri-Partite Audit Entry
+        4. Topological Sort (Dependency Chains)
+        5. Enforce Rules (Logic) — including SOFT_STOP with override
+        6. Tri-Partite Audit Entry (with rule versions)
+        7. Emit Webhook Events
         """
         
         # 1. GENERATE INPUT HASH
@@ -343,17 +627,46 @@ class OdgsInterceptor:
 
         # Allow passing even if no active rules exist, per test expectations.
 
-        # 4. EVALUATE RULES
+        # 4. TOPOLOGICAL SORT (v6.0.0 — Dependency Chains)
+        has_dependencies = any(r.get("depends_on") for r in active_rules)
+        if has_dependencies:
+            active_rules = _topological_sort(active_rules, self.rules)
+
+        # 5. EVALUATE RULES
         violations = []
         warnings_list = []
         log_only_events = []
+        soft_stop_events = []
         evaluated_rule_ids = []
+        evaluated_rule_versions = {}  # v6.0.0: Track rule versions
+        dependency_statuses = {}  # v6.0.0: Track pass/fail for dependency chains
         now_date = datetime.datetime.now(datetime.timezone.utc).date()
 
         for rule in active_rules:
             logic = rule.get("logic_expression")
             rule_id = rule.get("rule_id")
+            rule_urn = rule.get("urn") or f"urn:odgs:rule:{rule_id}"
             severity = rule.get("severity", "HARD_STOP")
+            rule_version = rule.get("version")  # v6.0.0
+
+            # v6.0.0: Record rule version for S-Cert
+            if rule_version:
+                evaluated_rule_versions[str(rule_id)] = rule_version
+
+            # --- DEPENDENCY CHECK (v6.0.0) ---
+            deps = rule.get("depends_on", [])
+            dep_failed = False
+            for dep_urn in deps:
+                dep_status = dependency_statuses.get(dep_urn)
+                if dep_status == "FAILED":
+                    dep_failed = True
+                    msg = f"Rule {rule_id} SKIPPED: dependency {dep_urn} failed"
+                    violations.append(msg)
+                    dependency_statuses[rule_urn] = "FAILED"
+                    evaluated_rule_ids.append(str(rule_id) if rule_id else "UNKNOWN")
+                    break
+            if dep_failed:
+                continue
 
             # --- TEMPORAL BOUNDS CHECK (Schema Requirements §2.5) ---
             # Skip rule silently if today is outside its effective window.
@@ -427,23 +740,57 @@ class OdgsInterceptor:
                     
                     if not is_valid:
                         msg = f"Rule {rule_id} Failed: {rule.get('name')}"
+
                         if severity in ("HARD_STOP", None):
                             violations.append(msg)
+                            dependency_statuses[rule_urn] = "FAILED"
+
+                        elif severity == "SOFT_STOP":
+                            # v6.0.0: SOFT_STOP — blocked unless override_token provided
+                            if override_token:
+                                # Override accepted — log the override event
+                                override_hash = hashlib.sha256(override_token.encode("utf-8")).hexdigest()
+                                soft_stop_events.append({
+                                    "rule_id": rule_id,
+                                    "override": True,
+                                    "override_token_hash": override_hash,
+                                })
+                                dependency_statuses[rule_urn] = "OVERRIDDEN"
+                                audit_logger.info(
+                                    f"SOFT_STOP OVERRIDE: Rule {rule_id} overridden with token {override_hash[:16]}..."
+                                )
+                            else:
+                                soft_stop_events.append({
+                                    "rule_id": rule_id,
+                                    "override": False,
+                                })
+                                violations.append(msg)
+                                dependency_statuses[rule_urn] = "FAILED"
+
                         elif severity == "WARNING":
                             warnings_list.append(msg)
+                            dependency_statuses[rule_urn] = "WARNING"
+
                         elif severity == "LOG_ONLY":
                             # LOG_ONLY: records the non-conformance but does NOT block processing
                             log_only_events.append(msg)
+                            dependency_statuses[rule_urn] = "LOGGED"
                         # INFO severity: logged but does not affect outcome
+                    else:
+                        dependency_statuses[rule_urn] = "PASSED"
 
                 except NameNotDefined as e:
                     # Missing field in data context — fail closed
                     violations.append(f"Rule {rule_id} Missing Field: {str(e)}")
+                    dependency_statuses[rule_urn] = "FAILED"
                 except Exception as e:
                     # "Fail Closed" -> treat execution errors as violations
                     violations.append(f"Rule {rule_id} Execution Error: {str(e)}")
+                    dependency_statuses[rule_urn] = "FAILED"
+            else:
+                dependency_statuses[rule_urn] = "PASSED"
 
-        # 5. TRI-PARTITE BINDING — Compute all 3 hashes for audit
+        # 6. TRI-PARTITE BINDING — Compute all 3 hashes for audit
         try:
             config_canonical = json.dumps(context_def, sort_keys=True, separators=(',', ':'))
             config_hash = hashlib.sha256(config_canonical.encode('utf-8')).hexdigest()
@@ -486,7 +833,7 @@ class OdgsInterceptor:
         )
 
         audit_entry = {
-            # --- ODGS S-Cert mandatory fields (v5.1.0) ---
+            # --- ODGS S-Cert mandatory fields (v6.0.0) ---
             "event_id": event_id,
             "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "process_urn": process_urn,
@@ -511,6 +858,9 @@ class OdgsInterceptor:
             "violations": violations,
             "warnings": warnings_list,
             "log_only_events": log_only_events,
+            # --- v6.0.0 new fields ---
+            "soft_stop_events": soft_stop_events,
+            "rule_versions": evaluated_rule_versions,
             "evidence": {
                 "context_id": context_def.get("context_id", "UNKNOWN"),
                 "active_rules_count": len(active_rules),
@@ -527,9 +877,24 @@ class OdgsInterceptor:
         except Exception as e:
             audit_logger.warning(f"AUDIT LOG FAILURE (git backend): {e}")
 
-        # 6. ENFORCE — HARD STOP on violations
+        # 7. EMIT WEBHOOK EVENTS (v6.0.0)
         if violations:
-            raise ProcessBlockedException(f"HARD STOP — Governance Failure: {violations}")
+            self.event_emitter.emit("BLOCKED", audit_entry)
+        if soft_stop_events:
+            for sse in soft_stop_events:
+                if sse.get("override"):
+                    self.event_emitter.emit("SOFT_STOP_OVERRIDE", audit_entry)
+                else:
+                    self.event_emitter.emit("SOFT_STOP_BLOCKED", audit_entry)
+
+        # 8. ENFORCE — HARD STOP on violations
+        if violations:
+            # Check if the only violations are SOFT_STOP with overrides
+            non_overridden = [v for v in violations if not any(
+                sse.get("rule_id") and sse.get("override") and str(sse["rule_id"]) in v
+                for sse in soft_stop_events
+            )]
+            if non_overridden:
+                raise ProcessBlockedException(f"HARD STOP — Governance Failure: {non_overridden}")
 
         return True
-

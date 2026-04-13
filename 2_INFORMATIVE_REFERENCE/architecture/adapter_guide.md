@@ -1,6 +1,6 @@
 # ODGS Adapter Interface Guide
 
-**Version:** 5.0.0  
+**Version:** 6.0.0  
 **Source:** [`2_INFORMATIVE_REFERENCE/src/odgs/core/adapter.py`](file:///Users/kartik/Code/open-data-governance-protocol/odgs-protocol-main/2_INFORMATIVE_REFERENCE/src/odgs/core/adapter.py)
 
 ---
@@ -66,7 +66,7 @@ ODGS is headless. Using the `AdapterRegistry`, you can inject custom Python hook
 
 ### Dynamic Injection Tutorial
 
-Instead of hardcoding adapters into the core engine, you can write your own Python modules and dynamically load them into the Universal Validation Engine at runtime via Python's native `importlib`.
+Instead of hardcoding adapters into the core engine, you can write your own Python modules and dynamically load them into the Sovereign Validation Engine at runtime via Python's native `importlib`.
 
 **1. Create a Custom Adapter Class**
 Create a new file anywhere in your VPC, for example: `/usr/local/lib/odgs/kafka_adapter.py`.
@@ -88,7 +88,7 @@ class KafkaAdapter(OdgsAdapter):
 ```
 
 **2. Injecting via the Registry**
-The ODGS v5.0.0 engine exposes an `AdapterRegistry` that allows you to cleanly inject your Python class before initializing the Interceptor.
+The ODGS v6.0.0 engine exposes an `AdapterRegistry` that allows you to cleanly inject your Python class before initializing the Interceptor.
 
 ```python
 from odgs.core.adapter import AdapterRegistry

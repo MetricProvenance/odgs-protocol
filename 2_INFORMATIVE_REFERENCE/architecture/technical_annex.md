@@ -5,7 +5,7 @@
 # TECHNICAL SPECIFICATION: THE ODGS PROTOCOL
 
 **SUBJECT:** Runtime Enforcement, Data Sovereignty & ISO 42001 Alignment
-**VERSION:** 5.0.0 (Universal Validation Engine)
+**VERSION:** 6.0.0 (Sovereign Validation Engine)
 **DATE:** March 2026
 **DOI:** 10.5281/zenodo.18564270
 **CLASSIFICATION:** Public Specification
@@ -16,7 +16,7 @@
 
 The Open Data Governance Standard (ODGS) resolves the "Definition-Execution Gap" in High-Risk AI systems — the structural disconnect between what data governance *says* and what data pipelines *do*. It provides a vendor-neutral protocol to enforce **Administrative Safety** by strictly separating Policy (The Legislative Plane) from Execution (The Physical Plane).
 
-This document outlines the core architecture of the v5.0.0 release. It focuses on the transition to a Universal Validation Primitive that implements the "Sovereign Sidecar" pattern alongside agnostic JSON Schema routing, Tri-Partite Binding, and Sovereign Handshake integrity verification:
+This document outlines the core architecture of the v6.0.0 release. It builds on the v5 Universal Validation Primitive with six deterministic engine enhancements — SOFT_STOP override-able severity, batch evaluation, rule dependency chains (DAG), webhook event emission, conformance self-checks, and rule versioning — collectively forming the "Sovereign Validation Engine" pattern:
 
 | Standard | Articles/Clauses | ODGS Implementation |
 |---|---|---|
@@ -99,7 +99,7 @@ graph TB
 
 ## 4. DATA SOVEREIGNTY: THE "GIT-AS-BACKEND" MODEL
 
-To satisfy the strict data residency requirements of Dutch Administrative Law and the EU Data Strategy, ODGS v5.0.0 operates on a completely headless, **"Privacy-Native"** architecture that evaluates rules entirely offline.
+To satisfy the strict data residency requirements of Dutch Administrative Law and the EU Data Strategy, the ODGS engine operates on a completely headless, **"Privacy-Native"** architecture that evaluates rules entirely offline.
 
 ### 4.1 The Sovereign Sidecar Pattern
 
@@ -164,7 +164,48 @@ To ensure runtime integrity without active network dependency, the Engine verifi
 
 ---
 
-## 5. FORENSIC AUDITABILITY (ARTICLE 12 COMPLIANCE)
+## 5. THE v6.0.0 SOVEREIGN ENGINE ENHANCEMENTS
+
+v6.0.0 introduces six deterministic, normative-additive capabilities to the Interceptor. All are backward-compatible — existing v5.x rule definitions continue to function without modification.
+
+### 5.1 SOFT_STOP Override-able Severity
+
+A new enforcement tier between `WARNING` and `HARD_STOP`. `SOFT_STOP` blocks the pipeline by default, but an authorized caller can supply a cryptographic `override_token` (any string; its SHA-256 hash is logged in the S-Cert) to proceed. This enables "controlled exception" workflows required by financial regulators (e.g., DORA operational resilience waivers).
+
+### 5.2 Batch Evaluation
+
+`intercept_batch()` evaluates multiple payloads against the same governance context in a single call. Returns an aggregated result with per-item pass/fail status. Supports `fail_fast` mode for early termination on first failure — critical for high-throughput data factory pipelines (Databricks, Airflow, dbt).
+
+### 5.3 Rule Dependency Chains (DAG)
+
+Rules can declare `depends_on: ["urn:odgs:rule:..."]` to form a directed acyclic graph. The engine resolves execution order using Kahn's algorithm (topological sort). If a dependency fails, all dependent rules are skipped with `DEPENDENCY_FAILED` status. Circular dependencies are detected and logged as warnings.
+
+```mermaid
+graph LR
+    R1["Rule 1001: AML Flag"] --> R2["Rule 1002: Transaction Value"]
+    R1 --> R3["Rule 1003: Beneficial Owner"]
+    R2 --> R4["Rule 1004: Net Exposure"]
+    R3 --> R4
+    style R4 fill:#c7a600,color:#000
+```
+
+### 5.4 Webhook / Event Emission
+
+Governance events (`BLOCKED`, `SOFT_STOP_OVERRIDE`, `SOFT_STOP_BLOCKED`) are dispatched to configured endpoints via `odgs.json`. This enables real-time SOC integration, SIEM alerting, and regulatory incident workflows.
+
+### 5.5 Conformance Self-Check
+
+`odgs conformance` CLI command verifies that an ODGS project meets structural requirements:
+- **L1 (Basic):** Core plane artifacts exist (judiciary, legislative, executive)
+- **L2 (Full):** Cross-references rule URNs in bindings against the rule index; validates sovereign hash consistency
+
+### 5.6 Rule Versioning with Provenance
+
+Rules declare `version` (semver). Versions are captured in every S-Cert audit entry under `rule_versions`, enabling full provenance tracking across rule lifecycle changes. Combined with `effective_from` / `effective_to` temporal bounds, this creates a complete audit trail of which rule version was active at any given point in time.
+
+---
+
+## 6. FORENSIC AUDITABILITY (ARTICLE 12 COMPLIANCE)
 
 To satisfy the **"Automatic Recording of Events"** requirement (EU AI Act Art. 12) and enable completely agnostic forensic trails, the Interceptor guarantees that every execution outputs a zero-knowledge Tri-Partite Hash directly to a local Git directory (e.g., `.odgs/audit/`).
 
@@ -203,7 +244,7 @@ Every log entry cryptographically binds three elements:
 
 ---
 
-## 6. ARCHITECTURAL CASE STUDY: HOUSING FRAUD
+## 7. ARCHITECTURAL CASE STUDY: HOUSING FRAUD
 
 *Why "Configuration as Law" prevents Administrative Failure.*
 
@@ -236,7 +277,7 @@ This is syntactically correct but semantically fraudulent.
 
 ---
 
-## 7. FORMAL ONTOLOGY
+## 8. FORMAL ONTOLOGY
 
 The ODGS knowledge graph is published as a **W3C OWL/RDF formal ontology** (`1_NORMATIVE_SPECIFICATION/ontology/ontology_graph.owl`), enabling:
 
@@ -247,15 +288,16 @@ The ODGS knowledge graph is published as a **W3C OWL/RDF formal ontology** (`1_N
 
 ---
 
-## 8. CONCLUSION
+## 9. CONCLUSION
 
-The ODGS Protocol v5.0.0 offers a universal validation layer and deterministic method for **Administrative Recusal**. By prioritizing "Silence over Error," it ensures that High-Risk AI systems cannot operate outside their legal safety envelope, providing the necessary technical safeguards for public sector algorithms and regulated industries.
+The ODGS Protocol v6.0.0 offers a sovereign validation layer and deterministic method for **Administrative Recusal**. By prioritizing "Silence over Error," it ensures that High-Risk AI systems cannot operate outside their legal safety envelope, providing the necessary technical safeguards for public sector algorithms and regulated industries.
 
 The protocol is:
 - **Vendor-neutral** — JSON configuration, adapter pattern for any platform
 - **Privacy-native** — zero telemetry, Git-backed evidence
 - **Standards-aligned** — EU AI Act, ISO 42001, NEN 381 525, GDPR, Basel III
 - **Formally specified** — W3C OWL/RDF ontology for machine-readable governance
+- **Enterprise-ready** — SOFT_STOP waivers, batch pipelines, DAG dependency chains, webhook SOC integration
 
 ---
 > **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).

@@ -1,9 +1,9 @@
 
-# ODGS Protocol v5.0.0: ISO/NEN Compliance Report
+# ODGS Protocol v6.0.0: ISO/NEN Compliance Report
 
 **Document ID:** ODGS-CR-2026-001
-**Date:** March 2026
-**Version:** 5.0.0 (Universal)
+**Date:** April 2026
+**Version:** 6.0.0 (Sovereign Validation Engine)
 **Status:** SUBMITTED TO NEN COMMITTEE 381 525
 **Authors:** Kartik Iyer, Metric Provenance B.V.
 **Classification:** Public
@@ -12,20 +12,24 @@
 
 ## 1. Executive Summary
 
-The Open Data Governance Standard (ODGS) Protocol v5.0.0 has been audited for compliance with:
+The Open Data Governance Standard (ODGS) Protocol v6.0.0 has been audited for compliance with:
 
 - **NEN Standards Committee 381 525** (Data, Data Management, Cloud and Edge)
 - **EU AI Act** (Regulation 2024/1689), Articles 10 and 12
 - **ISO/IEC 42001:2023** (Artificial Intelligence — Management System)
 - **GDPR** (Regulation 2016/679), Articles 5, 25, and 30
 
-The v5.0.0 release implements a **"Universal Validation Primitive"** architecture — a headless, privacy-native, vendor-neutral enforcement layer that provides:
+The v6.0.0 release implements a **"Sovereign Validation Engine"** architecture — a headless, privacy-native, vendor-neutral enforcement layer that provides:
 
 | Capability | Implementation | Standard Reference |
 |---|---|---|
 | Tri-Partite Binding | SHA-256 cryptographic binding of Input + Definition + Configuration | EU AI Act Art. 12 |
 | Sovereign Handshake | Content-addressed integrity verification against harvested definitions | ISO 42001 B.7 |
 | Hard Stop / Administrative Recusal | Runtime prevention of non-compliant AI decisions | EU AI Act Art. 10 |
+| SOFT_STOP Override | Controlled exception with cryptographic audit trail | DORA Art. 11 |
+| Batch Evaluation | Aggregated multi-payload enforcement for data factory pipelines | ISO 42001 B.9 |
+| Rule Dependency Chains | DAG-based topological rule execution ordering | NEN 381 525 |
+| Webhook Event Emission | Real-time governance event dispatch to SOC/SIEM endpoints | ISO 42001 B.10 |
 | Immutable Audit Trail | Git-backed forensic evidence ledger | ISO 42001 B.4 |
 | 86% Rule Enforceability | 87 of 101 data rules have executable `logic_expression` fields | NEN 381 525 |
 
@@ -40,17 +44,17 @@ The v5.0.0 release implements a **"Universal Validation Primitive"** architectur
 | Standard Directory Layout | ✅ | `1_NORMATIVE_SPECIFICATION/schemas/` (The Standard) vs `src/` (The Implementation) |
 | Build System | ✅ | PEP 517 compliant (`pyproject.toml` + `hatchling`) |
 | Dependency Management | ✅ | Zero proprietary dependencies. Open source only. |
-| Version Alignment | ✅ | v5.0.0 across all canonical version locations |
+| Version Alignment | ✅ | v6.0.0 across all canonical version locations |
 | W3C OWL/RDF Ontology | ✅ | `1_NORMATIVE_SPECIFICATION/ontology/ontology_graph.owl` — machine-readable formal ontology |
 
 ### 📜 Documentation & Metadata
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| CITATION.cff | ✅ | Valid CFF v1.2.0 schema, version 5.0.0, DOI: 10.5281/zenodo.18564270 |
+| CITATION.cff | ✅ | Valid CFF v1.2.0 schema, version 6.0.0, DOI: 10.5281/zenodo.18564270 |
 | CONTRIBUTING.md | ✅ | Professional guidelines, correct links to MetricProvenance |
 | Architecture Spec | ✅ | `1_NORMATIVE_SPECIFICATION/schemas/00-architecture-5-plane.md` — Single Source of Truth |
-| CHANGELOG.md | ✅ | Retroactive entries from v3.0.0 through v5.0.0 |
+| CHANGELOG.md | ✅ | Retroactive entries from v3.0.0 through v6.0.0 |
 | Comparison Matrix | ✅ | 7 competitors, 14 dimensions of analysis |
 
 ### 🛡️ ISO/IEC 42001 (AI Safety) Alignment
@@ -117,9 +121,10 @@ The ODGS Harvester can ingest definitions from 5 authoritative sources:
 
 | Test Suite | Result | Details |
 |---|---|---|
-| Integration Pipeline | ✅ 11/11 | Handshake, Tri-Partite Binding, Hard Stop, Full Pipeline |
-| Protocol Parity | ✅ 2/2 | Python/Node.js output equivalence |
-| **Total** | **✅ 13/13** | Zero failures |
+| v6 Engine (SOFT_STOP, Batch, DAG, Webhooks, Conformance, Versioning) | ✅ 49/49 | 3 skips (webhook network isolation) |
+| Root-level (crypto, router, schema, audit, v5.1+) | ✅ 17/17 | Full regression pass |
+| JSON Schema Validation | ✅ 122/122 | All rules and metrics validated |
+| **Total** | **✅ 188/188** | Zero failures, 3 expected skips |
 
 ---
 
@@ -127,7 +132,7 @@ The ODGS Harvester can ingest definitions from 5 authoritative sources:
 
 The repository is **CERTIFIED PREPARED** for review by NEN Standards Committee 381 525.
 
-The ODGS Protocol v5.0.0 provides a complete, auditable, vendor-neutral governance framework for High-Risk AI systems, with cryptographic integrity verification, immutable audit trails, and formal W3C OWL/RDF ontological grounding.
+The ODGS Protocol v6.0.0 provides a complete, auditable, vendor-neutral governance framework for High-Risk AI systems, with cryptographic integrity verification, immutable audit trails, enterprise-grade enforcement controls (SOFT_STOP, batch, DAG), and formal W3C OWL/RDF ontological grounding.
 
 ---
 > **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).

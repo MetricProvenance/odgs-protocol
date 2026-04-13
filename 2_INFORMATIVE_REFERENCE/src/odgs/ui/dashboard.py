@@ -11,7 +11,7 @@ from odgs.factory.generator import generate_bundle, generate_with_gemini, write_
 
 # Set Page Config
 st.set_page_config(
-    page_title="ODGS Universal Interface — v4.0.0",
+    page_title="ODGS Sovereign Interface — v6.0.0",
     page_icon="🏛️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -337,7 +337,7 @@ with st.sidebar:
     ODGS Protocol
   </div>
   <div style="font-size:0.78em; color:#5E6C84; font-weight:600; margin-top:2px;">
-    v4.0.0 &nbsp;·&nbsp; Universal Validation Engine
+    v6.0.0 &nbsp;·&nbsp; Sovereign Validation Engine
   </div>
   <div style="font-size:0.68em; color:#97A0AF; margin-top:4px;">
     EU AI Act · ISO 42001 · Enterprise Policies

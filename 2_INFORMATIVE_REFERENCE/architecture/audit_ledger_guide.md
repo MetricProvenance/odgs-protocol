@@ -1,13 +1,13 @@
 # ODGS Audit Ledger Guide
 
-**Version:** 5.0.0  
-**Source:** [`2_INFORMATIVE_REFERENCE/src/odgs/system/adapters/git_log_adapter.py`](file:///Users/kartik/Code/open-data-governance-protocol/odgs-protocol-main/2_INFORMATIVE_REFERENCE/src/odgs/system/adapters/git_log_adapter.py)
+**Version:** 6.0.0  
+**Source:** [`2_INFORMATIVE_REFERENCE/src/odgs/system/adapters/git_log_adapter.py`](../src/odgs/system/adapters/git_log_adapter.py)
 
 ---
 
 ## The Verifiability Principle
 
-The entire purpose of the Universal Validation Engine is **Trust without Transparency**. Enterprise Data pipelines often contain Highly Confidential algorithms, Personally Identifiable Information (PII), or Proprietary IP.
+The entire purpose of the Sovereign Validation Engine is **Trust without Transparency**. Enterprise Data pipelines often contain Highly Confidential algorithms, Personally Identifiable Information (PII), or Proprietary IP.
 
 If an independent auditor, a regulatory body (like the DNB or ECB), or a civil society watchdog asks: *"Did your algorithm obey the criteria set forth in Article 10 of the EU AI Act on Tuesday at 4:00 PM?"* you cannot hand them your raw database.
 
@@ -41,7 +41,7 @@ To independently verify the mechanical integrity of an algorithmic decision, an 
 
 1.  The `cryptographic_attestation.json` log from your repository.
 2.  The public Sovereign JSON Rule (`urn:odgs:sov:eu-ai-act:art10.json`).
-3.  The public source code of ODGS v5.0.0 at the specific Git Commit.
+3.  The public source code of ODGS v6.0.0 at the specific Git Commit.
 
 ### The Math:
 

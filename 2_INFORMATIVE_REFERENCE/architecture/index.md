@@ -85,7 +85,7 @@ graph TD
 
 ---
 
-*Protocol v5.0.0 · Core Execution Engine Edition*
+*Protocol v6.0.0 · Sovereign Validation Engine Edition*
 
 ---
 > **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).

@@ -5,22 +5,25 @@ build-backend = "hatchling.build"
 
 [project]
 name = "odgs"
-version = "5.2.0"
-description = "Open Data Governance Standard — Universal Validation Primitive"
+version = "6.0.0"
+description = "Open Data Governance Standard — Sovereign Validation Engine"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "Apache-2.0"}
 authors = [{name = "Metric Provenance", email = "partner@metricprovenance.com"}]
-keywords = ["data-governance", "sovereign", "compliance", "ai-safety"]
+keywords = ["data-governance", "sovereign", "compliance", "ai-safety", "eu-ai-act", "dora", "nis2", "data-quality", "regulatory", "enforcement"]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Legal Industry",
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: Office/Business :: Financial",
 ]
 
 dependencies = [
@@ -39,12 +42,17 @@ server = ["fastapi>=0.95.0", "uvicorn>=0.20.0"]
 audit = ["GitPython>=3.1.0"]
 demo = ["streamlit>=1.30.0", "streamlit-agraph>=0.0.45", "pandas>=2.0.0"]
 ai = ["google-genai>=1.0.0", "sse-starlette>=1.0.0"]
-all = ["odgs[demo,ai,server,audit]"]
+llm = ["ollama>=0.4.0", "google-genai>=1.0.0"]
+all = ["odgs[demo,ai,server,audit,llm]"]
 
 [project.urls]
 Homepage = "https://metricprovenance.com"
 Repository = "https://github.com/MetricProvenance/odgs-protocol"
 Documentation = "https://github.com/MetricProvenance/odgs-protocol/tree/main/docs"
+Changelog = "https://github.com/MetricProvenance/odgs-core/blob/main/CHANGELOG.md"
+Issues = "https://github.com/MetricProvenance/odgs-core/issues"
+"Partner Demo" = "https://platform.metricprovenance.com"
+"Research Paper (SSRN)" = "https://papers.ssrn.com/abstract=6205478"
 
 [project.scripts]
 odgs = "odgs.cli:app"

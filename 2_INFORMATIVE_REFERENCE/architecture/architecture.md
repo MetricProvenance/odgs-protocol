@@ -1,12 +1,12 @@
 # ODGS Technical Specification: 00 - Architecture
 **Status:** Air-Gapped Sovereign Engine
-**Version:** 5.0.0
+**Version:** 6.0.0
 **Type:** Normative
 
 > **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
 
 ## 1. Abstract
-The Open Data Governance Standard (ODGS) defines a **Hierarchical Constitutional Stack** for Data Governance. It strictly separates the Definition of Data (Legislative Plane) from the Execution of Data (Physical Plane), functioning as a headless **Universal Validation Primitive** that parses arbitrary text-based agreements into mechanical constraints.
+The Open Data Governance Standard (ODGS) defines a **Hierarchical Constitutional Stack** for Data Governance. It strictly separates the Definition of Data (Legislative Plane) from the Execution of Data (Physical Plane), functioning as a headless **Sovereign Validation Engine** that parses arbitrary text-based agreements into mechanical constraints.
 
 The core architectural pattern is the **"Sovereign Sidecar"**, where governance rules are enforced by a lightweight Interceptor that has *zero* hardcoded logic, relying entirely on immutable JSON configurations and Draft-7 schemas.
 
@@ -69,10 +69,13 @@ sequenceDiagram
     Sidecar->>Sidecar: 2. Calculate Input Hash (SHA-256)
     Sidecar->>Sidecar: 3. Sovereign Handshake (Verify Definition Integrity)
     Sidecar->>Sidecar: 4. Resolve Context Bindings
-    Sidecar->>Sidecar: 5. Enforce Rules (Logic Expressions)
-    alt Rule Violation
+    Sidecar->>Sidecar: 5. Enforce Rules (Logic Expressions + DAG)
+    alt Rule Violation (HARD_STOP)
         Sidecar-->>App: 6. HARD STOP (ProcessBlockedException)
         Sidecar->>Git: 7. Commit Tri-Partite Evidence
+    else Rule Violation (SOFT_STOP)
+        Sidecar-->>App: 6. SOFT_STOP (Override Token Required)
+        Sidecar->>Git: 7. Commit Override Evidence
     else Compliant
         Sidecar-->>App: 6. Access Granted
         Sidecar->>Git: 7. Commit Tri-Partite Evidence

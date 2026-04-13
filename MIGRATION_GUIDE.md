@@ -1,3 +1,54 @@
+# ODGS v6.0.0 Migration Guide
+
+**This release contains NO BREAKING CHANGES.** All v5.x configurations, bridges, and schemas continue to work without modification. v6.0.0 is a normative-additive upgrade.
+
+---
+
+## Upgrading from v5.x to v6.0.0
+
+### 1. Install
+
+```bash
+pip install odgs==6.0.0
+```
+
+### 2. What's New (All Optional)
+
+| Feature | Opt-in Required? | How |
+|---|---|---|
+| `SOFT_STOP` severity | ✅ Yes | Add `"severity": "SOFT_STOP"` to rules |
+| Batch evaluation | ✅ Yes | Call `interceptor.intercept_batch(items)` |
+| Dependency chains | ✅ Yes | Add `"depends_on": ["urn:odgs:rule:..."]` to rules |
+| Webhooks | ✅ Yes | Add `"webhooks"` array to `odgs.json` |
+| Conformance check | ✅ Yes | Run `odgs conformance [path] --level L1|L2` |
+| Rule versioning | ✅ Yes | Add `"version": "1.0.0"` to rule definitions |
+| Temporal bounds | ✅ Yes | Add `"effective_from"` / `"effective_to"` to rules |
+
+### 3. Schema Changes (Non-Breaking)
+
+The normative `rule.schema.json` now accepts these additional optional fields:
+- `SOFT_STOP` added to the `severity` enum (alongside existing `HARD_STOP`, `WARNING`, `INFO`)
+- `depends_on` — array of URN strings for dependency chains
+- `version` — semver string (e.g. `"1.0.0"`)
+- `effective_from` / `effective_to` — ISO 8601 date strings
+- `semantic_hash` — SHA-256 hash string for drift detection
+
+All existing v5 rule JSONs remain valid. `additionalProperties: false` is preserved.
+
+### 4. Bridge Compatibility
+
+All existing bridges (`odgs-databricks-bridge`, `odgs-collibra-bridge`, `odgs-snowflake-bridge`, `odgs-flint-bridge-oss`) pin `odgs>=5.1.0`. Since v6 satisfies this constraint, bridges auto-resolve to v6 on next `pip install`. No code changes required.
+
+### 5. Audit Log Changes (Additive)
+
+v6 S-Cert audit entries include new fields:
+- `soft_stop_events` — array of SOFT_STOP outcomes (with `override` flag and token hash)
+- `rule_versions` — dict mapping rule IDs to their declared versions
+
+These fields are **additive** and will not break existing log parsers.
+
+---
+
 # ODGS v5.0.0 Migration Guide
 
 **WARNING:** This release contains **BREAKING CHANGES** from v4.1.0 for users evaluating W3C JSON-LD rule structures.

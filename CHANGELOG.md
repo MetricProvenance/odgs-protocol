@@ -5,6 +5,82 @@ All notable changes to the Open Data Governance Standard (ODGS) will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v6.0.0] - 2026-04-13
+
+### 🚀 Major — Sovereign Validation Engine
+
+This release is a **major version bump** that introduces six deterministic engine enhancements,
+two new CLI commands, and an expanded normative rule schema. All changes are additive —
+existing v5.x configurations continue to work without modification.
+
+### ✨ Added
+
+- **`SOFT_STOP` Severity (Enhancement A.1):** A new enforcement tier between `WARNING` and `HARD_STOP`.
+  `SOFT_STOP` blocks the pipeline by default, but an authorized caller can supply a cryptographic
+  `override_token` to proceed. The override is always logged in the S-Cert audit entry with the
+  token's SHA-256 hash for full traceability.
+
+- **Batch Evaluation — `intercept_batch()` (Enhancement A.2):** Evaluate multiple data payloads against
+  the same governance context in a single call. Returns an aggregated result with per-item status.
+  Supports `fail_fast` mode for early termination on first failure.
+
+- **Rule Dependency Chains (Enhancement A.3):** Rules can now declare `depends_on: ["urn:odgs:rule:..."]`
+  to form a directed acyclic graph (DAG). The engine uses Kahn's algorithm (topological sort) to evaluate
+  rules in dependency order. If a dependency fails, dependent rules are automatically skipped with
+  `DEPENDENCY_FAILED` status. Circular dependencies are detected and logged as warnings.
+
+- **Webhook / Event Emission (Enhancement A.4):** The engine now emits governance events (`BLOCKED`,
+  `SOFT_STOP_OVERRIDE`, `SOFT_STOP_BLOCKED`) to configured webhook endpoints. Configure in `odgs.json`:
+  ```json
+  {
+    "webhooks": [
+      {"url": "https://soc.example.com/odgs", "events": ["BLOCKED", "SOFT_STOP_OVERRIDE"]}
+    ]
+  }
+  ```
+
+- **Conformance Self-Check — `odgs conformance` (Enhancement A.5):** New CLI command to verify that an
+  ODGS project meets conformance requirements. Supports two levels:
+  - **L1 (Basic):** Verifies core plane artifacts exist (judiciary, legislative, executive).
+  - **L2 (Full):** Cross-references rule URNs in bindings against the rule index, validates sovereign
+    hash consistency.
+
+- **CLI: `odgs batch` Command:** Evaluate multiple data payloads from a JSON file in a single batch run.
+  Supports `--fail-fast` flag for early termination.
+
+- **Rule Versioning (Enhancement A.6):** Rules can now declare `"version": "1.0.0"` (semver). Rule versions
+  are tracked in every S-Cert audit entry under the `rule_versions` field, enabling provenance tracking
+  across rule lifecycle changes.
+
+- **Temporal Rule Bounds:** Rules can declare `effective_from` and `effective_to` (ISO 8601 dates).
+  Rules outside their effective window are silently skipped during evaluation — no blocking, no warnings.
+
+- **Semantic Hash Field:** Rules can declare `semantic_hash` — a SHA-256 hash of the rule's legislative
+  provenance text. Used by the LLM Bridge's Drift Watchdog to detect when upstream legislation changes
+  have not been reflected in governance rules.
+
+### 📋 Schema Changes (Normative)
+
+- `rule.schema.json` — Added `SOFT_STOP` to severity enum
+- `rule.schema.json` — Added `depends_on` (array of URN strings)
+- `rule.schema.json` — Added `version` (semver pattern)
+- `rule.schema.json` — Added `effective_from`, `effective_to` (ISO date)
+- `rule.schema.json` — Added `semantic_hash` (string)
+
+### ♻️ Changed
+
+- **PyPI classifier** upgraded from `Development Status :: 4 - Beta` to `Development Status :: 5 - Production/Stable`
+- **Package description** updated from "Universal Validation Primitive" to "Sovereign Validation Engine"
+- **Optional dependency group `[llm]`** added: `ollama>=0.4.0`, `google-genai>=1.0.0`
+
+### 🔒 Backwards Compatibility
+
+- All existing v5.x rule JSONs remain valid — new fields are optional
+- Existing bridges (`odgs>=5.1.0`) resolve v6 automatically via semver floor pin
+- No breaking changes to `intercept()` method signature or S-Cert audit format
+- New audit fields (`soft_stop_events`, `rule_versions`) are additive
+
+---
 ## [v5.2.0] - 2026-03-23
 
 ### ✨ Added

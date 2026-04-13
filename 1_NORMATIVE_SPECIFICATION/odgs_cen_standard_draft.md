@@ -41,3 +41,68 @@ A non-repudiable, timestamped, and cryptographically signed audit payload genera
 
 **3.7 Semantic Hash**
 A cryptographic digest (utilizing SHA-256) mathematically binding a machine-executable constraint to its specific human-readable, authoritative verbatim legislative source text, thereby attesting to its provenance.
+
+## 4. Architecture of the Execution Engine (Normative)
+
+### 4.1 Systemic Polymorphism
+The Execution Engine SHALL operate as a polymorphic validation entity. It SHALL be capable of seamlessly ingesting and evaluating both standard operational telemetry and mathematically strict, cryptographically bound W3C JSON-LD semantic ontologies without requiring distinct processing pathways.
+
+### 4.2 The 5-Plane Semantic Architecture
+An ODGS-compliant system SHALL implement the following 5-Plane logical architecture to maintain strict boundaries between law, execution, and audit:
+
+**I. The Legislative Plane (Semantic Truth):** 
+The domain of origin. This plane generates the human-readable statutory text and its corresponding machine-executable ontology. It establishes the baseline Semantic Hash. 
+
+**II. The Physical Plane (Data Supply):**
+The operational environment generating the physical data payloads subjected to evaluation. 
+
+**III. The Execution Engine (Mathematical Enforcement):**
+The isolated processing core. This plane acts strictly as an mathematical arbiter, evaluating physical data against legislative logic. It SHALL NOT alter data or create policy.
+
+**IV. The Administrative Control Plane:**
+The surrounding orchestration systems responsible for routing payloads and absorbing the operational recoil of an Administrative Recusal.
+
+**V. The Forensic Audit Plane:**
+The immutable ledger that receives and persists the cryptographic S-Certs generated post-execution. 
+
+### 4.3 Cryptographic Ingestion Handshake
+Prior to loading an Executable Constraint into operational memory, the Execution Engine SHALL perform a Cryptographic Ingestion Handshake. 
+1. The engine SHALL isolate the supplied JSON Web Signature embedded within the ontology schema.
+2. The engine SHALL retrieve the corresponding public key from the declared sovereign authority.
+3. The engine SHALL independently verify the mathematical signature against the payload's content.
+4. If the signature is absent, malformed, or mathematically invalid, the Execution Engine SHALL reject the constraint and log an ingestion failure.
+
+## 5. The Execution & Recusal Protocol (Normative)
+
+### 5.1 Pre-Flight Schema Validation
+Upon receiving a physical data payload intended for evaluation against a Legislative Ontology, the Execution Engine SHALL strictly validate the payload's structure against the prescribed JSON-LD `@context` and required schema definitions. A malformed payload SHALL trigger an immediate rejection prior to logical evaluation, protecting the engine from semantic corruption.
+
+### 5.2 Deterministic Logic Enforcement
+The Execution Engine SHALL evaluate the Executable Constraint strictly as a mathematical or boolean operation against the target variable within the physical data payload. The result SHALL be deterministic (Pass or Fail).
+
+### 5.3 The Hard Stop Mandate (Administrative Recusal)
+Upon calculating a "Fail" result while evaluating a constraint classified as a statutory or legislative requirement, the Execution Engine SHALL execute an Administrative Recusal.
+
+1. The Execution Engine SHALL immediately halt all further processing of the offending data payload.
+2. The Execution Engine SHALL transmit a severe fault signal to the Administrative Control Plane, explicitly identifying the exact legislative Semantic Hash that was breached.
+3. The Execution Engine SHALL NOT attempt to automatically rectify, silently drop, or dynamically impute the offending data to achieve a "Pass" state. 
+
+### 5.4 Data Drift Quantification
+During an Administrative Recusal, if the failure was triggered by a structural or volumetric deviation rather than a direct logical threshold breach, the Execution Engine SHOULD quantify and append the delta of the Data Drift to the output signal, aiding forensic diagnosis.
+
+## 6. Audit Lineage and The S-Cert (Normative)
+
+### 6.1 Mandatory Lineage Generation
+The Execution Engine SHALL generate one structured audit log entry for every discrete evaluation event, regardless of whether the mathematical outcome was a Pass or an Administrative Recusal.
+
+### 6.2 Structural Requirements of the S-Cert
+To claim ODGS compliance, the generated audit entry SHALL structurally constitute an S-Cert (Sovereign Certificate). The sequence MUST contain, at a minimum:
+1. A formalized Universally Unique Identifier (UUID) or Uniform Resource Name (URN) identifying the execution event.
+2. The Semantic Hash of the Executable Constraint evaluated.
+3. The explicit boolean result of the evaluation.
+4. The exact timestamp of the execution (represented in ISO 8601 UTC format).
+5. The `provenance_metadata` detailing the source architecture of the ontology.
+
+### 6.3 Cryptographic Sealing
+The final S-Cert JSON payload SHALL be subjected to cryptographic sealing. The Execution Engine, acting as the private key holder for the system, SHALL generate a JWS (JSON Web Signature) mathematically binding the execution result to the exact moment in time, ensuring total non-repudiation for the Forensic Audit Plane.
+

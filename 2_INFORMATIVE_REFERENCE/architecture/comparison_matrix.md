@@ -1,6 +1,6 @@
 # ODGS Competitive Comparison Matrix
 
-**Version:** 5.0.0
+**Version:** 6.0.0
 **Purpose:** Formal differentiation of ODGS from existing data governance frameworks.
 
 ---
@@ -16,14 +16,17 @@ No existing framework binds **data to its legal definition** at runtime with cry
 
 ## Feature Comparison
 
-| Capability | ODGS v5.0 | Great Expectations | dbt Tests | Soda Core | Open Lineage | Monte Carlo | W3C PROV |
+| Capability | ODGS v6.0 | Great Expectations | dbt Tests | Soda Core | Open Lineage | Monte Carlo | W3C PROV |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **Universal URN Routing** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Semantic Binding** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Constitutional Stack** (5-Plane) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Tri-Partite Audit** (3-hash binding) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | Partial |
 | **Sovereign Handshake** (integrity verification) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **Fail-Closed Pattern** (Hard Stop) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Fail-Closed Pattern** (Hard Stop + SOFT_STOP) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Batch Evaluation** (multi-payload) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Rule Dependency DAG** (topological sort) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Webhook Event Emission** (SOC/SIEM) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Time-Travel Resolution** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | Partial |
 | **EU AI Act Alignment** (Art. 10 + 12) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Data Shape Validation | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |

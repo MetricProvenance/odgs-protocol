@@ -45,7 +45,7 @@ def get_version():
     try:
         return importlib.metadata.version("odgs")
     except importlib.metadata.PackageNotFoundError:
-        return "5.2.0"
+        return "6.0.0"
 
 @app.command()
 def version():
@@ -53,6 +53,73 @@ def version():
     Print the current ODGS version.
     """
     console.print(Panel(f"ODGS Sovereign Engine v{get_version()}", border_style="cyan"))
+
+@app.command()
+def conformance(
+    project_path: str = typer.Argument(".", help="Path to the ODGS governance project directory"),
+    level: str = typer.Option("L1", "--level", "-l", help="Conformance level: L1 (basic) or L2 (full)")
+):
+    """
+    Run a conformance self-check against the specified ODGS project (v6.0.0).
+
+    L1: Verifies core plane artifacts exist and are schema-valid.
+    L2: Full cross-reference validation including sovereign hash consistency.
+    """
+    from odgs.executive.interceptor import OdgsInterceptor
+    from odgs.executive.exceptions import ConformanceException
+
+    abs_path = os.path.abspath(project_path)
+    console.print(Panel(f"🔍 Conformance Check [{level}] — {abs_path}", border_style="yellow"))
+
+    try:
+        interceptor = OdgsInterceptor(project_root_path=abs_path)
+        result = interceptor.conformance_check(level=level)
+        console.print(f"\n✅ [bold green]CONFORMANT[/bold green] — {result['passed']} checks passed")
+        for check in result["checks_passed"]:
+            console.print(f"   ✓ {check}")
+    except ConformanceException as e:
+        console.print(f"\n❌ [bold red]NON-CONFORMANT[/bold red] — {len(e.failures)} failure(s)")
+        for failure in e.failures:
+            console.print(f"   ✗ {failure}", style="red")
+        raise typer.Exit(code=1)
+    except Exception as e:
+        console.print(f"\n[bold red]Error:[/bold red] {e}")
+        raise typer.Exit(code=1)
+
+@app.command()
+def batch(
+    batch_file: str = typer.Argument(..., help="Path to a JSON file containing an array of evaluation items"),
+    project_path: str = typer.Option(".", "--project", "-p", help="Path to the ODGS governance project"),
+    fail_fast: bool = typer.Option(False, "--fail-fast", help="Stop at first failure")
+):
+    """
+    Evaluate multiple data payloads in a single batch run (v6.0.0).
+
+    The input JSON file should contain an array of objects, each with
+    'process_urn' and 'data_context' fields.
+    """
+    from odgs.executive.interceptor import OdgsInterceptor
+
+    abs_path = os.path.abspath(project_path)
+    console.print(Panel(f"📦 Batch Evaluation — {batch_file}", border_style="blue"))
+
+    try:
+        with open(batch_file, "r") as f:
+            items = json.load(f)
+    except Exception as e:
+        console.print(f"[bold red]Failed to load batch file:[/bold red] {e}")
+        raise typer.Exit(code=1)
+
+    interceptor = OdgsInterceptor(project_root_path=abs_path)
+    result = interceptor.intercept_batch(items, fail_fast=fail_fast)
+
+    console.print(f"\n📊 Results: {result['passed']}/{result['total']} passed, {result['failed']} failed")
+    for r in result["results"]:
+        status_icon = "✅" if r["status"] == "APPROVED" else "❌"
+        console.print(f"   {status_icon} [{r['index']}] {r['status']}: {r.get('error', '')}")
+
+    if result["failed"] > 0:
+        raise typer.Exit(code=1)
 
 @app.command()
 def init(
