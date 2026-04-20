@@ -5,7 +5,21 @@ All notable changes to the Open Data Governance Standard (ODGS) will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v6.0.2] - 2026-04-20
+
+### 📦 Documentation
+
+- **MCP Server:** Added `odgs-mcp-server` spotlight section to Platform Bridges (new headline integration for AI agents — Claude, Copilot, Cursor)
+- **Badge:** Added `MCP Server` and `LLM Bridge` version badges to README header
+- **Badge:** Updated Protocol badge to `v6.0.2`
+- **CITATION.cff:** Version bumped to `6.0.2`
+
+No functional changes. All v6.0.x configurations work without modification.
+
+---
+
 ## [v6.0.1] - 2026-04-20
+
 
 ### 📦 PyPI & Documentation
 

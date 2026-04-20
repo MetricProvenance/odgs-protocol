@@ -1,8 +1,10 @@
 # Open Data Governance Standard (ODGS)
 
-[![Protocol](https://img.shields.io/badge/Protocol-v6.0.1_(Sovereign_Engine)-0055AA)](https://platform.metricprovenance.com)
+[![Protocol](https://img.shields.io/badge/Protocol-v6.0.2_(Sovereign_Engine)-0055AA)](https://platform.metricprovenance.com)
 [![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act_%7C_NEN_381_525-003399)](GOVERNANCE.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18564270.svg)](https://doi.org/10.5281/zenodo.18564270)
+[![MCP Server](https://img.shields.io/pypi/dm/odgs-mcp-server?label=MCP%20Server&color=6C47FF)](https://pypi.org/project/odgs-mcp-server/)
+[![LLM Bridge](https://img.shields.io/pypi/dm/odgs-llm-bridge?label=LLM%20Bridge&color=blueviolet)](https://pypi.org/project/odgs-llm-bridge/)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs)
 [![npm Downloads](https://img.shields.io/npm/dm/odgs?label=npm%20Downloads&color=orange)](https://www.npmjs.com/package/odgs)
 [![License](https://img.shields.io/badge/License-Apache_2.0-lightgrey)](LICENSE)
@@ -165,7 +167,8 @@ ODGS bridges connect your existing data governance platform to the Execution Eng
 
 | Bridge | Function | Status |
 | --- | --- | --- |
-| [`odgs-llm-bridge`](https://github.com/MetricProvenance/odgs-llm-bridge) | **🤖 AI / LLM:** Compile regulations into enforceable rules via sovereign LLM. | [![PyPI](https://img.shields.io/pypi/v/odgs-llm-bridge?label=PyPI&color=blueviolet)](https://pypi.org/project/odgs-llm-bridge/) |
+| [`odgs-mcp-server`](https://github.com/MetricProvenance/odgs-mcp-server) | **🤖 AI Agents (MCP):** Exposes ODGS governance tools to Claude, Copilot, Cursor, and any MCP-compatible AI agent. | [![PyPI](https://img.shields.io/pypi/v/odgs-mcp-server?label=PyPI&color=6C47FF)](https://pypi.org/project/odgs-mcp-server/) |
+| [`odgs-llm-bridge`](https://github.com/MetricProvenance/odgs-llm-bridge) | **🧠 LLM Compilation:** Compile regulations into enforceable rules via sovereign LLM. | [![PyPI](https://img.shields.io/pypi/v/odgs-llm-bridge?label=PyPI&color=blueviolet)](https://pypi.org/project/odgs-llm-bridge/) |
 | [`odgs-flint-bridge`](https://github.com/MetricProvenance/odgs-flint-bridge) | **Legislative:** Ingests TNO FLINT JSON-LD into ODGS schema. | [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-flint-bridge?label=PyPI%20Downloads&color=blue)](https://pypi.org/project/odgs-flint-bridge/) |
 | [`odgs-collibra-bridge`](https://github.com/MetricProvenance/odgs-collibra-bridge) | **Physical:** Collibra Business Glossary integration. | [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-collibra-bridge?label=PyPI%20Downloads&color=blue)](https://pypi.org/project/odgs-collibra-bridge/) |
 | [`odgs-databricks-bridge`](https://github.com/MetricProvenance/odgs-databricks-bridge) | **Physical:** Databricks Unity Catalog integration. | [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-databricks-bridge?label=PyPI%20Downloads&color=blue)](https://pypi.org/project/odgs-databricks-bridge/) |
@@ -173,7 +176,36 @@ ODGS bridges connect your existing data governance platform to the Execution Eng
 
 > **Want to build a bridge?** ODGS is designed to be the enforcement layer for *any* data governance platform. [Open an issue](https://github.com/MetricProvenance/odgs-protocol/issues) or submit a PR.
 
-### 🧠 NEW — AI-Powered Governance: `odgs-llm-bridge`
+### 🆕 NEW — AI Agent Integration: `odgs-mcp-server`
+
+> [!TIP]
+> **Industry First:** ODGS is the first open data governance standard with a native MCP server — meaning Claude, Copilot, Cursor, and any MCP-compatible AI agent can now run governance checks, score compliance maturity, and surface certified certification paths, live, inside your AI workflow.
+
+The **`odgs-mcp-server`** exposes the Sovereign Validation Engine as a set of structured tools any AI agent can call directly via the [Model Context Protocol](https://modelcontextprotocol.io).
+
+| Tool | What it does |
+|---|---|
+| **`validate_payload`** | Enforce ODGS rules against a live data payload — returns APPROVED/BLOCKED with violation detail. |
+| **`governance_score`** | Score your project's compliance maturity A–F across all five governance planes. |
+| **`list_packs`** | List available certified regulation packs (EU AI Act, DORA, GDPR, CSRD, NIS2, Basel III). |
+| **`compile_regulation`** *(Pro)* | Compile regulation text into validated ODGS rule JSON inside your AI agent. |
+| **`check_drift`** *(Pro)* | Detect when upstream legislation has changed but your rules haven't. |
+| **`narrate_audit`** *(Pro)* | Turn S-Cert cryptographic audit logs into plain-language stakeholder narratives. |
+
+Every tool output includes an `_odgs_notice` routing compliance and legal teams to the certified partner programme — without interrupting the developer workflow.
+
+```bash
+pip install odgs-mcp-server
+
+# Add to your MCP client (Claude Desktop, Cursor, etc.)
+# "odgs": { "command": "python", "args": ["-m", "odgs_mcp_server"] }
+```
+
+> 📦 **[`odgs-mcp-server` on PyPI →](https://pypi.org/project/odgs-mcp-server/)** · **[GitHub →](https://github.com/MetricProvenance/odgs-mcp-server)**
+
+---
+
+### 🧠 AI-Powered Governance: `odgs-llm-bridge`
 
 > [!TIP]
 > **Industry First:** ODGS is the first open data governance standard with a native LLM bridge that converts regulations into enforceable rules automatically — while keeping all AI output under deterministic schema validation before it enters the execution engine.
