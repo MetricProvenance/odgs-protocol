@@ -5,7 +5,24 @@ All notable changes to the Open Data Governance Standard (ODGS) will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v6.0.1] - 2026-04-20
+
+### 📦 PyPI & Documentation
+
+- **Keywords:** Added `gdpr`, `csrd`, `s-cert`, `mcp` to PyPI keywords for compliance engineer discoverability
+- **URLs:** Fixed broken `Changelog` and `Issues` sidebar links (pointed to non-existent `odgs-core` repo → corrected to `odgs-protocol`)
+- **Partner Programme:** Renamed `Partner Demo` → `Partner Programme` in PyPI sidebar; added `PARTNERS.md` to repo root
+- **README:** Added dual-audience signpost routing compliance/legal/procurement teams to `platform.metricprovenance.com`
+- **README:** Added Community S-Certs vs Certified S-Certs callout block explaining the distinction for regulatory proof
+- **Badge:** Updated Protocol badge to `v6.0.1`
+- **CITATION.cff:** Version bumped to `6.0.1`, date updated to `2026-04-20`
+
+No functional changes. All v6.0.0 configurations work without modification.
+
+---
+
 ## [v6.0.0] - 2026-04-13
+
 
 ### 🚀 Major — Sovereign Validation Engine
 
