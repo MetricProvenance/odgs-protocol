@@ -3,8 +3,6 @@
 [![Protocol](https://img.shields.io/badge/Protocol-v6.0.2_(Sovereign_Engine)-0055AA)](https://platform.metricprovenance.com)
 [![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act_%7C_NEN_381_525-003399)](GOVERNANCE.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18564270.svg)](https://doi.org/10.5281/zenodo.18564270)
-[![MCP Server](https://img.shields.io/pypi/dm/odgs-mcp-server?label=MCP%20Server&color=6C47FF)](https://pypi.org/project/odgs-mcp-server/)
-[![LLM Bridge](https://img.shields.io/pypi/dm/odgs-llm-bridge?label=LLM%20Bridge&color=blueviolet)](https://pypi.org/project/odgs-llm-bridge/)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs)
 [![npm Downloads](https://img.shields.io/npm/dm/odgs?label=npm%20Downloads&color=orange)](https://www.npmjs.com/package/odgs)
 [![License](https://img.shields.io/badge/License-Apache_2.0-lightgrey)](LICENSE)
