@@ -5,13 +5,13 @@ build-backend = "hatchling.build"
 
 [project]
 name = "odgs"
-version = "6.0.0"
+version = "6.0.1"
 description = "Open Data Governance Standard — Sovereign Validation Engine"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "Apache-2.0"}
 authors = [{name = "Metric Provenance", email = "partner@metricprovenance.com"}]
-keywords = ["data-governance", "sovereign", "compliance", "ai-safety", "eu-ai-act", "dora", "nis2", "data-quality", "regulatory", "enforcement"]
+keywords = ["data-governance", "sovereign", "compliance", "ai-safety", "eu-ai-act", "dora", "gdpr", "csrd", "nis2", "data-quality", "regulatory", "enforcement", "s-cert", "mcp"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
@@ -49,9 +49,9 @@ all = ["odgs[demo,ai,server,audit,llm]"]
 Homepage = "https://metricprovenance.com"
 Repository = "https://github.com/MetricProvenance/odgs-protocol"
 Documentation = "https://github.com/MetricProvenance/odgs-protocol/tree/main/docs"
-Changelog = "https://github.com/MetricProvenance/odgs-core/blob/main/CHANGELOG.md"
-Issues = "https://github.com/MetricProvenance/odgs-core/issues"
-"Partner Demo" = "https://platform.metricprovenance.com"
+Changelog = "https://github.com/MetricProvenance/odgs-protocol/blob/main/CHANGELOG.md"
+Issues = "https://github.com/MetricProvenance/odgs-protocol/issues"
+"Partner Programme" = "https://platform.metricprovenance.com"
 "Research Paper (SSRN)" = "https://papers.ssrn.com/abstract=6205478"
 
 [project.scripts]

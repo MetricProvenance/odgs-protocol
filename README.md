@@ -8,6 +8,14 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-lightgrey)](LICENSE)
 
 > **The Sovereign Validation Engine for High-Risk Data.**
+
+---
+
+> **For engineers:** See [Quick Start](#2-quick-start-the-data-engineer-workflow) below.
+> **For compliance, legal, or procurement teams:** Your organisation may already be running ODGS.
+> [Request a partner briefing →](https://platform.metricprovenance.com#partner-enquiry)
+> **Consulting or platform partner?** See [PARTNERS.md](PARTNERS.md) · [Executive Brief →](https://www.metricprovenance.com/brief)
+
 ---
 > [!IMPORTANT]
 > **EU AI Act & CEN-CENELEC JTC 25 Candidate Standard (v6.0.0)**
@@ -107,6 +115,19 @@ except AdministrativeRecusal as e:
     # The pipeline HALTS before an illegal decision is made.
     print(f"HARD STOP EXECUTED: Data Drift Detected. {e}")
 ```
+
+---
+
+> [!NOTE]
+> **Community S-Certs vs. Certified S-Certs**
+>
+> Community S-Certs (this package) are cryptographically signed audit trails for
+> internal engineering use — CI/CD, development, and pre-production validation.
+>
+> For proof presentable to external regulators under EU AI Act Article 12, DORA RTS,
+> or CSRD assurance requirements, **Certified S-Cert issuance** is required.
+> Available through [Metric Provenance verified partners](https://platform.metricprovenance.com).
+> See [PARTNERS.md](PARTNERS.md) for the partner programme.
 
 ---
 
