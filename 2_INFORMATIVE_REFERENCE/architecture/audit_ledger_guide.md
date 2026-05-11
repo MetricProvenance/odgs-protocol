@@ -71,17 +71,17 @@ For strict regulatory reporting scenarios (e.g., EU AI Act, DORA), enterprises r
 
 **The Commercial Upgrade:**
 
-If the engine is securely bound to the **Metric Provenance Enterprise Portal** with `ODGS_REQUIRE_SCERT=True`, it physically prevents the pipeline from executing unless the Tri-Partite Hash payload is successfully transmitted over mutual TLS to the **Air-Gapped S-Cert Registry**.
+If the engine is securely bound to the **Sovereign S-Cert Registry** with `ODGS_REQUIRE_SCERT=True`, it physically prevents the pipeline from executing unless the Tri-Partite Hash payload is successfully transmitted over mutual TLS to the **Air-Gapped S-Cert Registry**.
 
 The SaaS/On-Premise registry cryptographically wraps the raw ODGS hashes in its own Sovereign Private Key, returning an immutable **"S-Cert" (Semantic Certificate)**. 
 
 Organizations can take this S-Cert URN and publicly display it on physical products (e.g., an MRI machine UI screen) or embed it within regulatory filings, providing immediate, zero-knowledge mathematical proof that an independent 3rd-party Certificate Authority verified the internal execution log transaction.
 
-👉 **Auditors require S-Certs, not text files. [Book a compliance consultation to deploy the Sovereign Node](https://platform.metricprovenance.com)**.
+👉 **Auditors require S-Certs, not text files. [Book a compliance consultation to deploy the Sovereign Node](https://metricprovenance.com/brief)**.
 
 ---
 
 [< Back to README](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)
 
 ---
-> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+> **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).

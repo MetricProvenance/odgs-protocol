@@ -164,9 +164,9 @@ result = interceptor.intercept(
 | Databricks (SQL Warehouse) | `DatabricksAdapter` | 📋 Community |
 | REST API | `ApiAdapter` | 📋 Community |
 
-> **Contributing:** To add a new adapter, implement the `OdgsAdapter` ABC and use the `AdapterRegistry` to seamlessly inject it into your internal Airflow or PySpark environments.
+> **Contributing:** To add a new adapter, implement the `OdgsAdapter` ABC and use the `AdapterRegistry` to deterministically inject it into your internal Airflow or PySpark environments.
 
 ---
-> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+> **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).
 
 [< Back to README](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)

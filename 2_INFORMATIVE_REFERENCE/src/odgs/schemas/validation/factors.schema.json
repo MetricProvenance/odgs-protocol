@@ -33,6 +33,13 @@
                 "items": {
                     "type": "string"
                 }
+            },
+            "regulatoryAlignment": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "description": "Regulations aligned with this factor (e.g., EU AI Act, DORA, CSRD)"
             }
         },
         "required": [

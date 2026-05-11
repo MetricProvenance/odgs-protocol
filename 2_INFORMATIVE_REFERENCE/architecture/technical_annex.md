@@ -300,6 +300,6 @@ The protocol is:
 - **Enterprise-ready** — SOFT_STOP waivers, batch pipelines, DAG dependency chains, webhook SOC integration
 
 ---
-> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+> **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).
 
 [< Back to README.md](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)

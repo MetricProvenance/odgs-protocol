@@ -8,11 +8,11 @@
 
 While the open-source ODGS engine executes local rules, **High-Risk AI Systems** require cryptographically sealed, immutable governance logs to satisfy Article 12 of the EU AI Act and avoid strict liability.
 
-**[Metric Provenance](https://platform.metricprovenance.com)** offers the commercial Enterprise Infrastructure for ODGS:
+**[Metric Provenance](https://metricprovenance.com/brief)** offers the commercial Enterprise Infrastructure for ODGS:
 * **The S-Cert Sovereign Registry:** An air-gapped Enterprise Certificate Authority that mints immutable, JWS-sealed audit logs of every AI decision.
 * **Certified Sovereign Packs:** Pre-compiled, cryptographically signed Ed25519 rule bundles for EU AI Act, DORA, and Basel compliance.
 
-👉 **[Discover the Sovereign CA Enterprise Node & Packs](https://platform.metricprovenance.com)**
+👉 **[Discover the Sovereign CA Enterprise Node & Packs](https://metricprovenance.com/brief)**
 
 ---
 
@@ -88,4 +88,4 @@ graph TD
 *Protocol v6.0.0 · Sovereign Validation Engine Edition*
 
 ---
-> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+> **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).

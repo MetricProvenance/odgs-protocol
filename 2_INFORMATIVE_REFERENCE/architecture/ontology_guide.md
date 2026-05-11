@@ -28,6 +28,6 @@ The graph connects the declarative intent of governance to the mechanical realit
 *By adopting the ODGS Ontology, engineering teams can elevate their autonomous agents from executing blind rules to understanding the fundamental governance context of their environment.*
 
 ---
-> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+> **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).
 
 [< Back to README.md](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)

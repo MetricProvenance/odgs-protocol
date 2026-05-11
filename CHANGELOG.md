@@ -5,6 +5,37 @@ All notable changes to the Open Data Governance Standard (ODGS) will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v6.0.3] - 2026-04-30
+
+### 📊 Ecosystem — Maturity Diagnostic
+
+- **New Package:** [`odgs-maturity`](https://pypi.org/project/odgs-maturity/) — DAMA DMBOK-aligned maturity scoring engine with gap analysis and governance charter generation
+- **README:** Added `odgs-maturity` to Platform Bridges table
+- **Badge:** Updated Protocol badge to `v6.0.3`
+- **CITATION.cff:** Version bumped to `6.0.3`, added `maturity-model` keyword
+- **PyPI:** Added `maturity-model` keyword for discoverability
+
+### 📋 Schema — Framework Tag Extensibility
+
+- **Normative schemas** now include `framework_tags` — an extensible dictionary for binding
+  ODGS artefacts to enterprise governance frameworks (APQC, DAMA DMBOK, BIAN, CDMC, and others).
+  Ships empty; populated by enterprise configuration or certified framework packs.
+- **Affected files:** `01-metrics-schema.json`, `02-rules-schema.json`,
+  `context_bindings.json`, `standard_dq_dimensions.json`
+- **Maturity integration:** The `odgs-maturity` scoring engine (GOV-04) now measures whether
+  governance artefacts are aligned to an enterprise framework, enabling organisations to
+  quantify their framework coverage gap.
+
+### 🔧 Build Hygiene
+
+- **sdist exclusions:** Added 15 patterns to `pyproject.toml` preventing build caches,
+  editor configs, and non-Python artifacts from shipping to PyPI
+- **`.gitignore`:** Hardened with agent config and NPM artifact exclusions
+
+No functional changes to the core engine. All v6.0.x configurations work without modification.
+
+---
+
 ## [v6.0.2] - 2026-04-20
 
 ### 📦 Documentation
@@ -25,8 +56,8 @@ No functional changes. All v6.0.x configurations work without modification.
 
 - **Keywords:** Added `gdpr`, `csrd`, `s-cert`, `mcp` to PyPI keywords for compliance engineer discoverability
 - **URLs:** Fixed broken `Changelog` and `Issues` sidebar links (pointed to non-existent `odgs-core` repo → corrected to `odgs-protocol`)
-- **Partner Programme:** Renamed `Partner Demo` → `Partner Programme` in PyPI sidebar; added `PARTNERS.md` to repo root
-- **README:** Added dual-audience signpost routing compliance/legal/procurement teams to `platform.metricprovenance.com`
+- **Sovereign Registry:** Renamed `Sovereign Registry` → `Sovereign Registry` in PyPI sidebar; added `PARTNERS.md` to repo root
+- **README:** Added dual-audience signpost routing compliance/legal/procurement teams to `metricprovenance.com/brief`
 - **README:** Added Community S-Certs vs Certified S-Certs callout block explaining the distinction for regulatory proof
 - **Badge:** Updated Protocol badge to `v6.0.1`
 - **CITATION.cff:** Version bumped to `6.0.1`, date updated to `2026-04-20`
@@ -220,7 +251,7 @@ All changes are **additive** — existing configurations continue to work withou
 
 ### 🚀 Added
 - **Universal Validation Engine:** Transformed the core enforcement engine to be completely headless and agnostic, functioning as a "Linux of Data Governance" rather than a rigid RegTech tool.
-- **Universal URN Routing:** Introduced strict namespace separation (`urn:odgs:custom:*` vs `urn:odgs:sov:*`) allowing developers to execute free-form Internal Governance policies seamlessly on the exact same engine as high-risk compliance checks.
+- **Universal URN Routing:** Introduced strict namespace separation (`urn:odgs:custom:*` vs `urn:odgs:sov:*`) allowing developers to execute free-form Internal Governance policies deterministically on the exact same engine as high-risk compliance checks.
 - **Dynamic Extensibility:** Added `HarvesterFactory` (Bring Your Own Blueprints) and `AdapterRegistry` (Bring Your Own Integrations). Developers can now inject proprietary parsing or custom data sinks without altering the protocol's core standard.
 - **Ontology Repositioning:** Re-positioned `ontology_graph.owl` as a "Semantic Bridge for Agentic AI," providing autonomous agents with formal, mathematically verifiable boundaries for business rules.
 

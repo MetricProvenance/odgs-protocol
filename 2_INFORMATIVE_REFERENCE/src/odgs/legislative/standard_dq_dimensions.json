@@ -36,7 +36,8 @@
       "Analytical Model Accuracy",
       "Report Accuracy",
       "Data Entry Error Rate"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 2,
@@ -76,7 +77,8 @@
       "Customer Churn Rate (post-breach)",
       "Brand Reputation Score",
       "Time to Detect Security Incidents"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 3,
@@ -130,7 +132,8 @@
       "Project Completion Time",
       "Customer Service Resolution Time",
       "Data Search Time"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 4,
@@ -187,7 +190,8 @@
       "Compliance Breach Incidents",
       "Order Fulfillment Accuracy",
       "Inventory Shrinkage"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 5,
@@ -209,7 +213,7 @@
     ],
     "potentialBusinessImpacts": {
       "positive": [
-        "Seamless data processing and integration between systems due to suitable data formats.",
+        "Deterministic data processing and integration between systems due to suitable data formats.",
         "Reduced need for complex data transformations, saving time and resources.",
         "Improved usability of data for analytics, reporting, and automated processes.",
         "Enhanced interoperability with partner systems and industry standards."
@@ -226,7 +230,8 @@
       "ETL Development Cost/Time",
       "System Interoperability Score",
       "Data Processing Error Rate"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 6,
@@ -285,7 +290,8 @@
       "Mean Time To Recovery (MTTR)",
       "Customer Self-Service Success Rate",
       "Lost Revenue Due to Downtime"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 7,
@@ -337,7 +343,8 @@
       "Number of Data Misinterpretation Incidents",
       "Adoption Rate of BI/Analytics Tools",
       "Data Governance Maturity Score"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 8,
@@ -353,7 +360,7 @@
       "Healthcare: Datasets from different hospital departments use varying patient identifier schemes, making it difficult to create a longitudinal patient record."
     ],
     "exampleGood": [
-      "Logistics: Both inventory and order datasets use the same standardized 'ProductSKU' and 'LocationID', allowing seamless combination for stock analysis across locations.",
+      "Logistics: Both inventory and order datasets use the same standardized 'ProductSKU' and 'LocationID', allowing deterministic combination for stock analysis across locations.",
       "Retail: All customer-facing systems (CRM, PoS, Online Store) use a globally unique 'CustomerMasterID', enabling a 360-degree customer view.",
       "Healthcare: All clinical datasets within an organization use a common Master Patient Index (MPI) identifier, ensuring data can be reliably combined for patient care and research."
     ],
@@ -376,7 +383,8 @@
       "Time to Consolidate Enterprise Reports",
       "Customer Data Completeness (360 view %)",
       "Inter-departmental Process Efficiency Score"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 9,
@@ -415,7 +423,8 @@
       "Market Share Analysis Reliability",
       "Policy Effectiveness Measurement",
       "Resource Allocation Equity"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 10,
@@ -454,7 +463,8 @@
       "Historical Reporting Consistency",
       "Long-term KPI Trend Reliability",
       "Return on Investment (Time-Series Analysis)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 11,
@@ -493,7 +503,8 @@
       "Analytical Richness Score",
       "Time to Develop New Reports/Analyses",
       "Business Process Exception Rate (due to missing attributes)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 12,
@@ -546,7 +557,8 @@
       "Customer Database Completeness %",
       "Operational Process Audit Completeness",
       "Audit Pass Rate (Record Integrity)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 13,
@@ -585,7 +597,8 @@
       "Data Pipeline Reliability",
       "End-of-Day Processing Completion Rate",
       "Manual Intervention Rate (for missing files)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 14,
@@ -635,7 +648,8 @@
       "Marketing Campaign Effectiveness/Targeting Accuracy",
       "AI Model Performance Metrics (e.g., F1 score, AUC)",
       "Manual Data Entry/Correction Hours"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 15,
@@ -674,7 +688,8 @@
       "Targeted Communication Success Rate",
       "Specific Process Step Completion Rate",
       "Report Field Population Rate"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 16,
@@ -713,7 +728,8 @@
       "Self-Service BI Adoption Rate",
       "Time to Understand a Dataset",
       "Data Governance Audit Findings (Metadata)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 17,
@@ -753,7 +769,8 @@
       "Audit Finding Severity/Frequency",
       "Legal Expenditure on Compliance Issues",
       "Customer Trust Index"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 18,
@@ -792,7 +809,8 @@
       "Ethical AI Review Pass Rate",
       "Regulatory Reporting Accuracy (Composition)",
       "Data Sharing Agreement Violations"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 19,
@@ -832,7 +850,8 @@
       "Employee/Customer Trust Score (Privacy)",
       "Data Loss Prevention (DLP) Effectiveness Rate",
       "Cost of Data Breach Remediation"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 20,
@@ -862,7 +881,7 @@
     ],
     "notes": [
       "A company is registered in the city of Paris in the country of Belgium.",
-      "Overlap are gaps in file with address history of a person. For example: Address A from 1 Jan 2003 \u2013 1 May 2019 and Address B from 1 March \u2013 until now."
+      "Overlap are gaps in file with address history of a person. For example: Address A from 1 Jan 2003 – 1 May 2019 and Address B from 1 March – until now."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -884,7 +903,8 @@
       "User Trust in Data Score",
       "Cross-System Process Error Rate",
       "Decision Reversal Rate (due to conflicting data)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 21,
@@ -923,7 +943,8 @@
       "Audit Trail Integrity Score",
       "Time-Series Forecast Error Rate",
       "Event Sequence Anomaly Rate"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 22,
@@ -962,7 +983,8 @@
       "Data Silo Reduction Index",
       "Enterprise Data Warehouse Accuracy",
       "Strategic Alignment Score"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 23,
@@ -1001,7 +1023,8 @@
       "Data Relationship Integrity Score",
       "Accuracy of Network Analysis",
       "False Positive/Negative Linkage Rate"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 24,
@@ -1040,7 +1063,8 @@
       "Automated Validation Exception Rate",
       "Data Quality Score (Record Level)",
       "Process Straight-Through Processing (STP) Rate"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 25,
@@ -1079,7 +1103,8 @@
       "BI/Analytics Tool Adoption Rate",
       "Data-Driven Decision Rate",
       "Perceived Reliability of Data Sources"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 26,
@@ -1130,7 +1155,8 @@
       "Customer Complaint Rate (due to outdated info)",
       "Effectiveness of Real-time Alerts & Monitoring",
       "Data Freshness Index"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 27,
@@ -1169,7 +1195,8 @@
       "Semantic Consistency Score",
       "Common Business Vocabulary Adoption",
       "Cross-System Data Harmonization Rate"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 28,
@@ -1208,7 +1235,8 @@
       "Data Query Flexibility",
       "Business Rule Implementation Complexity",
       "Report Customization Capability"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 29,
@@ -1247,7 +1275,8 @@
       "Root Cause Analysis Effectiveness",
       "Predictive Model Granularity Fit",
       "Lowest Level of Detail Available for Analysis"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 30,
@@ -1286,7 +1315,8 @@
       "Data Loss Incident Frequency",
       "System Error Rate (Data Integrity related)",
       "Data Validation Success Rate"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 31,
@@ -1325,7 +1355,8 @@
       "User Comprehension Test Score (for data reports)",
       "Time to Understand Reports/Dashboards",
       "Error Rate in Data Application"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 32,
@@ -1364,7 +1395,8 @@
       "Real-time Decision Window Adherence",
       "Algorithmic Trading Profitability (Latency Impact)",
       "Customer Wait Time (Information Dependent)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 33,
@@ -1404,7 +1436,8 @@
       "Supply Chain End-to-End Visibility Percentage",
       "Analytical Query Performance on Joins",
       "Network Analysis Effectiveness"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 34,
@@ -1443,7 +1476,8 @@
       "Automated Data Quality Rule Pass Rate",
       "Data Conformance to Schema (%)",
       "Data Transformation Error Rate (due to non-compliance)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 35,
@@ -1482,7 +1516,8 @@
       "Query Complexity Index",
       "Data Model Maintenance Effort",
       "User Satisfaction with Data Structure"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 36,
@@ -1521,7 +1556,8 @@
       "Fairness Metrics for AI Models",
       "Employee/Customer Perception of Fairness Score",
       "Decision Appeal Rate (due to perceived bias)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 37,
@@ -1560,7 +1596,8 @@
       "Data Access Request Fulfillment Time",
       "User Frustration Score (Data Access)",
       "Process Cycle Time (Data Dependent Steps)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 38,
@@ -1599,7 +1636,8 @@
       "Number of Implausible Data Values Flagged",
       "User Reported Data Absurdities",
       "Automated Decision Override Rate (due to implausible inputs)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 39,
@@ -1638,7 +1676,8 @@
       "Vendor Switching Cost Index",
       "Data Sharing Compatibility Score",
       "Disaster Recovery Test Success Rate (Data Portability)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 40,
@@ -1678,7 +1717,8 @@
       "Industry Standard Adoption Rate (Formats)",
       "Number of Systems Supporting Data Format",
       "Long-Term Data Accessibility Risk Score"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 41,
@@ -1717,7 +1757,8 @@
       "Calculation Accuracy (Precision Dependent)",
       "Smallest Detectable Change (Data Sensitivity)",
       "Fitness for Purpose (High Precision Tasks)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 42,
@@ -1756,7 +1797,8 @@
       "Confidence Interval Width",
       "Signal-to-Noise Ratio",
       "Process Capability Index (Cp/Cpk)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 43,
@@ -1810,7 +1852,8 @@
       "Schedule Adherence for Reports",
       "Process Delay Time (Waiting for Data)",
       "User Satisfaction with Data Punctuality"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 44,
@@ -1849,7 +1892,8 @@
       "Number of Unexplained Data Fluctuations",
       "Forecast Deviation from Expected Patterns",
       "User Confidence in Data Predictability"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 45,
@@ -1889,7 +1933,8 @@
       "Data Loss Percentage (Post-Incident)",
       "Disaster Recovery Test Success Rate",
       "Cost of Downtime"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 46,
@@ -1928,7 +1973,8 @@
       "Data Consistency Rate Across Systems",
       "Data Management Overhead",
       "Data Reconciliation Effort"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 47,
@@ -1967,7 +2013,8 @@
       "Data Processing Error Rate (due to linkage issues)",
       "Application Stability Score (Data Dependent)",
       "Database Maintenance Effort (Integrity Checks)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 48,
@@ -2007,7 +2054,8 @@
       "Time to Find Relevant Information",
       "Decision Effectiveness & Speed",
       "Actionable Insight Rate from Data"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 49,
@@ -2018,12 +2066,12 @@
     "unitOfMeasure": "%",
     "icon": "bi-arrow-repeat",
     "examplePoor": [
-      "Logistics: Sensor readings for reefer container temperatures fluctuate wildly (e.g., jumping between -10\u00b0C and +5\u00b0C every few seconds) even when the actual measured condition is stable, indicating a faulty sensor or transmission.",
+      "Logistics: Sensor readings for reefer container temperatures fluctuate wildly (e.g., jumping between -10°C and +5°C every few seconds) even when the actual measured condition is stable, indicating a faulty sensor or transmission.",
       "Manufacturing: A weighing scale gives significantly different readings for the same item when weighed multiple times in quick succession.",
       "Environmental Monitoring: An air quality sensor produces highly erratic CO2 level readings that don't correlate with known environmental conditions or other nearby sensors."
     ],
     "exampleGood": [
-      "Logistics: Repeated readings of a container's internal temperature under stable ambient conditions and reefer setpoint yield very similar values (e.g., within +/- 0.2\u00b0C).",
+      "Logistics: Repeated readings of a container's internal temperature under stable ambient conditions and reefer setpoint yield very similar values (e.g., within +/- 0.2°C).",
       "Manufacturing: A calibrated torque wrench consistently applies the same amount of force when tested repeatedly on a test rig.",
       "Environmental Monitoring: A water quality sensor provides stable and consistent pH readings when sampling from a controlled, stable solution."
     ],
@@ -2046,7 +2094,8 @@
       "Data Point Stability Index",
       "False Alarm Rate (Monitoring Systems)",
       "Process Control Chart Stability"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 50,
@@ -2085,7 +2134,8 @@
       "Scientific Validation Success Rate",
       "Report Consistency Score (Across Runs)",
       "AI Model Output Variance (Fixed Inputs)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 51,
@@ -2124,7 +2174,8 @@
       "Adoption Rate of Data from Specific Sources",
       "Perceived Credibility of Reports (Source Dependent)",
       "Brand Trust Index (Data Handling)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 52,
@@ -2163,7 +2214,8 @@
       "Storage Cost Savings (from disposal)",
       "Audit Findings (Retention Related)",
       "Legal Discovery Cost/Time"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 53,
@@ -2219,7 +2271,8 @@
       "Customer Issue Resolution Time",
       "Real-time Process Adherence Rate",
       "Data Lag Time (Creation to Availability)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 54,
@@ -2270,7 +2323,8 @@
       "Data Governance Compliance Rate (Traceability aspect)",
       "AI Model Explainability Score",
       "Impact Analysis Accuracy (for data changes)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 55,
@@ -2323,7 +2377,8 @@
       "Marketing Spend Effectiveness (Impacted by targeting duplicates)",
       "Data Cleansing & De-duplication Costs",
       "MDM 'Golden Record' Accuracy"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 56,
@@ -2362,7 +2417,8 @@
       "Transactional Error Rate (due to duplicates)",
       "Report Aggregation Accuracy",
       "Storage Utilization Efficiency"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 57,
@@ -2420,7 +2476,8 @@
       "Automated Decision Accuracy & Reliability",
       "Data Transformation Success Rate",
       "Data Quality Rule Pass Rate (Validity Checks)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 58,
@@ -2460,7 +2517,8 @@
       "Cost Savings from Data-Driven Optimizations",
       "Strategic Goal Achievement Rate (Data-linked goals)",
       "New Product/Service Success Rate (Data-informed)"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 59,
@@ -2500,7 +2558,8 @@
       "Predictive Model Generalizability Score",
       "Innovation Rate (Data-driven ideas)",
       "Completeness of 360-Degree Views"
-    ]
+    ],
+    "framework_tags": {}
   },
   {
     "id": 60,
@@ -2539,6 +2598,7 @@
       "Real-time Monitoring Accuracy (in volatile systems)",
       "Data Update Frequency vs. Change Rate Gap",
       "Cost of Managing High-Volatility Data"
-    ]
+    ],
+    "framework_tags": {}
   }
 ]

@@ -39,8 +39,17 @@ Thumbs.db
 .gemini/
 .claude/
 .cursor/
+.copilot/
 .agents/
 .agent/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+
+# ── NPM artifacts (this is a Python package) ─────────────────────────────────
+package.json
+package-lock.json
+.npmignore
 
 # ── Internal planning (keep local, don't ship) ───────────────────────────────
 docs/internal/
@@ -54,3 +63,4 @@ data/drafts/
 
 # Testing
 .pytest_cache/
+.gitnexus

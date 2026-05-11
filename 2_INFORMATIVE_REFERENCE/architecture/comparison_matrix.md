@@ -96,6 +96,6 @@ This binding satisfies **EU AI Act Article 12** (Automatic Recording) and **ISO/
 - **DAMA DMBOK v2:** Data Quality Dimensions Framework
 
 ---
-> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+> **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).
 
 [< Back to README](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)

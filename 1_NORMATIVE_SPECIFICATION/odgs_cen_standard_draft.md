@@ -45,7 +45,7 @@ A cryptographic digest (utilizing SHA-256) mathematically binding a machine-exec
 ## 4. Architecture of the Execution Engine (Normative)
 
 ### 4.1 Systemic Polymorphism
-The Execution Engine SHALL operate as a polymorphic validation entity. It SHALL be capable of seamlessly ingesting and evaluating both standard operational telemetry and mathematically strict, cryptographically bound W3C JSON-LD semantic ontologies without requiring distinct processing pathways.
+The Execution Engine SHALL operate as a polymorphic validation entity. It SHALL be capable of deterministically ingesting and evaluating both standard operational telemetry and mathematically strict, cryptographically bound W3C JSON-LD semantic ontologies without requiring distinct processing pathways.
 
 ### 4.2 The 5-Plane Semantic Architecture
 An ODGS-compliant system SHALL implement the following 5-Plane logical architecture to maintain strict boundaries between law, execution, and audit:

@@ -5,13 +5,13 @@ build-backend = "hatchling.build"
 
 [project]
 name = "odgs"
-version = "6.0.2"
+version = "6.0.3"
 description = "Open Data Governance Standard — Sovereign Validation Engine"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "Apache-2.0"}
 authors = [{name = "Metric Provenance", email = "partner@metricprovenance.com"}]
-keywords = ["data-governance", "sovereign", "compliance", "ai-safety", "eu-ai-act", "dora", "gdpr", "csrd", "nis2", "data-quality", "regulatory", "enforcement", "s-cert", "mcp"]
+keywords = ["data-governance", "sovereign", "compliance", "ai-safety", "eu-ai-act", "dora", "gdpr", "csrd", "nis2", "data-quality", "regulatory", "enforcement", "s-cert", "mcp", "maturity-model"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
@@ -51,7 +51,7 @@ Repository = "https://github.com/MetricProvenance/odgs-protocol"
 Documentation = "https://github.com/MetricProvenance/odgs-protocol/tree/main/docs"
 Changelog = "https://github.com/MetricProvenance/odgs-protocol/blob/main/CHANGELOG.md"
 Issues = "https://github.com/MetricProvenance/odgs-protocol/issues"
-"Partner Programme" = "https://platform.metricprovenance.com"
+"Sovereign Registry" = "https://registry.metricprovenance.com"
 "Research Paper (SSRN)" = "https://papers.ssrn.com/abstract=6205478"
 
 [project.scripts]
@@ -90,4 +90,19 @@ exclude = [
     "tests/.pytest_cache/",
     "**/*.log",
     "**/audit_logs/",
+    # AI tool configurations (never ship to PyPI)
+    "AGENTS.md",
+    "CLAUDE.md",
+    "GEMINI.md",
+    ".claude/",
+    ".gitnexus/",
+    ".gemini/",
+    ".cursor/",
+    ".copilot/",
+    # NPM artifacts (Python package only)
+    "node_modules/",
+    "package.json",
+    "package-lock.json",
+    ".npmignore",
+    "*.tgz",
 ]

@@ -135,6 +135,6 @@ The repository is **CERTIFIED PREPARED** for review by NEN Standards Committee 3
 The ODGS Protocol v6.0.0 provides a complete, auditable, vendor-neutral governance framework for High-Risk AI systems, with cryptographic integrity verification, immutable audit trails, enterprise-grade enforcement controls (SOFT_STOP, batch, DAG), and formal W3C OWL/RDF ontological grounding.
 
 ---
-> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+> **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).
 
 [< Back to README.md](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)

@@ -210,6 +210,6 @@ A: The EU AI Act requires "High-Risk AI systems" to have documented data governa
 *Have questions? Visit [metricprovenance.com](https://metricprovenance.com) or read the full [Technical Specification](technical_annex.md).*
 
 ---
-> **Require architectural clearance or SLA support for your organization?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+> **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).
 
 [< Back to README.md](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)

@@ -1,6 +1,6 @@
 # Open Data Governance Standard (ODGS)
 
-[![Protocol](https://img.shields.io/badge/Protocol-v6.0.2_(Sovereign_Engine)-0055AA)](https://platform.metricprovenance.com)
+[![Protocol](https://img.shields.io/badge/Protocol-v6.0.3_(Sovereign_Engine)-0055AA)](https://metricprovenance.com/brief)
 [![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act_%7C_NEN_381_525-003399)](GOVERNANCE.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18564270.svg)](https://doi.org/10.5281/zenodo.18564270)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs)
@@ -12,23 +12,23 @@
 ---
 
 > **For engineers:** See [Quick Start](#2-quick-start-the-data-engineer-workflow) below.
-> **For compliance, legal, or procurement teams:** Your organisation may already be running ODGS.
-> [Request a partner briefing →](https://platform.metricprovenance.com#partner-enquiry)
-> **Consulting or platform partner?** See [PARTNERS.md](PARTNERS.md) · [Executive Brief →](https://www.metricprovenance.com/brief)
+> **For compliance and procurement teams:** Certified Regulatory Law Packs and Sovereign S-Cert Registries are managed by Metric Provenance partners.
+> See [PARTNERS.md](PARTNERS.md) for certification details.
 
 ---
 > [!IMPORTANT]
-> **EU AI Act & CEN-CENELEC JTC 25 Candidate Standard (v6.0.0)**
+> **EU AI Act & CEN-CENELEC JTC 25 Candidate Standard (v6.0.3)**
 > ODGS v6 extends the Polymorphic Execution Engine with six deterministic enhancements:
 > `SOFT_STOP` override-able severity, batch evaluation, rule dependency chains (DAG),
 > webhook event emission, conformance self-checks, and rule versioning with provenance tracking.
-> All changes are normative-additive — existing v5.x deployments upgrade seamlessly.
+> All changes are normative-additive — existing v5.x deployments upgrade deterministically.
 ---
 
-### 🚀 What's New in v6.0.0: Sovereign Validation Engine
+### 🚀 What's New in v6.0.3: Maturity Diagnostic + Sovereign Engine
 
 | Enhancement | Description |
 |---|---|
+| **📊 `odgs-maturity`** | **NEW** — DAMA DMBOK-aligned maturity scoring across 8 governance pillars with gap analysis and automated charter generation. `pip install odgs-maturity` |
 | **SOFT_STOP** | Overrideable block — halts the pipeline by default, but authorized callers can supply a cryptographic `override_token` to proceed. Override is always logged. |
 | **Batch Evaluation** | `intercept_batch()` evaluates multiple payloads in a single call with `fail_fast` support. |
 | **Dependency Chains** | Rules declare `depends_on` URNs. Engine uses Kahn's algorithm for DAG ordering. Failed dependencies cascade. |
@@ -36,6 +36,9 @@
 | **Conformance Check** | `odgs conformance` CLI command verifies project meets L1/L2 conformance requirements. |
 | **Rule Versioning** | Rules declare `version` (semver). Versions tracked in every S-Cert audit for provenance. |
 | **Temporal Bounds** | Rules with `effective_from` / `effective_to` are auto-skipped outside their validity window. |
+| **Framework Tags** | Extensible `framework_tags` dictionary added to all normative schemas — bind ODGS artefacts to your enterprise governance framework (APQC, DAMA DMBOK, BIAN, CDMC). |
+
+> 💡 **Maturity Baseline:** Most teams score below 60% on first run. Certified sovereign packs map directly to missing conformance requirements to establish deterministic compliance.
 
 ---
 ### 🏢 Enterprise & Public Sector: EU AI Act Compliance
@@ -45,7 +48,9 @@ This open-source package connects your physical data infrastructure to the ODGS 
 * **Certified Sovereign Packs:** Pre-compiled, cryptographically signed Ed25519 rule bundles for DORA, EU AI Act, and Basel.
 * **The S-Cert Sovereign Registry:** An air-gapped Enterprise Certificate Authority that natively ingests ODGS telemetry to mint immutable, JWS-sealed audit logs.
 
-👉 **[Discover the Sovereign CA Enterprise Node & Packs](https://platform.metricprovenance.com)**
+> 📊 **Industry Benchmark:** The European Data Governance Maturity Benchmark 2026 found an average governance maturity of **37.6%** across 99 enterprises — a **62.4% enforcement gap** against regulatory expectation.
+
+**Registry Access:** The Sovereign CA Enterprise Node and Packs are available exclusively through the [Metric Provenance certification registry](https://metricprovenance.com/brief).
 
 ---
 
@@ -126,8 +131,8 @@ except AdministrativeRecusal as e:
 >
 > For proof presentable to external regulators under EU AI Act Article 12, DORA RTS,
 > or CSRD assurance requirements, **Certified S-Cert issuance** is required.
-> Available through [Metric Provenance verified partners](https://platform.metricprovenance.com).
-> See [PARTNERS.md](PARTNERS.md) for the partner programme.
+> This is maintained within the Metric Provenance Sovereign S-Cert Registry.
+> See [PARTNERS.md](PARTNERS.md) for certification details.
 
 ---
 
@@ -166,6 +171,7 @@ ODGS bridges connect your existing data governance platform to the Execution Eng
 | Bridge | Function | Status |
 | --- | --- | --- |
 | [`odgs-mcp-server`](https://github.com/MetricProvenance/odgs-mcp-server) | **🤖 AI Agents (MCP):** Exposes ODGS governance tools to Claude, Copilot, Cursor, and any MCP-compatible AI agent. | [![PyPI](https://img.shields.io/pypi/v/odgs-mcp-server?label=PyPI&color=6C47FF)](https://pypi.org/project/odgs-mcp-server/) |
+| [`odgs-maturity`](https://github.com/MetricProvenance/odgs-maturity) | **📊 Maturity Diagnostic:** DAMA DMBOK-aligned maturity scoring with gap analysis and governance charter generation. | [![PyPI](https://img.shields.io/pypi/v/odgs-maturity?label=PyPI&color=00AA55)](https://pypi.org/project/odgs-maturity/) |
 | [`odgs-llm-bridge`](https://github.com/MetricProvenance/odgs-llm-bridge) | **🧠 LLM Compilation:** Compile regulations into enforceable rules via sovereign LLM. | [![PyPI](https://img.shields.io/pypi/v/odgs-llm-bridge?label=PyPI&color=blueviolet)](https://pypi.org/project/odgs-llm-bridge/) |
 | [`odgs-flint-bridge`](https://github.com/MetricProvenance/odgs-flint-bridge) | **Legislative:** Ingests TNO FLINT JSON-LD into ODGS schema. | [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-flint-bridge?label=PyPI%20Downloads&color=blue)](https://pypi.org/project/odgs-flint-bridge/) |
 | [`odgs-collibra-bridge`](https://github.com/MetricProvenance/odgs-collibra-bridge) | **Physical:** Collibra Business Glossary integration. | [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-collibra-bridge?label=PyPI%20Downloads&color=blue)](https://pypi.org/project/odgs-collibra-bridge/) |
@@ -190,7 +196,7 @@ The **`odgs-mcp-server`** exposes the Sovereign Validation Engine as a set of st
 | **`check_drift`** *(Pro)* | Detect when upstream legislation has changed but your rules haven't. |
 | **`narrate_audit`** *(Pro)* | Turn S-Cert cryptographic audit logs into plain-language stakeholder narratives. |
 
-Every tool output includes an `_odgs_notice` routing compliance and legal teams to the certified partner programme — without interrupting the developer workflow.
+Every tool output includes an `_odgs_notice` routing compliance and legal teams to the certified registry — without interrupting the deterministic execution flow.
 
 ```bash
 pip install odgs-mcp-server
@@ -271,17 +277,16 @@ helm repo update
 # Install the Engine
 helm install odgs-cluster-agent metricprovenance/odgs-engine \
   --set configuration.namespace="urn:odgs:sov" \
-  --set keys.jwks_url="https://platform.metricprovenance.com/.well-known/jwks.json"
+  --set keys.jwks_url="https://certificate.metricprovenance.com/.well-known/jwks.json"
 ```
 
-To request architectural clearance for your organization's compliance deployment, please consult the [Metric Provenance Enterprise Portal](https://platform.metricprovenance.com).
+Architectural clearance and registry access for compliance deployments are managed via the [Metric Provenance Sovereign Registry](https://metricprovenance.com/brief).
 
 ---
 
 ## 8. Documentation & Contribution
 
 > 📚 **[Full Documentation Map →](2_INFORMATIVE_REFERENCE/architecture/index.md)**
-> 🎯 **[Live Demo →](https://demo.metricprovenance.com)**
 
 | Guide | Description |
 | --- | --- |
@@ -295,7 +300,7 @@ To request architectural clearance for your organization's compliance deployment
 ### Support & Community
 
 * **Bug Reports & Feature Requests:** Please use the [GitHub Issues](https://github.com/MetricProvenance/odgs-protocol/issues) tracker.
-* **Enterprise Compliance Deployments:** For architectural clearance, SLA support, or custom Law Packs, please contact us via the [Enterprise Portal](https://platform.metricprovenance.com).
+* **Enterprise Compliance Deployments:** Certified Law Packs and registry access are maintained via the [Metric Provenance Sovereign Registry](https://metricprovenance.com/brief).
 
 ---
 

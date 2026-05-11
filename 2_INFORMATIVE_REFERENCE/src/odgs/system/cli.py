@@ -45,7 +45,7 @@ def get_version():
     try:
         return importlib.metadata.version("odgs")
     except importlib.metadata.PackageNotFoundError:
-        return "6.0.0"
+        return "6.0.3"
 
 @app.command()
 def version():
