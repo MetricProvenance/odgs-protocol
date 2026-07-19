@@ -1,6 +1,6 @@
 # ODGS Partner Programme
 
-> ODGS certification is delivered exclusively through verified partner firms.
+> Certified Regulation Packs are **self-serve** at [metricprovenance.com/pricing](https://metricprovenance.com/pricing). Enterprise certification, Sovereign CA nodes, and implementation engagements are delivered through verified partner firms.
 > This document explains the commercial model and how to apply.
 
 ---
@@ -56,7 +56,7 @@ Email **[partner@metricprovenance.com](mailto:partner@metricprovenance.com)** wi
 2. A client use case or sector you have in mind
 3. Your evaluation timeline
 
-Or submit a partner enquiry at **[metricprovenance.com/brief](https://metricprovenance.com/brief)**.
+Or submit a partner enquiry at **[metricprovenance.com/pricing](https://metricprovenance.com/pricing)**.
 
 We respond to all partner enquiries within 48 hours.
 
@@ -66,7 +66,7 @@ We respond to all partner enquiries within 48 hours.
 
 If you're an engineer who installed `odgs` via PyPI and want to surface it to your compliance or procurement team, the easiest path is:
 
-1. Open [metricprovenance.com/brief](https://metricprovenance.com/brief) — executive brief with PDF download.
+1. Open [metricprovenance.com/pricing](https://metricprovenance.com/pricing) — executive brief with PDF download.
 2. Forward the PDF to your CDO, CTO, or Chief Compliance Officer with the note: *"We're already running this — here's the commercial certification layer."*
 3. Use the **Partner Enquiry** button on that page to request an introduction.
 

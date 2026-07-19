@@ -61,7 +61,7 @@ Engineers use the generated Charter to present the findings to the CDO. The Char
 ### Step 4: Close the Gaps
 Organisations can engage a **Metric Provenance certified implementation partner** to deploy pre-configured certified packs that close the identified gaps far faster than manual remediation. Partners handle the full delivery — Metric Provenance issues the certified IP layer.
 
-> The [European Data Governance Maturity Benchmark 2026](https://benchmark.metricprovenance.com) assessed 99 enterprises across the EU. Average governance maturity: **37.6%** — a 62.4% enforcement gap against regulatory requirements. For executive context, see [metricprovenance.com/brief](https://metricprovenance.com/brief).
+> The [European Data Governance Maturity Benchmark 2026](https://benchmark.metricprovenance.com) assessed 99 enterprises across the EU. Average governance maturity: **37.6%** — a 62.4% enforcement gap against regulatory requirements. For executive context, see [metricprovenance.com/pricing](https://metricprovenance.com/pricing).
 
 ### Step 5: Verify and Certify
 Re-run the maturity assessment after deploying the certified packs. The score will reflect the improvements (e.g., jumping from 32% to 65%+). You can then generate **S-Cert Certificates** to cryptographically prove your compliance to auditors and partners.

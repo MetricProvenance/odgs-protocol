@@ -1,6 +1,6 @@
 # Open Data Governance Standard (ODGS)
 
-[![Protocol](https://img.shields.io/badge/Protocol-v6.0.3_(Sovereign_Engine)-0055AA)](https://metricprovenance.com/brief)
+[![Protocol](https://img.shields.io/badge/Protocol-v6.0.4_(Sovereign_Engine)-0055AA)](https://metricprovenance.com/pricing)
 [![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act_%7C_NEN_381_525-003399)](GOVERNANCE.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18564270.svg)](https://doi.org/10.5281/zenodo.18564270)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs)
@@ -17,7 +17,7 @@
 
 ---
 > [!IMPORTANT]
-> **EU AI Act & CEN-CENELEC JTC 25 Candidate Standard (v6.0.3)**
+> **EU AI Act & CEN-CENELEC JTC 25 Candidate Standard (v6.0.4)**
 > ODGS v6 extends the Polymorphic Execution Engine with six deterministic enhancements:
 > `SOFT_STOP` override-able severity, batch evaluation, rule dependency chains (DAG),
 > webhook event emission, conformance self-checks, and rule versioning with provenance tracking.
@@ -36,7 +36,7 @@
 | **Conformance Check** | `odgs conformance` CLI command verifies project meets L1/L2 conformance requirements. |
 | **Rule Versioning** | Rules declare `version` (semver). Versions tracked in every S-Cert audit for provenance. |
 | **Temporal Bounds** | Rules with `effective_from` / `effective_to` are auto-skipped outside their validity window. |
-| **Framework Tags** | Extensible `framework_tags` dictionary added to all normative schemas — bind ODGS artefacts to your enterprise governance framework (APQC, DAMA DMBOK, BIAN, CDMC). |
+| **Framework Tags** | Extensible `framework_tags` dictionary added to all normative schemas for binding ODGS artefacts to enterprise frameworks (APQC, DAMA DMBOK, BIAN, CDMC). Schema support ships in v6.0.3; curated bindings are being populated per release (DQ dimensions already carry DAMA ids via `dama_id`). |
 
 > 💡 **Maturity Baseline:** Most teams score below 60% on first run. Certified sovereign packs map directly to missing conformance requirements to establish deterministic compliance.
 
@@ -50,7 +50,7 @@ This open-source package connects your physical data infrastructure to the ODGS 
 
 > 📊 **Industry Benchmark:** The European Data Governance Maturity Benchmark 2026 found an average governance maturity of **37.6%** across 99 enterprises — a **62.4% enforcement gap** against regulatory expectation.
 
-**Registry Access:** The Sovereign CA Enterprise Node and Packs are available exclusively through the [Metric Provenance certification registry](https://metricprovenance.com/brief).
+**Getting a licence:** Certified Packs are **self-serve** at [metricprovenance.com/pricing](https://metricprovenance.com/pricing) (Team €990/yr · Professional €2,490/yr · Consultant €4,990/yr — key emailed on purchase). Sovereign CA Enterprise Nodes are deployed through the [Metric Provenance partner registry](https://metricprovenance.com/pricing).
 
 ---
 
@@ -280,7 +280,7 @@ helm install odgs-cluster-agent metricprovenance/odgs-engine \
   --set keys.jwks_url="https://certificate.metricprovenance.com/.well-known/jwks.json"
 ```
 
-Architectural clearance and registry access for compliance deployments are managed via the [Metric Provenance Sovereign Registry](https://metricprovenance.com/brief).
+Architectural clearance and registry access for compliance deployments are managed via the [Metric Provenance Sovereign Registry](https://metricprovenance.com/pricing).
 
 ---
 
@@ -300,7 +300,7 @@ Architectural clearance and registry access for compliance deployments are manag
 ### Support & Community
 
 * **Bug Reports & Feature Requests:** Please use the [GitHub Issues](https://github.com/MetricProvenance/odgs-protocol/issues) tracker.
-* **Enterprise Compliance Deployments:** Certified Law Packs and registry access are maintained via the [Metric Provenance Sovereign Registry](https://metricprovenance.com/brief).
+* **Enterprise Compliance Deployments:** Certified Law Packs and registry access are maintained via the [Metric Provenance Sovereign Registry](https://metricprovenance.com/pricing).
 
 ---
 

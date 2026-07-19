@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "odgs"
-version = "6.0.3"
+version = "6.0.4"
 description = "Open Data Governance Standard — Sovereign Validation Engine"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -48,7 +48,7 @@ all = ["odgs[demo,ai,server,audit,llm]"]
 [project.urls]
 Homepage = "https://metricprovenance.com"
 Repository = "https://github.com/MetricProvenance/odgs-protocol"
-Documentation = "https://github.com/MetricProvenance/odgs-protocol/tree/main/docs"
+Documentation = "https://github.com/MetricProvenance/odgs-protocol/blob/main/2_INFORMATIVE_REFERENCE/architecture/index.md"
 Changelog = "https://github.com/MetricProvenance/odgs-protocol/blob/main/CHANGELOG.md"
 Issues = "https://github.com/MetricProvenance/odgs-protocol/issues"
 "Sovereign Registry" = "https://registry.metricprovenance.com"

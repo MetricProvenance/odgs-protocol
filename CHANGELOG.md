@@ -5,6 +5,15 @@ All notable changes to the Open Data Governance Standard (ODGS) will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v6.0.4] - 2026-07-18
+
+### 📄 Docs & Metadata — patch release, no functional changes
+
+- **PyPI `Documentation` URL fixed:** pointed at `/tree/main/docs`, which does not exist (404). Now points to the architecture reference at `2_INFORMATIVE_REFERENCE/architecture/index.md`.
+- **npm `package.json` version** aligned with the Python package (`6.0.0` → `6.0.4`).
+- **Licensing links** across the ecosystem now use the self-serve pricing page (`metricprovenance.com/pricing`); this release accompanies the odgs-mcp-server 0.3.0 / odgs-llm-bridge 0.2.2 / bridge 0.4.1 wave.
+- **Engine code untouched:** no changes to the interceptor, resolver, crypto, or schemas.
+
 ## [v6.0.3] - 2026-04-30
 
 ### 📊 Ecosystem — Maturity Diagnostic
