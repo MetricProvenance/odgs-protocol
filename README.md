@@ -50,6 +50,8 @@ This open-source package connects your physical data infrastructure to the ODGS 
 
 > 📊 **Industry Benchmark:** The European Data Governance Maturity Benchmark 2026 found an average governance maturity of **37.6%** across 99 enterprises — a **62.4% enforcement gap** against regulatory expectation.
 
+**Getting started:** New to ODGS? The guided walkthrough at [metricprovenance.com/start](https://www.metricprovenance.com/start) covers install, first score, and certified packs step by step.
+
 **Getting a licence:** Certified Packs are **self-serve** at [metricprovenance.com/pricing](https://metricprovenance.com/pricing) (Team €990/yr · Professional €2,490/yr · Consultant €4,990/yr — key emailed on purchase). Sovereign CA Enterprise Nodes are deployed through the [Metric Provenance partner registry](https://metricprovenance.com/pricing).
 
 ---
