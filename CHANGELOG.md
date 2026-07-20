@@ -5,6 +5,14 @@ All notable changes to the Open Data Governance Standard (ODGS) will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v6.0.5] - 2026-07-20
+
+### 📄 Docs & Metadata — patch release, no functional changes
+
+- **Documentation scope tightened:** removed forward-looking standardization commentary and a submission-status document that didn't belong in an open-source repo; the README and governance docs now focus on what the protocol does rather than external process status.
+- **CITATION.cff** corrected: title terminology aligned to "Standard" throughout, version/date fields brought current.
+- **Engine code untouched:** no changes to the interceptor, resolver, crypto, or schemas.
+
 ## [v6.0.4] - 2026-07-18
 
 ### 📄 Docs & Metadata — patch release, no functional changes

@@ -1299,7 +1299,6 @@ what the systems do (Execution)**.
     alignment_data = pd.DataFrame([
         {"Standard": "EU AI Act (2024/1689)", "Articles": "Art. 10, Art. 12", "ODGS Mechanism": "Data Quality Enforcement + Automatic Event Recording", "Status": "✅ Aligned"},
         {"Standard": "ISO/IEC 42001:2023", "Articles": "Clauses 4–10, Controls B.4–B.10", "ODGS Mechanism": "AI Management System via Legislative Plane", "Status": "✅ Aligned"},
-        {"Standard": "NEN 381 525", "Articles": "Data, Cloud & Edge", "ODGS Mechanism": "Semantic Interoperability + Sovereign Sidecar", "Status": "✅ Aligned"},
         {"Standard": "GDPR (2016/679)", "Articles": "Art. 5, 25, 30, 35", "ODGS Mechanism": "Privacy-Native Architecture + Zero-Trust Logging", "Status": "✅ Aligned"},
         {"Standard": "Basel III/IV", "Articles": "CET1, LCR, NSFR, FRTB", "ODGS Mechanism": "Financial Metrics Governance Definitions", "Status": "✅ Aligned"},
     ])

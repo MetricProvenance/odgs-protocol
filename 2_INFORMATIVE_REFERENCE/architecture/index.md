@@ -22,8 +22,8 @@ While the open-source ODGS engine executes local rules, **High-Risk AI Systems**
 |---|---|---|
 | **Executive / Board** | [Plain Language Guide](eli5_guide.md) | [Technical Note v4.0](research/technical_note_v40.md) |
 | **Chief Data Officer** | [Plain Language Guide](eli5_guide.md) | [Technical Annex](technical_annex.md) |
-| **Compliance Officer** | [Compliance Report](compliance_report.md) | [Technical Annex](technical_annex.md) |
-| **Regulator / Auditor** | [Compliance Report](compliance_report.md) | [Architecture Spec](architecture.md) |
+| **Compliance Officer** | [Technical Annex](technical_annex.md) | [Architecture Spec](architecture.md) |
+| **Regulator / Auditor** | [Technical Annex](technical_annex.md) | [Architecture Spec](architecture.md) |
 | **Academic / Researcher** | [Technical Note v4.0](research/technical_note_v40.md) | [Technical Annex](technical_annex.md) |
 | **Data Engineer** | [Adapter Guide](adapter_guide.md) | [Plain Language Guide](eli5_guide.md) |
 | **General Public** | [Plain Language Guide](eli5_guide.md) | [Comparison Matrix](comparison_matrix.md) |
@@ -57,11 +57,6 @@ While the open-source ODGS engine executes local rules, **High-Risk AI Systems**
 | [Adapter Guide](adapter_guide.md) | How to integrate ODGS with your platform |
 | [Architecture Specification](architecture.md) | Normative 5-Plane reference architecture |
 
-### For Compliance
-| Document | Description |
-|---|---|
-| [Compliance Report](compliance_report.md) | EU AI Act, GDPR, ISO 42001, Basel III alignment evidence |
-
 ---
 
 ## Document Relationships
@@ -70,17 +65,14 @@ While the open-source ODGS engine executes local rules, **High-Risk AI Systems**
 graph TD
     ELI5["Plain Language Guide"] --> TN["Technical Note v4.0"]
     ELI5 --> AG["Adapter Guide"]
-    ELI5 --> CR["Compliance Report"]
     TN --> TA["Technical Annex"]
     TA --> ARCH["Architecture Spec"]
-    CR --> TA
     AG --> ARCH
     CS["Case Studies"] --> ELI5
     CM["Comparison Matrix"] --> ELI5
 
     style ELI5 fill:#003399,color:#fff
     style TN fill:#003399,color:#fff
-    style CR fill:#c7a600,color:#000
 ```
 
 ---

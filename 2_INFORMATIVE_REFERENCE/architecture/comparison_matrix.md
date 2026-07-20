@@ -92,7 +92,6 @@ This binding satisfies **EU AI Act Article 12** (Automatic Recording) and **ISO/
 
 - **EU AI Act (2024/1689):** Articles 10, 12
 - **ISO/IEC 42001:2023:** Control B.7 (Data Management), B.9 (Operational Control)
-- **NEN 381 525:** Data, Data Management, Cloud and Edge
 - **DAMA DMBOK v2:** Data Quality Dimensions Framework
 
 ---

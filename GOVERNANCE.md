@@ -58,7 +58,7 @@ We are building this standard in the open.
 *   **For Regulators:** Review the `2_INFORMATIVE_REFERENCE/architecture/technical_annex.md` to assess compliance viability.
 *   **For Developers:** Help refine the Reference Implementation in `src/`.
 
-*Ideally suited for collaboration with NEN Standards Committee 381 525 and similar ISO working groups.*
+*Ideally suited for collaboration with standards bodies and working groups.*
 
 ---
 [< Back to README.md](/README.md)

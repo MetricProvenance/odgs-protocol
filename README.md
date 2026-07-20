@@ -1,7 +1,7 @@
 # Open Data Governance Standard (ODGS)
 
-[![Protocol](https://img.shields.io/badge/Protocol-v6.0.4_(Sovereign_Engine)-0055AA)](https://metricprovenance.com/pricing)
-[![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act_%7C_NEN_381_525-003399)](GOVERNANCE.md)
+[![Protocol](https://img.shields.io/badge/Protocol-v6.0.5_(Sovereign_Engine)-0055AA)](https://metricprovenance.com/pricing)
+[![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act-003399)](GOVERNANCE.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18564270.svg)](https://doi.org/10.5281/zenodo.18564270)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs)
 [![npm Downloads](https://img.shields.io/npm/dm/odgs?label=npm%20Downloads&color=orange)](https://www.npmjs.com/package/odgs)
@@ -17,14 +17,14 @@
 
 ---
 > [!IMPORTANT]
-> **EU AI Act & CEN-CENELEC JTC 25 Candidate Standard (v6.0.4)**
+> **EU AI Act Compliance Engine (v6.0.5)**
 > ODGS v6 extends the Polymorphic Execution Engine with six deterministic enhancements:
 > `SOFT_STOP` override-able severity, batch evaluation, rule dependency chains (DAG),
 > webhook event emission, conformance self-checks, and rule versioning with provenance tracking.
 > All changes are normative-additive — existing v5.x deployments upgrade deterministically.
 ---
 
-### 🚀 What's New in v6.0.3: Maturity Diagnostic + Sovereign Engine
+### 🚀 What's New in v6.0.5: Maturity Diagnostic + Sovereign Engine
 
 | Enhancement | Description |
 |---|---|
@@ -36,7 +36,7 @@
 | **Conformance Check** | `odgs conformance` CLI command verifies project meets L1/L2 conformance requirements. |
 | **Rule Versioning** | Rules declare `version` (semver). Versions tracked in every S-Cert audit for provenance. |
 | **Temporal Bounds** | Rules with `effective_from` / `effective_to` are auto-skipped outside their validity window. |
-| **Framework Tags** | Extensible `framework_tags` dictionary added to all normative schemas for binding ODGS artefacts to enterprise frameworks (APQC, DAMA DMBOK, BIAN, CDMC). Schema support ships in v6.0.3; curated bindings are being populated per release (DQ dimensions already carry DAMA ids via `dama_id`). |
+| **Framework Tags** | Extensible `framework_tags` dictionary added to all normative schemas for binding ODGS artefacts to enterprise frameworks (APQC, DAMA DMBOK, BIAN, CDMC). Schema support ships in v6.0.4 (unchanged in v6.0.5); curated bindings are being populated per release (DQ dimensions already carry DAMA ids via `dama_id`). |
 
 > 💡 **Maturity Baseline:** Most teams score below 60% on first run. Certified sovereign packs map directly to missing conformance requirements to establish deterministic compliance.
 
@@ -56,7 +56,7 @@ This open-source package connects your physical data infrastructure to the ODGS 
 
 ## 1. The Standard: Data Governance Without Compromise
 
-The **Open Data Governance Standard (ODGS)** resolves the "Definition-Execution Gap" in data pipelines. 
+The **Open Data Governance Standard (ODGS)** resolves the "Definition-Execution Gap" in data pipelines. ODGS is also on a path toward formal standardization.
 
 > **"Silence over Error."** — The Core Philosophy.
 > If data drifts from its legal, contractual, or internal definition, the pipeline must mathematically **halt** rather than process an invalid inference.

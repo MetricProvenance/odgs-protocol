@@ -22,7 +22,6 @@ This document outlines the core architecture of the v6.0.0 release. It builds on
 |---|---|---|
 | EU AI Act (2024/1689) | Articles 10, 12 | Data Quality + Automatic Event Recording |
 | ISO/IEC 42001:2023 | Clauses 4–10, Controls B.4–B.10 | AI Management System |
-| NEN Committee 381 525 | Data, Cloud & Edge | Semantic Interoperability |
 | GDPR (2016/679) | Articles 5, 25, 30 | Privacy-Native Architecture |
 
 ---
@@ -295,7 +294,7 @@ The ODGS Protocol v6.0.0 offers a sovereign validation layer and deterministic m
 The protocol is:
 - **Vendor-neutral** — JSON configuration, adapter pattern for any platform
 - **Privacy-native** — zero telemetry, Git-backed evidence
-- **Standards-aligned** — EU AI Act, ISO 42001, NEN 381 525, GDPR, Basel III
+- **Standards-aligned** — EU AI Act, ISO 42001, GDPR, Basel III
 - **Formally specified** — W3C OWL/RDF ontology for machine-readable governance
 - **Enterprise-ready** — SOFT_STOP waivers, batch pipelines, DAG dependency chains, webhook SOC integration
 

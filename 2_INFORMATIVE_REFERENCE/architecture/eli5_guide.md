@@ -184,7 +184,7 @@ When data does not match its statutory definition, the system refuses to proceed
 → Read the [Adapter Guide](adapter_guide.md) to integrate with your platform
 
 ### If You're a Regulator
-→ Review the [Compliance Report](compliance_report.md) for standards alignment
+→ Review the [Technical Annex](technical_annex.md) for standards alignment
 
 ---
 
