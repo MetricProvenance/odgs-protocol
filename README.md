@@ -1,6 +1,6 @@
 # Open Data Governance Standard (ODGS)
 
-[![Protocol](https://img.shields.io/badge/Protocol-v6.0.5_(Sovereign_Engine)-0055AA)](https://metricprovenance.com/pricing)
+[![Protocol](https://img.shields.io/badge/Protocol-v6.0.6_(Sovereign_Engine)-0055AA)](https://metricprovenance.com/pricing)
 [![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act-003399)](GOVERNANCE.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18564270.svg)](https://doi.org/10.5281/zenodo.18564270)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs)
@@ -17,7 +17,7 @@
 
 ---
 > [!IMPORTANT]
-> **EU AI Act Compliance Engine (v6.0.5)**
+> **EU AI Act Compliance Engine (v6.0.6)**
 > ODGS v6 extends the Polymorphic Execution Engine with six deterministic enhancements:
 > `SOFT_STOP` override-able severity, batch evaluation, rule dependency chains (DAG),
 > webhook event emission, conformance self-checks, and rule versioning with provenance tracking.

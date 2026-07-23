@@ -1,7 +1,7 @@
 # ODGS Adapter Interface Guide
 
 **Version:** 6.0.0  
-**Source:** [`2_INFORMATIVE_REFERENCE/src/odgs/core/adapter.py`](file:///Users/kartik/Code/open-data-governance-protocol/odgs-protocol-main/2_INFORMATIVE_REFERENCE/src/odgs/core/adapter.py)
+**Source:** [`2_INFORMATIVE_REFERENCE/src/odgs/core/adapter.py`](../src/odgs/core/adapter.py)
 
 ---
 
@@ -169,4 +169,4 @@ result = interceptor.intercept(
 ---
 > **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).
 
-[< Back to README](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)
+[< Back to README](/README.md) | [Documentation Map →](index.md) | 🎯 [Watch the demo →](https://www.metricprovenance.com/watch)

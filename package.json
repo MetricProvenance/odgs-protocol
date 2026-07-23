@@ -1,6 +1,6 @@
 {
   "name": "odgs",
-  "version": "6.0.5",
+  "version": "6.0.6",
   "description": "ODGS Protocol — Sovereign Validation Engine (Node.js)",
   "author": "Metric Provenance <partner@metricprovenance.com>",
   "license": "Apache-2.0",
@@ -21,15 +21,13 @@
   },
   "main": "2_INFORMATIVE_REFERENCE/src/index.js",
   "type": "module",
-  "types": "2_INFORMATIVE_REFERENCE/src/index.d.ts",
   "scripts": {
     "test": "vitest",
     "prepublishOnly": "python3 2_INFORMATIVE_REFERENCE/src/scripts/sync_schemas.py"
   },
   "files": [
     "1_NORMATIVE_SPECIFICATION",
-    "2_INFORMATIVE_REFERENCE/src/**/*.js",
-    "2_INFORMATIVE_REFERENCE/src/**/*.d.ts"
+    "2_INFORMATIVE_REFERENCE/src/**/*.js"
   ],
   "dependencies": {
     "ajv": "^8.12.0",

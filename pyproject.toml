@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "odgs"
-version = "6.0.5"
+version = "6.0.6"
 description = "Open Data Governance Standard — Sovereign Validation Engine"
 readme = "README.md"
 requires-python = ">=3.9"

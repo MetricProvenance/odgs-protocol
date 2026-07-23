@@ -34,6 +34,14 @@ except ImportError as e:
     # Try local relative imports for scripts if in dev
     from scripts.validate_schema import validate_all
     from scripts.hashing import generate_project_hash
+    # Adapters
+    from adapters.dbt.generate_seeds import generate_seeds
+    from adapters.dbt.generate_tests import generate_tests
+    from adapters.dbt.generate_semantic_models import generate_dbt_semantic_models
+    from adapters.powerbi.generate_tmsl import generate_powerbi_tmsl
+    from adapters.tableau.generate_tds import generate_tableau_tds
+    # Executive
+    from executive.interceptor import OdgsInterceptor, ProcessBlockedException, SecurityException
 
 app = typer.Typer(
     help="ODGS Protocol CLI - The Sovereign Data Governance Engine",
@@ -45,7 +53,8 @@ def get_version():
     try:
         return importlib.metadata.version("odgs")
     except importlib.metadata.PackageNotFoundError:
-        return "6.0.3"
+        from odgs import __version__
+        return __version__
 
 @app.command()
 def version():
@@ -494,7 +503,12 @@ def generate(
     """
     Generate a Draft Governance Bundle using AI (Gemini).
     """
-    from odgs.factory.generator import generate_bundle
+    try:
+        from odgs.factory.generator import generate_bundle
+    except ImportError:
+        console.print("[bold red]Error:[/bold red] The AI Factory is not part of the open-source package.")
+        console.print("   See https://metricprovenance.com/pricing for Enterprise access.")
+        raise typer.Exit(code=1)
     from odgs.system.config import settings
     
     # Resolve API Key (CLI Flag > Settings/.env)
@@ -544,12 +558,17 @@ def ui():
     Launch the Sovereign Web Interface (Local Dashboard).
     """
     import subprocess
-    
+
     console.print(Panel("🏛️  Launching [bold cyan]Sovereign UI[/bold cyan]...", border_style="cyan"))
-    
+
     dashboard_path = os.path.join(os.path.dirname(__file__), "../ui/dashboard.py")
     dashboard_path = os.path.abspath(dashboard_path)
-    
+
+    if not os.path.exists(dashboard_path):
+        console.print("[bold red]Error:[/bold red] The Sovereign UI is not part of the open-source package.")
+        console.print("   See https://metricprovenance.com/pricing for Enterprise access to the dashboard.")
+        raise typer.Exit(code=1)
+
     try:
         # Check for streamlit
         subprocess.run(["streamlit", "--version"], check=True, capture_output=True)
@@ -575,20 +594,19 @@ def register(
     """
     Register this Node for Critical Security Alerts (Sovereign Handshake).
     """
-    import requests
     import datetime
-    
+
     console.print(Panel(f"🛡️  [bold cyan]Sovereign Handshake Protocol[/bold cyan]"))
     console.print(f"   Connecting to Metric Provenance Authority...")
 
     # pseudo-logic for now - we don't have a backend yet
     # In a real scenario, this would POST to https://api.metricprovenance.com/register
-    
+
     registration_data = {
         "email": email,
         "org": org,
         "timestamp": datetime.datetime.utcnow().isoformat(),
-        "version": "4.0.0",
+        "version": get_version(),
         "node_id": generate_project_hash(os.getcwd()).get("master_hash", "UNKNOWN")[:8]
     }
     

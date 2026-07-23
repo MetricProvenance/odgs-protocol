@@ -5,10 +5,9 @@ Thank you for your interest in contributing to the **ODGS Protocol**. We are bui
 
 ## 🌟 How to Contribute
 
-We welcome contributions in three main areas:
+We welcome contributions in two main areas:
 1.  **Core Protocol**: Improving the JSON schemas for Metrics, Rules, Ontology, and Sovereign Definitions.
-2.  **Harvester Blueprints**: Adding new legislative source connectors (see `2_INFORMATIVE_REFERENCE/src/odgs/harvester/blueprints/`).
-3.  **Platform Adapters**: Extending integrations for dbt, Power BI, Tableau, and new platforms.
+2.  **Platform Adapters**: Extending integrations for dbt, Power BI, Tableau, and new platforms.
 
 ## 🛠 Development Setup
 

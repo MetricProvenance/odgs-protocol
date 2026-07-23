@@ -6,8 +6,8 @@ authors:
     email: "partner@metricprovenance.com"
 title: "Open Data Governance Standard (ODGS)"
 abstract: "The Open Data Governance Standard (ODGS) is a vendor-neutral protocol that resolves the Definition-Execution Gap in High-Risk AI systems through Semantic Binding, Tri-Partite Audit, and the Sovereign Handshake. v6.0.0 introduces SOFT_STOP severity, batch evaluation, rule dependency chains, webhook emission, conformance self-checks, and rule versioning for EU AI Act compliance via Metric Provenance."
-version: 6.0.5
-date-released: 2026-07-20
+version: 6.0.6
+date-released: 2026-07-23
 license: Apache-2.0
 url: "https://github.com/MetricProvenance/odgs-protocol"
 repository-code: "https://github.com/MetricProvenance/odgs-protocol"

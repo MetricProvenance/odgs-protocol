@@ -30,9 +30,9 @@ While the open-source ODGS engine executes local rules, **High-Risk AI Systems**
 
 ---
 
-## 🎯 Live Demo
+## 🎯 See It In Action
 
-> **[demo.metricprovenance.com](https://demo.metricprovenance.com)** — Interactive Streamlit dashboard with live governance metrics, harvester sources, and protocol architecture.
+> **[Watch the demo](https://www.metricprovenance.com/watch)** — the real engine compiling and enforcing a signed rule pack, with a genuine cryptographic audit trail.
 
 ---
 

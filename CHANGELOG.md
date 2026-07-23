@@ -5,6 +5,29 @@ All notable changes to the Open Data Governance Standard (ODGS) will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v6.0.6] - 2026-07-23
+
+### 🐛 Fixed — CLI commands that broke on a clean install
+
+- **`odgs register`**: removed a dead, unused `import requests` (the command never actually makes a network call, it's local pseudo-logic) — was crashing with `ModuleNotFoundError` on every clean install even though the module was never needed. Also replaced a hardcoded `"version": "4.0.0"` literal in the registration payload with the real running version.
+- **`odgs ui`** and **`odgs generate`**: both imported modules (`ui/`, `factory/`) that are intentionally excluded from the published package (Enterprise-tier features). They now fail with a clear message pointing to `metricprovenance.com/pricing` instead of a raw `ModuleNotFoundError` traceback.
+- **`get_version()`** fallback was hardcoded to a stale `"6.0.3"` two versions behind current; now reads `odgs.__version__` instead of a second hardcoded literal that can drift.
+- **Dev-mode import fallback** (`system/cli.py`) only re-imported 2 of 9 names when the primary package-relative import failed, leaving 7 names undefined and destined for a confusing `NameError` deep in unrelated commands. Fallback now mirrors all 9.
+
+### 📄 Docs — removed stale references to an unshipped internal dashboard
+
+- Replaced 3 screenshots in `README.md` of a private, unshipped internal dashboard (version-stamped `v3.3.0`, three versions stale, labeled "Connected: Private Repository") with a real "See it in action" video section linking to an actual signed-rule-pack enforcement run.
+- `eli5_guide.md` stated outright *"ODGS includes an interactive dashboard"* and told readers to run `odgs ui` — genuinely broken for anyone who `pip install`ed the package. Replaced with the same real video link.
+- The same stale `demo.metricprovenance.com` link (a live but generically-titled page, almost certainly the same unshipped dashboard) appeared in **9 more docs files**, including an explicit "Live Demo" claim in `index.md`. All repointed to `metricprovenance.com/watch`.
+- Fixed a leaked local `file://` path in `adapter_guide.md` (replaced with a relative repo link).
+- `CONTRIBUTING.md` pointed contributors at a `harvester/blueprints/` directory that doesn't exist in this repo — removed.
+
+### 🔒 Hygiene
+
+- Removed 2 committed audit-log files (`audit_logs/*.jsonl`) that had been tracked before the `.gitignore` rule excluding them was added — local engineering telemetry, not meant to ship in a public repo.
+- Removed a stray test artifact (`dummy_authority/dummy_123.json`) committed into an accidental duplicate nested directory.
+- `package.json` declared a `types` field and a `**/*.d.ts` files pattern pointing at a `.d.ts` file that doesn't exist anywhere in the repo — removed both.
+
 ## [v6.0.5] - 2026-07-20
 
 ### 📄 Docs & Metadata — patch release, no functional changes
