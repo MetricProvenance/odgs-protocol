@@ -136,39 +136,9 @@ These definitions are **content-hashed** — meaning if anyone changes them, the
 
 ## See It In Action
 
-ODGS includes an interactive dashboard. Here's what it looks like:
+[![Watch the ODGS core engine enforce a real signed rule pack](../../docs/demo/clip_core_poster.jpg)](../../docs/demo/clip_core.mp4)
 
-### Compliance Matrix — Real-Time KPIs
-
-![Sovereign Compliance Matrix showing 72 business metrics, 5 harvester sources, and 86% enforceable rules](images/ui_compliance_matrix.png)
-
-The main dashboard shows live governance status: how many metrics are registered, how many are backed by sovereign definitions, and the overall enforceability rate.
-
-### Harvester Sources — The 5 Trusted Authorities
-
-![Harvester Sources showing Dutch AwB, FIBO, ISO 42001, GDPR, and Basel III with live API status](images/ui_harvester_sources.png)
-
-Each source card shows the authority, format, CLI command, and live URL — providing full transparency on where every definition originates.
-
-### Protocol Guide — Architecture Made Visual
-
-![Protocol Guide showing the 5-Plane Architecture and the Definition-Execution Gap explanation](images/ui_protocol_guide.png)
-
-The built-in Protocol Guide explains the 5-Plane Architecture, key innovations, and standards alignment — directly within the tool.
-
-### Semantic Certificate — The Proof
-
-![Semantic Certificate showing VALID status, Government of the Netherlands as issuer, and cryptographic fingerprint](images/ui_semantic_certificate.png)
-
-Every sovereign definition carries a cryptographic fingerprint bound to its issuing authority — the data equivalent of a TLS certificate. If anyone changes the definition, the system detects it instantly.
-
-### Sovereign Brake — The Hard Stop
-
-![Sovereign Brake showing HARD_STOP enforcement rules with RFC 5322 email validation and E.164 phone format](images/ui_sovereign_brake.png)
-
-When data does not match its statutory definition, the system refuses to proceed — preventing bad AI decisions rather than just logging them. This is the "Administrative Recusal" principle enshrined in the EU AI Act Article 10.
-
-> **Try it yourself:** Visit [demo.metricprovenance.com](https://demo.metricprovenance.com) or run `odgs ui` locally.
+Real engine, real ES256-signed rule pack, real Ed25519 audit seal — click to watch on GitHub. A rule pack is compiled and signed, a conforming payload is APPROVED, and a non-conforming one is hard-stopped, with a verifiable audit trail generated for both.
 
 ---
 
@@ -212,4 +182,4 @@ A: The EU AI Act requires "High-Risk AI systems" to have documented data governa
 ---
 > **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).
 
-[< Back to README.md](/README.md) | [Documentation Map →](index.md) | 🎯 [Live Demo →](https://demo.metricprovenance.com)
+[< Back to README.md](/README.md) | [Documentation Map →](index.md) | 🎯 [Watch the demo →](https://www.metricprovenance.com/watch)

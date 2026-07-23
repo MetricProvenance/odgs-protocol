@@ -105,4 +105,9 @@ exclude = [
     "package-lock.json",
     ".npmignore",
     "*.tgz",
+    # Demo video/poster live in the repo for the README + marketplace listing links,
+    # excluded from the published sdist — pure bloat for `pip install`.
+    "docs/demo/*.mp4",
+    "docs/demo/*.jpg",
+    "docs/demo/*.png",
 ]

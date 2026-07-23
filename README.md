@@ -65,20 +65,11 @@ The **Open Data Governance Standard (ODGS)** resolves the "Definition-Execution 
 
 **Semantic Certificate** — Every sovereign definition carries a cryptographic fingerprint bound to its issuing authority. The data equivalent of a TLS certificate.
 
-![Semantic Certificate — cryptographic fingerprint bound to the Government of the Netherlands, with VALID status badge and SHA-256 content hash](2_INFORMATIVE_REFERENCE/architecture/images/ui_semantic_certificate.png)
+### See it in action
 
-<details>
-<summary><b>📊 More Screenshots</b> — Compliance Matrix · Sovereign Brake</summary>
+[![Watch the ODGS core engine enforce a real signed rule pack](docs/demo/clip_core_poster.jpg)](docs/demo/clip_core.mp4)
 
-**Sovereign Compliance Matrix** — Real-time governance status across 72 business metrics, aligned with EU AI Act Art. 10 & 12.
-
-![Sovereign Compliance Matrix showing 72 business metrics, domain filters, and Naked vs Sovereign status](2_INFORMATIVE_REFERENCE/architecture/images/ui_compliance_matrix.png)
-
-**Sovereign Brake — Live Interceptor** — When data does not match its statutory definition, the system *refuses to proceed*. This is the "Administrative Recusal" principle.
-
-![Sovereign Brake showing HARD_STOP enforcement rules with regex validation](2_INFORMATIVE_REFERENCE/architecture/images/ui_sovereign_brake.png)
-
-</details>
+Real engine, real ES256-signed rule pack, real Ed25519 audit seal — click to watch on GitHub. Sample process data, genuine cryptographic verification throughout.
 
 ---
 
