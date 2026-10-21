@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
-    <!ENTITY odgs "https://metricprovenance.com/odgs/ontology#">
+    <!ENTITY odgs "https://w3id.org/odgs/ontology#">
     <!ENTITY owl "http://www.w3.org/2002/07/owl#">
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
@@ -19,7 +19,7 @@
 
     <!-- ================================================================== -->
     <!-- ODGS ONTOLOGY — W3C OWL/RDF Formal Specification                   -->
-    <!-- Version: 4.0.0 (Generated from canonical JSON)       -->
+    <!-- Version: 6.1.0 (ISO/IEC 38505 & ISO/IEC 25012 Contextual Ontology)       -->
     <!-- Standard: EU AI Act (2024/1689), ISO/IEC 42001                     -->
     <!-- ================================================================== -->
 
@@ -33,9 +33,13 @@
             8 Factors, 42 Process Stages,
             and 43 Sovereign Definitions from 5 regulatory domains.
         </dcterms:description>
-        <dcterms:creator>Kartik Iyer</dcterms:creator>
+        <dcterms:creator>ODGS Project Contributors</dcterms:creator>
         <dcterms:license rdf:resource="https://www.apache.org/licenses/LICENSE-2.0"/>
-        <owl:versionInfo>4.0.0</owl:versionInfo>
+        <owl:versionInfo>6.1.0</owl:versionInfo>
+        <dcterms:conformsTo>ISO/IEC 38505-1:2026 &amp; ISO/IEC TR 38505-2:2018</dcterms:conformsTo>
+        <dcterms:conformsTo>ISO/IEC 25012:2008 &amp; ISO 8000</dcterms:conformsTo>
+        <dcterms:conformsTo>W3C ODRL 2.2 &amp; W3C PROV-O</dcterms:conformsTo>
+        <dcterms:conformsTo>Eclipse Dataspace CAP v2.2.1 &amp; DRP</dcterms:conformsTo>
         <dcterms:conformsTo>EU AI Act (2024/1689) Articles 10, 12</dcterms:conformsTo>
         <dcterms:conformsTo>ISO/IEC 42001:2023</dcterms:conformsTo>
     </owl:Ontology>
@@ -57,7 +61,7 @@
 
     <owl:Class rdf:about="&odgs;Process">
         <rdfs:label xml:lang="en">Business Process Stage</rdfs:label>
-        <rdfs:comment xml:lang="en">A stage in a business process lifecycle. Lives in the Executive Plane.</rdfs:comment>
+        <rdfs:comment xml:lang="en">A contextual operational business process stage (Plane III Governance Binding) where data meaning, quality thresholds, and policy rules are contextually bound and enforced (ISO/IEC TR 38505-2:2018).</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="&odgs;"/>
     </owl:Class>
 
@@ -69,13 +73,25 @@
 
     <owl:Class rdf:about="&odgs;Dimension">
         <rdfs:label xml:lang="en">Data Quality Dimension</rdfs:label>
-        <rdfs:comment xml:lang="en">A DAMA DMBOK data quality dimension.</rdfs:comment>
+        <rdfs:comment xml:lang="en">A contextual data and AI quality dimension aligned with ISO/IEC 25012:2008, ISO 8000, and ETSI EN 304 311, evaluated within a specific operational process context (ISO/IEC 38505-1:2026 &amp; ISO/IEC TR 38505-2:2018).</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="&odgs;"/>
     </owl:Class>
 
     <owl:Class rdf:about="&odgs;SovereignDefinition">
         <rdfs:label xml:lang="en">Sovereign Definition</rdfs:label>
         <rdfs:comment xml:lang="en">An immutable, SHA-256-hashed legal definition. Content-addressed.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="&odgs;"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="&odgs;ContextBinding">
+        <rdfs:label xml:lang="en">Contextual Process Binding</rdfs:label>
+        <rdfs:comment xml:lang="en">Plane IV binding that associates a specific operational Process Stage and Dataspace Agreement with required Metrics and enforceable Rules (ISO/IEC 38505-1:2026).</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="&odgs;"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="&odgs;SemanticCertificate">
+        <rdfs:label xml:lang="en">Semantic Certificate (S-Cert)</rdfs:label>
+        <rdfs:comment xml:lang="en">Plane V cryptographic attestation binding payload_hash, definition_hash, and config_hash via RFC 8785 JCS and RFC 7515 JWS.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="&odgs;"/>
     </owl:Class>
 

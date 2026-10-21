@@ -4,9 +4,9 @@
 
 # TECHNICAL SPECIFICATION: THE ODGS PROTOCOL
 
-**SUBJECT:** Runtime Enforcement, Data Sovereignty & ISO 42001 Alignment
-**VERSION:** 6.0.0 (Sovereign Validation Engine)
-**DATE:** March 2026
+**SUBJECT:** Runtime Semantic Policy Enforcement, Dataspace Interoperability & Cryptographic Attestation (`S-Cert`)
+**VERSION:** 6.1.0
+**DATE:** October 2026
 **DOI:** 10.5281/zenodo.18564270
 **CLASSIFICATION:** Public Specification
 
@@ -14,15 +14,17 @@
 
 ## 1. ABSTRACT
 
-The Open Data Governance Standard (ODGS) resolves the "Definition-Execution Gap" in High-Risk AI systems — the structural disconnect between what data governance *says* and what data pipelines *do*. It provides a vendor-neutral protocol to enforce **Administrative Safety** by strictly separating Policy (The Legislative Plane) from Execution (The Physical Plane).
+The Open Data Governance Standard (ODGS) resolves the "Definition-Execution Gap" in enterprise data pipelines and high-risk AI systems — the structural disconnect between what data governance *says* and what data pipelines *do*. It provides a vendor-neutral protocol to enforce **Administrative Safety** by strictly separating Policy (Planes I–III) from Contextual Process Binding (Plane IV) and Runtime Execution (Plane V).
 
-This document outlines the core architecture of the v6.0.0 release. It builds on the v5 Universal Validation Primitive with six deterministic engine enhancements — SOFT_STOP override-able severity, batch evaluation, rule dependency chains (DAG), webhook event emission, conformance self-checks, and rule versioning — collectively forming the "Sovereign Validation Engine" pattern:
+This document outlines the core architecture of the v6.1.0 release, grounding its deterministic engine capabilities — `SOFT_STOP` override-able severity, batch evaluation, rule dependency chains (DAG), webhook event emission, conformance self-checks, rule versioning, and Phase 6 dataspace runtime enforcement (`W3C ODRL 2.2`, `Eclipse CAP v2.2.1`, `Gaia-X DTA`) — in international standards:
 
 | Standard | Articles/Clauses | ODGS Implementation |
 |---|---|---|
-| EU AI Act (2024/1689) | Articles 10, 12 | Data Quality + Automatic Event Recording |
-| ISO/IEC 42001:2023 | Clauses 4–10, Controls B.4–B.10 | AI Management System |
-| GDPR (2016/679) | Articles 5, 25, 30 | Privacy-Native Architecture |
+| ISO/IEC 38505-1:2026 & TR 38505-2 | Evaluate — Direct — Monitor | Contextual Process Bindings (`context_bindings.json`) |
+| ISO/IEC 25012:2008 & ISO 8000-8 | 15 Inherent & System-Dependent Characteristics | 60 Data Quality Dimensions (`standard_dq_dimensions.json`) |
+| EU AI Act (2024/1689) | Articles 10, 12 | Data Quality Enforcement + Automatic Event Recording (`S-Cert`) |
+| ISO/IEC 42001:2023 | Clauses 4–10, Controls B.4–B.10 | AI Management System Alignment |
+| GDPR (2016/679) | Articles 5, 25, 30 | Zero-Knowledge Cryptographic Attestation |
 
 ---
 
@@ -89,7 +91,7 @@ graph TB
 | Plane | Role | Key Artifact | ISO Control |
 |---|---|---|---|
 | **1. Governance** | Captures human intent and policy scope (e.g., "Zero Tolerance for Fraud") | Policy Documents | B.5.1 (AI Policy) |
-| **2. Legislative** | The strict semantic definition of truth. 72 metrics, 101 rules, 57 DQ dimensions | `standard_metrics.json`, `standard_data_rules.json` | B.7 (Data Management) |
+| **2. Legislative** | The strict semantic definition of truth. 72 metrics, 101 rules, 60 ISO/IEC 25012 & ISO 8000-8 DQ dimensions | `standard_metrics.json`, `standard_data_rules.json` | B.7 (Data Management) |
 | **3. Judiciary** | The logic engine that validates data. If Data ≠ Definition → **Hard Stop** | `OdgsInterceptor` | B.9 (Operations) |
 | **4. Executive** | Maps definitions to business contexts (e.g., "Fiscal Year 2026", "EU Region") | `business_process_maps.json` | B.10 (Monitoring) |
 | **5. Physical** | Raw data streams, sensors, databases, APIs | Adapter Layer (Snowflake, PostgreSQL, etc.) | Infrastructure |
@@ -159,13 +161,13 @@ The ODGS Universal Engine is strictly built for **Zero Telemetry** operations; i
 To ensure runtime integrity without active network dependency, the Engine verifies the provenance of Configuration Packs (Law Packs) locally using standard **Ed25519 JWKS (JSON Web Key Set)** public keys.
 
 * **Stateless Integrity:** The Engine securely caches the public keys from a JWKS endpoint on startup. It then mathematically verifies the signature of every loaded policy package (e.g., EU AI Act) without conducting external database lookups during processing.
-* **Decentralized Custody:** Organizations are explicitly encouraged to host their own internal JWKS registries for their proprietary, internal rules (`urn:odgs:custom:*`). This ensures the protocol remains 100% neutral and decentralized. Organizations rely on the Metric Provenance Root Authority *solely* for official, statutory Sovereign URNs (`urn:odgs:sov:*`).
+* **Decentralized Custody:** Organizations are explicitly encouraged to host their own internal JWKS registries for their proprietary, internal rules (`urn:odgs:custom:*`). This ensures the protocol remains 100% neutral and decentralized. Organizations may also verify signatures from external dataspace trust anchors and conformity assessment authorities (`urn:odgs:sov:*`).
 
 ---
 
-## 5. THE v6.0.0 SOVEREIGN ENGINE ENHANCEMENTS
+## 5. CORE RUNTIME ENGINE CAPABILITIES (`v6.1.0`)
 
-v6.0.0 introduces six deterministic, normative-additive capabilities to the Interceptor. All are backward-compatible — existing v5.x rule definitions continue to function without modification.
+ODGS `v6.1.0` provides deterministic runtime enforcement capabilities in `OdgsInterceptor` and `DataspaceRuntimePEP`:
 
 ### 5.1 SOFT_STOP Override-able Severity
 
@@ -289,7 +291,7 @@ The ODGS knowledge graph is published as a **W3C OWL/RDF formal ontology** (`1_N
 
 ## 9. CONCLUSION
 
-The ODGS Protocol v6.0.0 offers a sovereign validation layer and deterministic method for **Administrative Recusal**. By prioritizing "Silence over Error," it ensures that High-Risk AI systems cannot operate outside their legal safety envelope, providing the necessary technical safeguards for public sector algorithms and regulated industries.
+The ODGS Protocol v6.1.0 offers a vendor-neutral runtime enforcement layer and deterministic method for **Administrative Recusal** and **Cryptographic Attestation (`S-Cert`)**. By prioritizing "Silence over Error," it ensures that data pipelines and high-risk AI systems cannot operate outside their defined safety and contractual envelope.
 
 The protocol is:
 - **Vendor-neutral** — JSON configuration, adapter pattern for any platform
@@ -299,6 +301,5 @@ The protocol is:
 - **Enterprise-ready** — SOFT_STOP waivers, batch pipelines, DAG dependency chains, webhook SOC integration
 
 ---
-> **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).
 
-[< Back to README.md](/README.md) | [Documentation Map →](index.md) | 🎯 [Watch the demo →](https://www.metricprovenance.com/watch)
+[< Back to README.md](../../README.md) | [Documentation Map →](index.md)

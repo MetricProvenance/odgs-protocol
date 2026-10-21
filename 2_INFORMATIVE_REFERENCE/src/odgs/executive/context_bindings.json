@@ -2,7 +2,7 @@
   "contexts": [
     {
       "context_id": "urn:odgs:process:O2C_S01",
-      "description": "Order to Cash — Customer Inquiry & Quotation: Validate customer identity and contact data at first touch.",
+      "description": "Order to Cash \u2014 Customer Inquiry & Quotation: Validate customer identity and contact data at first touch.",
       "required_metrics": [
         "urn:odgs:metric:8001",
         "urn:odgs:metric:8002"
@@ -12,13 +12,22 @@
         "urn:odgs:rule:2005",
         "urn:odgs:rule:2001"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:O2C_S02",
-      "description": "Order to Cash — Order Entry & Management: Validate order data, credit limits, and product identifiers.",
+      "description": "Order to Cash \u2014 Order Entry & Management: Validate order data, credit limits, and product identifiers.",
       "required_metrics": [
         "urn:odgs:metric:4002",
         "urn:odgs:metric:4004"
@@ -28,13 +37,22 @@
         "urn:odgs:rule:2024",
         "urn:odgs:rule:2008"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:O2C_S03",
-      "description": "Order to Cash — Order Fulfillment & Shipping: Validate container IDs, carrier codes, and shipping addresses.",
+      "description": "Order to Cash \u2014 Order Fulfillment & Shipping: Validate container IDs, carrier codes, and shipping addresses.",
       "required_metrics": [
         "urn:odgs:metric:1004",
         "urn:odgs:metric:1001"
@@ -44,13 +62,22 @@
         "urn:odgs:rule:2022",
         "urn:odgs:rule:2035"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:O2C_S04",
-      "description": "Order to Cash — Invoicing & Billing: Validate financial precision, currency codes, and tax IDs.",
+      "description": "Order to Cash \u2014 Invoicing & Billing: Validate financial precision, currency codes, and tax IDs.",
       "required_metrics": [
         "urn:odgs:metric:101",
         "urn:odgs:metric:103"
@@ -60,13 +87,22 @@
         "urn:odgs:rule:2023",
         "urn:odgs:rule:2029"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:O2C_S05",
-      "description": "Order to Cash — Payment Collection & Reconciliation: Validate payment dates and amounts.",
+      "description": "Order to Cash \u2014 Payment Collection & Reconciliation: Validate payment dates and amounts.",
       "required_metrics": [
         "urn:odgs:metric:4006",
         "urn:odgs:metric:106"
@@ -76,13 +112,22 @@
         "urn:odgs:rule:2007",
         "urn:odgs:rule:2006"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:P2P_S01",
-      "description": "Procure to Pay — Requisition: Validate purchase requests, chart of accounts, and vendor completeness.",
+      "description": "Procure to Pay \u2014 Requisition: Validate purchase requests, chart of accounts, and vendor completeness.",
       "required_metrics": [
         "urn:odgs:metric:4001",
         "urn:odgs:metric:4007"
@@ -92,13 +137,22 @@
         "urn:odgs:rule:2045",
         "urn:odgs:rule:2008"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:P2P_S03",
-      "description": "Procure to Pay — Goods Receipt: Validate batch/lot traceability, units of measure, and quantities.",
+      "description": "Procure to Pay \u2014 Goods Receipt: Validate batch/lot traceability, units of measure, and quantities.",
       "required_metrics": [
         "urn:odgs:metric:14001",
         "urn:odgs:metric:2003"
@@ -108,13 +162,22 @@
         "urn:odgs:rule:2011",
         "urn:odgs:rule:2007"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:H2R_S01",
-      "description": "Hire to Retire — Recruitment: Validate candidate contact data and identity documents.",
+      "description": "Hire to Retire \u2014 Recruitment: Validate candidate contact data and identity documents.",
       "required_metrics": [
         "urn:odgs:metric:501",
         "urn:odgs:metric:503"
@@ -124,13 +187,22 @@
         "urn:odgs:rule:2005",
         "urn:odgs:rule:2006"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:R2R_S02",
-      "description": "Record to Report — Journal Entry: Validate GL codes, amounts, and date compliance.",
+      "description": "Record to Report \u2014 Journal Entry: Validate GL codes, amounts, and date compliance.",
       "required_metrics": [
         "urn:odgs:metric:101",
         "urn:odgs:metric:102"
@@ -140,13 +212,22 @@
         "urn:odgs:rule:2007",
         "urn:odgs:rule:2006"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:I2M_S02",
-      "description": "Idea to Market — Product Development: Validate BOM versioning, material classification, and safety data.",
+      "description": "Idea to Market \u2014 Product Development: Validate BOM versioning, material classification, and safety data.",
       "required_metrics": [
         "urn:odgs:metric:2003",
         "urn:odgs:metric:6003"
@@ -156,13 +237,22 @@
         "urn:odgs:rule:2012",
         "urn:odgs:rule:2018"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:CRM_S01",
-      "description": "Customer Relationship — Onboarding: Validate golden record, de-duplication, and master data completeness.",
+      "description": "Customer Relationship \u2014 Onboarding: Validate golden record, de-duplication, and master data completeness.",
       "required_metrics": [
         "urn:odgs:metric:8001",
         "urn:odgs:metric:11002"
@@ -172,13 +262,22 @@
         "urn:odgs:rule:2014",
         "urn:odgs:rule:2004"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:OPS_S02",
-      "description": "Operations — Asset Maintenance: Validate work orders, calibration dates, inspection compliance, and criticality.",
+      "description": "Operations \u2014 Asset Maintenance: Validate work orders, calibration dates, inspection compliance, and criticality.",
       "required_metrics": [
         "urn:odgs:metric:3001",
         "urn:odgs:metric:3003",
@@ -190,13 +289,22 @@
         "urn:odgs:rule:2048",
         "urn:odgs:rule:2037"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:P2P_S02",
-      "description": "Procure to Pay — Supplier Selection & PO: Validate vendor master data, payment terms, and purchase order completeness.",
+      "description": "Procure to Pay \u2014 Supplier Selection & PO: Validate vendor master data, payment terms, and purchase order completeness.",
       "required_metrics": [
         "urn:odgs:metric:4007",
         "urn:odgs:metric:4001"
@@ -206,13 +314,22 @@
         "urn:odgs:rule:2008",
         "urn:odgs:rule:2002"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:P2P_S04",
-      "description": "Procure to Pay — Invoice 3-Way Match: Validate invoice amounts against PO and goods receipt, enforce currency and price precision.",
+      "description": "Procure to Pay \u2014 Invoice 3-Way Match: Validate invoice amounts against PO and goods receipt, enforce currency and price precision.",
       "required_metrics": [
         "urn:odgs:metric:101",
         "urn:odgs:metric:4006"
@@ -222,13 +339,22 @@
         "urn:odgs:rule:2023",
         "urn:odgs:rule:2007"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:R2R_S01",
-      "description": "Record to Report — Transaction Recording: Validate transaction dates, mandatory fields, and GL account codes at capture.",
+      "description": "Record to Report \u2014 Transaction Recording: Validate transaction dates, mandatory fields, and GL account codes at capture.",
       "required_metrics": [
         "urn:odgs:metric:9002",
         "urn:odgs:metric:9001"
@@ -238,13 +364,22 @@
         "urn:odgs:rule:2008",
         "urn:odgs:rule:2040"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:R2R_S03",
-      "description": "Record to Report — Financial Reporting: Validate GL balances, amounts, and date compliance before consolidation.",
+      "description": "Record to Report \u2014 Financial Reporting: Validate GL balances, amounts, and date compliance before consolidation.",
       "required_metrics": [
         "urn:odgs:metric:101",
         "urn:odgs:metric:104"
@@ -254,13 +389,22 @@
         "urn:odgs:rule:2007",
         "urn:odgs:rule:2027"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:OPS_S01",
-      "description": "Operations — Demand & Capacity Planning: Validate forecast data, resource availability, and scheduling parameters.",
+      "description": "Operations \u2014 Demand & Capacity Planning: Validate forecast data, resource availability, and scheduling parameters.",
       "required_metrics": [
         "urn:odgs:metric:4008",
         "urn:odgs:metric:2005"
@@ -270,9 +414,18 @@
         "urn:odgs:rule:2007",
         "urn:odgs:rule:2006"
       ],
-      "framework_tags": {},
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      },
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      }
     },
     {
       "context_id": "urn:odgs:process:integration_test",
@@ -300,7 +453,17 @@
         "urn:odgs:rule:2001"
       ],
       "effective_from": "2024-01-01",
-      "effective_until": null
+      "effective_until": null,
+      "iso38505Role": {
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+      },
+      "framework_tags": {
+        "iso_governance": "ISO/IEC 38505-1:2026",
+        "iso_data_quality": "ISO/IEC 25012:2008 & ISO 8000-8:2015",
+        "etsi_sovereignty": "ETSI EN 304 311"
+      }
     },
     {
       "context_id": "urn:odgs:process:pipeline_test_pass",

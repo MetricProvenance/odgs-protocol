@@ -1,0 +1,54 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "odgs": "https://w3id.org/odgs/dataspace/v1#",
+    "odrl": "http://www.w3.org/ns/odrl/2/",
+    "cred": "https://www.w3.org/2018/credentials#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "cap": "https://w3id.org/eclipse-cap/v2.2.1/#",
+    "ovc": "https://w3id.org/gaia-x/ovc/1/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "SemanticCertificate": "odgs:SemanticCertificate",
+    "ExecutableRule": "odgs:ExecutableRule",
+    "ProcessBinding": "odgs:ProcessBinding",
+    "AuthoritativeSource": "odgs:AuthoritativeSource",
+    "event_id": "@id",
+    "timestamp": {
+      "@id": "prov:generatedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "process_urn": {
+      "@id": "odgs:processUrn",
+      "@type": "@id"
+    },
+    "rule_id": {
+      "@id": "odgs:ruleId"
+    },
+    "semantic_hash": {
+      "@id": "odgs:semanticHash"
+    },
+    "verdict": {
+      "@id": "odgs:verdict"
+    },
+    "system_id": {
+      "@id": "odgs:systemId"
+    },
+    "payload_hash": {
+      "@id": "odgs:payloadHash"
+    },
+    "correlation_id": {
+      "@id": "odgs:correlationId"
+    },
+    "jws_signature": {
+      "@id": "odgs:jwsSignature"
+    },
+    "authority_id": {
+      "@id": "odgs:authorityId"
+    },
+    "issuing_jwk_url": {
+      "@id": "odgs:issuingJwkUrl",
+      "@type": "@id"
+    }
+  }
+}

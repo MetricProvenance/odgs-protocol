@@ -1,8 +1,9 @@
 {
     "meta": {
-        "schema_version": "1.0",
+        "schema_version": "6.1.0",
         "project_name": "ODGS_Master_Ontology",
-        "description": "The connective tissue linking Metrics, Rules, Processes, Factors, and Dimensions into a single traversable graph for AI grounding and automated governance.",
+        "normative_alignment": "ISO/IEC 38505-1:2026, ISO/IEC TR 38505-2:2018, ISO/IEC 25012:2008, ISO 8000-8, W3C ODRL 2.2",
+        "description": "The connective tissue linking Metrics, Rules, Processes, Factors, and Dimensions into a single traversable graph for contextual governance and AI grounding.",
         "urn_format": "urn:odgs:<domain>:<id>"
     },
     "domains": {
@@ -149,7 +150,7 @@
             "target_urn": "urn:odgs:dimension:17",
             "relationship": "MEASURES_DIMENSION",
             "weight": 1.0,
-            "description": "Hazmat Classification Rule directly enforces the 'Compliance' dimension [DAMA ID 17]."
+            "description": "Hazmat Classification Rule directly enforces the 'Compliance' dimension [ISO/IEC 25012 Compliance - Dimension 17]."
         },
         {
             "link_id": "LNK_011",
@@ -168,7 +169,7 @@
             "target_urn": "urn:odgs:dimension:55",
             "relationship": "MEASURES_DIMENSION",
             "weight": 1.0,
-            "description": "Duplicate Record Prevention Rule is the primary enforcement mechanism for 'Uniqueness (Objects)' [DAMA ID 55]."
+            "description": "Duplicate Record Prevention Rule is the primary enforcement mechanism for 'Uniqueness (Objects)' [ISO/IEC 25012 Uniqueness - Dimension 55]."
         },
         {
             "link_id": "LNK_013",

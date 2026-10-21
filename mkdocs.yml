@@ -1,0 +1,56 @@
+site_name: Open Data Governance Standard (ODGS) v6.1.0
+site_description: Normative Specification & Reference Runtime for In-Pipeline Semantic Policy Enforcement and Cryptographic Attestation (S-Cert)
+site_url: https://metricprovenance.github.io/odgs-protocol/
+repo_url: https://github.com/MetricProvenance/odgs-protocol
+repo_name: MetricProvenance/odgs-protocol
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search
+
+nav:
+  - Overview: index.md
+  - Getting Started & Quickstart: getting-started.md
+  - Architecture & Standards:
+    - 5-Plane Architecture & TDT: architecture-and-planes.md
+    - Conformance Levels (L1 & L2): conformance-levels.md
+    - JSON Schemas, OWL 2 & LinkML: schemas-and-linkml.md
+  - Dataspace Interoperability:
+    - Eclipse EDWG (ODRL 2.2, CAP v2.2.1, DRP): eclipse-edwg.md
+    - Gaia-X Phase 6 & DTA Verification: gaia-x-dta.md
+    - IDSA Rulebook, W3C PROV-O & NIST OSCAL: idsa-prov-oscal.md
+  - Reference:
+    - Python & Node.js API Reference: api-reference.md
+
+markdown_extensions:
+  - tables
+  - admonition
+  - attr_list
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite

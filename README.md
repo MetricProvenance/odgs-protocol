@@ -1,310 +1,180 @@
-# Open Data Governance Standard (ODGS)
+# Open Data Governance Standard (ODGS) — Reference Specification & Runtime Engine (`v6.1.0`)
 
-[![Protocol](https://img.shields.io/badge/Protocol-v6.0.6_(Sovereign_Engine)-0055AA)](https://metricprovenance.com/pricing)
-[![Compliance](https://img.shields.io/badge/Compliance-EU_AI_Act-003399)](GOVERNANCE.md)
+[![Protocol](https://img.shields.io/badge/ODGS_Specification-v6.1.0-0055AA)](1_NORMATIVE_SPECIFICATION/SPECIFICATION.md)
+[![Documentation](https://img.shields.io/badge/Docs-GitHub_Pages-007ACC)](https://metricprovenance.github.io/odgs-protocol/)
+[![ISO Alignment](https://img.shields.io/badge/ISO%2FIEC-38505--1%3A2026_%7C_25012%3A2008-003399)](1_NORMATIVE_SPECIFICATION/SPECIFICATION.md)
+[![Dataspace Profile](https://img.shields.io/badge/Dataspace-W3C_ODRL_2.2_%7C_Eclipse_CAP_v2.2.1_%7C_Gaia--X_DTA-teal)](https://metricprovenance.github.io/odgs-protocol/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18564270.svg)](https://doi.org/10.5281/zenodo.18564270)
-[![PyPI Downloads](https://img.shields.io/pypi/dm/odgs?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs)
-[![npm Downloads](https://img.shields.io/npm/dm/odgs?label=npm%20Downloads&color=orange)](https://www.npmjs.com/package/odgs)
 [![License](https://img.shields.io/badge/License-Apache_2.0-lightgrey)](LICENSE)
 
-> **The Sovereign Validation Engine for High-Risk Data.**
+> **Vendor-Neutral Runtime Semantic Policy Enforcement & Cryptographic Attestation (`S-Cert`) for Data Pipelines and Federated Dataspaces.**
 
 ---
 
-> **For engineers:** See [Quick Start](#2-quick-start-the-data-engineer-workflow) below.
-> **For compliance and procurement teams:** Certified Regulatory Law Packs and Sovereign S-Cert Registries are managed by Metric Provenance partners.
-> See [PARTNERS.md](PARTNERS.md) for certification details.
+## 1. Overview & Architectural Scope
 
----
-> [!IMPORTANT]
-> **EU AI Act Compliance Engine (v6.0.6)**
-> ODGS v6 extends the Polymorphic Execution Engine with six deterministic enhancements:
-> `SOFT_STOP` override-able severity, batch evaluation, rule dependency chains (DAG),
-> webhook event emission, conformance self-checks, and rule versioning with provenance tracking.
-> All changes are normative-additive — existing v5.x deployments upgrade deterministically.
----
+The **Open Data Governance Standard (ODGS)** (`v6.1.0`) resolves the **Definition–Execution Gap** (in-pipeline governance) and the **Phase 6 Operationalisation Gap** (post-transfer usage enforcement in federated dataspaces).
 
-### 🚀 What's New in v6.0.5: Maturity Diagnostic + Sovereign Engine
+While dataspace control planes (**Eclipse DSP/DCP**, **W3C ODRL 2.2**, **Eclipse DRP**, and the **Gaia-X Data Transfer Agent**) govern *pre-transfer negotiation and credential verification*, ODGS governs **in-pipeline runtime execution** once data arrives at the processing boundary — deterministically evaluating payload constraints (`HARD_STOP`, `SOFT_STOP`, `LOG_ONLY`) and emitting a zero-knowledge **Semantic Certificate (`S-Cert`)** (RFC 8785 JCS + RFC 7515 JWS).
 
-| Enhancement | Description |
-|---|---|
-| **📊 `odgs-maturity`** | **NEW** — DAMA DMBOK-aligned maturity scoring across 8 governance pillars with gap analysis and automated charter generation. `pip install odgs-maturity` |
-| **SOFT_STOP** | Overrideable block — halts the pipeline by default, but authorized callers can supply a cryptographic `override_token` to proceed. Override is always logged. |
-| **Batch Evaluation** | `intercept_batch()` evaluates multiple payloads in a single call with `fail_fast` support. |
-| **Dependency Chains** | Rules declare `depends_on` URNs. Engine uses Kahn's algorithm for DAG ordering. Failed dependencies cascade. |
-| **Webhook Events** | `BLOCKED`, `SOFT_STOP_OVERRIDE`, `SOFT_STOP_BLOCKED` events dispatched to configured endpoints via `odgs.json`. |
-| **Conformance Check** | `odgs conformance` CLI command verifies project meets L1/L2 conformance requirements. |
-| **Rule Versioning** | Rules declare `version` (semver). Versions tracked in every S-Cert audit for provenance. |
-| **Temporal Bounds** | Rules with `effective_from` / `effective_to` are auto-skipped outside their validity window. |
-| **Framework Tags** | Extensible `framework_tags` dictionary added to all normative schemas for binding ODGS artefacts to enterprise frameworks (APQC, DAMA DMBOK, BIAN, CDMC). Schema support ships in v6.0.4 (unchanged in v6.0.5); curated bindings are being populated per release (DQ dimensions already carry DAMA ids via `dama_id`). |
+### Normative Standards Alignment
 
-> 💡 **Maturity Baseline:** Most teams score below 60% on first run. Certified sovereign packs map directly to missing conformance requirements to establish deterministic compliance.
-
----
-### 🏢 Enterprise & Public Sector: EU AI Act Compliance
-This open-source package connects your physical data infrastructure to the ODGS validation engine. However, if you are operating a **High-Risk AI System** and require strict liability indemnification under the **EU AI Act (Articles 10 & 12)**, you need cryptographic provenance.
-
-**Metric Provenance** offers the commercial Enterprise Infrastructure for ODGS:
-* **Certified Sovereign Packs:** Pre-compiled, cryptographically signed Ed25519 rule bundles for DORA, EU AI Act, and Basel.
-* **The S-Cert Sovereign Registry:** An air-gapped Enterprise Certificate Authority that natively ingests ODGS telemetry to mint immutable, JWS-sealed audit logs.
-
-> 📊 **Industry Benchmark:** The European Data Governance Maturity Benchmark 2026 found an average governance maturity of **37.6%** across 99 enterprises — a **62.4% enforcement gap** against regulatory expectation.
-
-**Getting started:** New to ODGS? The guided walkthrough at [metricprovenance.com/start](https://www.metricprovenance.com/start) covers install, first score, and certified packs step by step.
-
-**Getting a licence:** Certified Packs are **self-serve** at [metricprovenance.com/pricing](https://metricprovenance.com/pricing) (Team €990/yr · Professional €2,490/yr · Consultant €4,990/yr — key emailed on purchase). Sovereign CA Enterprise Nodes are deployed through the [Metric Provenance partner registry](https://metricprovenance.com/pricing).
+| Standard / Ecosystem | Normative Specification | Role in ODGS `v6.1.0` |
+| :--- | :--- | :--- |
+| **ISO/IEC JTC 1/SC 40** | `ISO/IEC 38505-1:2026` & `TR 38505-2:2018` | Separates corporate governance of data (*Evaluate, Direct, Monitor*) from operational data management via contextual process bindings (`context_bindings.json`). |
+| **ISO/IEC JTC 1/SC 7 & TC 184** | `ISO/IEC 25012:2008`, `ISO 8000-8`, `ETSI EN 304 311` | Grounds all 60 data quality dimensions in `standard_dq_dimensions.json` (`Inherent`, `System-Dependent`, `Inherent_and_System_Dependent`). |
+| **W3C** | `W3C ODRL 2.2`, `W3C VC 2.0`, `W3C PROV-O`, `W3C OWL 2` | Compiles ODRL 2.2 agreements into executable rules (`odrl_binder.py`) and exports `S-Cert` lineage graphs (`export_w3c_prov_o`). |
+| **Eclipse Dataspace Working Group** | `Eclipse CAP v2.2.1` (`LinkML`) & `Eclipse DRP` | Projects runtime `S-Cert` receipts into `cap:Declaration` and `cred:Evidence` Verifiable Credentials (`cap_exporter.py`) and enforces DRP `delegationEvidence`. |
+| **Gaia-X & IDSA** | `Gaia-X Architecture 25.11` (§4.8.4.2) & `IDSA Rulebook 2026-3` (§121) | Verifies Phase 6 post-transfer obligations and upstream provenance hashes (`dta_verifier.py`) with decentralized `correlation_id` observability. |
+| **NIST** | `NIST OSCAL v1.1.2` | Exports runtime evaluation outcomes as OSCAL Assessment Results `finding` and `observation` records (`export_nist_oscal_finding`). |
 
 ---
 
-## 1. The Standard: Data Governance Without Compromise
+## 2. Repository Structure
 
-The **Open Data Governance Standard (ODGS)** resolves the "Definition-Execution Gap" in data pipelines. ODGS is also on a path toward formal standardization.
-
-> **"Silence over Error."** — The Core Philosophy.
-> If data drifts from its legal, contractual, or internal definition, the pipeline must mathematically **halt** rather than process an invalid inference.
-
-**Semantic Certificate** — Every sovereign definition carries a cryptographic fingerprint bound to its issuing authority. The data equivalent of a TLS certificate.
-
-### See it in action
-
-[![Watch the ODGS core engine enforce a real signed rule pack](docs/demo/clip_core_poster.jpg)](docs/demo/clip_core.mp4)
-
-Real engine, real ES256-signed rule pack, real Ed25519 audit seal — click to watch on GitHub. Sample process data, genuine cryptographic verification throughout.
-
----
-
-## 2. Quick Start: The Data Engineer Workflow
-
-Stop relying on passive analytics dashboards. Enforce statutory rules directly in your Python transforms.
-
-### Install
-```bash
-pip install odgs
+```text
+├── 1_NORMATIVE_SPECIFICATION/
+│   ├── SPECIFICATION.md                        # Normative 5-Plane & Phase 6 Dataspace Specification
+│   ├── conformance_rules.md                    # Level 1 Core & Level 2 Attested Conformance Rules
+│   ├── ontology/
+│   │   ├── ontology_graph.owl                  # W3C OWL 2 Ontology (ISO/IEC 38505 & 25012 grounded)
+│   │   └── odgs_dataspace.linkml.yaml          # LinkML Dataspace Vocabulary (Eclipse CAP / W3C PROV-O mapped)
+│   └── schemas/
+│       ├── 01-metrics-schema.json              # Plane II: Metric Definitions Schema
+│       ├── 02-rules-schema.json                # Plane III: Validation Rules Schema
+│       ├── 03-ontology-schema.json             # Plane IV: Contextual Process Bindings Schema
+│       ├── 04-s-cert-schema.json               # Plane V: Semantic Certificate (S-Cert) Schema
+│       ├── odgs-dataspace.context.jsonld       # JSON-LD Context (odgs, odrl, cred, prov, cap, ovc)
+│       ├── legislative/                        # 72 Metrics, 60 ISO/IEC 25012 DQ Dimensions, Ontology Graph
+│       ├── judiciary/                          # 101 Validation Rules & Root Cause Taxonomy
+│       └── executive/                          # Contextual Process Bindings & Physical Data Maps
+├── 2_INFORMATIVE_REFERENCE/
+│   ├── architecture/                           # Reference Architecture, Adapter, Ontology & Audit Guides
+│   └── src/
+│       ├── odgs/
+│       │   ├── core/                           # Cryptographic hashing (RFC 8785 JCS) & Adapter ABC
+│       │   ├── executive/                      # OdgsInterceptor (Python Runtime PEP)
+│       │   ├── dataspace/                      # ODRL 2.2 Binder, Phase 6 PEP, CAP/PROV-O/OSCAL Exporters, DTA Verifier
+│       │   └── system/                         # CLI (`odgs`), FastAPI Server, Schema Validators, dbt Adapter
+│       └── interceptor.js                      # Cross-language Node.js Interceptor Reference Implementation
+├── docs/                                       # MkDocs Technical Documentation (Eclipse EDWG, Gaia-X, IDSA, LinkML)
+├── examples/
+│   └── run_all_dataspace_scenarios.py          # End-to-end executable demonstration of Scenarios 1–5
+└── tests/                                      # Python (pytest) & Node.js (vitest) Conformance & Parity Suites
 ```
 
-### Create a Governance Project
-```bash
-# Standard 5-Plane Topology
-odgs init MyProject
+---
 
-# Minimalist Topology (Fast Start for small teams)
-odgs init MyProject --tier minimalist
+## 3. Quick Start
+
+### Installation (Local Development / Reference Verification)
+
+```bash
+pip install -e ".[dev]"
 ```
 
-### Example: Halting a Pipeline in Python/dbt
+### 1. Run the End-to-End Dataspace Scenarios (ODRL 2.2 → Phase 6 PEP → S-Cert → CAP v2.2.1 / PROV-O / OSCAL)
 
-Inject ODGS directly into your data warehouse transforms, Airflow DAGs, or Databricks PySpark wrappers:
+```bash
+# Run all 5 normative dataspace scenarios (HARD_STOP, SOFT_STOP, LOG_ONLY, DTA Provenance, CAP/PROV-O/OSCAL)
+python3 examples/run_all_dataspace_scenarios.py
+
+# Or via the CLI:
+odgs dataspace-demo --format cap-vc
+odgs dataspace-demo --format s-cert
+odgs dataspace-demo --format prov-o
+odgs dataspace-demo --format oscal
+```
+
+### 2. In-Pipeline Enforcement in Python (`OdgsInterceptor` & `DataspaceRuntimePEP`)
 
 ```python
-from odgs.executive.interceptor import OdgsInterceptor
-from odgs.executive.exceptions import AdministrativeRecusal
+from odgs.dataspace.odrl_binder import bind_odrl_policy
+from odgs.dataspace.runtime_pep import DataspaceRuntimePEP, AdministrativeRecusalError
+from odgs.dataspace.cap_exporter import export_cap_declaration_vc
 
-engine = OdgsInterceptor()
+odrl_agreement = {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "@type": "Agreement",
+    "uid": "urn:uuid:agreement-energy-grid-2026-091",
+    "obligation": [{
+        "uid": "urn:odrl:duty:k-anonymity-min-50",
+        "action": "aggregate",
+        "constraint": [{
+            "leftOperand": "aggregation_household_count",
+            "operator": "gteq",
+            "rightOperand": 50
+        }]
+    }]
+}
 
-# The physical payload (e.g., an AI applicant profile or standard telemetry)
-payload = {"transaction_value": 150000, "aml_flag": False}
+process_urn = "urn:odgs:process:energy-consumer:grid-load-forecasting"
+rules, binding = bind_odrl_policy(odrl_agreement, process_urn=process_urn)
+pep = DataspaceRuntimePEP(rules=rules, bindings=[binding])
 
-try:
-    # Evaluate against your internal checks or mathematically hashed W3C JSON-LD ontologies
-    engine.intercept("urn:odgs:sov:eu-ai-act:aml-threshold", payload)
-    print("Payload Validated. Proceeding to inference.")
-    
-except AdministrativeRecusal as e:
-    # The pipeline HALTS before an illegal decision is made.
-    print(f"HARD STOP EXECUTED: Data Drift Detected. {e}")
+# Evaluate runtime payload and emit Semantic Certificate (S-Cert)
+s_cert = pep.evaluate(
+    process_urn=process_urn,
+    payload={"aggregation_household_count": 64, "region": "NL-ZH"},
+)
+
+# Project S-Cert into an Eclipse CAP v2.2.1 Declaration Verifiable Credential
+cap_vc = export_cap_declaration_vc(
+    s_cert,
+    issuer_did="did:web:consumer.energy-dataspace.eu",
+    subject_did="did:web:consumer.energy-dataspace.eu#pipeline-1",
+)
 ```
 
 ---
 
-> [!NOTE]
-> **Community S-Certs vs. Certified S-Certs**
->
-> Community S-Certs (this package) are cryptographically signed audit trails for
-> internal engineering use — CI/CD, development, and pre-production validation.
->
-> For proof presentable to external regulators under EU AI Act Article 12, DORA RTS,
-> or CSRD assurance requirements, **Certified S-Cert issuance** is required.
-> This is maintained within the Metric Provenance Sovereign S-Cert Registry.
-> See [PARTNERS.md](PARTNERS.md) for certification details.
-
----
-
-## 3. The 5-Plane Semantic Architecture
-
-ODGS implements a strict 5-Plane topology to guarantee the absolute sovereignty of legislative intent over physical execution pipelines.
+## 4. The 5-Plane Architecture & Phase 6 Dataspace Handshake
 
 ```mermaid
-graph TD
-    subgraph Legislative_Plane ["I. Legislative Plane (Semantic Truth)"]
-        FLINT[TNO FLINT / W3C JSON-LD] --> |Semantic Hash| Definition(Statutory Definition)
+flowchart LR
+    subgraph ControlPlane ["Control Plane (Pre-Transfer)"]
+        ODRL["W3C ODRL 2.2 / Eclipse DSP & DRP"]
+        ISO["ISO/IEC 38505-1 & 25012 Definitions"]
     end
-    
-    subgraph Physical_Plane ["II. Physical Plane (ODGS Execution Engine)"]
-        Definition -.-> |Cryptographic Tether| Boundary[Execution Boundary]
-        Boundary --> Eval{Constraint Evaluation}
-        
-        Pipeline[IV. Data Pipeline Plane] --> |Payload| Eval
-        
-        Eval --> |Compliant| Approved[Execution Authorized]
-        Eval --> |Data Drift Detected| Recusal[Administrative Recusal]
-        
-        Approved --> Audit[V. Forensic Audit Plane]
-        Recusal --> Audit
-        
-        Audit --> |Generates| SCert[S-Cert: Immutable JWS Provenance Log]
+
+    subgraph DataPlane ["Data Plane (Phase 6 Runtime PEP)"]
+        BIND["Contextual Process Binding (context_bindings.json)"]
+        PEP["ODGS Interceptor / DataspaceRuntimePEP"]
+        DECISION{"HARD_STOP | SOFT_STOP | LOG_ONLY"}
     end
+
+    subgraph AttestationPlane ["Attestation & Conformity Plane"]
+        SCERT["Semantic Certificate (S-Cert: JCS + JWS)"]
+        CAP["Eclipse CAP v2.2.1 (cred:Evidence)"]
+        PROVO["W3C PROV-O & NIST OSCAL"]
+    end
+
+    ODRL --> BIND
+    ISO --> BIND
+    BIND --> PEP
+    PEP --> DECISION
+    DECISION --> SCERT
+    SCERT --> CAP
+    SCERT --> PROVO
 ```
 
 ---
 
-## 4. Platform Bridges
-
-ODGS bridges connect your existing data governance platform to the Execution Engine, transforming passive data dictionaries into active runtime enforcement.
-
-| Bridge | Function | Status |
-| --- | --- | --- |
-| [`odgs-mcp-server`](https://github.com/MetricProvenance/odgs-mcp-server) | **🤖 AI Agents (MCP):** Exposes ODGS governance tools to Claude, Copilot, Cursor, and any MCP-compatible AI agent. | [![PyPI](https://img.shields.io/pypi/v/odgs-mcp-server?label=PyPI&color=6C47FF)](https://pypi.org/project/odgs-mcp-server/) |
-| [`odgs-maturity`](https://github.com/MetricProvenance/odgs-maturity) | **📊 Maturity Diagnostic:** DAMA DMBOK-aligned maturity scoring with gap analysis and governance charter generation. | [![PyPI](https://img.shields.io/pypi/v/odgs-maturity?label=PyPI&color=00AA55)](https://pypi.org/project/odgs-maturity/) |
-| [`odgs-llm-bridge`](https://github.com/MetricProvenance/odgs-llm-bridge) | **🧠 LLM Compilation:** Compile regulations into enforceable rules via sovereign LLM. | [![PyPI](https://img.shields.io/pypi/v/odgs-llm-bridge?label=PyPI&color=blueviolet)](https://pypi.org/project/odgs-llm-bridge/) |
-| [`odgs-flint-bridge`](https://github.com/MetricProvenance/odgs-flint-bridge) | **Legislative:** Ingests TNO FLINT JSON-LD into ODGS schema. | [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-flint-bridge?label=PyPI%20Downloads&color=blue)](https://pypi.org/project/odgs-flint-bridge/) |
-| [`odgs-collibra-bridge`](https://github.com/MetricProvenance/odgs-collibra-bridge) | **Physical:** Collibra Business Glossary integration. | [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-collibra-bridge?label=PyPI%20Downloads&color=blue)](https://pypi.org/project/odgs-collibra-bridge/) |
-| [`odgs-databricks-bridge`](https://github.com/MetricProvenance/odgs-databricks-bridge) | **Physical:** Databricks Unity Catalog integration. | [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-databricks-bridge?label=PyPI%20Downloads&color=blue)](https://pypi.org/project/odgs-databricks-bridge/) |
-| [`odgs-snowflake-bridge`](https://github.com/MetricProvenance/odgs-snowflake-bridge) | **Physical:** Snowflake Data Dictionary integration. | [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-snowflake-bridge?label=PyPI%20Downloads&color=blue)](https://pypi.org/project/odgs-snowflake-bridge/) |
-
-> **Want to build a bridge?** ODGS is designed to be the enforcement layer for *any* data governance platform. [Open an issue](https://github.com/MetricProvenance/odgs-protocol/issues) or submit a PR.
-
-### 🆕 NEW — AI Agent Integration: `odgs-mcp-server`
-
-> [!TIP]
-> **Industry First:** ODGS is the first open data governance standard with a native MCP server — meaning Claude, Copilot, Cursor, and any MCP-compatible AI agent can now run governance checks, score compliance maturity, and surface certified certification paths, live, inside your AI workflow.
-
-The **`odgs-mcp-server`** exposes the Sovereign Validation Engine as a set of structured tools any AI agent can call directly via the [Model Context Protocol](https://modelcontextprotocol.io).
-
-| Tool | What it does |
-|---|---|
-| **`validate_payload`** | Enforce ODGS rules against a live data payload — returns APPROVED/BLOCKED with violation detail. |
-| **`governance_score`** | Score your project's compliance maturity A–F across all five governance planes. |
-| **`list_packs`** | List available certified regulation packs (EU AI Act, DORA, GDPR, CSRD, NIS2, Basel III). |
-| **`compile_regulation`** *(Pro)* | Compile regulation text into validated ODGS rule JSON inside your AI agent. |
-| **`check_drift`** *(Pro)* | Detect when upstream legislation has changed but your rules haven't. |
-| **`narrate_audit`** *(Pro)* | Turn S-Cert cryptographic audit logs into plain-language stakeholder narratives. |
-
-Every tool output includes an `_odgs_notice` routing compliance and legal teams to the certified registry — without interrupting the deterministic execution flow.
+## 5. Verification & Test Suite
 
 ```bash
-pip install odgs-mcp-server
+# Run Python test suite (core interceptor, ISO schema conformance, and dataspace bridge)
+pytest
 
-# Add to your MCP client (Claude Desktop, Cursor, etc.)
-# "odgs": { "command": "python", "args": ["-m", "odgs_mcp_server"] }
+# Run cross-language Node.js parity tests
+npm test
+
+# Build technical documentation strictly
+mkdocs build --strict
 ```
 
-> 📦 **[`odgs-mcp-server` on PyPI →](https://pypi.org/project/odgs-mcp-server/)** · **[GitHub →](https://github.com/MetricProvenance/odgs-mcp-server)**
-
 ---
 
-### 🧠 AI-Powered Governance: `odgs-llm-bridge`
+## 6. License
 
-> [!TIP]
-> **Industry First:** ODGS is the first open data governance standard with a native LLM bridge that converts regulations into enforceable rules automatically — while keeping all AI output under deterministic schema validation before it enters the execution engine.
-
-The **`odgs-llm-bridge`** extends the Sovereign Validation Engine with five AI-powered governance capabilities, designed for teams that need to operationalise regulation at scale without manual rule authoring.
-
-| Capability | What it does |
-|---|---|
-| **Regulatory Compiler** | Paste regulation text (EU AI Act, DORA, Basel III) → get validated ODGS rule JSON. |
-| **Drift Watchdog** | Continuously scan legislative definitions for semantic staleness and recommend updates. |
-| **Conflict Detector** | Cross-reference rules from multiple regulatory sources to surface contradictions. |
-| **Audit Narrator** | Convert cryptographic S-Certs into plain-language narratives for stakeholders. |
-| **Binding Discoverer** | Point at a data catalog → auto-generate `physical_data_map.json` bindings. |
-
-**Sovereignty-first provider stack:**
-
-```
-Priority 1 → Ollama (gemma4:26b local)   # Zero data leaves your perimeter
-Priority 2 → Google GenAI (gemini-3.1-flash-lite-preview) # Cloud fallback
-Priority 3 → OpenAI-compatible            # GPT-NL, Mistral, self-hosted
-Priority 4 → LiteLLM                      # Universal multi-model router
-```
-
-All LLM output passes through a **JSON Schema Validation Gate** before entering the deterministic engine — probabilistic AI never touches your production pipeline directly.
-
-```bash
-pip install odgs-llm-bridge[ollama]       # sovereign local (recommended)
-pip install odgs-llm-bridge[google]       # Google GenAI
-pip install odgs-llm-bridge[all]          # all providers
-
-# Compile a regulation into enforceable rules
-odgs-llm compile-regulation --input regulation.txt --output rules.json
-```
-
-> 📦 **[`odgs-llm-bridge` on PyPI →](https://pypi.org/project/odgs-llm-bridge/)** · **[GitHub →](https://github.com/MetricProvenance/odgs-llm-bridge)**
-
----
-
-## 5. Air-Gapped Execution & Stateless Cryptography (JWKS)
-
-The ODGS Engine operates with **Zero Telemetry** and does not "phone home". It is designed for strict air-gapped enterprise environments.
-
-To ensure metric authenticity, ODGS implements stateless cryptography using standard **Ed25519 JWKS (JSON Web Key Set)** public keys. When the Engine loads a Sovereign Pack, it cryptographically verifies the signature against the cached JWKS public key.
-
----
-
-## 6. Audit Ledgers: Cryptographic Verifiability & Zero-Knowledge
-
-ODGS outputs an agnostic `cryptographic_attestation` JSON schema to satisfy **EU AI Act Article 12 (Forensic Logging)** without exposing third-party data.
-
-* **Git-as-Backend:** ODGS utilizes a privacy-native logging architecture. Forensic logs are written directly to your private enterprise Git repository. **Zero data ever leaves your perimeter.**
-* **The Tri-Partite Hash:** The engine generates a cryptographic proof binding the Input Data Hash + Rule Definition Hash + Engine Configuration Hash. Independent auditors and regulatory bodies can mechanically verify the integrity of algorithmic decisions without exposing PII.
-
----
-
-## 7. Enterprise Deployment (Kubernetes / Helm)
-
-For organization-wide policy enforcement, Sovereign Nodes can deploy ODGS as an active sidecar container routing mesh traffic.
-
-```bash
-# Add the Official Metric Provenance Repository
-helm repo add metricprovenance https://charts.metricprovenance.com
-helm repo update
-
-# Install the Engine
-helm install odgs-cluster-agent metricprovenance/odgs-engine \
-  --set configuration.namespace="urn:odgs:sov" \
-  --set keys.jwks_url="https://certificate.metricprovenance.com/.well-known/jwks.json"
-```
-
-Architectural clearance and registry access for compliance deployments are managed via the [Metric Provenance Sovereign Registry](https://metricprovenance.com/pricing).
-
----
-
-## 8. Documentation & Contribution
-
-> 📚 **[Full Documentation Map →](2_INFORMATIVE_REFERENCE/architecture/index.md)**
-
-| Guide | Description |
-| --- | --- |
-| [Migration Guide (v5.x → v6.0.0)](MIGRATION_GUIDE.md) | Non-breaking Sovereign Engine upgrade — all v5 configs work as-is. |
-| [Migration Guide (v4.0 → v5.0)](MIGRATION_GUIDE.md#odgs-v500-migration-guide) | Breaking changes for W3C JSON-LD rule structures. |
-| [Adapter Guide](2_INFORMATIVE_REFERENCE/architecture/adapter_guide.md) | For Data Engineers connecting ODGS to custom infrastructures. |
-| [Audit Ledger Guide](2_INFORMATIVE_REFERENCE/architecture/audit_ledger_guide.md) | For Big 4 Auditors verifying the Tri-Partite Hash. |
-
----
-
-### Support & Community
-
-* **Bug Reports & Feature Requests:** Please use the [GitHub Issues](https://github.com/MetricProvenance/odgs-protocol/issues) tracker.
-* **Enterprise Compliance Deployments:** Certified Law Packs and registry access are maintained via the [Metric Provenance Sovereign Registry](https://metricprovenance.com/pricing).
-
----
-
-### License
-
-Released under the **Apache 2.0 License**.
-
-> * **No Vendor Lock-in.**
-> * **No Cloud Dependency.**
-> * **100% Data Sovereignty.**
-
----
-
-ODGS | Developed by [Metric Provenance](https://metricprovenance.com) | The Hague, NL 🇳🇱
+Released under the **Apache License, Version 2.0**. See [LICENSE](LICENSE) and [GOVERNANCE.md](GOVERNANCE.md).

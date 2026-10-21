@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="608" viewBox="0 0 1200 608">
+  <defs>
+    <style>
+      text { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+      .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; }
+    </style>
+    <marker id="arrowNavy" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0B2545"/>
+    </marker>
+    <marker id="arrowTeal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0D6E6E"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#B45309"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#FFFFFF" rx="8"/>
+  
+  <!-- Title Banner -->
+  <rect x="20" y="16" width="1160" height="54" rx="6" fill="#0B2545"/>
+  <text x="40" y="40" font-size="18" font-weight="700" fill="#FFFFFF">THREE-LAYER DATASPACE &amp; GOVERNANCE ARCHITECTURE (PLANE I–V MAPPING)</text>
+  <text x="40" y="60" font-size="12.5" fill="#CBD5E1">Alignment of ODGS Planes I–V with ISO/IEC 38505-1:2026 &amp; TR 38505-2 (EDM), IDSA Rulebook Layers, and CEN/CLC JTC 25 Facets</text>
+
+  <!-- LAYER 1: GOVERNANCE & LEGISLATIVE FACET -->
+  <rect x="20" y="84" width="1160" height="145" rx="8" fill="#F8FAFC" stroke="#1E3A8A" stroke-width="2"/>
+  <rect x="20" y="84" width="265" height="145" rx="8" fill="#1E3A8A"/>
+  <text x="36" y="112" font-size="14" font-weight="700" fill="#FFFFFF">LAYER 1 · GOVERNANCE</text>
+  <text x="36" y="130" font-size="14" font-weight="700" fill="#FFFFFF">&amp; LEGISLATIVE FACET</text>
+  <text x="36" y="154" font-size="11.5" fill="#DBEAFE">• ISO/IEC 38500 &amp; 38505-1:2026</text>
+  <text x="36" y="171" font-size="11.5" fill="#DBEAFE">  (Evaluate &amp; Direct — Human)</text>
+  <text x="36" y="188" font-size="11.5" fill="#DBEAFE">• IDSA Rulebook Legislative Layer</text>
+  <text x="36" y="205" font-size="11.5" fill="#DBEAFE">• ISO/IEC AWI TR 25850 Clause 4.1</text>
+
+  <!-- Layer 1 Nodes -->
+  <rect x="305" y="100" width="255" height="112" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.5"/>
+  <text x="320" y="122" font-size="12.5" font-weight="700" fill="#0B2545">Statutory &amp; Sectoral Law</text>
+  <text x="320" y="142" font-size="11.5" fill="#334155">• EU Data Act (Art. 33) &amp; GDPR</text>
+  <text x="320" y="159" font-size="11.5" fill="#334155">• EU AI Act (Art. 10 &amp; 12)</text>
+  <text x="320" y="176" font-size="11.5" fill="#334155">• DORA (Art. 17) / ESPR / REACH</text>
+  <text x="320" y="195" font-size="11" font-weight="600" fill="#1E3A8A">Governing Authority: Legislator</text>
+
+  <rect x="585" y="100" width="265" height="112" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.5"/>
+  <text x="600" y="122" font-size="12.5" font-weight="700" fill="#0B2545">Dataspace &amp; Board Governance</text>
+  <text x="600" y="142" font-size="11.5" fill="#334155">• Data Space Rulebooks (DSGA)</text>
+  <text x="600" y="159" font-size="11.5" fill="#334155">• Corporate Data Strategy (38505-1)</text>
+  <text x="600" y="176" font-size="11.5" fill="#334155">• Quality Framework (FprEN 18352)</text>
+  <text x="600" y="195" font-size="11" font-weight="600" fill="#1E3A8A">Governing Body: Human Accountability</text>
+
+  <path d="M 855 156 L 885 156" stroke="#0B2545" stroke-width="2" marker-end="url(#arrowNavy)"/>
+
+  <rect x="890" y="100" width="272" height="112" rx="6" fill="#EFF6FF" stroke="#1E3A8A" stroke-width="2"/>
+  <text x="905" y="122" font-size="12.5" font-weight="700" fill="#1E3A8A">PLANES I &amp; II · PROVENANCE (Cl. 5.2–5.3)</text>
+  <text x="905" y="141" font-size="12" font-weight="700" fill="#0B2545">Authoritative Source Attestation</text>
+  <text x="905" y="160" font-size="11.5" fill="#334155">• Verbatim legal/rulebook clause</text>
+  <text x="905" y="177" font-size="11.5" class="mono" fill="#0D6E6E">• semantic_hash = SHA-256(text)</text>
+  <text x="905" y="195" font-size="11" font-weight="600" fill="#B45309">Detects regulatory/rulebook drift (Cl. 6.3)</text>
+
+  <!-- LAYER 2: POLICY, DELEGATION & CONTEXTUAL BINDING FACET -->
+  <rect x="20" y="252" width="1160" height="150" rx="8" fill="#F8FAFC" stroke="#0D6E6E" stroke-width="2"/>
+  <rect x="20" y="252" width="265" height="150" rx="8" fill="#0D6E6E"/>
+  <text x="36" y="280" font-size="14" font-weight="700" fill="#FFFFFF">LAYER 2 · OPERATIONAL</text>
+  <text x="36" y="298" font-size="14" font-weight="700" fill="#FFFFFF">MANAGEMENT &amp; BINDING</text>
+  <text x="36" y="322" font-size="11.5" fill="#CCFBF1">• ISO/IEC TR 38505-2:2018</text>
+  <text x="36" y="339" font-size="11.5" fill="#CCFBF1">  (Direct → Management Controls)</text>
+  <text x="36" y="356" font-size="11.5" fill="#CCFBF1">• Economic / Operational Facet</text>
+  <text x="36" y="373" font-size="11.5" fill="#CCFBF1">• ISO/IEC 11179 &amp; ISO/IEC 25012</text>
+
+  <!-- Layer 2 Nodes -->
+  <rect x="305" y="268" width="255" height="118" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.5"/>
+  <text x="320" y="290" font-size="12.5" font-weight="700" fill="#0B2545">Policy &amp; Rights Expression</text>
+  <text x="320" y="310" font-size="11.5" fill="#334155">• W3C ODRL 2.2 Policy Model</text>
+  <text x="320" y="327" font-size="11.5" fill="#334155">• Gaia-X ODRL-VC (ovc:constraint)</text>
+  <text x="320" y="344" font-size="11.5" fill="#334155">• Eclipse DRP (delegationEvidence</text>
+  <text x="320" y="361" font-size="11.5" fill="#334155">  &amp; environment.licenses)</text>
+
+  <rect x="585" y="268" width="265" height="118" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.5"/>
+  <text x="600" y="290" font-size="12.5" font-weight="700" fill="#0B2545">Conformity &amp; Quality Specs</text>
+  <text x="600" y="310" font-size="11.5" fill="#334155">• Eclipse CAP v2.2.1 (ISO 17000</text>
+  <text x="600" y="327" font-size="11.5" fill="#334155">  cap:SpecifiedRequirement)</text>
+  <text x="600" y="344" font-size="11.5" fill="#334155">• ETSI EN 304 311 / TS 104 312</text>
+  <text x="600" y="361" font-size="11.5" fill="#334155">• ISO/IEC 25012 Quality Metrics</text>
+
+  <path d="M 855 327 L 885 327" stroke="#0D6E6E" stroke-width="2" marker-end="url(#arrowTeal)"/>
+
+  <rect x="890" y="268" width="272" height="118" rx="6" fill="#F0FDFA" stroke="#0D6E6E" stroke-width="2"/>
+  <text x="905" y="290" font-size="12.5" font-weight="700" fill="#0D6E6E">PLANE III · EXECUTIVE (Cl. 5.4)</text>
+  <text x="905" y="309" font-size="12" font-weight="700" fill="#0B2545">Contextual Governance Binding</text>
+  <text x="905" y="328" font-size="11.5" fill="#334155">• Binds executable constraints to</text>
+  <text x="905" y="345" font-size="11.5" fill="#334155">  named process contexts (Cl. 3.6)</text>
+  <text x="905" y="364" font-size="11.5" class="mono" fill="#0D6E6E">• urn:odgs:process:* + validity</text>
+
+  <!-- Vertical Connectors L1 -> L2 -->
+  <path d="M 1026 212 L 1026 264" stroke="#0B2545" stroke-width="2.5" marker-end="url(#arrowNavy)"/>
+
+  <!-- LAYER 3: RUNTIME ENFORCEMENT & OBSERVABILITY FACET -->
+  <rect x="20" y="425" width="1160" height="165" rx="8" fill="#F8FAFC" stroke="#B45309" stroke-width="2"/>
+  <rect x="20" y="425" width="265" height="165" rx="8" fill="#0B2545"/>
+  <text x="36" y="453" font-size="14" font-weight="700" fill="#FFFFFF">LAYER 3 · DATA-PLANE</text>
+  <text x="36" y="471" font-size="14" font-weight="700" fill="#FFFFFF">ENFORCEMENT &amp; MONITOR</text>
+  <text x="36" y="495" font-size="11.5" fill="#CBD5E1">• EAS 18425:2026 CL3 &amp; CL4</text>
+  <text x="36" y="512" font-size="11.5" fill="#CBD5E1">  (PA4.1 Measurement / PA4.2 Control)</text>
+  <text x="36" y="529" font-size="11.5" fill="#CBD5E1">• EN 18235-2 §5.7–5.8 &amp; §4.8.4.2</text>
+  <text x="36" y="546" font-size="11.5" fill="#CBD5E1">• IDSA Rulebook §105 &amp; §121</text>
+  <text x="36" y="563" font-size="11.5" fill="#CBD5E1">• ISO/IEC CD 38011 Observability</text>
+
+  <!-- Layer 3 Nodes -->
+  <rect x="305" y="442" width="255" height="132" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.5"/>
+  <text x="320" y="464" font-size="12.5" font-weight="700" fill="#0B2545">Control-Plane Hand-Off</text>
+  <text x="320" y="484" font-size="11.5" fill="#334155">• DSP (ISO/IEC DIS 26450)</text>
+  <text x="320" y="501" font-size="11.5" fill="#334155">• DCP (ISO/IEC DIS 26451)</text>
+  <text x="320" y="518" font-size="11.5" fill="#334155">• Gaia-X DTA (Pre-transfer check;</text>
+  <text x="320" y="535" font-size="11.5" fill="#B45309" font-weight="600">  stops when bytes land — §5.8.3)</text>
+  <text x="320" y="554" font-size="11" fill="#475569">Hands off to Data Plane ↓</text>
+
+  <path d="M 560 508 L 582 508" stroke="#0B2545" stroke-width="2" marker-end="url(#arrowNavy)"/>
+
+  <rect x="585" y="442" width="265" height="132" rx="6" fill="#FFFBEB" stroke="#B45309" stroke-width="2"/>
+  <text x="600" y="464" font-size="12.5" font-weight="700" fill="#B45309">PLANES IV &amp; V · EXECUTION (Cl. 5.5–5.6)</text>
+  <text x="600" y="483" font-size="12" font-weight="700" fill="#0B2545">In-Pipeline Enforcement Gate (PEP)</text>
+  <text x="600" y="502" font-size="11.5" fill="#334155">• Evaluates live payload at runtime</text>
+  <text x="600" y="519" font-size="11.5" font-weight="600" fill="#0D6E6E">• PASS → Proceed with execution</text>
+  <text x="600" y="536" font-size="11.5" font-weight="600" fill="#DC2626">• HARD_STOP → Administrative Recusal</text>
+  <text x="600" y="553" font-size="11.5" font-weight="600" fill="#B45309">• SOFT_STOP → Proportional (Cl. 7.1.3)</text>
+
+  <path d="M 850 508 L 885 508" stroke="#B45309" stroke-width="2.5" marker-end="url(#arrowAmber)"/>
+
+  <rect x="890" y="442" width="272" height="132" rx="6" fill="#EFF6FF" stroke="#0B2545" stroke-width="2"/>
+  <text x="905" y="464" font-size="12.5" font-weight="700" fill="#1E3A8A">SEMANTIC CERTIFICATE (S-Cert · Cl. 8)</text>
+  <text x="905" y="483" font-size="12" font-weight="700" fill="#0B2545">Zero-Knowledge Audit Record</text>
+  <text x="905" y="501" font-size="11" class="mono" fill="#0D6E6E">• payload_hash (No PII/raw data)</text>
+  <text x="905" y="517" font-size="11" class="mono" fill="#0D6E6E">• semantic_hash + process_urn</text>
+  <text x="905" y="533" font-size="11" class="mono" fill="#0D6E6E">• correlation_id (IDSA §121)</text>
+  <text x="905" y="552" font-size="11" font-weight="600" fill="#1E3A8A">→ Feeds CAP cred:Evidence &amp; CD 38011</text>
+
+  <!-- Vertical Connectors L2 -> L3 -->
+  <path d="M 1026 386 L 1026 438" stroke="#0D6E6E" stroke-width="2.5" marker-end="url(#arrowTeal)"/>
+  <path d="M 718 386 L 718 438" stroke="#0D6E6E" stroke-width="2" marker-end="url(#arrowTeal)"/>
+
+</svg>

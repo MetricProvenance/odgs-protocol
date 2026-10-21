@@ -1,13 +1,13 @@
 # ODGS Adapter Interface Guide
 
-**Version:** 6.0.0  
+**Version:** 6.1.0  
 **Source:** [`2_INFORMATIVE_REFERENCE/src/odgs/core/adapter.py`](../src/odgs/core/adapter.py)
 
 ---
 
 ## Overview
 
-The **OdgsAdapter** is the Abstract Base Class (ABC) that connects the ODGS Constitutional Stack to external data sources. It lives at the boundary between the **Executive Plane** (governance context) and the **Physical Plane** (real-world data).
+The **OdgsAdapter** is the Abstract Base Class (ABC) that connects the ODGS 5-Plane Architecture to external data sources. It sits at the boundary between **Plane IV (Contextual Process Binding)** and **Plane V (Runtime Policy Enforcement Point & Physical Execution)**.
 
 Every data platform integration (Snowflake, Databricks, PostgreSQL, Synapse, API endpoints) implements this interface.
 
@@ -88,7 +88,7 @@ class KafkaAdapter(OdgsAdapter):
 ```
 
 **2. Injecting via the Registry**
-The ODGS v6.0.0 engine exposes an `AdapterRegistry` that allows you to cleanly inject your Python class before initializing the Interceptor.
+The ODGS v6.1.0 engine exposes an `AdapterRegistry` that allows you to cleanly inject your Python class before initializing the Interceptor.
 
 ```python
 from odgs.core.adapter import AdapterRegistry
@@ -167,6 +167,5 @@ result = interceptor.intercept(
 > **Contributing:** To add a new adapter, implement the `OdgsAdapter` ABC and use the `AdapterRegistry` to deterministically inject it into your internal Airflow or PySpark environments.
 
 ---
-> **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).
 
-[< Back to README](/README.md) | [Documentation Map →](index.md) | 🎯 [Watch the demo →](https://www.metricprovenance.com/watch)
+[< Back to README.md](../../README.md) | [Documentation Map →](index.md)

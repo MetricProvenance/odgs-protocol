@@ -1,24 +1,24 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
+message: "If you use this specification or reference runtime, please cite it as below."
 type: software
 authors:
-  - name: "Kartik Iyer"
-    email: "partner@metricprovenance.com"
+  - name: "ODGS Technical Specification Contributors"
 title: "Open Data Governance Standard (ODGS)"
-abstract: "The Open Data Governance Standard (ODGS) is a vendor-neutral protocol that resolves the Definition-Execution Gap in High-Risk AI systems through Semantic Binding, Tri-Partite Audit, and the Sovereign Handshake. v6.0.0 introduces SOFT_STOP severity, batch evaluation, rule dependency chains, webhook emission, conformance self-checks, and rule versioning for EU AI Act compliance via Metric Provenance."
-version: 6.0.6
-date-released: 2026-07-23
+abstract: "The Open Data Governance Standard (ODGS) v6.1.0 is a vendor-neutral specification and reference runtime for in-pipeline semantic policy enforcement and cryptographic attestation (S-Cert) across enterprise data pipelines and federated dataspaces, aligned with ISO/IEC 38505-1:2026, ISO/IEC 25012:2008, ISO 8000-8, W3C ODRL 2.2, Eclipse CAP v2.2.1, and Gaia-X Architecture 25.11."
+version: 6.1.0
+date-released: 2026-10-19
 license: Apache-2.0
-url: "https://github.com/MetricProvenance/odgs-protocol"
+url: "https://metricprovenance.github.io/odgs-protocol/"
 repository-code: "https://github.com/MetricProvenance/odgs-protocol"
 doi: "10.5281/zenodo.18564270"
 keywords:
   - "data-governance"
-  - "schema"
-  - "metrics"
-  - "kpi"
-  - "data-quality"
-  - "ai-safety"
+  - "dataspace"
+  - "iso-38505"
+  - "iso-25012"
+  - "odrl"
+  - "eclipse-cap"
+  - "gaia-x"
   - "eu-ai-act"
   - "owl-ontology"
-  - "maturity-model"
+  - "s-cert"

@@ -10,7 +10,7 @@
       "High levels of data redundancy and inconsistency for key master data entities.",
       "Confusion about which data source to trust for specific information."
     ],
-    "dqDimensionsImpactedDamaIds": [
+    "dqDimensionsImpactedIds": [
       3,
       8,
       10,
@@ -35,7 +35,7 @@
       57,
       58
     ],
-    "potentialSolutionsTeaser": [
+    "remediationControls": [
       "Establish formal Data Governance to define and assign ownership for SoRs.",
       "Implement Master Data Management (MDM) strategies and solutions for critical data domains.",
       "Develop clear data integration and synchronization policies between systems.",
@@ -54,7 +54,7 @@
       "Lack of audit trails, security controls, and proper backup for data managed in these shadow systems.",
       "Business continuity risk if the person who built/maintains the spreadsheet leaves."
     ],
-    "dqDimensionsImpactedDamaIds": [
+    "dqDimensionsImpactedIds": [
       1,
       2,
       3,
@@ -111,7 +111,7 @@
       58,
       60
     ],
-    "potentialSolutionsTeaser": [
+    "remediationControls": [
       "Identify and inventory critical business processes reliant on Excel/Shadow IT.",
       "Prioritize migrating high-risk/high-value processes to controlled, auditable systems (databases, ERP modules, BI platforms).",
       "Implement proper BI and data visualization tools fed from governed data sources to replace Excel reporting.",
@@ -130,7 +130,7 @@
       "Difficulty in performing enterprise-wide reporting or analytics due to inconsistent data.",
       "High number of data validation errors when data is moved between systems."
     ],
-    "dqDimensionsImpactedDamaIds": [
+    "dqDimensionsImpactedIds": [
       3,
       4,
       6,
@@ -153,7 +153,7 @@
       47,
       57
     ],
-    "potentialSolutionsTeaser": [
+    "remediationControls": [
       "Develop and implement a Data Governance framework that includes defining data standards.",
       "Establish a common business glossary and data dictionary.",
       "Implement Master Data Management (MDM) for critical data domains (Customer, Product, Supplier).",
@@ -172,7 +172,7 @@
       "Significant manual effort required to consolidate data for enterprise-level reporting or analysis.",
       "Missed opportunities for cross-functional insights or collaboration."
     ],
-    "dqDimensionsImpactedDamaIds": [
+    "dqDimensionsImpactedIds": [
       2,
       3,
       5,
@@ -192,7 +192,7 @@
       58,
       59
     ],
-    "potentialSolutionsTeaser": [
+    "remediationControls": [
       "Develop an enterprise data strategy focusing on integration and data sharing.",
       "Implement data integration platforms (ETL/ELT tools, APIs, message queues).",
       "Establish data warehouses, data lakes, or lakehouses as centralized repositories for analytical data.",
@@ -211,7 +211,7 @@
       "Difficulty in making decisions about data standards, SoRs, or data access rules.",
       "Limited proactive monitoring or management of data quality."
     ],
-    "dqDimensionsImpactedDamaIds": [
+    "dqDimensionsImpactedIds": [
       1,
       3,
       7,
@@ -241,7 +241,7 @@
       57,
       58
     ],
-    "potentialSolutionsTeaser": [
+    "remediationControls": [
       "Establish a formal Data Governance framework with clear roles (e.g., Data Owners, Data Stewards, Data Council).",
       "Develop and communicate enterprise-wide data policies, standards, and procedures.",
       "Implement processes for data quality monitoring, issue management, and remediation.",
@@ -260,7 +260,7 @@
       "Difficult to adapt legacy systems to new business requirements or modern data analytics needs.",
       "Shortage of skilled personnel familiar with legacy system technologies."
     ],
-    "dqDimensionsImpactedDamaIds": [
+    "dqDimensionsImpactedIds": [
       2,
       3,
       4,
@@ -286,7 +286,7 @@
       57,
       59
     ],
-    "potentialSolutionsTeaser": [
+    "remediationControls": [
       "Develop a modernization strategy for legacy systems (e.g., encapsulate, re-platform, re-engineer, replace).",
       "Implement data extraction and integration layers to make legacy data accessible to modern systems.",
       "Invest in reverse-engineering and documenting data models of critical legacy systems.",
@@ -305,7 +305,7 @@
       "Limited scalability of processes as volume increases.",
       "Lack of audit trails for manually changed data."
     ],
-    "dqDimensionsImpactedDamaIds": [
+    "dqDimensionsImpactedIds": [
       3,
       5,
       12,
@@ -324,7 +324,7 @@
       56,
       57
     ],
-    "potentialSolutionsTeaser": [
+    "remediationControls": [
       "Identify and map critical manual data processes and their pain points.",
       "Invest in process automation technologies (e.g., RPA, workflow automation, ETL tools).",
       "Improve system integrations to reduce the need for manual data transfer.",
@@ -343,7 +343,7 @@
       "Resistance to adopting new data tools or data-driven approaches.",
       "Misinterpretation of reports and dashboards due to lack of understanding of data concepts or visualizations."
     ],
-    "dqDimensionsImpactedDamaIds": [
+    "dqDimensionsImpactedIds": [
       3,
       7,
       16,
@@ -356,7 +356,7 @@
       57,
       58
     ],
-    "potentialSolutionsTeaser": [
+    "remediationControls": [
       "Invest in data literacy training programs for employees at all levels.",
       "Promote a data-aware culture through leadership commitment and communication.",
       "Establish clear data ownership and stewardship roles with defined responsibilities.",

@@ -61,6 +61,8 @@ data/drafts/
 *.log
 **/server/logs/
 
-# Testing
+# Testing & Docs Build
 .pytest_cache/
 .gitnexus
+site/
+_site/

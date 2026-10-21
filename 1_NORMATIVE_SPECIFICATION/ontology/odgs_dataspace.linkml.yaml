@@ -1,0 +1,228 @@
+id: https://w3id.org/odgs/dataspace/v1
+name: odgs_dataspace
+title: ODGS Dataspace Runtime Policy Enforcement and Semantic Certification Vocabulary
+description: >-
+  LinkML schema defining the Open Data Governance Standard (ODGS) runtime policy
+  enforcement, provenance attestation, and Semantic Certificate (S-Cert) classes,
+  mapped directly to W3C ODRL 2.2, W3C Verifiable Credentials v2.0 (cred:Evidence),
+  W3C PROV-O, Eclipse Dataspace CAP v2.2.1, Eclipse DRP, and Gaia-X ODRL-VC Profile.
+license: https://www.apache.org/licenses/LICENSE-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  odgs: https://w3id.org/odgs/dataspace/v1#
+  odrl: http://www.w3.org/ns/odrl/2/
+  cred: https://www.w3.org/2018/credentials#
+  prov: http://www.w3.org/ns/prov#
+  cap: https://w3id.org/eclipse-cap/v2.2.1/#
+  ovc: https://w3id.org/gaia-x/ovc/1/
+  dcterms: http://purl.org/dc/terms/
+  xsd: http://www.w3.org/2001/XMLSchema#
+
+default_prefix: odgs
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  VerdictEnum:
+    description: Deterministic runtime evaluation verdict (Plane IV PEP).
+    permissible_values:
+      PASS:
+        description: All bound constraints evaluated to True.
+      HARD_STOP:
+        description: >-
+          Administrative Recusal triggered (mandatory pipeline halt on statutory
+          or contractual prohibition breach).
+      SOFT_STOP:
+        description: >-
+          Operational threshold breached; non-conformance logged and signed
+          (proceeds only with authorised override token).
+      LOG_ONLY:
+        description: Informational observation logged without blocking execution.
+
+  ConformanceLevelEnum:
+    description: ODGS technical implementation conformance profile.
+    permissible_values:
+      LEVEL_1_CORE:
+        description: Self-assessed local SHA-256 provenance and unsigned S-Cert emission.
+      LEVEL_2_ATTESTED:
+        description: Cryptographically signed S-Cert (RFC 7515 JWS / Ed25519) verifiable via RFC 7517 JWK.
+
+classes:
+  AuthoritativeSource:
+    description: >-
+      Plane I Legislative / Rulebook Ontology definition anchored by a cryptographic
+      SHA-256 semantic_hash of the verbatim statutory or rulebook clause.
+    class_uri: odgs:AuthoritativeSource
+    exact_mappings:
+      - cap:SpecifiedRequirement
+      - prov:Plan
+    slots:
+      - source_urn
+      - legislative_source
+      - verbatim_source_text
+      - semantic_hash
+
+  ExecutableRule:
+    description: >-
+      Deterministic boolean constraint derived from an AuthoritativeSource and bound
+      to an operational data or AI processing context.
+    class_uri: odgs:ExecutableRule
+    close_mappings:
+      - odrl:Rule
+      - ovc:Constraint
+      - cap:SpecifiedRequirement
+    slots:
+      - rule_id
+      - pack_id
+      - version
+      - legislative_source
+      - semantic_hash
+      - expression
+      - fields_evaluated
+      - verdict_on_fail
+      - odrl_policy_uid
+      - odrl_rule_type
+
+  ProcessBinding:
+    description: >-
+      Plane III Governance Binding associating one or more ExecutableRules and
+      delegated licences (W3C ODRL 2.2 / Eclipse DRP) with a target process_urn.
+    class_uri: odgs:ProcessBinding
+    close_mappings:
+      - prov:Association
+    slots:
+      - process_urn
+      - bound_rules
+      - correlation_id
+      - delegation_license_ref
+      - effective_from
+      - effective_to
+
+  SemanticCertificate:
+    description: >-
+      Zero-knowledge cryptographic execution receipt (S-Cert) emitted by the
+      Plane IV Policy Enforcement Point (PEP) at the moment of data processing.
+      Serves as machine-verifiable runtime cred:Evidence inside an Eclipse CAP
+      Declaration or Certification Verifiable Credential and discharges post-transfer
+      Phase 6 consumer obligations for the Gaia-X Data Transfer Agent (DTA).
+    class_uri: odgs:SemanticCertificate
+    close_mappings:
+      - cred:Evidence
+      - prov:Entity
+    slots:
+      - event_id
+      - timestamp
+      - process_urn
+      - rule_id
+      - semantic_hash
+      - verdict
+      - system_id
+      - payload_hash
+      - correlation_id
+      - conformance_level
+      - jws_signature
+      - authority_id
+      - issuing_jwk_url
+
+slots:
+  source_urn:
+    identifier: true
+    required: true
+    description: URN identifying the authoritative statutory or rulebook clause.
+  legislative_source:
+    required: true
+    slot_uri: dcterms:source
+    description: Citation of the statutory article, standard clause, or dataspace rulebook rule.
+  verbatim_source_text:
+    required: true
+    description: Exact, unedited text of the governing provision.
+  semantic_hash:
+    required: true
+    pattern: "^[a-f0-9]{64}$"
+    description: Lowercase hexadecimal SHA-256 digest of the verbatim source text.
+  rule_id:
+    identifier: true
+    required: true
+    description: Unique identifier of the executable rule.
+  pack_id:
+    required: true
+    description: Governance pack or rulebook bundle identifier.
+  version:
+    required: true
+    description: Semantic version string (MAJOR.MINOR.PATCH).
+  expression:
+    required: true
+    description: Deterministic boolean expression evaluated against the runtime payload.
+  fields_evaluated:
+    multivalued: true
+    required: true
+    description: List of payload field names inspected during evaluation.
+  verdict_on_fail:
+    required: true
+    range: VerdictEnum
+    description: Proportional enforcement action triggered when expression evaluates to False.
+  odrl_policy_uid:
+    required: false
+    slot_uri: odrl:uid
+    description: Optional IRI of the upstream W3C ODRL 2.2 Agreement or Gaia-X DUA.
+  odrl_rule_type:
+    required: false
+    description: Upstream ODRL rule class (Permission, Prohibition, Duty).
+  process_urn:
+    required: true
+    description: URN of the governed pipeline stage or AI inference boundary.
+  bound_rules:
+    multivalued: true
+    required: true
+    description: List of rule_id identifiers bound to this process_urn.
+  correlation_id:
+    required: false
+    description: >-
+      Shared transaction or contract-agreement identifier linking the S-Cert to
+      an upstream Eclipse DSP ContractAgreementMessage or Gaia-X DTA TransferRequestResult.
+  delegation_license_ref:
+    required: false
+    description: Licence identifier from Eclipse DRP delegationEvidence (environment.licenses).
+  effective_from:
+    required: true
+    range: datetime
+  effective_to:
+    required: false
+    range: datetime
+  event_id:
+    identifier: true
+    required: true
+    description: Globally unique UUID v4 for the runtime evaluation event.
+  timestamp:
+    required: true
+    range: datetime
+    slot_uri: prov:generatedAtTime
+    description: ISO 8601 UTC timestamp of the runtime evaluation.
+  verdict:
+    required: true
+    range: VerdictEnum
+    description: Deterministic evaluation outcome (PASS, HARD_STOP, SOFT_STOP, LOG_ONLY).
+  system_id:
+    required: true
+    description: Identifier of the evaluating Plane IV runtime system instance.
+  payload_hash:
+    required: true
+    pattern: "^[a-f0-9]{64}$"
+    description: SHA-256 digest of the evaluated payload (zero raw payload data retained).
+  conformance_level:
+    required: false
+    range: ConformanceLevelEnum
+  jws_signature:
+    required: false
+    description: Compact JWS (RFC 7515, EdDSA/Ed25519) signature over the canonical S-Cert payload.
+  authority_id:
+    required: false
+    description: Identifier of the Plane II Attestation Authority (Level 2).
+  issuing_jwk_url:
+    required: false
+    range: uri
+    description: HTTPS endpoint publishing the RFC 7517 JWK Set for signature verification.

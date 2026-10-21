@@ -1,19 +1,21 @@
 {
   "name": "odgs",
-  "version": "6.0.6",
-  "description": "ODGS Protocol — Sovereign Validation Engine (Node.js)",
-  "author": "Metric Provenance <partner@metricprovenance.com>",
+  "version": "6.1.0",
+  "description": "ODGS Protocol — Runtime Semantic Policy Enforcement & Certification Engine (Node.js)",
+  "author": "ODGS Technical Specification Contributors",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/MetricProvenance/odgs-protocol.git"
   },
-  "homepage": "https://metricprovenance.com",
   "keywords": [
     "data-governance",
-    "eu-ai-act",
-    "sovereign",
-    "compliance",
+    "dataspace",
+    "iso-38505",
+    "iso-25012",
+    "odrl",
+    "eclipse-cap",
+    "gaia-x",
     "interceptor"
   ],
   "engines": {

@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "urn:odgs:schema:rule",
     "title": "ODGS Standard Data Rule",
-    "description": "Schema for validating individual rule definitions in the Judiciary plane. v6.0.0 adds SOFT_STOP severity, dependency chains, and rule versioning.",
+    "description": "Schema for validating individual rule definitions in Plane III. Supports HARD_STOP, SOFT_STOP, and LOG_ONLY severity, dependency chains, and rule versioning.",
     "type": "object",
     "required": [
         "rule_id",

@@ -1,21 +1,34 @@
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
 name = "odgs"
-version = "6.0.6"
-description = "Open Data Governance Standard — Sovereign Validation Engine"
+version = "6.1.0"
+description = "Open Data Governance Standard (ODGS) — Runtime Semantic Policy Enforcement & Certification Engine (ISO/IEC 38505, ISO/IEC 25012, W3C ODRL 2.2, Eclipse CAP v2.2.1, Gaia-X DTA)"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "Apache-2.0"}
-authors = [{name = "Metric Provenance", email = "partner@metricprovenance.com"}]
-keywords = ["data-governance", "sovereign", "compliance", "ai-safety", "eu-ai-act", "dora", "gdpr", "csrd", "nis2", "data-quality", "regulatory", "enforcement", "s-cert", "mcp", "maturity-model"]
+authors = [{name = "ODGS Technical Specification Contributors"}]
+keywords = [
+    "data-governance",
+    "dataspace",
+    "iso-38505",
+    "iso-25012",
+    "odrl",
+    "eclipse-cap",
+    "gaia-x",
+    "idsa",
+    "prov-o",
+    "oscal",
+    "eu-ai-act",
+    "s-cert",
+    "semantic-certificate"
+]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Science/Research",
     "Intended Audience :: Legal Industry",
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3.9",
@@ -23,7 +36,6 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Application Frameworks",
-    "Topic :: Office/Business :: Financial",
 ]
 
 dependencies = [
@@ -35,33 +47,33 @@ dependencies = [
     "certifi>=2024.2.2",
     "jsonschema>=4.21.1",
     "PyJWT[crypto]>=2.8.0",
+    "PyYAML>=6.0.0",
 ]
 
 [project.optional-dependencies]
 server = ["fastapi>=0.95.0", "uvicorn>=0.20.0"]
 audit = ["GitPython>=3.1.0"]
-demo = ["streamlit>=1.30.0", "streamlit-agraph>=0.0.45", "pandas>=2.0.0"]
-ai = ["google-genai>=1.0.0", "sse-starlette>=1.0.0"]
-llm = ["ollama>=0.4.0", "google-genai>=1.0.0"]
-all = ["odgs[demo,ai,server,audit,llm]"]
+dev = ["pytest>=7.4.0", "mkdocs>=1.5.0", "mkdocs-material>=9.5.0"]
+all = ["odgs[server,audit,dev]"]
 
 [project.urls]
-Homepage = "https://metricprovenance.com"
+Documentation = "https://metricprovenance.github.io/odgs-protocol/"
 Repository = "https://github.com/MetricProvenance/odgs-protocol"
-Documentation = "https://github.com/MetricProvenance/odgs-protocol/blob/main/2_INFORMATIVE_REFERENCE/architecture/index.md"
+Specification = "https://github.com/MetricProvenance/odgs-protocol/blob/main/1_NORMATIVE_SPECIFICATION/SPECIFICATION.md"
 Changelog = "https://github.com/MetricProvenance/odgs-protocol/blob/main/CHANGELOG.md"
 Issues = "https://github.com/MetricProvenance/odgs-protocol/issues"
-"Sovereign Registry" = "https://registry.metricprovenance.com"
-"Research Paper (SSRN)" = "https://papers.ssrn.com/abstract=6205478"
+
+[tool.pytest.ini_options]
+pythonpath = ["2_INFORMATIVE_REFERENCE/src"]
+testpaths = ["tests"]
 
 [project.scripts]
 odgs = "odgs.cli:app"
+odgs-dataspace = "odgs.dataspace.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["2_INFORMATIVE_REFERENCE/src/odgs"]
 exclude = [
-    "2_INFORMATIVE_REFERENCE/src/odgs/ui/",
-    "2_INFORMATIVE_REFERENCE/src/odgs/factory/",
     "2_INFORMATIVE_REFERENCE/src/odgs/audit_logs/",
     "2_INFORMATIVE_REFERENCE/src/odgs/sovereign_audit.log",
 ]
@@ -71,43 +83,15 @@ exclude = [
 
 [tool.hatch.build.targets.sdist]
 exclude = [
-    "2_INFORMATIVE_REFERENCE/src/odgs/ui/",
-    "2_INFORMATIVE_REFERENCE/src/odgs/factory/",
     "2_INFORMATIVE_REFERENCE/src/odgs/audit_logs/",
-    "2_INFORMATIVE_REFERENCE/architecture/images/",
-    "2_INFORMATIVE_REFERENCE/architecture/research/",
     ".env",
-    "deploy/",
-    "docker-compose.yml",
-    "Dockerfile",
-    ".streamlit/",
-    "docs/internal/",
-    "docs/images/",
-    "COMMERCIALIZATION_PLAN.md",
-    "PACKAGE_RELEASE_AUDIT.md",
-    "OPENSOURCE_RELEASE_CLEANUP.md",
     ".pytest_cache/",
     "tests/.pytest_cache/",
     "**/*.log",
     "**/audit_logs/",
-    # AI tool configurations (never ship to PyPI)
-    "AGENTS.md",
-    "CLAUDE.md",
-    "GEMINI.md",
-    ".claude/",
-    ".gitnexus/",
-    ".gemini/",
-    ".cursor/",
-    ".copilot/",
-    # NPM artifacts (Python package only)
     "node_modules/",
     "package.json",
     "package-lock.json",
     ".npmignore",
     "*.tgz",
-    # Demo video/poster live in the repo for the README + marketplace listing links,
-    # excluded from the published sdist — pure bloat for `pip install`.
-    "docs/demo/*.mp4",
-    "docs/demo/*.jpg",
-    "docs/demo/*.png",
 ]

@@ -1,64 +1,33 @@
+# Open Data Governance Standard (ODGS) — Project Governance & Neutrality Charter
 
-# The ODGS Coalition: A Manifesto for Sovereign Governance
-
-**Status:** Open Invitation
-**Version:** 1.0 (Coalition Draft)
-
----
-
-## 1. The Collaborative Mission
-The Open Data Governance Standard (ODGS) is not a product; it is a **shared initiative** to bridge the gap between **Administrative Law** and **Computer Science**.
-
-We believe that High-Risk AI Systems in Public Administration require "Administrative Recusal"—a mechanism where the machine cannot overrule the law, and the law can be mathematically enforced.
-
-**Who This Is For:**
-*   **Legal Scholars:** To define the "Legislative Plane" (The Semantic Truth) independent of code.
-*   **Public Administrators:** To ensure sovereignty and auditability (EU AI Act Article 12).
-*   **Technologists:** To build the "Interceptor" (The Enforcement Mechanism) that respects these definitions.
-
-**Our Goal:**
-To build a **Coalition of the Willing**—a network of academic, regulatory, and technical partners working together to define a vendor-neutral standard for 21st-century governance.
+**Status:** Open Specification & Reference Implementation  
+**Version:** 6.1.0  
+**License:** Apache-2.0  
 
 ---
 
-## 2. A Call for Coalition
-We invite experts from **Academia, Government, and Standards Bodies** to join this working group. This is a neutral ground for research and implementation.
+## 1. Mission & Scope
+The Open Data Governance Standard (ODGS) is an open, vendor-neutral specification and reference implementation bridging **Corporate Governance of Data (`ISO/IEC 38505-1:2026`)**, **Data Quality (`ISO/IEC 25012:2008`, `ISO 8000-8`)**, and **Dataspace Runtime Policy Enforcement (`W3C ODRL 2.2`, `Eclipse CAP v2.2.1`, `Eclipse DRP`, `Gaia-X DTA`)**.
 
-**Key Research Areas:**
-*   **Semantic Interoperability:** How can different agencies share a common "Ontology Graph"?
-*   **Automated Compliance:** How can we map ISO 42001 controls directly to runtime interceptors?
-*   **Sovereign Architecture:** How can we guarantee "Data Sovereignty" in a cloud-native world?
-
-*(We are actively seeking input from thought leaders in Digital Administrative Law and Information Systems to refine these questions.)*
+ODGS addresses the **Phase 6 Operationalisation Gap**: ensuring that contractual, statutory, and data-quality constraints negotiated at the control plane are deterministically enforced inside the data-processing pipeline, producing verifiable, zero-knowledge cryptographic evidence (**Semantic Certificates / `S-Cert`**).
 
 ---
 
-## 3. Governance by Consensus
-This initiative operates on a model of **Academic Peer Review** and **Regulatory Consensus**.
-
-*   **No Single Owner:** The protocol is common property, released under Apache 2.0.
-*   **RFC Process:** Changes to the standard are proposed as "Requests for Comments" (RFCs), open for debate by all coalition members.
-*   **Lazy Consensus:** We move forward when there are no substantial objections from the working group, prioritizing "Rough Consensus and Running Code".
-
----
-
-## 4. Conflict of Interest & Neutrality
-To serve as a Reference Standard for the public sector, this coalition maintains strict neutrality:
-
-1.  **Vendor Neutrality:** The standard shall not favor any specific vendor, cloud provider, or proprietary tool.
-2.  **Sovereignty First:** All architectural decisions must prioritize the user's ability to retain full control over their data and definitions.
-3.  **Transparency:** All discussions and decisions are public and open to scrutiny.
+## 2. Standards & Working Group Alignment
+This repository is structured to support open standardization and interoperability across:
+- **CEN/CENELEC JTC 25 & NEN:** Data Management, Dataspaces, Cloud and Edge (Working Group 2 — Data Governance & Quality).
+- **ISO/IEC JTC 1/SC 40 & SC 7:** Governance of IT and Data (`ISO/IEC 38505-1:2026`, `ISO/IEC TR 38505-2:2018`) and Data Quality (`ISO/IEC 25012:2008`).
+- **Eclipse Dataspace Working Group (EDWG):** Complementing `Eclipse CAP v2.2.1` (`LinkML`), `Eclipse DRP`, and `Eclipse DSP/DCP`.
+- **Gaia-X & IDSA:** Supporting Phase 6 post-transfer obligation enforcement (`Gaia-X Architecture Document 25.11` §4.8.4.2) and decentralized observability (`IDSA Rulebook 2026-3` §121).
 
 ---
 
-## 5. Join the Conversation
-We are building this standard in the open.
-
-*   **For Academics:** Contribute to the `2_INFORMATIVE_REFERENCE/architecture/` to align them with legal theory.
-*   **For Regulators:** Review the `2_INFORMATIVE_REFERENCE/architecture/technical_annex.md` to assess compliance viability.
-*   **For Developers:** Help refine the Reference Implementation in `src/`.
-
-*Ideally suited for collaboration with standards bodies and working groups.*
+## 3. Governance Principles
+1. **Vendor Neutrality:** The normative schemas (`1_NORMATIVE_SPECIFICATION/`) and reference runtime (`2_INFORMATIVE_REFERENCE/`) do not depend on any proprietary cloud service, vendor platform, or closed registry.
+2. **Open Licensing:** All source code, JSON Schemas, OWL 2 ontologies, and LinkML definitions in this repository are released under the **Apache License, Version 2.0**.
+3. **Zero-Knowledge Verifiability:** Runtime attestations (`S-Cert`) bind SHA-256 digests (`payload_hash`, `definition_hash`, `config_hash`) over RFC 8785 canonical JSON without transmitting raw data outside the operating organisation's control boundary.
+4. **Consensus-Driven Evolution:** Normative changes to schemas or ontologies require pull requests with passing Python (`pytest`), Node.js (`vitest`), and LinkML/JSON Schema conformance checks.
 
 ---
-[< Back to README.md](/README.md)
+
+[< Back to README.md](README.md)

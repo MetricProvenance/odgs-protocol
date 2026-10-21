@@ -1,12 +1,11 @@
 # ODGS Technical Specification: 00 - Architecture
-**Status:** Air-Gapped Sovereign Engine
-**Version:** 6.0.0
-**Type:** Normative
+**Status:** Informative Reference Architecture
+**Version:** 6.1.0
+**Type:** Informative (Normative Specification in `1_NORMATIVE_SPECIFICATION/SPECIFICATION.md`)
 
-> **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).
 
 ## 1. Abstract
-The Open Data Governance Standard (ODGS) defines a **Hierarchical Constitutional Stack** for Data Governance. It strictly separates the Definition of Data (Legislative Plane) from the Execution of Data (Physical Plane), functioning as a headless **Sovereign Validation Engine** that parses arbitrary text-based agreements into mechanical constraints.
+The Open Data Governance Standard (ODGS) defines a **5-Plane Architecture** for Data Governance grounded in `ISO/IEC 38505-1:2026` (*Evaluate — Direct — Monitor*) and `ISO/IEC 25012:2008` (*Data Quality Model*). It strictly separates declarative policy and semantic definitions (Planes I–III) from contextual process bindings (Plane IV) and physical pipeline execution (Plane V).
 
 The core architectural pattern is the **"Sovereign Sidecar"**, where governance rules are enforced by a lightweight Interceptor that has *zero* hardcoded logic, relying entirely on immutable JSON configurations and Draft-7 schemas.
 
@@ -104,6 +103,5 @@ The system exposes a lightweight FastAPI interface (`2_INFORMATIVE_REFERENCE/src
 *   **ISO/IEC 42001**: Control B.7 (Data Management).
 
 ---
-> **Require architectural clearance or SLA support for your organization?** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief).
 
-[< Back to README.md](/README.md) | [Documentation Map →](index.md) | 🎯 [Watch the demo →](https://www.metricprovenance.com/watch)
+[< Back to README.md](../../README.md) | [Documentation Map →](index.md)

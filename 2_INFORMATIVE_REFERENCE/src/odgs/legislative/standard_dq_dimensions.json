@@ -1,12 +1,14 @@
 [
   {
     "id": 1,
-    "damaId": 6,
     "name": "Ability to represent null values",
     "category": "Format",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which a format allows null values in an attribute.",
     "unitOfMeasure": "Yes/No",
-    "icon": "bi-file-earmark-code",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: A required field (e.g., 'Hazardous Material Class') does not allow nulls, forcing users to enter a default non-hazardous class when the real value is unknown or not applicable for a non-hazardous item.",
       "HR: A 'Termination Date' field in an employee system does not allow nulls, forcing entry of a dummy future date for active employees.",
@@ -37,16 +39,21 @@
       "Report Accuracy",
       "Data Entry Error Rate"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 2,
-    "damaId": 1,
     "name": "Access security",
     "category": "Datasets",
+    "iso25012Characteristic": "Confidentiality",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which access to datasets is restricted.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-shield-lock",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Customer contract details and pricing accessible by all terminal operations staff.",
       "Finance: All employees can view salary information for everyone in the company.",
@@ -78,16 +85,23 @@
       "Brand Reputation Score",
       "Time to Detect Security Incidents"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Confidentiality",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 3,
-    "damaId": 2,
     "name": "Accessibility",
     "category": "Data",
+    "iso25012Characteristic": "Accessibility",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The ease with which data can be consulted or retrieved.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-key",
+    "relatedDimensionIds": [
+      37
+    ],
     "examplePoor": [
       "Logistics: Yard planners cannot easily access real-time container location data; requires logging into multiple slow, disparate systems.",
       "Retail: Store managers need to request sales reports from HQ, which takes 2 days to generate, hindering timely stock decisions.",
@@ -97,20 +111,6 @@
       "Logistics: Planners have a single, responsive dashboard providing fast access to up-to-date container locations and vessel schedules.",
       "Retail: A self-service BI portal allows store managers to instantly generate custom sales reports for their location.",
       "Research: All research data is archived in a well-documented, searchable digital repository with open-format options."
-    ],
-    "damaAppendix3Title": "Availability",
-    "synonyms": [
-      "Obtainability of data"
-    ],
-    "relatedDamaDimensionIds": [
-      37
-    ],
-    "indicators": [
-      "Yes or No",
-      "The effort it takes to make data available (hours)"
-    ],
-    "notes": [
-      "Data can be partly available."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -133,16 +133,21 @@
       "Customer Service Resolution Time",
       "Data Search Time"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Accessibility",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 4,
-    "damaId": 3,
     "name": "Accuracy",
     "category": "Data values",
+    "iso25012Characteristic": "Accuracy",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree of closeness of data values to real values.",
     "unitOfMeasure": "%",
-    "icon": "bi-bullseye",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Incorrect container weight recorded differs significantly from actual weight, causing unsafe lifts or incorrect billing.",
       "Healthcare: Patient's date of birth recorded as 10/15/2023 instead of 10/15/1983 in their medical record.",
@@ -152,19 +157,6 @@
       "Logistics: Package weight in system matches verified gross mass (VGM), ensuring safe handling and accurate charges.",
       "Healthcare: Patient's allergy information in the Electronic Health Record (EHR) accurately reflects all their known allergies.",
       "Finance: The account balance displayed to a customer matches the confirmed ledger balance after all transactions are processed for the day."
-    ],
-    "damaAppendix3Title": "Accuracy",
-    "synonyms": [
-      "Correctness of data values"
-    ],
-    "relatedDamaDimensionIds": [],
-    "indicators": [
-      "Percentage or number of inaccurate data values."
-    ],
-    "notes": [
-      "The data producer or consumer must define when he/she considers a data value as inaccurate and define criteria for inaccuracy.",
-      "The impact of an inaccuracy is different for each attribute.",
-      "Generally, accuracy will be measured for individual attributes, e.g., the accuracy of the product name."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -191,16 +183,21 @@
       "Order Fulfillment Accuracy",
       "Inventory Shrinkage"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Accuracy",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 5,
-    "damaId": 4,
     "name": "Appropriateness",
     "category": "Format",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which the format is suitable for use.",
     "unitOfMeasure": "%",
-    "icon": "bi-file-earmark-code",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Storing numerical quantities (like TEU count) as text strings with embedded commas prevents direct calculations.",
       "Manufacturing: Sensor timestamps stored as Unix epoch time without timezone information, leading to ambiguity in event sequencing across plants.",
@@ -231,16 +228,23 @@
       "System Interoperability Score",
       "Data Processing Error Rate"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 6,
-    "damaId": 5,
     "name": "Availability",
     "category": "Data",
+    "iso25012Characteristic": "Availability",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data can be consulted or retrieved by data consumers or a process.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-key",
+    "relatedDimensionIds": [
+      37
+    ],
     "examplePoor": [
       "Logistics: The reporting server for terminal performance dashboards is frequently down during peak operational hours.",
       "E-commerce: Product inventory data is not updated in real-time on the website, leading to orders for out-of-stock items.",
@@ -250,25 +254,6 @@
       "Logistics: The data warehouse has high uptime (e.g., 99.99%) and performance, ensuring vessel schedules and cargo data are readily available for analysis.",
       "E-commerce: The customer order history is consistently available through the online portal 24/7.",
       "Public Sector: Emergency response coordination data is accessible through redundant, highly available systems."
-    ],
-    "damaAppendix3Title": "Availability",
-    "synonyms": [
-      "Obtainability of data"
-    ],
-    "relatedDamaDimensionIds": [
-      37
-    ],
-    "indicators": [
-      "Yes or No",
-      "The effort it takes to make data available (hours)"
-    ],
-    "notes": [
-      "Data are not available because they are not processed yet such as the number of casualties of a recent incident.",
-      "Personal data are not available to the public.",
-      "Data are not available for reasons of competition.",
-      "Data are not available because they are confidential or secret.",
-      "Data are not available because they not archived in a professional manner.",
-      "Data can be partly available."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -291,16 +276,21 @@
       "Customer Self-Service Success Rate",
       "Lost Revenue Due to Downtime"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Availability",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 7,
-    "damaId": 7,
     "name": "Clarity",
     "category": "Metadata",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The ease with which data consumers can understand the metadata.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-info-circle",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Data dictionary definition for 'TEU Factor' is ambiguous, missing, or uses highly technical jargon not understood by business users.",
       "Finance: The metadata for a financial report column 'AdjNetRev' does not explain what adjustments were made or the source of the net revenue figure.",
@@ -310,18 +300,6 @@
       "Logistics: Metadata clearly defines 'Dwell Time' calculation, including source systems, specific filters applied, and the unit of measure (e.g., hours).",
       "Finance: The business glossary clearly defines 'Customer Lifetime Value (CLV)' including the formula, data sources, and assumptions.",
       "Scientific Research: Metadata for a climate dataset thoroughly documents each variable, its units, collection methodology, and any known data quality issues."
-    ],
-    "damaAppendix3Title": "Clarity",
-    "synonyms": [
-      "Unambiguity",
-      "readability"
-    ],
-    "relatedDamaDimensionIds": [],
-    "indicators": [
-      "A grade (1-10)"
-    ],
-    "notes": [
-      "Other quality dimensions of metadata are completeness, correctness, and availability."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -344,16 +322,21 @@
       "Adoption Rate of BI/Analytics Tools",
       "Data Governance Maturity Score"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 8,
-    "damaId": 8,
     "name": "Coherence",
     "category": "Composition of datasets",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which datasets can be combined.",
     "unitOfMeasure": "Story",
-    "icon": "bi-puzzle",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Sales data uses 'CustomerID' (integer) while shipping data uses 'Customer_Ref_Code' (alphanumeric string) for the same customer, preventing easy joins.",
       "Retail: Product data from the e-commerce platform uses 'SKU_Online' while the ERP system uses 'MaterialNumber', hindering unified inventory views.",
@@ -384,16 +367,21 @@
       "Customer Data Completeness (360 view %)",
       "Inter-departmental Process Efficiency Score"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 9,
-    "damaId": 9,
     "name": "Comparability of populations",
     "category": "Data values",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data values representing two populations have the same definition and are measured in the same way.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-people",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Comparing 'Revenue' from Warehouse A (which includes Value Added Services income) with 'Revenue' from Warehouse B (which only includes handling charges) gives misleading performance results.",
       "Education: Comparing student test scores from two different regions where one region uses a standardized national test and the other uses a locally developed test.",
@@ -424,16 +412,21 @@
       "Policy Effectiveness Measurement",
       "Resource Allocation Equity"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 10,
-    "damaId": 10,
     "name": "Comparability over time",
     "category": "Data values",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data values over time have the same definition and are measured in the same way.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-graph-up",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: The calculation method for 'Yard Utilization' changed last year without documentation or adjustment of historical data, making trend analysis unreliable.",
       "Finance: The company changed its revenue recognition policy mid-year, but historical financial reports were not restated, making year-over-year comparisons inaccurate.",
@@ -464,16 +457,21 @@
       "Long-term KPI Trend Reliability",
       "Return on Investment (Time-Series Analysis)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 11,
-    "damaId": 11,
     "name": "Completeness (Attributes)",
     "category": "Attributes",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which all required attributes in the dataset are present.",
     "unitOfMeasure": "%",
-    "icon": "bi-check2-square",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: The 'Customer' dataset is missing the 'Tax ID' attribute, which is required for compliant invoicing in certain regions.",
       "Product Management: A new 'Product' dataset schema omits the 'Country of Origin' attribute, which is legally required for import/export documentation.",
@@ -504,16 +502,21 @@
       "Time to Develop New Reports/Analyses",
       "Business Process Exception Rate (due to missing attributes)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 12,
-    "damaId": 12,
     "name": "Completeness (Records)",
     "category": "Records",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which all required records in the dataset are present.",
     "unitOfMeasure": "%",
-    "icon": "bi-check2-square",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Daily gate transaction log missing records for several hours due to a system outage, skewing throughput reports.",
       "Healthcare: Not all patient encounters or administered medications are being recorded in the EHR system, leading to incomplete medical histories and potential safety risks.",
@@ -523,20 +526,6 @@
       "Logistics: Transport Unit arrival notification feed contains records for all expected vessel calls based on port schedules.",
       "Healthcare: All diagnostic test results ordered for patients are successfully recorded and linked to the respective patient record within 24 hours.",
       "Sales: Every lead generated from the website inquiry form is successfully created as a new lead record in the sales automation system."
-    ],
-    "damaAppendix3Title": "Completeness (1)",
-    "synonyms": [
-      "Coverage"
-    ],
-    "relatedDamaDimensionIds": [],
-    "indicators": [
-      "Percentage or number of the required records that are present."
-    ],
-    "notes": [
-      "Not all products are present in a product file.",
-      "Not all inhabitants of a city are registered.",
-      "A file of trees also contains shrubs (superfluous records)",
-      "Incomplete records are also called missing units."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -558,16 +547,21 @@
       "Operational Process Audit Completeness",
       "Audit Pass Rate (Record Integrity)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 13,
-    "damaId": 13,
     "name": "Completeness (Data files)",
     "category": "Data files",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which all required data files are present.",
     "unitOfMeasure": "%, Number",
-    "icon": "bi-check2-square",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: The monthly financial data feed from a subsidiary terminal is missing for the last two months.",
       "Manufacturing: Daily production log files from one of the assembly lines were not received by the central data repository.",
@@ -598,16 +592,21 @@
       "End-of-Day Processing Completion Rate",
       "Manual Intervention Rate (for missing files)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 14,
-    "damaId": 14,
     "name": "Completeness (Data values)",
     "category": "Data values",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which all required data values are present.",
     "unitOfMeasure": "%",
-    "icon": "bi-check2-square",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Dangerous goods flag (value) missing for a container carrying hazardous materials, leading to improper storage and safety risks.",
       "Customer Service: The 'Resolution Code' field is blank for many closed customer support tickets, preventing analysis of issue resolution types.",
@@ -617,17 +616,6 @@
       "Logistics: All required flags (e.g., DG, Reefer Temperature Setting, Out-of-Gauge dimensions) have populated values for containers where applicable.",
       "Customer Service: Every customer feedback record has a value for the 'Satisfaction Score' (e.g., 1-5 scale).",
       "Order Processing: The 'Quantity Ordered' field contains a valid numerical value for every line item in an order."
-    ],
-    "damaAppendix3Title": "Completeness (2)",
-    "synonyms": [],
-    "relatedDamaDimensionIds": [],
-    "indicators": [
-      "Percentage of the possible data values that are present."
-    ],
-    "notes": [
-      "In a product file the attribute supplier is not completed in every record.",
-      "In a questionnaire a respondent did not answer all questions.",
-      "Incomplete data values are also called missing values."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -649,16 +637,21 @@
       "AI Model Performance Metrics (e.g., F1 score, AUC)",
       "Manual Data Entry/Correction Hours"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 15,
-    "damaId": 15,
     "name": "Completeness (Data values of an attribute)",
     "category": "Data values of an attribute",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which all required data values of an attribute are present.",
     "unitOfMeasure": "%",
-    "icon": "bi-check2-square",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Many records in the 'Customer' table have a blank 'PhoneNumber' field, hindering communication for delivery coordination.",
       "HR: The 'Date of Birth' attribute is missing for 20% of employee records, impacting benefits administration.",
@@ -689,16 +682,21 @@
       "Specific Process Step Completion Rate",
       "Report Field Population Rate"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 16,
-    "damaId": 16,
     "name": "Completeness (Metadata)",
     "category": "Metadata",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which the metadata are fully described.",
     "unitOfMeasure": "%",
-    "icon": "bi-check2-square",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Data dictionary definition for 'TEU Factor' is ambiguous or missing crucial details like how different container sizes are converted.",
       "Finance: The metadata for a financial report lacks information on the source systems for each data element or the last refresh date.",
@@ -729,16 +727,21 @@
       "Time to Understand a Dataset",
       "Data Governance Audit Findings (Metadata)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 17,
-    "damaId": 17,
     "name": "Compliance with laws, regulations, or standards (Data)",
     "category": "Data",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data is in accordance with laws, regulations, or standards.",
     "unitOfMeasure": "Story",
-    "icon": "bi-shield-check",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Storing customer personal data (e.g., consignee contact details) without required consent or for longer than permitted violates GDPR.",
       "Healthcare: Patient records are not de-identified according to HIPAA standards before being used for research.",
@@ -770,16 +773,21 @@
       "Legal Expenditure on Compliance Issues",
       "Customer Trust Index"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 18,
-    "damaId": 18,
     "name": "Compliance with laws, regulations, or standards (Composition of datasets)",
     "category": "Composition of datasets",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which the composition of datasets is in accordance with laws, regulations, or standards.",
     "unitOfMeasure": "Story",
-    "icon": "bi-shield-check",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Combining employee performance data with anonymous survey data in a way that inadvertently allows re-identification of individuals, violating privacy policies.",
       "Marketing: Creating customer profiles by combining data from various sources without explicit consent for such aggregation, potentially violating data privacy laws.",
@@ -810,16 +818,21 @@
       "Regulatory Reporting Accuracy (Composition)",
       "Data Sharing Agreement Violations"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 19,
-    "damaId": 19,
     "name": "Confidentiality",
     "category": "Data",
+    "iso25012Characteristic": "Confidentiality",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which disclosure of data should be restricted to authorized data consumers.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-shield-lock",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Competitively sensitive customer contract details and pricing information are accessible by unauthorized personnel or through poorly secured APIs.",
       "HR: Employee salary and performance review data is stored in a shared folder accessible to all network users.",
@@ -851,16 +864,23 @@
       "Data Loss Prevention (DLP) Effectiveness Rate",
       "Cost of Data Breach Remediation"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Confidentiality",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 20,
-    "damaId": 20,
     "name": "Consistency (Data values)",
     "category": "Data values",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data values of two sets of attributes comply with a rule.",
     "unitOfMeasure": "%",
-    "icon": "bi-link-45deg",
+    "relatedDimensionIds": [
+      38
+    ],
     "examplePoor": [
       "Logistics: Warehouse Operating System (ERP) shows a container in Yard Block A, but the Gate System shows the same container exited the terminal 1 hour ago.",
       "Retail: The price of a product on the shelf tag is $9.99, but it scans at $10.99 at the point-of-sale.",
@@ -870,18 +890,6 @@
       "Logistics: All systems (ERP, Gate System, Handheld Scanners) show the same, current, and accurate location for a specific container.",
       "Retail: The product price listed on the e-commerce website matches the price in the inventory management system and the price at the physical store checkout.",
       "Finance: The customer's outstanding balance in the billing system is identical to the balance shown in the accounts receivable ledger."
-    ],
-    "damaAppendix3Title": "Consistency",
-    "synonyms": [],
-    "relatedDamaDimensionIds": [
-      38
-    ],
-    "indicators": [
-      "Percentage of inconsistencies."
-    ],
-    "notes": [
-      "A company is registered in the city of Paris in the country of Belgium.",
-      "Overlap are gaps in file with address history of a person. For example: Address A from 1 Jan 2003 – 1 May 2019 and Address B from 1 March – until now."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -904,16 +912,21 @@
       "Cross-System Process Error Rate",
       "Decision Reversal Rate (due to conflicting data)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 21,
-    "damaId": 21,
     "name": "Consistency (Temporal)",
     "category": "Data values of a set of attributes of a dataset at different points in time (temporal consistency)",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which the data values of a set of attributes of a dataset at different points in time comply with a rule.",
     "unitOfMeasure": "%",
-    "icon": "bi-link-45deg",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: A container's status changes from 'Gated Out' back to 'In Yard' in the system's event log without a corresponding gate-in event record.",
       "Banking: A customer's account balance for yesterday is reported as $100, but today's report for the same historical date shows $150 without any correcting transaction.",
@@ -944,16 +957,21 @@
       "Time-Series Forecast Error Rate",
       "Event Sequence Anomaly Rate"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 22,
-    "damaId": 22,
     "name": "Consistency (Across Datasets)",
     "category": "Data values of two sets of attributes between datasets (across datasets)",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data values of two sets of attributes between datasets comply with a rule.",
     "unitOfMeasure": "%",
-    "icon": "bi-link-45deg",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Total container moves reported in the operational system for a vessel do not match the total moves used for billing that vessel in the financial system.",
       "HR: The number of active employees in the HR payroll system differs from the number of active user accounts in the IT directory.",
@@ -984,16 +1002,21 @@
       "Enterprise Data Warehouse Accuracy",
       "Strategic Alignment Score"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 23,
-    "damaId": 23,
     "name": "Consistency (Cross-Record)",
     "category": "Data values of two sets of attributes between records (cross record)",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data values of two sets of attributes between records comply with a rule.",
     "unitOfMeasure": "%",
-    "icon": "bi-link-45deg",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Two different employee records in the HR system show the same unique Social Security Number.",
       "E-commerce: Multiple customer records exist with the exact same email address but different customer IDs.",
@@ -1024,16 +1047,21 @@
       "Accuracy of Network Analysis",
       "False Positive/Negative Linkage Rate"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 24,
-    "damaId": 24,
     "name": "Consistency (Record-Level)",
     "category": "Data values of two sets of attributes within a record (record level)",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data values of two sets of attributes within a record comply with a rule.",
     "unitOfMeasure": "%",
-    "icon": "bi-link-45deg",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: A shipment record shows 'DateShipped' is earlier than 'DateBooked'.",
       "HR: An employee record has a 'TerminationDate' that is before their 'HireDate'.",
@@ -1064,16 +1092,21 @@
       "Data Quality Score (Record Level)",
       "Process Straight-Through Processing (STP) Rate"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 25,
-    "damaId": 25,
     "name": "Credibility",
     "category": "Data values",
+    "iso25012Characteristic": "Credibility",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data values are regarded as true and believable by data consumers.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-person-check",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Users distrust the sales forecast report for shipping volumes because past forecasts have been consistently and wildly inaccurate.",
       "News Media: A news article citing data from an unverified source is met with skepticism by readers.",
@@ -1104,16 +1137,23 @@
       "Data-Driven Decision Rate",
       "Perceived Reliability of Data Sources"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Credibility",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 26,
-    "damaId": 26,
     "name": "Currency",
     "category": "Data values",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data values are up to date.",
     "unitOfMeasure": "%",
-    "icon": "bi-clock-history",
+    "relatedDimensionIds": [
+      53
+    ],
     "examplePoor": [
       "Logistics: Reefer container temperature shown in the monitoring system is from 2 hours ago. The cargo might have spoiled if the reefer unit failed since that last update.",
       "Finance: The stock portfolio valuation on a trading platform displays prices from the previous day's close, not real-time market prices.",
@@ -1123,17 +1163,6 @@
       "Logistics: Package location data is updated in near real-time (e.g., within seconds or minutes) as it moves through the yard or is scanned.",
       "Finance: Foreign exchange rates used for international transactions are updated every few minutes from a reliable market feed.",
       "Customer Service: A customer's shipping address is confirmed and updated (if necessary) during every new order placement."
-    ],
-    "damaAppendix3Title": "Currency",
-    "synonyms": [],
-    "relatedDamaDimensionIds": [
-      53
-    ],
-    "indicators": [
-      "Percentage of data that are up to date in a point of time."
-    ],
-    "notes": [
-      "Outdated prices in the product file."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -1156,16 +1185,21 @@
       "Effectiveness of Real-time Alerts & Monitoring",
       "Data Freshness Index"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 27,
-    "damaId": 27,
     "name": "Equivalence",
     "category": "Attributes",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which attributes stored in multiple datasets are conceptually equal.",
     "unitOfMeasure": "%",
-    "icon": "bi-arrow-left-right",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: One system uses 'CustID' (integer, primary key) while another system uses 'CustomerIdentifier' (alphanumeric string, business key) for the same customer concept, making automated joins difficult.",
       "Product Management: 'ProductWeight' in the catalog system is in kilograms, while 'Item_Wt' in the shipping system is in pounds, for the same product attribute.",
@@ -1196,16 +1230,21 @@
       "Common Business Vocabulary Adoption",
       "Cross-System Data Harmonization Rate"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 28,
-    "damaId": 28,
     "name": "Granularity (Attributes)",
     "category": "Attributes",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which a single characteristic is subdivided in attributes.",
     "unitOfMeasure": "Story",
-    "icon": "bi-grid-1x2",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: A single 'Address' attribute in the customer table holds the entire address: Street, City, Postal Code, and Country, making it hard to query by city.",
       "Contact Management: A 'FullName' attribute stores first name, middle name, and last name together.",
@@ -1236,16 +1275,21 @@
       "Business Rule Implementation Complexity",
       "Report Customization Capability"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 29,
-    "damaId": 29,
     "name": "Granularity (Records)",
     "category": "Records",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which objects are aggregated to records.",
     "unitOfMeasure": "Story",
-    "icon": "bi-grid-1x2",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Sales data for container movements is only available aggregated at the monthly level, preventing analysis of daily operational trends or peak hour demands.",
       "Retail: Website traffic data is only stored as daily summaries, losing information about user navigation paths or hourly visit patterns.",
@@ -1276,16 +1320,21 @@
       "Predictive Model Granularity Fit",
       "Lowest Level of Detail Available for Analysis"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 30,
-    "damaId": 30,
     "name": "Integrity",
     "category": "Data values",
+    "iso25012Characteristic": "Accuracy",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree of absence of data value loss or corruption.",
     "unitOfMeasure": "%",
-    "icon": "bi-gem",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Data transmission errors cause container numbers to be corrupted (e.g., 'MSCU12?4567' instead of 'MSCU1234567') during EDI exchange.",
       "Database: A database restore process fails, and a portion of transaction data from the last backup is permanently lost.",
@@ -1316,16 +1365,21 @@
       "System Error Rate (Data Integrity related)",
       "Data Validation Success Rate"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Accuracy",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 31,
-    "damaId": 31,
     "name": "Interpretability",
     "category": "Data",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data are in an appropriate language and units of measure.",
     "unitOfMeasure": "%",
-    "icon": "bi-info-circle",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: A report shows 'Package Weight' as a numerical value but doesn't specify if it's in kilograms (KG) or pounds (LBS).",
       "International Trade: Product descriptions are only available in one language, making them difficult for international partners to understand.",
@@ -1356,16 +1410,21 @@
       "Time to Understand Reports/Dashboards",
       "Error Rate in Data Application"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 32,
-    "damaId": 32,
     "name": "Latency",
     "category": "Data",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The period of time between the point when the data is created and the point when it is available for use.",
     "unitOfMeasure": "Duration",
-    "icon": "bi-clock-history",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: It takes 24 hours for gate move data (container entering/leaving terminal) to appear in the central reporting system, delaying operational analysis.",
       "Financial Trading: Real-time stock price data feed has a 15-minute delay, making it unsuitable for high-frequency trading decisions.",
@@ -1396,16 +1455,21 @@
       "Algorithmic Trading Profitability (Latency Impact)",
       "Customer Wait Time (Information Dependent)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 33,
-    "damaId": 33,
     "name": "Linkability",
     "category": "Data files",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which records of one data file can be correctly coupled with records of another data file.",
     "unitOfMeasure": "%",
-    "icon": "bi-link",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Inconsistent formatting or typos in vessel names (e.g., 'MSC New York' vs 'MSC_NewYork' vs 'MSCNWY') prevents accurately linking vessel schedule data with operational data for that vessel.",
       "Customer Management: The customer ID in the sales order system is a different format than the customer ID in the support ticket system, making it hard to get a unified view of customer interactions.",
@@ -1437,16 +1501,21 @@
       "Analytical Query Performance on Joins",
       "Network Analysis Effectiveness"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 34,
-    "damaId": 34,
     "name": "Metadata compliance",
     "category": "Data values",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which the data values are in accordance with their definition, format specification and value domain.",
     "unitOfMeasure": "%",
-    "icon": "bi-shield-check",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: A 'PackageType' field, defined in metadata to accept values like '20GP', '40HC', sometimes contains invalid codes like '20 Standard' or free text.",
       "Finance: An 'InvoiceDate' field, specified to be in YYYY-MM-DD format, contains values like '15/03/2024' or 'March 15, 2024'.",
@@ -1477,16 +1546,21 @@
       "Data Conformance to Schema (%)",
       "Data Transformation Error Rate (due to non-compliance)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 35,
-    "damaId": 35,
     "name": "Naturalness",
     "category": "Composition of datasets",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which the composition of datasets is aligned with the real-world objects that they represent.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-tree",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Storing individual container move details, vessel visit information, and customer billing data all within the same highly complex, denormalized table.",
       "E-commerce: A single 'Product' table contains attributes for physical products, digital downloads, and service subscriptions, making the schema overly complicated and hard to manage.",
@@ -1517,16 +1591,21 @@
       "Data Model Maintenance Effort",
       "User Satisfaction with Data Structure"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 36,
-    "damaId": 36,
     "name": "Objectivity",
     "category": "Data values",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which the data values are created in an unbiased manner.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-person",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Sales forecasts for shipping volumes are consistently overestimated due to overly optimistic assumptions from the sales team who are incentivized on targets.",
       "Performance Reviews: Employee performance ratings are subjectively influenced by a manager's personal relationship with the employee rather than objective criteria.",
@@ -1557,16 +1636,21 @@
       "Employee/Customer Perception of Fairness Score",
       "Decision Appeal Rate (due to perceived bias)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 37,
-    "damaId": 37,
     "name": "Obtainability",
     "category": "Data",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which the data can be acquired.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-key",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Historical maintenance records for port equipment are stored only on paper archives in a remote, difficult-to-access location.",
       "Market Research: Competitor pricing data is proprietary and not publicly available or easily purchasable.",
@@ -1597,16 +1681,21 @@
       "User Frustration Score (Data Access)",
       "Process Cycle Time (Data Dependent Steps)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 38,
-    "damaId": 38,
     "name": "Plausibility",
     "category": "Data values",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data values match knowledge of the real world.",
     "unitOfMeasure": "Story",
-    "icon": "bi-lightbulb",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: A container move is recorded in the system as taking only 0.1 seconds, which is physically impossible.",
       "Healthcare: A patient's recorded age is 150 years, or their recorded body temperature is 5 degrees Celsius.",
@@ -1637,16 +1726,21 @@
       "User Reported Data Absurdities",
       "Automated Decision Override Rate (due to implausible inputs)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 39,
-    "damaId": 39,
     "name": "Portability (Data)",
     "category": "Data",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data can be installed, replaced or moved from one system to another while preserving the existing quality.",
     "unitOfMeasure": "Story",
-    "icon": "bi-file-earmark-zip",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Data exported from the legacy terminal operating system is in a proprietary binary format that is unusable by the new system without complex, lossy conversion.",
       "CRM: Customer data is locked into a specific cloud CRM vendor's platform with no easy way to export it completely and accurately for migration to another CRM.",
@@ -1677,16 +1771,21 @@
       "Data Sharing Compatibility Score",
       "Disaster Recovery Test Success Rate (Data Portability)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 40,
-    "damaId": 40,
     "name": "Portability (Format)",
     "category": "Format",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which a format can be applied in a wide range of situations.",
     "unitOfMeasure": "Story",
-    "icon": "bi-file-earmark-code",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Using a highly specific, internal XML schema for data exchange that external partners or new software cannot easily parse or adapt to.",
       "Reporting: Financial reports are generated only in a proprietary ",
@@ -1718,16 +1817,21 @@
       "Number of Systems Supporting Data Format",
       "Long-Term Data Accessibility Risk Score"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 41,
-    "damaId": 41,
     "name": "Precision (1 - Recording Accuracy)",
     "category": "Data values",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree of accuracy with which data values are recorded or classified.",
     "unitOfMeasure": "Depends on data or metadata",
-    "icon": "bi-rulers",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Recording container temperatures only to the nearest 5 degrees Celsius when the cargo requires monitoring to +/- 0.5 degrees.",
       "Manufacturing: Measuring component dimensions only to the nearest millimeter when engineering tolerances require micron-level precision.",
@@ -1758,16 +1862,21 @@
       "Smallest Detectable Change (Data Sensitivity)",
       "Fitness for Purpose (High Precision Tasks)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 42,
-    "damaId": 42,
     "name": "Precision (2 - Statistical Spread)",
     "category": "Data values",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which the error in data values spreads around zero (in statistics).",
     "unitOfMeasure": "%",
-    "icon": "bi-graph-down",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Weight measurements from a specific, uncalibrated scale consistently read 5kg too high (low precision because of systematic bias, although individual readings might be close to each other).",
       "Scientific Measurement: Readings from a sensor show very wide random variations around the true value, even if the average is correct (high variance = low precision).",
@@ -1798,16 +1907,23 @@
       "Signal-to-Noise Ratio",
       "Process Capability Index (Cp/Cpk)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 43,
-    "damaId": 43,
     "name": "Punctuality",
     "category": "Dataset availability",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which the period between the actual and target point of time of availability of a dataset is appropriate.",
     "unitOfMeasure": "Duration",
-    "icon": "bi-clock-fill",
+    "relatedDimensionIds": [
+      53
+    ],
     "examplePoor": [
       "Logistics: The daily sales report for container volumes, expected by 9 AM for the morning planning meeting, often arrives after midday.",
       "Finance: Month-end financial statements, required by the 5th working day, are consistently delivered on the 10th.",
@@ -1817,21 +1933,6 @@
       "Logistics: Transport Unit stowage plans are consistently available in the system 24 hours before estimated vessel arrival, as per the agreed service level.",
       "Finance: Regulatory compliance reports are submitted to the authorities by the official deadline without exception.",
       "Supply Chain: Daily inventory status files from third-party warehouses are received every morning by 8 AM as scheduled."
-    ],
-    "damaAppendix3Title": "Punctuality",
-    "synonyms": [],
-    "relatedDamaDimensionIds": [
-      53
-    ],
-    "indicators": [
-      "The period between the actual and target point in time of availability of a dataset (days, hours, minutes).",
-      "Percentage of times that datasets were available too late (or too early)."
-    ],
-    "notes": [
-      "The dataset should be available on 1 July 2020 but is released on 3 July 2020. Too late.",
-      "The dataset should be available on 1 July 2020 at 10:00 am but is released at 9.45 am. Too early.",
-      "A dataset can also consist of one transaction.",
-      "If no target time is agreed or planned, punctuality cannot be measured."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -1853,16 +1954,21 @@
       "Process Delay Time (Waiting for Data)",
       "User Satisfaction with Data Punctuality"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 44,
-    "damaId": 44,
     "name": "Reasonability",
     "category": "Data pattern",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which a data pattern meets expectations.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-graph-up-arrow",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Reported daily container throughput for the terminal suddenly drops to zero for a full day without any explanation (e.g., not a public holiday, no known strike or system outage).",
       "Retail: Online sales figures show a 1000% increase overnight for a specific product without any corresponding marketing campaign or external event.",
@@ -1893,16 +1999,21 @@
       "Forecast Deviation from Expected Patterns",
       "User Confidence in Data Predictability"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 45,
-    "damaId": 45,
     "name": "Recoverability",
     "category": "Datasets",
+    "iso25012Characteristic": "Recoverability",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which datasets are preserved in the event of incident.",
     "unitOfMeasure": "Story",
-    "icon": "bi-save",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Critical operational data from the Warehouse Operating System is only stored locally on a single server with no automated backups or disaster recovery plan.",
       "Finance: The only copy of the company's general ledger database exists on a primary server; a hardware failure could lead to permanent data loss.",
@@ -1934,16 +2045,21 @@
       "Disaster Recovery Test Success Rate",
       "Cost of Downtime"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Recoverability",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 46,
-    "damaId": 46,
     "name": "Redundancy",
     "category": "Data",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which logically identical data are stored more than once.",
     "unitOfMeasure": "Number",
-    "icon": "bi-files",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Customer address information is stored redundantly in the sales system, billing system, and shipping system, leading to inconsistencies when an address changes and isn't updated in all places.",
       "HR: Employee emergency contact details are captured in the HRIS, a separate departmental spreadsheet, and a local manager's contact list.",
@@ -1974,16 +2090,21 @@
       "Data Management Overhead",
       "Data Reconciliation Effort"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 47,
-    "damaId": 47,
     "name": "Referential integrity",
     "category": "Data files",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data values of the primary key of one data file and data values of the foreign key of another data file are equal.",
     "unitOfMeasure": "%",
-    "icon": "bi-link",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: An order record in the sales system references a Customer ID that no longer exists (or never existed) in the customer master table, creating an 'orphan' record.",
       "University: An enrollment record links to a 'CourseID' that has been deleted from the official course catalog.",
@@ -2014,16 +2135,21 @@
       "Application Stability Score (Data Dependent)",
       "Database Maintenance Effort (Integrity Checks)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 48,
-    "damaId": 48,
     "name": "Relevance",
     "category": "Composition of datasets",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which the composition of datasets meets the needs of the data consumer.",
     "unitOfMeasure": "Story",
-    "icon": "bi-filter-circle",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: A safety incident report for yard operations includes highly detailed equipment maintenance logs from the past 5 years, which are not directly relevant to analyzing the specific incident.",
       "Marketing: A weekly sales performance dashboard sent to regional sales managers includes detailed IT system server logs, which they don't need or understand.",
@@ -2055,23 +2181,28 @@
       "Decision Effectiveness & Speed",
       "Actionable Insight Rate from Data"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 49,
-    "damaId": 49,
     "name": "Reliability",
     "category": "Initial data value",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The closeness of the initial data value to the subsequent data value.",
     "unitOfMeasure": "%",
-    "icon": "bi-arrow-repeat",
+    "relatedDimensionIds": [],
     "examplePoor": [
-      "Logistics: Sensor readings for reefer container temperatures fluctuate wildly (e.g., jumping between -10°C and +5°C every few seconds) even when the actual measured condition is stable, indicating a faulty sensor or transmission.",
+      "Logistics: Sensor readings for reefer container temperatures fluctuate wildly (e.g., jumping between -10\u00b0C and +5\u00b0C every few seconds) even when the actual measured condition is stable, indicating a faulty sensor or transmission.",
       "Manufacturing: A weighing scale gives significantly different readings for the same item when weighed multiple times in quick succession.",
       "Environmental Monitoring: An air quality sensor produces highly erratic CO2 level readings that don't correlate with known environmental conditions or other nearby sensors."
     ],
     "exampleGood": [
-      "Logistics: Repeated readings of a container's internal temperature under stable ambient conditions and reefer setpoint yield very similar values (e.g., within +/- 0.2°C).",
+      "Logistics: Repeated readings of a container's internal temperature under stable ambient conditions and reefer setpoint yield very similar values (e.g., within +/- 0.2\u00b0C).",
       "Manufacturing: A calibrated torque wrench consistently applies the same amount of force when tested repeatedly on a test rig.",
       "Environmental Monitoring: A water quality sensor provides stable and consistent pH readings when sampling from a controlled, stable solution."
     ],
@@ -2095,16 +2226,21 @@
       "False Alarm Rate (Monitoring Systems)",
       "Process Control Chart Stability"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 50,
-    "damaId": 50,
     "name": "Reproducibility",
     "category": "Dataset",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which a dataset can be recreated with the same data values.",
     "unitOfMeasure": "Story",
-    "icon": "bi-arrow-clockwise",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Running the same 'Monthly Throughput Report' query at different times yields slightly different results due to underlying operational data changes not being versioned or timestamped for historical reporting.",
       "Scientific Research: A published research paper's results cannot be replicated by other scientists because the original dataset or the exact data processing steps are not available or documented.",
@@ -2135,16 +2271,21 @@
       "Report Consistency Score (Across Runs)",
       "AI Model Output Variance (Fixed Inputs)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 51,
-    "damaId": 51,
     "name": "Reputation",
     "category": "Data",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data are trusted or highly regarded in terms of their source or content.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-patch-check-fill",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Data originating from a known unreliable spreadsheet that is manually updated by many users with no validation is treated with skepticism by managers.",
       "News: Information from an unverified social media account with a history of spreading misinformation has a poor reputation.",
@@ -2175,16 +2316,21 @@
       "Perceived Credibility of Reports (Source Dependent)",
       "Brand Trust Index (Data Handling)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 52,
-    "damaId": 52,
     "name": "Retention period",
     "category": "Datasets",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The period that datasets are available until they can or must be deleted.",
     "unitOfMeasure": "Duration",
-    "icon": "bi-calendar-x",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Financial records related to shipping transactions are deleted after only one year, violating legal retention requirements which mandate 7 years.",
       "Healthcare: Patient medical records are purged too soon, potentially impacting long-term patient care or legal inquiries.",
@@ -2215,16 +2361,24 @@
       "Audit Findings (Retention Related)",
       "Legal Discovery Cost/Time"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 53,
-    "damaId": 53,
     "name": "Timeliness",
     "category": "Dataset availability",
+    "iso25012Characteristic": "Currentness",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which the period between the time of creation of the real value and the time that the dataset is available is appropriate.",
     "unitOfMeasure": "Duration",
-    "icon": "bi-alarm-fill",
+    "relatedDimensionIds": [
+      43,
+      26
+    ],
     "examplePoor": [
       "Logistics: Customs release status for imported containers is updated in the terminal system only once daily, causing potential truck delays at the gate if the release happened earlier but isn't yet visible.",
       "Retail: Inventory updates from Point-of-Sale systems take 4 hours to reflect in the online store, leading to customers ordering items that are actually out of stock.",
@@ -2234,22 +2388,6 @@
       "Logistics: Transport Unit arrival times are updated in the port community system within minutes of the actual event (e.g., vessel crossing port limits, berthing).",
       "Retail: Online product availability is updated within 5 minutes of a sale or stock replenishment in the physical store or warehouse.",
       "Emergency Response: Real-time GPS location of ambulances is available to dispatchers with a delay of less than 10 seconds."
-    ],
-    "damaAppendix3Title": "Timeliness",
-    "synonyms": [],
-    "relatedDamaDimensionIds": [
-      43,
-      26
-    ],
-    "indicators": [
-      "Percentage of times a dataset was not available in a timely manner."
-    ],
-    "notes": [
-      "The date of birth of a person is available in a dataset after 23 days. It should be available within one week.",
-      "Data about quarterly returns of VAT are available 3 months after the end of the quarter. The requirement is 1 month after the end of the quarter.",
-      "Timeliness can only be measured if there is a norm for timeliness, e.g., one week after the event.",
-      "Timeliness is dependent on the duration of a process.",
-      "Data can be available punctually but not timely and the other way around."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -2272,16 +2410,21 @@
       "Real-time Process Adherence Rate",
       "Data Lag Time (Creation to Availability)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Currentness",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 54,
-    "damaId": 54,
     "name": "Traceability",
     "category": "Data",
+    "iso25012Characteristic": "Traceability",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data lineage is available.",
     "unitOfMeasure": "Story",
-    "icon": "bi-signpost-split",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Business users are unsure where the 'estimated time of arrival' (ETA) data for a vessel originated, what transformations it underwent, or if it was manually adjusted.",
       "Finance: A key figure in a regulatory report cannot be easily traced back to its source transactions or calculation logic, making audits difficult.",
@@ -2291,15 +2434,6 @@
       "Logistics: Data lineage tools show that the vessel ETA originated from the shipping line's EDI feed, was then updated based on AIS tracking data, and subsequently adjusted by the port agent, with timestamps and user IDs for each change.",
       "Finance: An auditable data trail exists for all financial reporting, allowing any number to be traced back through aggregation and transformation steps to its source general ledger entries.",
       "Data Analytics: A data catalog provides complete lineage for all datasets, showing their origin, transformations, dependencies, and usage in models and reports."
-    ],
-    "damaAppendix3Title": "Traceability",
-    "synonyms": [],
-    "relatedDamaDimensionIds": [],
-    "indicators": [
-      "A grade (1-10)"
-    ],
-    "notes": [
-      "Data lineage is metadata that identifies the sources of data and the transformations through which it has passed up to the point of consumption."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -2324,16 +2458,23 @@
       "AI Model Explainability Score",
       "Impact Analysis Accuracy (for data changes)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Traceability",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 55,
-    "damaId": 55,
     "name": "Uniqueness (Objects)",
     "category": "Objects",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which objects (of the real world) occur only once as a record in a data file.",
     "unitOfMeasure": "%",
-    "icon": "bi-person-badge",
+    "relatedDimensionIds": [
+      56
+    ],
     "examplePoor": [
       "Logistics: The same physical container (e.g., MSCU1234567) appears as two different records in the terminal inventory list due to a minor typo in one of the ID entries or being recorded by two different systems without reconciliation.",
       "Customer Management: The same individual customer exists as three separate records in the CRM because they used different email addresses or had slight name variations when interacting with the company.",
@@ -2343,19 +2484,6 @@
       "Logistics: Each distinct physical vessel calling at the port has exactly one corresponding master record in the vessel database, identified by its unique IMO number.",
       "Customer Management: A robust Master Data Management (MDM) process ensures that each unique customer (individual or organization) is represented by a single 'golden record' in the system.",
       "Asset Management: Every physical asset owned by the company has one unique record in the asset tracking system, identified by a unique serial number or asset ID."
-    ],
-    "damaAppendix3Title": "Uniqueness",
-    "synonyms": [],
-    "relatedDamaDimensionIds": [
-      56
-    ],
-    "indicators": [
-      "Percentage of duplicates in a data file."
-    ],
-    "notes": [
-      "A record that occurs twice in a data file is called a duplicate.",
-      "Uniqueness of object is the degree to which objects (of the real world) occur only once as a record in a dataset.",
-      "Three different problems can occur: a. One record with one key value occurs more than once in a dataset (duplicate with identical key values). The two records are not unique. b. One record with more than one key value occurs more than once in a dataset (duplicate with different key values). Object John is not unique in the dataset. c. One record has the same key as another record, and both occur in a dataset (false duplicate). Key 22 is not unique."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -2378,16 +2506,21 @@
       "Data Cleansing & De-duplication Costs",
       "MDM 'Golden Record' Accuracy"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 56,
-    "damaId": 56,
     "name": "Uniqueness (Records)",
     "category": "Records",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which records occur only once in a data file.",
     "unitOfMeasure": "%",
-    "icon": "bi-exclude",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: A duplicate Bill of Lading record exists in the shipping documentation system, potentially leading to double-billing or incorrect cargo release.",
       "Online Orders: The same online order is recorded twice in the order management system due to a user clicking the 'submit' button multiple times or a system glitch.",
@@ -2418,16 +2551,25 @@
       "Report Aggregation Accuracy",
       "Storage Utilization Efficiency"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 57,
-    "damaId": 57,
     "name": "Validity",
     "category": "Data values",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data values comply with rules.",
     "unitOfMeasure": "%",
-    "icon": "bi-shield-check",
+    "relatedDimensionIds": [
+      3,
+      14,
+      20
+    ],
     "examplePoor": [
       "Logistics: A container number in the system is 'ABCD123456X' which doesn't conform to the ISO 6346 standard format (e.g., invalid check digit or owner code).",
       "Order Entry: An order record contains an invalid date like '31/02/2024' or a 'ProductStatusCode' of 'X' when only 'A', 'I', 'D' are allowed.",
@@ -2437,24 +2579,6 @@
       "Logistics: All container numbers stored in the system follow the ISO 6346 standard format, including a valid owner code, serial number, and check digit.",
       "Order Entry: All 'OrderDate' fields contain valid calendar dates in the YYYY-MM-DD format, and 'CountryCode' fields use valid ISO 3166-1 alpha-2 codes.",
       "User Registration: Email addresses entered by users are validated against a standard email format pattern (e.g., user@domain.com)."
-    ],
-    "damaAppendix3Title": "Validity",
-    "synonyms": [],
-    "relatedDamaDimensionIds": [
-      3,
-      14,
-      20
-    ],
-    "indicators": [
-      "Percentage of data values that do not comply with rules."
-    ],
-    "notes": [
-      "A city that does not exist in a list of cities.",
-      "A birth data that is out of range of valid birth dates.",
-      "A data value can be valid but not accurate.",
-      "A data value can be valid but incomplete. Absence of certain data values may be permitted.",
-      "A valid data value is part of a value domain.",
-      "Consistency is about comparing two or more data values."
     ],
     "potentialBusinessImpacts": {
       "positive": [
@@ -2477,16 +2601,21 @@
       "Data Transformation Success Rate",
       "Data Quality Rule Pass Rate (Validity Checks)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 58,
-    "damaId": 58,
     "name": "Value",
     "category": "Data",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data provide advantages from their use.",
     "unitOfMeasure": "Grade",
-    "icon": "bi-currency-dollar",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Collecting highly detailed equipment sensor data (e.g., vibration readings every second) that is never analyzed, used for predictive maintenance, or contributes to any business decision.",
       "Marketing: Investing heavily in a complex customer segmentation model whose outputs are too difficult for the sales team to understand or act upon.",
@@ -2518,16 +2647,21 @@
       "Strategic Goal Achievement Rate (Data-linked goals)",
       "New Product/Service Success Rate (Data-informed)"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 59,
-    "damaId": 59,
     "name": "Variety",
     "category": "Data",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data are available from different data sources.",
     "unitOfMeasure": "Story",
-    "icon": "bi-diagram-3",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Relying solely on manual input from operators for recording operational status (e.g., equipment breakdowns), without cross-referencing system logs, sensor data, or maintenance records.",
       "Market Analysis: Basing market trend predictions only on internal sales data without considering broader economic indicators, competitor activities, or industry reports.",
@@ -2559,16 +2693,21 @@
       "Innovation Rate (Data-driven ideas)",
       "Completeness of 360-Degree Views"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   },
   {
     "id": 60,
-    "damaId": 60,
     "name": "Volatility",
     "category": "Data values",
+    "iso25012Characteristic": "Compliance",
+    "isoReference": "ISO/IEC 25012:2008 & ISO 8000-8 / ETSI EN 304 311",
+    "iso38505Role": "Contextual operational measurement indicator (ISO/IEC 38505-1:2026 & ISO/IEC TR 38505-2:2018)",
     "definition": "The degree to which data values change over time.",
     "unitOfMeasure": "%",
-    "icon": "bi-lightning-charge-fill",
+    "relatedDimensionIds": [],
     "examplePoor": [
       "Logistics: Customer contact information (e.g., primary contact person, phone number for a shipping company) changes frequently, but the update process for the master data is slow and manual, leading to many outdated records.",
       "Stock Market: Real-time stock prices are highly volatile, changing many times per second, requiring very frequent updates for accurate trading systems.",
@@ -2599,6 +2738,9 @@
       "Data Update Frequency vs. Change Rate Gap",
       "Cost of Managing High-Volatility Data"
     ],
-    "framework_tags": {}
+    "framework_tags": {
+      "iso_25012": "Compliance",
+      "iso_38505_edm": "Monitor (ISO/IEC TR 38505-2:2018)"
+    }
   }
 ]

@@ -1,77 +1,90 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://odgs.org/schemas/dimension.schema.json",
-    "title": "ODGS DQ Dimension",
-    "description": "Schema for an ODGS Data Quality Dimension",
-    "type": "array",
-    "items": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://w3id.org/odgs/schemas/dimension.schema.json",
+  "title": "ODGS ISO/IEC 25012 & 38505 Contextual Data Quality Dimension",
+  "description": "Schema for an ODGS Data Quality Dimension aligned with ISO/IEC 25012:2008, ISO 8000, ETSI EN 304 311, and ISO/IEC 38505-1:2026.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "integer",
+          "string"
+        ]
+      },
+      "name": {
+        "type": "string"
+      },
+      "category": {
+        "type": "string"
+      },
+      "iso25012Characteristic": {
+        "type": "string"
+      },
+      "isoReference": {
+        "type": "string"
+      },
+      "iso38505Role": {
+        "type": "string"
+      },
+      "definition": {
+        "type": "string"
+      },
+      "unitOfMeasure": {
+        "type": "string"
+      },
+      "relatedDimensionIds": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      },
+      "examplePoor": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "exampleGood": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "potentialBusinessImpacts": {
         "type": "object",
         "properties": {
-            "id": {
-                "type": [
-                    "integer",
-                    "string"
-                ]
-            },
-            "damaId": {
-                "type": "integer"
-            },
-            "name": {
-                "type": "string"
-            },
-            "category": {
-                "type": "string"
-            },
-            "definition": {
-                "type": "string"
-            },
-            "unitOfMeasure": {
-                "type": "string"
-            },
-            "icon": {
-                "type": "string"
-            },
-            "examplePoor": {
-                "type": "array",
-                "items": {
-                    "type": "string"
-                }
-            },
-            "exampleGood": {
-                "type": "array",
-                "items": {
-                    "type": "string"
-                }
-            },
-            "potentialBusinessImpacts": {
-                "type": "object",
-                "properties": {
-                    "positive": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "negative": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                }
-            },
-            "illustrativeKpis": {
-                "type": "array",
-                "items": {
-                    "type": "string"
-                }
+          "positive": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
-        },
-        "required": [
-            "id",
-            "name",
-            "category",
-            "definition"
-        ]
-    }
+          },
+          "negative": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "illustrativeKpis": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "framework_tags": {
+        "type": "object"
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "category",
+      "iso25012Characteristic",
+      "definition"
+    ]
+  }
 }

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="508" viewBox="0 0 1200 508">
+  <defs>
+    <style>
+      text { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+      .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; }
+    </style>
+    <marker id="arrowNavy" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0B2545"/>
+    </marker>
+    <marker id="arrowTeal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0D6E6E"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#B45309"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#FFFFFF" rx="8"/>
+  
+  <!-- Title Banner -->
+  <rect x="20" y="16" width="1160" height="54" rx="6" fill="#0B2545"/>
+  <text x="40" y="40" font-size="18" font-weight="700" fill="#FFFFFF">END-TO-END TRUSTED DATA TRANSACTION (EN 18235-1/-2 PHASES 1–6 &amp; RUNTIME ENFORCEMENT)</text>
+  <text x="40" y="60" font-size="12.5" fill="#CBD5E1">Hand-off between pre-transfer control-plane agents (Phase 5) and in-pipeline data-plane enforcement &amp; S-Cert generation (Phase 6)</text>
+
+  <!-- Phase Header Bar -->
+  <rect x="20" y="84" width="350" height="36" rx="4" fill="#334155"/>
+  <text x="195" y="107" font-size="12.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">PHASES 1–4: GRANT, PUBLISH, DISCOVER, NEGOTIATE</text>
+
+  <rect x="380" y="84" width="360" height="36" rx="4" fill="#1E3A8A"/>
+  <text x="560" y="107" font-size="12.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">PHASE 5: DATA SHARING / TRANSFER (§5.7)</text>
+
+  <rect x="750" y="84" width="430" height="36" rx="4" fill="#0D6E6E"/>
+  <text x="965" y="107" font-size="12.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">PHASE 6: ACCESS, USAGE &amp; OBLIGATIONS (§5.8)</text>
+
+  <!-- Swimlane 1: Control Plane -->
+  <rect x="20" y="130" width="720" height="195" rx="6" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="36" y="154" font-size="13" font-weight="700" fill="#1E3A8A">CONTROL PLANE &amp; TRANSFER BOUNDARY (Existing Standards &amp; Gaia-X DTA)</text>
+
+  <rect x="36" y="168" width="318" height="140" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
+  <text x="50" y="190" font-size="12" font-weight="700" fill="#0B2545">1. Catalogue &amp; Contract Negotiation</text>
+  <text x="50" y="210" font-size="11.5" fill="#334155">• DCAT-3 Metadata &amp; W3C ODRL 2.2 Policy</text>
+  <text x="50" y="227" font-size="11.5" fill="#334155">• Eclipse DRP delegationEvidence (§5.3)</text>
+  <text x="50" y="244" font-size="11.5" fill="#334155">• Eclipse CAP Conformity VC (ISO 17000)</text>
+  <text x="50" y="261" font-size="11.5" fill="#334155">• Notarized Data Usage Agreement (DUA)</text>
+  <text x="50" y="285" font-size="11" font-weight="600" fill="#0D6E6E">+ Clause 6 &amp; Annex D: Pre-publication quality check</text>
+
+  <path d="M 356 238 L 386 238" stroke="#0B2545" stroke-width="2" marker-end="url(#arrowNavy)"/>
+
+  <rect x="390" y="168" width="334" height="140" rx="6" fill="#FFFFFF" stroke="#1E3A8A" stroke-width="1.5"/>
+  <text x="404" y="190" font-size="12" font-weight="700" fill="#1E3A8A">2. Gaia-X Data Transfer Agent (DTA) / EDC</text>
+  <text x="404" y="210" font-size="11.5" fill="#334155">• Verifies Participant Identity via OpenID4VP</text>
+  <text x="404" y="227" font-size="11.5" fill="#334155">• Evaluates Gaia-X ODRL-VC (ovc:constraint)</text>
+  <text x="404" y="244" font-size="11.5" fill="#334155">• Enforces Data Access Prerequisites (odrl:read)</text>
+  <rect x="404" y="256" width="306" height="42" rx="4" fill="#FEF3C7" stroke="#F59E0B"/>
+  <text x="412" y="273" font-size="10.5" font-weight="700" fill="#92400E">DTA Boundary (CWA 18245 §5.8.3):</text>
+  <text x="412" y="288" font-size="10.5" fill="#92400E">"Agent involvement ends when bytes land."</text>
+
+  <!-- Hand-off Arrow from Phase 5 to Phase 6 -->
+  <path d="M 724 238 L 766 238" stroke="#0D6E6E" stroke-width="2.5" marker-end="url(#arrowTeal)"/>
+
+  <!-- Swimlane 2: Data Plane (Phase 6) -->
+  <rect x="750" y="130" width="430" height="360" rx="6" fill="#F0FDFA" stroke="#0D6E6E" stroke-width="2"/>
+  <text x="768" y="154" font-size="13" font-weight="700" fill="#0D6E6E">DATA PLANE · IN-PIPELINE PROCESSING (THIS SPEC)</text>
+
+  <rect x="768" y="168" width="394" height="140" rx="6" fill="#FFFFFF" stroke="#0D6E6E" stroke-width="1.5"/>
+  <text x="782" y="190" font-size="12.5" font-weight="700" fill="#0B2545">3. Runtime Constraint &amp; Obligation Gate (Clauses 6 &amp; 7)</text>
+  <text x="782" y="210" font-size="11.5" fill="#334155">• Enforces Data Usage Constraints (Gaia-X Arch §5.2)</text>
+  <text x="782" y="227" font-size="11.5" fill="#334155">• Enforces post-transfer obligations (CWA 18245 §5.8.3)</text>
+  <text x="782" y="244" font-size="11.5" fill="#334155">• Enforces DRP "MUST not process resource" on breach</text>
+  <text x="782" y="264" font-size="11.5" font-weight="700" fill="#DC2626">→ Breach: Deterministic HARD_STOP (Pipeline Halted)</text>
+  <text x="782" y="284" font-size="11.5" font-weight="700" fill="#0D6E6E">→ Conformant: Proceeds &amp; emits S-Cert Receipt (Clause 8)</text>
+
+  <path d="M 965 308 L 965 338" stroke="#0D6E6E" stroke-width="2.5" marker-end="url(#arrowTeal)"/>
+
+  <rect x="768" y="342" width="394" height="132" rx="6" fill="#EFF6FF" stroke="#1E3A8A" stroke-width="2"/>
+  <text x="782" y="364" font-size="12.5" font-weight="700" fill="#1E3A8A">4. Proof of Policy Enforcement (S-Cert · Clause 8)</text>
+  <text x="782" y="384" font-size="11.5" fill="#334155">• Satisfies Gaia-X Arch Doc 25.11 §4.8.4.2:</text>
+  <text x="782" y="400" font-size="11" font-style="italic" fill="#1E293B">  "Consumer provides proof of implemented policy enforcement"</text>
+  <text x="782" y="418" font-size="11" class="mono" fill="#0D6E6E">• JWS(payload_hash, semantic_hash, process_urn)</text>
+  <text x="782" y="435" font-size="11" class="mono" fill="#0D6E6E">• Linked via correlation_id (IDSA Rulebook §121)</text>
+  <text x="782" y="454" font-size="11" font-weight="700" fill="#0B2545">• Zero raw payload or PII ever leaves participant boundary</text>
+
+  <!-- Bottom Return Loop: Verification & Observability -->
+  <rect x="20" y="342" width="720" height="148" rx="6" fill="#FFFBEB" stroke="#B45309" stroke-width="1.5"/>
+  <text x="36" y="366" font-size="13" font-weight="700" fill="#B45309">CONTINUOUS OBSERVABILITY, AUDIT &amp; CONFORMITY FEEDBACK LOOP</text>
+  <text x="36" y="390" font-size="12" fill="#334155">• Gaia-X DTA / Provider Verification (§4.8.4.2): Provider verifies S-Cert signature &amp; hashes without seeing raw consumer data</text>
+  <text x="36" y="412" font-size="12" fill="#334155">• Eclipse CAP (v2.2.1): S-Cert attaches as machine-verifiable cred:Evidence inside cap:Declaration or cap:Certification VCs</text>
+  <text x="36" y="434" font-size="12" fill="#334155">• ISO/IEC CD 38011 &amp; IDSA Rulebook §121: S-Cert stream populates decentralized observability logs &amp; TR 38505-2 Monitor</text>
+  <text x="36" y="456" font-size="12" fill="#334155">• FprEN 18352 §11.2.4 &amp; EAS 18425:2026: Substantiates Capability Level 4 (Predictable Process) assessments</text>
+
+  <path d="M 768 410 L 742 410" stroke="#B45309" stroke-width="2.5" marker-end="url(#arrowAmber)"/>
+
+</svg>

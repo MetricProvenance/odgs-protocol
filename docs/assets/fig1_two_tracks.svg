@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="515" viewBox="0 0 1200 515">
+  <defs>
+    <style>
+      text { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+      .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; }
+    </style>
+    <marker id="arrowNavy" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0B2545"/>
+    </marker>
+    <marker id="arrowTeal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0D6E6E"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#B45309"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#FFFFFF" rx="8"/>
+  
+  <!-- Title Banner -->
+  <rect x="20" y="16" width="1160" height="54" rx="6" fill="#0B2545"/>
+  <text x="40" y="40" font-size="18" font-weight="700" fill="#FFFFFF">SEPARATION OF CONCERNS: NORMATIVE SPECIFICATION VS. REFERENCE IMPLEMENTATIONS</text>
+  <text x="40" y="60" font-size="12.5" fill="#CBD5E1">Relationship between vendor-neutral functional requirements (ISO/IEC Directives, Part 2) and open-source software implementations</text>
+
+  <!-- Left Column: Normative Specification Track -->
+  <rect x="20" y="88" width="540" height="410" rx="8" fill="#F8FAFC" stroke="#0B2545" stroke-width="2"/>
+  <rect x="20" y="88" width="540" height="46" rx="8" fill="#1E3A8A"/>
+  <text x="40" y="110" font-size="15" font-weight="700" fill="#FFFFFF">SPECIFICATION TRACK · FUNCTIONAL REQUIREMENTS</text>
+  <text x="40" y="126" font-size="11.5" fill="#DBEAFE">Standardisation Scope: CEN/CLC JTC 25 (WG 2 Dataspaces &amp; WG 3 Data Governance)</text>
+
+  <rect x="44" y="152" width="492" height="86" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="60" y="175" font-size="13.5" font-weight="700" fill="#0B2545">1. Technology-Agnostic Functional Requirements (Clauses 5–9)</text>
+  <text x="60" y="196" font-size="12" fill="#334155">• Specifies functional criteria for runtime constraint evaluation and audit records</text>
+  <text x="60" y="214" font-size="12" fill="#334155">• Supports EAS 18425:2026 (CL3–CL4), FprEN 18352, and EN 18235-2:2026</text>
+  <text x="60" y="230" font-size="11.5" font-weight="600" fill="#1E3A8A">• Deliverable Type: European Agile Specification (EAS) / Technical Specification (TS)</text>
+
+  <rect x="44" y="254" width="492" height="102" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="60" y="277" font-size="13.5" font-weight="700" fill="#0B2545">2. Standardized Work Products (Clauses 6, 8 &amp; Annexes A, D)</text>
+  <text x="60" y="298" font-size="12" fill="#334155">• Work Product 1: Provenance-Attested Constraint Schema (semantic_hash)</text>
+  <text x="60" y="316" font-size="12" fill="#334155">• Work Product 2: Semantic Certificate (S-Cert) Audit Payload Schema</text>
+  <text x="60" y="336" font-size="11.5" class="mono" fill="#0D6E6E">payload_hash + semantic_hash + process_urn + correlation_id</text>
+
+  <rect x="44" y="372" width="492" height="106" rx="6" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="60" y="395" font-size="13.5" font-weight="700" fill="#1E3A8A">3. Clean Legal &amp; IP Boundary</text>
+  <text x="60" y="416" font-size="12" fill="#1E293B">• Paper specification only; zero dependency on any GitHub repository</text>
+  <text x="60" y="434" font-size="12" fill="#1E293B">• Normative references cite ISO/CEN standards &amp; persistent Zenodo DOIs</text>
+  <text x="60" y="452" font-size="12" fill="#1E293B">• Implementable by any vendor in Java, Rust, Python, Go, or SQL</text>
+
+  <!-- Right Column: Reference Implementation Track -->
+  <rect x="640" y="88" width="540" height="410" rx="8" fill="#F8FAFC" stroke="#0D6E6E" stroke-width="2"/>
+  <rect x="640" y="88" width="540" height="46" rx="8" fill="#0D6E6E"/>
+  <text x="660" y="110" font-size="15" font-weight="700" fill="#FFFFFF">IMPLEMENTATION TRACK · INFORMATIVE REFERENCE SOFTWARE</text>
+  <text x="660" y="126" font-size="11.5" fill="#CCFBF1">Open-Source Ecosystem Alignment: Eclipse Dataspace Working Group (Apache 2.0)</text>
+
+  <rect x="664" y="152" width="492" height="86" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="680" y="175" font-size="13.5" font-weight="700" fill="#0D6E6E">1. Vendor-Neutral Reference Software (Apache 2.0)</text>
+  <text x="680" y="196" font-size="12" fill="#334155">• Headless runtime policy enforcement point (PEP) and S-Cert generator</text>
+  <text x="680" y="214" font-size="12" fill="#334155">• Demonstrates implementability without mandating any single vendor or stack</text>
+  <text x="680" y="230" font-size="11.5" font-weight="600" fill="#0D6E6E">• Informative status only; conformance is strictly to the written specification</text>
+
+  <rect x="664" y="254" width="492" height="102" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="680" y="277" font-size="13.5" font-weight="700" fill="#0D6E6E">2. Interoperability with Dataspace Control-Plane Components</text>
+  <text x="680" y="298" font-size="12" fill="#334155">• Eclipse CAP (v2.2.1): Exports S-Cert as W3C VC v2.0 cred:Evidence</text>
+  <text x="680" y="316" font-size="12" fill="#334155">• Eclipse DRP &amp; W3C ODRL 2.2: Enforces bound usage obligations at runtime</text>
+  <text x="680" y="334" font-size="12" fill="#334155">• Gaia-X DTA &amp; EDC: Discharges post-transfer obligations (EN 18235-2 §5.8)</text>
+
+  <rect x="664" y="372" width="492" height="106" rx="6" fill="#F0FDFA" stroke="#14B8A6" stroke-width="1.5"/>
+  <text x="680" y="395" font-size="13.5" font-weight="700" fill="#0F766E">3. Conformance Testing &amp; Verification (Clause 9)</text>
+  <text x="680" y="416" font-size="11.5" fill="#1E293B">• Open test suite for Level 1 (Core) and Level 2 (Attested) conformance</text>
+  <text x="680" y="434" font-size="11.5" fill="#1E293B">• Compatible with ISO/IEC 10118-3 hashing &amp; ISO/IEC 14888-3 signatures</text>
+  <text x="680" y="452" font-size="11.5" fill="#1E293B">• Enables independent third-party audit without exposing raw data payloads</text>
+
+  <!-- Center Bridge Arrows -->
+  <path d="M 564 265 L 634 265" stroke="#0B2545" stroke-width="2.5" marker-end="url(#arrowNavy)"/>
+  <path d="M 634 325 L 564 325" stroke="#0D6E6E" stroke-width="2.5" marker-end="url(#arrowTeal)"/>
+  <rect x="556" y="275" width="88" height="38" rx="4" fill="#FFFFFF" stroke="#CBD5E1"/>
+  <text x="600" y="292" font-size="10.5" font-weight="700" fill="#0B2545" text-anchor="middle">DECOUPLED</text>
+  <text x="600" y="306" font-size="9.5" fill="#475569" text-anchor="middle">Spec ≠ Code</text>
+
+</svg>

@@ -22,17 +22,19 @@
                     "type": "string"
                 }
             },
-            "dqDimensionsImpactedDamaIds": {
+            "dqDimensionsImpactedIds": {
                 "type": "array",
                 "items": {
                     "type": "integer"
-                }
+                },
+                "description": "Referenced dimensionId entries from standard_dq_dimensions.json (ISO/IEC 25012 & ISO 8000-8)"
             },
-            "potentialSolutionsTeaser": {
+            "remediationControls": {
                 "type": "array",
                 "items": {
                     "type": "string"
-                }
+                },
+                "description": "Governance and operational remediation controls (ISO/IEC 38505-1:2026)"
             },
             "regulatoryAlignment": {
                 "type": "array",

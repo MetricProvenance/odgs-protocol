@@ -11,4 +11,4 @@ __all__ = [
     "ConformanceException",
 ]
 
-__version__ = "6.0.6"
+__version__ = "6.1.0"
