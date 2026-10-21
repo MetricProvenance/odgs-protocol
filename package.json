@@ -24,7 +24,7 @@
   "main": "2_INFORMATIVE_REFERENCE/src/index.js",
   "type": "module",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest run",
     "prepublishOnly": "python3 2_INFORMATIVE_REFERENCE/src/scripts/sync_schemas.py"
   },
   "files": [

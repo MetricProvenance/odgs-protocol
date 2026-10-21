@@ -47,7 +47,6 @@ CLAUDE.md
 GEMINI.md
 
 # ── NPM artifacts (this is a Python package) ─────────────────────────────────
-package.json
 package-lock.json
 .npmignore
 

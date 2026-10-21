@@ -3,6 +3,7 @@ import standardDqDimensions from '../../1_NORMATIVE_SPECIFICATION/schemas/legisl
 import standardDataRules from '../../1_NORMATIVE_SPECIFICATION/schemas/judiciary/standard_data_rules.json' with { type: "json" };
 import rootCauseFactors from '../../1_NORMATIVE_SPECIFICATION/schemas/judiciary/root_cause_factors.json' with { type: "json" };
 import businessProcessMaps from '../../1_NORMATIVE_SPECIFICATION/schemas/executive/business_process_maps.json' with { type: "json" };
+import contextBindings from '../../1_NORMATIVE_SPECIFICATION/schemas/executive/context_bindings.json' with { type: "json" };
 import physicalDataMap from '../../1_NORMATIVE_SPECIFICATION/schemas/executive/physical_data_map.json' with { type: "json" };
 import ontologyGraph from '../../1_NORMATIVE_SPECIFICATION/schemas/legislative/ontology_graph.json' with { type: "json" };
 
@@ -14,6 +15,7 @@ export {
   standardDqDimensions,
   rootCauseFactors,
   businessProcessMaps,
+  contextBindings,
   physicalDataMap,
   ontologyGraph,
   OdgsInterceptor,
@@ -27,6 +29,7 @@ export default {
   standardDqDimensions,
   rootCauseFactors,
   businessProcessMaps,
+  contextBindings,
   physicalDataMap,
   ontologyGraph,
   OdgsInterceptor,
