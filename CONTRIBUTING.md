@@ -59,4 +59,4 @@ python 2_INFORMATIVE_REFERENCE/src/odgs/system/scripts/validate_schemas.py .
 This project is licensed under the Apache 2.0 License.
 
 ---
-[< Back to README.md](/README.md)
+[< Back to README.md](README.md)
