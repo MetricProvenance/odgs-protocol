@@ -166,7 +166,7 @@ def run_verification() -> None:
         s_cert=ai_cert_l1,
         private_key=priv_key,
         authority_id="urn:odgs:authority:metric-provenance-eu-ai-act",
-        issuing_jwk_url="https://trust.metricprovenance.com/.well-known/jwks.json",
+        issuing_jwk_url="https://trust.example-dataspace.org/.well-known/jwks.json",
     )
     jsonschema.validate(instance=ai_cert_l2.to_canonical_dict(), schema=s_cert_schema)
     print(f"  [2B - CURATED AI DATASET APPROVED] Verdict: {ai_cert_l2.verdict.value} | Authority: {ai_cert_l2.authority_id}")
@@ -219,12 +219,12 @@ def run_verification() -> None:
         s_cert=b2b_cert_l1,
         private_key=priv_key,
         authority_id="urn:odgs:authority:logistics-dataspace-nl",
-        issuing_jwk_url="https://trust.metricprovenance.com/.well-known/jwks.json",
+        issuing_jwk_url="https://trust.example-dataspace.org/.well-known/jwks.json",
     )
 
     cap_vc = export_cap_declaration_vc(
         b2b_cert_l2,
-        issuer_did="did:web:metricprovenance.com",
+        issuer_did="did:web:trust.example-dataspace.org",
         subject_did="did:web:port-rotterdam.nl#scope3-manifest-2026Q3",
     )
     prov_graph = export_w3c_prov_o(b2b_cert_l2)

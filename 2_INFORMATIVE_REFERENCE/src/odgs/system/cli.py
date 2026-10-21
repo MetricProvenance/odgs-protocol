@@ -62,7 +62,7 @@ def conformance(
         "L1",
         "--level",
         "-l",
-        help="ODGS Implementation Conformance Level: L1 (Level 1 Core) or L2 (Level 2 Attested). Distinct from ISO/IEC 17000 / Eclipse CAP and EAS 18425:2026."
+        help="ODGS Implementation Conformance Level: L1 (Level 1 Core) or L2 (Level 2 Attested). Distinct from ISO/IEC 17000 / Eclipse CAP and federated dataspace capability profiles."
     )
 ):
     """
@@ -71,7 +71,7 @@ def conformance(
     L1 (Level 1 Core): Verifies core plane artifacts exist and are schema-valid.
     L2 (Level 2 Attested): Full cross-reference validation including cryptographic hash consistency.
     Note: ODGS Implementation Conformance Levels (L1/L2) are distinct from ISO/IEC 17000 conformity
-    assessment (Eclipse CAP) and EAS 18425:2026 dataspace conformance profiles.
+    assessment (Eclipse CAP) and federated dataspace capability profiles.
     """
     from odgs.executive.interceptor import OdgsInterceptor
     from odgs.executive.exceptions import ConformanceException

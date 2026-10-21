@@ -6,7 +6,7 @@ This document defines the normative requirements for achieving **ODGS Implementa
 > **Terminology Disambiguation:**
 > **ODGS Implementation Conformance Levels (`Level 1 Core` and `Level 2 Attested`)** apply strictly to software implementations of the ODGS specification. They are distinct from:
 > - **`ISO/IEC 17000` Conformity Assessment & Eclipse CAP (`cap:ConformityAssessmentScheme`):** Formal conformity assessment vocabularies into which ODGS projects runtime evidence (`cred:Evidence`).
-> - **`EAS 18425:2026`:** European dataspace interoperability conformance profiles.
+> - **Dataspace Interoperability Profiles:** Capability profiles across federated dataspace ecosystems.
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
 

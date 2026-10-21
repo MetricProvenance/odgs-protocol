@@ -33,7 +33,7 @@ ODGS structures governance into **Five Normative Planes** grouped across three a
 
 ## 3. Trustworthy Data Transaction (`TDT`) Sequence
 
-In a federated dataspace transaction aligned with **`EN 18235`** (*Trustworthy Data Transactions*) and **`EAS 18425:2026`** (*European Dataspace Interoperability Specification*), ODGS operates as the Phase 6 Runtime Policy Enforcement Point (`PEP`) at the processing boundary:
+In a federated dataspace transaction across federated dataspace transactions (Phases 1–6), ODGS operates as the Phase 6 Runtime Policy Enforcement Point (`PEP`) at the processing boundary:
 
 ![Trustworthy Data Transaction Sequence](assets/fig3_tdt_sequence.svg)
 

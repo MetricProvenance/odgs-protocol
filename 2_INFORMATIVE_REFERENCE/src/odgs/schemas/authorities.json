@@ -1,3 +1,3 @@
 {
-    "metric_provenance": "https://certificate.metricprovenance.com/.well-known/jwks.json"
+    "default_dataspace_authority": "https://trust.example-dataspace.org/.well-known/jwks.json"
 }

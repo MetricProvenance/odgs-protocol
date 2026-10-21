@@ -143,7 +143,7 @@ The Harvester fetches and content-addresses definitions from authoritative exter
 # Harvest from 5 different trusted sources:
 odgs harvest nl_awb 1:3          # Dutch Administrative Law
 odgs harvest fibo InterestRate   # FIBO Financial Ontology
-odgs harvest iso_42001 4         # ISO 42001 Clause 4
+odgs harvest eu_ai_act 10        # EU AI Act Article 10
 odgs harvest gdpr 25             # GDPR Article 25
 odgs harvest basel CET1          # Basel III CET1 Capital Ratio
 ```
@@ -158,7 +158,7 @@ Each harvested definition is:
 
 The ODGS Universal Engine is strictly built for **Zero Telemetry** operations; it does not "phone home." This architecture is critical for Enterprise CISOs managing air-gapped, highly restricted, or sovereign cloud environments.
 
-To ensure runtime integrity without active network dependency, the Engine verifies the provenance of Configuration Packs (Law Packs) locally using standard **Ed25519 JWKS (JSON Web Key Set)** public keys.
+To ensure runtime integrity without active network dependency, the Engine verifies the provenance of Configuration Packs (Policy Bundles) locally using standard **Ed25519 JWKS (JSON Web Key Set)** public keys.
 
 * **Stateless Integrity:** The Engine securely caches the public keys from a JWKS endpoint on startup. It then mathematically verifies the signature of every loaded policy package (e.g., EU AI Act) without conducting external database lookups during processing.
 * **Decentralized Custody:** Organizations are explicitly encouraged to host their own internal JWKS registries for their proprietary, internal rules (`urn:odgs:custom:*`). This ensures the protocol remains 100% neutral and decentralized. Organizations may also verify signatures from external dataspace trust anchors and conformity assessment authorities (`urn:odgs:sov:*`).

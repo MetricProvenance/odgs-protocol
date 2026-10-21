@@ -19,7 +19,7 @@ COPY .streamlit/ .streamlit/
 RUN pip install --no-cache-dir .[all]
 
 # Initialize a git repo so GitPython can work
-RUN git config --global user.email "odgs@metricprovenance.com" && \
+RUN git config --global user.email "maintainers@odgs-protocol.org" && \
     git config --global user.name "ODGS Demo" && \
     git init && git add -A && git commit -m "init" --allow-empty
 

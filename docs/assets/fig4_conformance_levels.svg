@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="446" viewBox="0 0 1200 446">
+  <defs>
+    <style>
+      text { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+      .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; }
+    </style>
+    <marker id="arrowTeal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0D6E6E"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#FFFFFF" rx="8"/>
+
+  <!-- Title Banner -->
+  <rect x="20" y="16" width="1160" height="54" rx="6" fill="#0B2545"/>
+  <text x="40" y="40" font-size="18" font-weight="700" fill="#FFFFFF">ODGS IMPLEMENTATION CONFORMANCE LEVELS (L1 CORE &amp; L2 ATTESTED)</text>
+  <text x="40" y="60" font-size="12.5" fill="#CBD5E1">Progression from Documentary Governance to Deterministic Runtime Enforcement and Cryptographic Attestation</text>
+
+  <!-- Left Box: Pre-Runtime / Documentary Baseline -->
+  <rect x="20" y="88" width="490" height="340" rx="8" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <rect x="20" y="88" width="490" height="42" rx="8" fill="#475569"/>
+  <text x="38" y="114" font-size="14" font-weight="700" fill="#FFFFFF">DOCUMENTARY &amp; CONTROL-PLANE BASELINE</text>
+
+  <rect x="40" y="146" width="450" height="120" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
+  <text x="56" y="170" font-size="13" font-weight="700" fill="#334155">Stage 1 · Catalogue &amp; Inventory Baseline</text>
+  <text x="56" y="192" font-size="12" fill="#475569">• Datasets catalogued with basic metadata and ownership</text>
+  <text x="56" y="212" font-size="12" fill="#475569">• Typical Artefacts: Written policy documents, data inventories,</text>
+  <text x="56" y="230" font-size="12" fill="#475569">  business glossaries, manual compliance checklists</text>
+  <text x="56" y="250" font-size="11.5" font-weight="600" fill="#64748B">Mode: Manual / Documentary</text>
+
+  <rect x="40" y="282" width="450" height="128" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
+  <text x="56" y="306" font-size="13" font-weight="700" fill="#334155">Stage 2 · Pre-Transfer Contract Negotiation</text>
+  <text x="56" y="328" font-size="12" fill="#475569">• Participant identity and access rights negotiated prior to transfer</text>
+  <text x="56" y="346" font-size="12" fill="#475569">  via Dataspace Control Plane connectors</text>
+  <text x="56" y="366" font-size="12" fill="#475569">• Typical Artefacts: W3C ODRL 2.2 Agreements, Verifiable</text>
+  <text x="56" y="384" font-size="12" fill="#475569">  Credentials, periodic retrospective audit reports</text>
+  <text x="56" y="400" font-size="11.5" font-weight="600" fill="#64748B">Mode: Pre-Transfer Authorization</text>
+
+  <!-- Arrow -->
+  <path d="M 516 258 L 564 258" stroke="#0D6E6E" stroke-width="3.5" marker-end="url(#arrowTeal)"/>
+
+  <!-- Right Box: ODGS Conformance Levels L1 & L2 -->
+  <rect x="570" y="88" width="610" height="340" rx="8" fill="#F0FDFA" stroke="#0D6E6E" stroke-width="2.5"/>
+  <rect x="570" y="88" width="610" height="42" rx="8" fill="#0D6E6E"/>
+  <text x="590" y="114" font-size="14" font-weight="700" fill="#FFFFFF">ODGS RUNTIME CONFORMANCE (LEVEL 1 CORE &amp; LEVEL 2 ATTESTED)</text>
+
+  <rect x="590" y="146" width="570" height="120" rx="6" fill="#FFFFFF" stroke="#0D6E6E" stroke-width="1.5"/>
+  <text x="606" y="170" font-size="13" font-weight="700" fill="#0B2545">ODGS Level 1 Core · Declarative Schema &amp; Ontology Conformance</text>
+  <text x="606" y="192" font-size="12" fill="#334155">• Planes II–IV JSON artifacts validate against Draft-07 JSON Schemas (01–03)</text>
+  <text x="606" y="212" font-size="12" fill="#334155">• Data quality dimensions grounded in ISO/IEC 25012 &amp; ISO 8000-8</text>
+  <text x="606" y="230" font-size="12" class="mono" fill="#0D6E6E">• Verified via: odgs conformance --level L1</text>
+  <text x="606" y="250" font-size="11.5" font-weight="700" fill="#0D6E6E">Guarantees Structural &amp; Semantic Decoupling</text>
+
+  <rect x="590" y="282" width="570" height="128" rx="6" fill="#EFF6FF" stroke="#1E3A8A" stroke-width="2"/>
+  <text x="606" y="306" font-size="13" font-weight="700" fill="#1E3A8A">ODGS Level 2 Attested · Deterministic PEP &amp; Cryptographic S-Cert</text>
+  <text x="606" y="328" font-size="12" fill="#0B2545">• Full cross-reference integrity across context_bindings.json (ISO/IEC 38505-1 EDM)</text>
+  <text x="606" y="346" font-size="12" fill="#0B2545">• Deterministic HARD_STOP / SOFT_STOP / LOG_ONLY runtime gate in data pipeline</text>
+  <text x="606" y="364" font-size="12" fill="#0B2545">• Emits RFC 8785 (JCS) canonical S-Cert (04-s-cert-schema.json) &amp; Eclipse CAP VC</text>
+  <text x="606" y="382" font-size="12" class="mono" fill="#0D6E6E">• Verified via: odgs conformance --level L2</text>
+  <text x="606" y="400" font-size="11.5" font-weight="700" fill="#1E3A8A">Mode: Deterministic Runtime Control &amp; Zero-Knowledge Cryptographic Evidence</text>
+</svg>

@@ -822,7 +822,7 @@ class OdgsInterceptor:
             if sh and sh not in rule_semantic_hashes:
                 rule_semantic_hashes.append(sh)
 
-        # Canonical s_cert_status for commercial audit log compatibility
+        # Canonical s_cert_status for backward-compatible audit log schema
         s_cert_status = "ISSUED_AND_VERIFIED" if attestation_list else "NOT_ISSUED"
 
         # system_id — hostname or ODGS_SYSTEM_ID env var override

@@ -20,9 +20,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -45,9 +45,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -70,9 +70,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -95,9 +95,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -120,9 +120,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -145,9 +145,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -170,9 +170,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -195,9 +195,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -220,9 +220,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -245,9 +245,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -270,9 +270,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -297,9 +297,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -322,9 +322,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -347,9 +347,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -372,9 +372,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -397,9 +397,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -422,9 +422,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       }
     },
     {
@@ -455,9 +455,9 @@
       "effective_from": "2024-01-01",
       "effective_until": null,
       "iso38505Role": {
-        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1:2026 Clause 6.2)",
-        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1:2026 Clause 6.3)",
-        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1:2026 Clause 6.4)"
+        "evaluate": "Governing Body / Data Owner assesses business process risk and regulatory impact (ISO/IEC 38505-1 Evaluate Facet)",
+        "direct": "Policy Authority binds required ISO/IEC 25012 & ISO 8000-8 rules to context URN (ISO/IEC 38505-1 Direct Facet)",
+        "monitor": "ODGS Runtime Engine emits cryptographic S-Cert conformance evidence (ISO/IEC 38505-1 Monitor Facet)"
       },
       "framework_tags": {
         "iso_governance": "ISO/IEC 38505-1:2026",

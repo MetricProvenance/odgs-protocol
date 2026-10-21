@@ -1341,30 +1341,6 @@
         <odgs:urn>urn:odgs:def:fibo:regulatoryagency:v2024</odgs:urn>
         <rdfs:label xml:lang="en"></rdfs:label>
     </odgs:SovereignDefinition>
-    <odgs:SovereignDefinition rdf:about="&odgs;def_iso_42001_10_2_v2023">
-        <odgs:urn>urn:odgs:def:iso:42001_10_2:v2023</odgs:urn>
-        <rdfs:label xml:lang="en"></rdfs:label>
-    </odgs:SovereignDefinition>
-    <odgs:SovereignDefinition rdf:about="&odgs;def_iso_42001_4_1_v2023">
-        <odgs:urn>urn:odgs:def:iso:42001_4_1:v2023</odgs:urn>
-        <rdfs:label xml:lang="en"></rdfs:label>
-    </odgs:SovereignDefinition>
-    <odgs:SovereignDefinition rdf:about="&odgs;def_iso_42001_4_2_v2023">
-        <odgs:urn>urn:odgs:def:iso:42001_4_2:v2023</odgs:urn>
-        <rdfs:label xml:lang="en"></rdfs:label>
-    </odgs:SovereignDefinition>
-    <odgs:SovereignDefinition rdf:about="&odgs;def_iso_42001_6_1_v2023">
-        <odgs:urn>urn:odgs:def:iso:42001_6_1:v2023</odgs:urn>
-        <rdfs:label xml:lang="en"></rdfs:label>
-    </odgs:SovereignDefinition>
-    <odgs:SovereignDefinition rdf:about="&odgs;def_iso_42001_8_4_v2023">
-        <odgs:urn>urn:odgs:def:iso:42001_8_4:v2023</odgs:urn>
-        <rdfs:label xml:lang="en"></rdfs:label>
-    </odgs:SovereignDefinition>
-    <odgs:SovereignDefinition rdf:about="&odgs;def_iso_42001_9_1_v2023">
-        <odgs:urn>urn:odgs:def:iso:42001_9_1:v2023</odgs:urn>
-        <rdfs:label xml:lang="en"></rdfs:label>
-    </odgs:SovereignDefinition>
     <odgs:SovereignDefinition rdf:about="&odgs;def_nl_gov_awb_art_1_3_v2024">
         <odgs:urn>urn:odgs:def:nl_gov:awb:art_1_3:v2024</odgs:urn>
         <rdfs:label xml:lang="en"></rdfs:label>

@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added `1_NORMATIVE_SPECIFICATION/ontology/odgs_dataspace.linkml.yaml`, `1_NORMATIVE_SPECIFICATION/schemas/04-s-cert-schema.json`, and `1_NORMATIVE_SPECIFICATION/schemas/odgs-dataspace.context.jsonld`.
 - **CLI & Documentation:**
   - Added `odgs dataspace-demo` command (`--format s-cert|cap-vc|prov-o|oscal`) and `odgs-dataspace` entrypoint.
-  - Added `1_NORMATIVE_SPECIFICATION/SPECIFICATION.md` and updated `1_NORMATIVE_SPECIFICATION/conformance_rules.md` with explicit disambiguation between ODGS Implementation Conformance Levels (`Level 1 Core` / `Level 2 Attested`), `ISO/IEC 17000` (Eclipse CAP), and `EAS 18425:2026`.
+  - Added `1_NORMATIVE_SPECIFICATION/SPECIFICATION.md` and updated `1_NORMATIVE_SPECIFICATION/conformance_rules.md` with explicit disambiguation between ODGS Implementation Conformance Levels (`Level 1 Core` / `Level 2 Attested`), `ISO/IEC 17000` (Eclipse CAP), and federated dataspace interoperability profiles.
 
 ## [v6.0.0] - 2026-04-04
 

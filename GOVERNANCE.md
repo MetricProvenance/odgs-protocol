@@ -15,7 +15,6 @@ ODGS addresses the **Phase 6 Operationalisation Gap**: ensuring that contractual
 
 ## 2. Standards & Working Group Alignment
 This repository is structured to support open standardization and interoperability across:
-- **CEN/CENELEC JTC 25 & NEN:** Data Management, Dataspaces, Cloud and Edge (Working Group 2 — Data Governance & Quality).
 - **ISO/IEC JTC 1/SC 40 & SC 7:** Governance of IT and Data (`ISO/IEC 38505-1:2026`, `ISO/IEC TR 38505-2:2018`) and Data Quality (`ISO/IEC 25012:2008`).
 - **Eclipse Dataspace Working Group (EDWG):** Complementing `Eclipse CAP v2.2.1` (`LinkML`), `Eclipse DRP`, and `Eclipse DSP/DCP`.
 - **Gaia-X & IDSA:** Supporting Phase 6 post-transfer obligation enforcement (`Gaia-X Architecture Document 25.11` §4.8.4.2) and decentralized observability (`IDSA Rulebook 2026-3` §121).

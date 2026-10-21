@@ -324,7 +324,7 @@ async def intercept_process(req: InterceptRequest):
             }
         )
     except MissingRuleException as e:
-        # 428 Precondition Required for Missing Commercial Law Packs
+        # 428 Precondition Required for Missing Policy Configurations
         return JSONResponse(
             status_code=428,
             content={
