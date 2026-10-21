@@ -29,7 +29,7 @@ jobs:
 
       - name: Run Python conformance and cryptographic test suite
         run: |
-          python -m pytest tests/ -v --tb=short
+          python -m pytest tests/ 2_INFORMATIVE_REFERENCE/tests/python/ -v --tb=short
 
       - name: Run dataspace & enterprise verification scenarios
         run: |

@@ -53,7 +53,7 @@ dependencies = [
 [project.optional-dependencies]
 server = ["fastapi>=0.95.0", "uvicorn>=0.20.0"]
 audit = ["GitPython>=3.1.0"]
-dev = ["pytest>=7.4.0", "mkdocs>=1.5.0", "mkdocs-material>=9.5.0"]
+dev = ["pytest>=7.4.0", "jwcrypto>=1.5.0", "GitPython>=3.1.0", "mkdocs>=1.5.0", "mkdocs-material>=9.5.0"]
 all = ["odgs[server,audit,dev]"]
 
 [project.urls]
@@ -65,7 +65,7 @@ Issues = "https://github.com/MetricProvenance/odgs-protocol/issues"
 
 [tool.pytest.ini_options]
 pythonpath = ["2_INFORMATIVE_REFERENCE/src"]
-testpaths = ["tests"]
+testpaths = ["tests", "2_INFORMATIVE_REFERENCE/tests/python"]
 
 [project.scripts]
 odgs = "odgs.cli:app"
@@ -82,16 +82,19 @@ exclude = [
 "2_INFORMATIVE_REFERENCE/src" = ""
 
 [tool.hatch.build.targets.sdist]
+include = [
+    "1_NORMATIVE_SPECIFICATION/",
+    "2_INFORMATIVE_REFERENCE/src/odgs/",
+    "tests/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "pyproject.toml",
+]
 exclude = [
     "2_INFORMATIVE_REFERENCE/src/odgs/audit_logs/",
-    ".env",
-    ".pytest_cache/",
-    "tests/.pytest_cache/",
+    "2_INFORMATIVE_REFERENCE/src/odgs/sovereign_audit.log",
+    "**/__pycache__/",
+    "**/*.pyc",
     "**/*.log",
-    "**/audit_logs/",
-    "node_modules/",
-    "package.json",
-    "package-lock.json",
-    ".npmignore",
-    "*.tgz",
 ]
