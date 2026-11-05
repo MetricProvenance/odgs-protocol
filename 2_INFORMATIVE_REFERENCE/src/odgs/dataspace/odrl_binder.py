@@ -1,4 +1,4 @@
-"""W3C ODRL 2.2, Gaia-X ODRL-VC, and Eclipse DRP Policy Binder for ODGS."""
+"""W3C ODRL 2.2, Eclipse DSP (ISO/IEC DIS 26450), Gaia-X ODRL-VC, and Eclipse DRP Policy Binder for ODGS."""
 
 from __future__ import annotations
 
@@ -68,7 +68,11 @@ def _compile_constraints(
     fields: List[str] = []
 
     for c in constraints:
-        left_raw = c.get("leftOperand") if "leftOperand" in c else c.get("ovc:leftOperand")
+        left_raw = (
+            c.get("leftOperand")
+            or c.get("odrl:leftOperand")
+            or c.get("ovc:leftOperand")
+        )
         op_raw = c.get("operator") if "operator" in c else c.get("odrl:operator", "eq")
         right_raw = c["rightOperand"] if "rightOperand" in c else c.get("odrl:rightOperand")
 
@@ -103,17 +107,42 @@ def bind_odrl_policy(
     Supports `obligation` / `duty` (post-transfer consumer obligations), `prohibition`,
     and constrained `permission` blocks.
     """
-    policy_uid = str(odrl_policy.get("uid") or odrl_policy.get("@id") or "urn:odrl:policy:unnamed")
+    policy_uid = str(
+        odrl_policy.get("uid")
+        or odrl_policy.get("odrl:uid")
+        or odrl_policy.get("@id")
+        or "urn:odrl:policy:unnamed"
+    )
     eff_corr_id = correlation_id or policy_uid
     compiled_rules: List[ExecutableRule] = []
 
     # 1. Process obligations / duties
-    obligations = odrl_policy.get("obligation", []) + odrl_policy.get("duty", [])
+    obligations = (
+        odrl_policy.get("obligation", [])
+        + odrl_policy.get("odrl:obligation", [])
+        + odrl_policy.get("duty", [])
+        + odrl_policy.get("odrl:duty", [])
+    )
     for idx, duty in enumerate(obligations):
-        duty_uid = str(duty.get("uid") or f"{policy_uid}#duty-{idx + 1}")
-        constraints = duty.get("constraint", []) + duty.get("refinement", [])
-        if isinstance(duty.get("action"), dict):
-            constraints = constraints + duty["action"].get("refinement", [])
+        duty_uid = str(
+            duty.get("uid")
+            or duty.get("odrl:uid")
+            or duty.get("@id")
+            or f"{policy_uid}#duty-{idx + 1}"
+        )
+        constraints = (
+            duty.get("constraint", [])
+            + duty.get("odrl:constraint", [])
+            + duty.get("refinement", [])
+            + duty.get("odrl:refinement", [])
+        )
+        action_obj = duty.get("action") or duty.get("odrl:action")
+        if isinstance(action_obj, dict):
+            constraints = (
+                constraints
+                + action_obj.get("refinement", [])
+                + action_obj.get("odrl:refinement", [])
+            )
 
         expr, eval_fields = _compile_constraints(constraints, invert_for_prohibition=False)
         verbatim = json.dumps(duty, sort_keys=True, separators=(",", ":"))
@@ -141,10 +170,20 @@ def bind_odrl_policy(
         )
 
     # 2. Process prohibitions
-    prohibitions = odrl_policy.get("prohibition", [])
+    prohibitions = odrl_policy.get("prohibition", []) + odrl_policy.get("odrl:prohibition", [])
     for idx, prohib in enumerate(prohibitions):
-        prohib_uid = str(prohib.get("uid") or f"{policy_uid}#prohibition-{idx + 1}")
-        constraints = prohib.get("constraint", []) + prohib.get("refinement", [])
+        prohib_uid = str(
+            prohib.get("uid")
+            or prohib.get("odrl:uid")
+            or prohib.get("@id")
+            or f"{policy_uid}#prohibition-{idx + 1}"
+        )
+        constraints = (
+            prohib.get("constraint", [])
+            + prohib.get("odrl:constraint", [])
+            + prohib.get("refinement", [])
+            + prohib.get("odrl:refinement", [])
+        )
         expr, eval_fields = _compile_constraints(constraints, invert_for_prohibition=True)
         verbatim = json.dumps(prohib, sort_keys=True, separators=(",", ":"))
         sem_hash = compute_semantic_hash(verbatim)
@@ -171,15 +210,30 @@ def bind_odrl_policy(
         )
 
     # 3. Process permissions with duties or constraints
-    permissions = odrl_policy.get("permission", [])
+    permissions = odrl_policy.get("permission", []) + odrl_policy.get("odrl:permission", [])
     for idx, perm in enumerate(permissions):
-        perm_duties = perm.get("duty", [])
-        perm_constraints = perm.get("constraint", [])
+        perm_duties = perm.get("duty", []) + perm.get("odrl:duty", [])
+        perm_constraints = perm.get("constraint", []) + perm.get("odrl:constraint", [])
         for d_idx, duty in enumerate(perm_duties):
-            duty_uid = str(duty.get("uid") or f"{policy_uid}#perm-{idx + 1}-duty-{d_idx + 1}")
-            constraints = duty.get("constraint", []) + duty.get("refinement", [])
-            if isinstance(duty.get("action"), dict):
-                constraints = constraints + duty["action"].get("refinement", [])
+            duty_uid = str(
+                duty.get("uid")
+                or duty.get("odrl:uid")
+                or duty.get("@id")
+                or f"{policy_uid}#perm-{idx + 1}-duty-{d_idx + 1}"
+            )
+            constraints = (
+                duty.get("constraint", [])
+                + duty.get("odrl:constraint", [])
+                + duty.get("refinement", [])
+                + duty.get("odrl:refinement", [])
+            )
+            action_obj = duty.get("action") or duty.get("odrl:action")
+            if isinstance(action_obj, dict):
+                constraints = (
+                    constraints
+                    + action_obj.get("refinement", [])
+                    + action_obj.get("odrl:refinement", [])
+                )
             expr, eval_fields = _compile_constraints(constraints, invert_for_prohibition=False)
             verbatim = json.dumps(duty, sort_keys=True, separators=(",", ":"))
             sem_hash = compute_semantic_hash(verbatim)
@@ -206,7 +260,12 @@ def bind_odrl_policy(
             )
 
         if perm_constraints and not perm_duties:
-            perm_uid = str(perm.get("uid") or f"{policy_uid}#perm-{idx + 1}")
+            perm_uid = str(
+                perm.get("uid")
+                or perm.get("odrl:uid")
+                or perm.get("@id")
+                or f"{policy_uid}#perm-{idx + 1}"
+            )
             expr, eval_fields = _compile_constraints(perm_constraints, invert_for_prohibition=False)
             verbatim = json.dumps(perm, sort_keys=True, separators=(",", ":"))
             sem_hash = compute_semantic_hash(verbatim)
@@ -241,6 +300,68 @@ def bind_odrl_policy(
         correlation_id=eff_corr_id,
     )
     return tuple(compiled_rules), binding
+
+
+def bind_dsp_contract_agreement(
+    dsp_agreement_message: Dict[str, Any],
+    process_urn: str,
+    transfer_message: Optional[Dict[str, Any]] = None,
+    pack_id: str = "ODGS-ECLIPSE-DSP",
+) -> Tuple[Tuple[ExecutableRule, ...], ProcessBinding]:
+    """Bind an Eclipse Dataspace Protocol (DSP v2025-1 / ISO/IEC DIS 26450) ContractAgreementMessage.
+
+    Ingests a control-plane `dspace:ContractAgreementMessage` (containing an embedded
+    `dspace:agreement` W3C ODRL 2.2 `odrl:Agreement`) and an optional DSP Transfer Process
+    message (`dspace:TransferStartMessage` or `dspace:TransferCompletionMessage`).
+
+    Validates agreement-to-transfer continuity (`dspace:agreementId`) and binds the DSP
+    process correlation identifier (`dspace:consumerPid` / `dspace:providerPid` / `@id`)
+    into the Plane IV `ProcessBinding` so emitted `S-Cert` receipts are cryptographically
+    linked to the exact DSP Contract Negotiation and Transfer Process.
+    """
+    agreement = (
+        dsp_agreement_message.get("dspace:agreement")
+        or dsp_agreement_message.get("agreement")
+        or dsp_agreement_message
+    )
+    if not isinstance(agreement, dict):
+        raise ValueError("DSP ContractAgreementMessage missing valid `dspace:agreement` object.")
+
+    agreement_id = str(
+        agreement.get("@id")
+        or agreement.get("odrl:uid")
+        or agreement.get("uid")
+        or "urn:uuid:dsp-agreement-unnamed"
+    )
+
+    # Determine correlation_id from DSP Transfer Process or Contract Agreement
+    correlation_id = agreement_id
+    if transfer_message is not None:
+        transfer_agreement_id = (
+            transfer_message.get("dspace:agreementId")
+            or transfer_message.get("agreementId")
+        )
+        if transfer_agreement_id and str(transfer_agreement_id) != agreement_id:
+            raise ValueError(
+                f"DSP TransferProcess agreementId mismatch: expected '{agreement_id}', "
+                f"got '{transfer_agreement_id}'."
+            )
+        transfer_pid = (
+            transfer_message.get("dspace:consumerPid")
+            or transfer_message.get("dspace:providerPid")
+            or transfer_message.get("dspace:processId")
+            or transfer_message.get("consumerPid")
+            or transfer_message.get("providerPid")
+        )
+        if transfer_pid:
+            correlation_id = f"{agreement_id}#transfer:{transfer_pid}"
+
+    return bind_odrl_policy(
+        odrl_policy=agreement,
+        process_urn=process_urn,
+        pack_id=pack_id,
+        correlation_id=correlation_id,
+    )
 
 
 def bind_drp_delegation_evidence(

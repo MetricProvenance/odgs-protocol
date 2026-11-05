@@ -29,19 +29,30 @@ from odgs.executive.interceptor import (
 
 ---
 
-## 2. W3C ODRL 2.2 Policy Binder (`odgs.dataspace.odrl_binder`)
+## 2. Eclipse DSP & W3C ODRL 2.2 Policy Binder (`odgs.dataspace.odrl_binder`)
 
-### `bind_odrl_policy`
+### `bind_dsp_contract_agreement` & `bind_odrl_policy`
 
-Compiles a negotiated **W3C ODRL 2.2** policy (`Agreement`, `Offer`, or `Set`) and optional **Eclipse DRP** `delegationEvidence` into deterministic ODGS validation rules and a Plane IV contextual process binding.
+Compiles an **Eclipse Dataspace Protocol (`DSP v2025-1` / `ISO/IEC DIS 26450`)** `dspace:ContractAgreementMessage` (and optional `dspace:TransferStartMessage` / `dspace:TransferCompletionMessage`), a **W3C ODRL 2.2** policy (`Agreement`, `Offer`, or `Set`), or **Eclipse DRP** `delegationEvidence` into deterministic ODGS validation rules and a Plane IV contextual process binding.
 
 ```python
-from odgs.dataspace.odrl_binder import bind_odrl_policy, OdrlBindingError
+from odgs.dataspace.odrl_binder import (
+    bind_dsp_contract_agreement,
+    bind_odrl_policy,
+    bind_drp_delegation_evidence,
+)
 
+# 1. Bind directly from an Eclipse DSP ContractAgreementMessage + TransferStartMessage
+rules, binding = bind_dsp_contract_agreement(
+    dsp_agreement_message=dsp_contract_agreement_msg,
+    process_urn="urn:odgs:process:consumer:pipeline",
+    transfer_message=dsp_transfer_start_msg,
+)
+
+# 2. Or bind from a standalone W3C ODRL 2.2 policy
 rules, binding = bind_odrl_policy(
     odrl_policy=odrl_agreement,
     process_urn="urn:odgs:process:consumer:pipeline",
-    delegation_evidence=drp_delegation,
 )
 ```
 
@@ -98,14 +109,16 @@ verify_dta_provenance(payload=payload, expected_provenance_hash=expected_hash)
 
 ---
 
-## 5. Conformity & Lineage Exporters (`odgs.dataspace.cap_exporter`)
+## 5. Eclipse DCP, CAP v2.2.1, Lineage & Audit Exporters (`odgs.dataspace.cap_exporter`)
 
-Projects canonical `S-Cert` receipts into external conformity assessment, lineage, and audit standards:
+Projects canonical `S-Cert` receipts into **Eclipse DCP (`ISO/IEC DIS 26451`)**, **Eclipse CAP v2.2.1**, **W3C PROV-O**, and **NIST OSCAL v1.1.2**:
 
 ```python
 from odgs.dataspace.cap_exporter import (
+    export_dcp_presentation_response,
+    extract_dcp_presentation_claims,
     export_cap_declaration_vc,
-    export_gaiax_compliance_evidence,
+    export_cap_cred_evidence,
     export_w3c_prov_o,
     export_nist_oscal_finding,
 )
@@ -113,8 +126,9 @@ from odgs.dataspace.cap_exporter import (
 
 | Function | Target Standard | Output Artifact |
 | :--- | :--- | :--- |
+| `export_dcp_presentation_response(s_cert, holder_did)` | **Eclipse DCP v1.0 (`ISO/IEC DIS 26451`)** | `PresentationResponseMessage` containing `VerifiablePresentation` & `JsonWebSignature2020` proof |
+| `extract_dcp_presentation_claims(dcp_presentation_message, expected_holder_did)` | **Eclipse DCP v1.0 (`ISO/IEC DIS 26451`)** | Verified participant claims dictionary extracted from `PresentationResponseMessage` |
 | `export_cap_declaration_vc(s_cert, issuer_did, subject_did)` | **Eclipse CAP v2.2.1** & **W3C VC 2.0** | `VerifiableCredential` containing `cap:Declaration` and `cred:Evidence` |
-| `export_gaiax_compliance_evidence(s_cert, dta_transfer_id)` | **Gaia-X Architecture 25.11** (`ovc:Constraint`) | Gaia-X Compliance Evidence Envelope |
 | `export_w3c_prov_o(s_cert)` | **W3C PROV-O** | JSON-LD Provenance Graph (`prov:Activity`, `prov:Entity`, `prov:Agent`) |
 | `export_nist_oscal_finding(s_cert)` | **NIST OSCAL v1.1.2** | OSCAL Assessment Results `finding` and `observation` structure |
 

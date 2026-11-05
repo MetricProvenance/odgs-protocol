@@ -1,8 +1,8 @@
-"""Exporters for Eclipse CAP v2.2.1 (W3C VC v2.0), W3C PROV-O, and NIST OSCAL v1.1.2."""
+"""Exporters for Eclipse DCP v1.0 (ISO/IEC DIS 26451), Eclipse CAP v2.2.1 (W3C VC v2.0), W3C PROV-O, and NIST OSCAL v1.1.2."""
 
 from __future__ import annotations
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from odgs.dataspace.models import SemanticCertificate, Verdict
 
@@ -67,6 +67,113 @@ def export_cap_declaration_vc(
             ),
         },
         "evidence": [export_cap_cred_evidence(s_cert)],
+    }
+
+
+def export_dcp_presentation_response(
+    s_cert: SemanticCertificate,
+    holder_did: str,
+    subject_did: Optional[str] = None,
+    scheme_uri: str = "https://w3id.org/eclipse-cap/v2.2.1/scheme/dataspace-governance",
+    requirement_uri: Optional[str] = None,
+) -> Dict[str, Any]:
+    """Export an ODGS S-Cert as an Eclipse DCP v1.0 (ISO/IEC DIS 26451) `PresentationResponseMessage`.
+
+    Wraps the `S-Cert` conformity Verifiable Credential inside a W3C `VerifiablePresentation`
+    envelope served by an Eclipse DCP `CredentialService` (`PresentationQueryMessage` ->
+    `PresentationResponseMessage`), binding the holder's `did:web` identifier and optional
+    Level 2 Ed25519 / RFC 7515 JWS cryptographic proof.
+    """
+    eff_subject_did = subject_did or f"{holder_did}#{s_cert.system_id}"
+    vc = export_cap_declaration_vc(
+        s_cert=s_cert,
+        issuer_did=holder_did,
+        subject_did=eff_subject_did,
+        scheme_uri=scheme_uri,
+        requirement_uri=requirement_uri,
+    )
+    vp: Dict[str, Any] = {
+        "@context": [
+            "https://www.w3.org/ns/credentials/v2",
+            "https://w3id.org/eclipse-cap/v2.2.1/",
+            "https://w3id.org/odgs/dataspace/v1",
+        ],
+        "id": f"urn:uuid:{s_cert.event_id}:dcp-vp",
+        "type": ["VerifiablePresentation"],
+        "holder": holder_did,
+        "verifiableCredential": [vc],
+    }
+    if s_cert.jws_signature:
+        vp["proof"] = {
+            "type": "JsonWebSignature2020",
+            "created": s_cert.timestamp,
+            "verificationMethod": s_cert.issuing_jwk_url or f"{holder_did}#key-1",
+            "proofPurpose": "authentication",
+            "jws": s_cert.jws_signature,
+        }
+    return {
+        "@context": [
+            "https://w3id.org/dspace-dcp/v1.0/dcp.jsonld",
+        ],
+        "type": "PresentationResponseMessage",
+        "presentation": [vp],
+    }
+
+
+def extract_dcp_presentation_claims(
+    dcp_presentation_message: Dict[str, Any],
+    expected_holder_did: Optional[str] = None,
+) -> Dict[str, Any]:
+    """Extract and validate participant claims from an incoming Eclipse DCP `PresentationResponseMessage`.
+
+    Used on the inbound control-to-data-plane boundary to bind DCP-verified participant
+    credentials (such as membership, license, or conformity attributes) into the ODGS
+    runtime evaluation payload.
+    """
+    msg_type = dcp_presentation_message.get("type") or dcp_presentation_message.get("@type")
+    if msg_type != "PresentationResponseMessage":
+        raise ValueError(
+            f"Expected Eclipse DCP 'PresentationResponseMessage', got '{msg_type}'."
+        )
+    presentations = dcp_presentation_message.get("presentation", [])
+    if not presentations or not isinstance(presentations, list):
+        raise ValueError("Eclipse DCP PresentationResponseMessage contains no presentations.")
+
+    holders: List[str] = []
+    vc_ids: List[str] = []
+    credential_types: List[str] = []
+    subject_claims: List[Dict[str, Any]] = []
+
+    for vp in presentations:
+        if not isinstance(vp, dict):
+            continue
+        holder = vp.get("holder")
+        if holder:
+            holders.append(str(holder))
+            if expected_holder_did and str(holder) != expected_holder_did:
+                raise ValueError(
+                    f"DCP holder DID mismatch: expected '{expected_holder_did}', got '{holder}'."
+                )
+        for vc in vp.get("verifiableCredential", []):
+            if not isinstance(vc, dict):
+                continue
+            if "id" in vc:
+                vc_ids.append(str(vc["id"]))
+            vc_type = vc.get("type", [])
+            if isinstance(vc_type, list):
+                credential_types.extend(str(t) for t in vc_type)
+            elif vc_type:
+                credential_types.append(str(vc_type))
+            cred_subj = vc.get("credentialSubject")
+            if isinstance(cred_subj, dict):
+                subject_claims.append(cred_subj)
+
+    return {
+        "dcp_verified": True,
+        "holder_did": holders[0] if holders else None,
+        "vc_ids": vc_ids,
+        "credential_types": credential_types,
+        "subject_claims": subject_claims,
     }
 
 

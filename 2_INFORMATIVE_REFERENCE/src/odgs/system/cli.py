@@ -473,7 +473,7 @@ def dataspace_demo(
         "cap-vc",
         "--format",
         "-f",
-        help="Output format: s-cert | cap-vc | prov-o | oscal"
+        help="Output format: s-cert | cap-vc | dcp-vp | prov-o | oscal"
     )
 ):
     """

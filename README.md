@@ -24,7 +24,7 @@ While dataspace control planes (**Eclipse DSP/DCP**, **W3C ODRL 2.2**, **Eclipse
 | **ISO/IEC JTC 1/SC 40** | `ISO/IEC 38505-1:2026` & `TR 38505-2:2018` | Separates corporate governance of data (*Evaluate, Direct, Monitor*) from operational data management via contextual process bindings (`context_bindings.json`). |
 | **ISO/IEC JTC 1/SC 7 & TC 184** | `ISO/IEC 25012:2008`, `ISO 8000-8`, `ETSI EN 304 311` | Grounds all 60 data quality dimensions in `standard_dq_dimensions.json` (`Inherent`, `System-Dependent`, `Inherent_and_System_Dependent`). |
 | **W3C** | `W3C ODRL 2.2`, `W3C VC 2.0`, `W3C PROV-O`, `W3C OWL 2` | Compiles ODRL 2.2 agreements into executable rules (`odrl_binder.py`) and exports `S-Cert` lineage graphs (`export_w3c_prov_o`). |
-| **Eclipse Dataspace Working Group** | `Eclipse CAP v2.2.1` (`LinkML`) & `Eclipse DRP` | Projects runtime `S-Cert` receipts into `cap:Declaration` and `cred:Evidence` Verifiable Credentials (`cap_exporter.py`) and enforces DRP `delegationEvidence`. |
+| **Eclipse Dataspace Working Group** | `Eclipse DSP` (`ISO/IEC DIS 26450`), `Eclipse DCP` (`ISO/IEC DIS 26451`), `Eclipse CAP v2.2.1` (`LinkML`) & `Eclipse DRP` | Binds `dspace:ContractAgreementMessage` & `dspace:TransferStartMessage` (`bind_dsp_contract_agreement`), exchanges `PresentationResponseMessage` Verifiable Presentations (`export_dcp_presentation_response`), projects `S-Cert` receipts into `cap:Declaration` VCs, and enforces DRP `delegationEvidence`. |
 | **Gaia-X & IDSA** | `Gaia-X Architecture 25.11` (§4.8.4.2) & `IDSA Rulebook 2026-3` (§121) | Verifies Phase 6 post-transfer obligations and upstream provenance hashes (`dta_verifier.py`) with decentralized `correlation_id` observability. |
 | **NIST** | `NIST OSCAL v1.1.2` | Exports runtime evaluation outcomes as OSCAL Assessment Results `finding` and `observation` records (`export_nist_oscal_finding`). |
 
@@ -81,6 +81,7 @@ python3 examples/run_all_dataspace_scenarios.py
 
 # Or via the CLI:
 odgs dataspace-demo --format cap-vc
+odgs dataspace-demo --format dcp-vp
 odgs dataspace-demo --format s-cert
 odgs dataspace-demo --format prov-o
 odgs dataspace-demo --format oscal

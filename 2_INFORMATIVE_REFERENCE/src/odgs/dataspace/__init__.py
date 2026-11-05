@@ -20,6 +20,7 @@ from odgs.dataspace.models import (
 )
 from odgs.dataspace.odrl_binder import (
     bind_drp_delegation_evidence,
+    bind_dsp_contract_agreement,
     bind_odrl_policy,
     compute_semantic_hash,
 )
@@ -31,8 +32,10 @@ from odgs.dataspace.runtime_pep import (
 from odgs.dataspace.cap_exporter import (
     export_cap_cred_evidence,
     export_cap_declaration_vc,
+    export_dcp_presentation_response,
     export_nist_oscal_finding,
     export_w3c_prov_o,
+    extract_dcp_presentation_claims,
 )
 from odgs.dataspace.dta_verifier import (
     sign_s_cert_ed25519,
@@ -50,6 +53,7 @@ __all__ = [
     "SemanticCertificate",
     "Verdict",
     "bind_drp_delegation_evidence",
+    "bind_dsp_contract_agreement",
     "bind_odrl_policy",
     "compute_semantic_hash",
     "AdministrativeRecusalError",
@@ -57,8 +61,10 @@ __all__ = [
     "SoftStopOverrideRequiredError",
     "export_cap_cred_evidence",
     "export_cap_declaration_vc",
+    "export_dcp_presentation_response",
     "export_nist_oscal_finding",
     "export_w3c_prov_o",
+    "extract_dcp_presentation_claims",
     "sign_s_cert_ed25519",
     "verify_dta_post_transfer_obligation",
 ]

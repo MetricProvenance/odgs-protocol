@@ -10,6 +10,7 @@ from typing import List, Optional
 
 from odgs.dataspace.cap_exporter import (
     export_cap_declaration_vc,
+    export_dcp_presentation_response,
     export_nist_oscal_finding,
     export_w3c_prov_o,
 )
@@ -34,7 +35,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     )
     demo_cmd.add_argument(
         "--format",
-        choices=["s-cert", "cap-vc", "prov-o", "oscal"],
+        choices=["s-cert", "cap-vc", "dcp-vp", "prov-o", "oscal"],
         default="cap-vc",
         help="Output format to display",
     )
@@ -72,6 +73,12 @@ def main(argv: Optional[List[str]] = None) -> int:
             out = export_cap_declaration_vc(
                 s_cert,
                 issuer_did="did:web:consumer.energy-dataspace.eu",
+                subject_did="did:web:consumer.energy-dataspace.eu#pipeline-1",
+            )
+        elif args.format == "dcp-vp":
+            out = export_dcp_presentation_response(
+                s_cert,
+                holder_did="did:web:consumer.energy-dataspace.eu",
                 subject_did="did:web:consumer.energy-dataspace.eu#pipeline-1",
             )
         elif args.format == "prov-o":

@@ -18,12 +18,15 @@ from odgs.dataspace import (
     SoftStopOverrideRequiredError,
     Verdict,
     bind_drp_delegation_evidence,
+    bind_dsp_contract_agreement,
     bind_odrl_policy,
     compute_semantic_hash,
     export_cap_cred_evidence,
     export_cap_declaration_vc,
+    export_dcp_presentation_response,
     export_nist_oscal_finding,
     export_w3c_prov_o,
+    extract_dcp_presentation_claims,
     sign_s_cert_ed25519,
     verify_dta_post_transfer_obligation,
 )
@@ -328,9 +331,99 @@ def test_exporters_eclipse_cap_w3c_prov_o_and_nist_oscal() -> None:
 
 
 def test_cli_demo_modes() -> None:
-    for fmt in ("s-cert", "cap-vc", "prov-o", "oscal"):
+    for fmt in ("s-cert", "cap-vc", "dcp-vp", "prov-o", "oscal"):
         rc = cli_main(["demo", "--format", fmt])
         assert rc == 0
+
+
+def test_eclipse_dsp_contract_agreement_and_dcp_presentation_roundtrip() -> None:
+    """Verify Eclipse DSP (ISO/IEC DIS 26450) ContractAgreementMessage + TransferStartMessage binding
+    and Eclipse DCP (ISO/IEC DIS 26451) PresentationResponseMessage roundtrip."""
+    dsp_contract_agreement_msg = {
+        "@context": "https://w3id.org/dspace/2025/1/context.jsonld",
+        "@type": "dspace:ContractAgreementMessage",
+        "dspace:providerPid": "urn:uuid:dsp-provider-pid-101",
+        "dspace:consumerPid": "urn:uuid:dsp-consumer-pid-202",
+        "dspace:agreement": {
+            "@id": "urn:uuid:dsp-agreement-energy-2026-901",
+            "@type": "odrl:Agreement",
+            "odrl:target": "urn:uuid:dataset-smart-grid-2026",
+            "dspace:timestamp": "2026-11-05T12:00:00Z",
+            "dspace:consumerId": "did:web:consumer.energy-dataspace.eu",
+            "dspace:providerId": "did:web:provider.energy-dataspace.eu",
+            "odrl:obligation": [
+                {
+                    "odrl:uid": "urn:odrl:duty:k-anonymity-min-50",
+                    "odrl:action": "odrl:aggregate",
+                    "odrl:constraint": [
+                        {
+                            "odrl:leftOperand": "aggregation_household_count",
+                            "odrl:operator": "odrl:gteq",
+                            "odrl:rightOperand": 50,
+                        }
+                    ],
+                }
+            ],
+        },
+    }
+    dsp_transfer_start_msg = {
+        "@context": "https://w3id.org/dspace/2025/1/context.jsonld",
+        "@type": "dspace:TransferStartMessage",
+        "dspace:providerPid": "urn:uuid:transfer-provider-501",
+        "dspace:consumerPid": "urn:uuid:transfer-consumer-602",
+        "dspace:agreementId": "urn:uuid:dsp-agreement-energy-2026-901",
+    }
+
+    process_urn = "urn:odgs:process:dsp-consumer:grid-load-ingestion"
+    rules, binding = bind_dsp_contract_agreement(
+        dsp_agreement_message=dsp_contract_agreement_msg,
+        process_urn=process_urn,
+        transfer_message=dsp_transfer_start_msg,
+    )
+    assert len(rules) == 1
+    assert (
+        binding.correlation_id
+        == "urn:uuid:dsp-agreement-energy-2026-901#transfer:urn:uuid:transfer-consumer-602"
+    )
+
+    # Verify mismatched DSP transfer agreementId is rejected
+    with pytest.raises(ValueError, match="agreementId mismatch"):
+        bind_dsp_contract_agreement(
+            dsp_agreement_message=dsp_contract_agreement_msg,
+            process_urn=process_urn,
+            transfer_message={"dspace:agreementId": "urn:uuid:wrong-agreement"},
+        )
+
+    # Evaluate payload at Data-Plane PEP and sign Level 2 S-Cert
+    priv_key = Ed25519PrivateKey.generate()
+    pep = DataspaceRuntimePEP(rules=rules, bindings=[binding])
+    s_cert_l1 = pep.evaluate(
+        process_urn=process_urn,
+        payload={"aggregation_household_count": 75, "region": "NL-ZH"},
+    )
+    s_cert_l2 = sign_s_cert_ed25519(
+        s_cert=s_cert_l1,
+        private_key=priv_key,
+        authority_id="did:web:consumer.energy-dataspace.eu",
+        issuing_jwk_url="https://consumer.energy-dataspace.eu/.well-known/jwks.json",
+    )
+
+    # Export as Eclipse DCP v1.0 PresentationResponseMessage and verify claims roundtrip
+    dcp_msg = export_dcp_presentation_response(
+        s_cert=s_cert_l2,
+        holder_did="did:web:consumer.energy-dataspace.eu",
+    )
+    assert dcp_msg["type"] == "PresentationResponseMessage"
+    assert dcp_msg["presentation"][0]["type"] == ["VerifiablePresentation"]
+    assert "proof" in dcp_msg["presentation"][0]
+
+    extracted = extract_dcp_presentation_claims(
+        dcp_presentation_message=dcp_msg,
+        expected_holder_did="did:web:consumer.energy-dataspace.eu",
+    )
+    assert extracted["dcp_verified"] is True
+    assert extracted["holder_did"] == "did:web:consumer.energy-dataspace.eu"
+    assert "cap:Declaration" in extracted["credential_types"]
 
 
 def test_iso_38505_and_25012_normative_schema_alignment() -> None:
