@@ -11,7 +11,7 @@
 
 ## 1. Interoperability with Eclipse Dataspace Protocol (`DSP v2025-1` / `ISO/IEC DIS 26450`)
 
-In the **Eclipse Dataspace Protocol (`DSP`)**, control-plane negotiation and transfer coordination occur across two state machines: the **Contract Negotiation Protocol** (`AGREED` $\rightarrow$ `VERIFIED` $\rightarrow$ `FINALIZED`) and the **Transfer Process Protocol** (`STARTED` $\rightarrow$ `COMPLETED`). However, DSP explicitly delegates **data-plane payload enforcement and post-transfer obligation verification** to the participating runtime environment.
+In the **Eclipse Dataspace Protocol (`DSP`)**, control-plane negotiation and transfer coordination occur across two state machines: the **Contract Negotiation Protocol** (`AGREED` → `VERIFIED` → `FINALIZED`) and the **Transfer Process Protocol** (`STARTED` → `COMPLETED`). However, DSP explicitly delegates **data-plane payload enforcement and post-transfer obligation verification** to the participating runtime environment.
 
 ODGS binds directly to DSP control-plane messages via `bind_dsp_contract_agreement()`:
 
@@ -88,14 +88,14 @@ s_cert = pep.evaluate(
 
 ## 2. Interoperability with Eclipse Decentralized Claims Protocol (`DCP v1.0` / `ISO/IEC DIS 26451`)
 
-The **Eclipse Decentralized Claims Protocol (`DCP`)** defines how Dataspace participants authenticate via **`did:web`** / Self-Issued ID Tokens (`SIOPv2`) and exchange **W3C Verifiable Presentations (`VerifiablePresentation`)** via the **`CredentialService` API** (`PresentationQueryMessage` $\rightarrow$ `PresentationResponseMessage`).
+The **Eclipse Decentralized Claims Protocol (`DCP`)** defines how Dataspace participants authenticate via **`did:web`** / Self-Issued ID Tokens (`SIOPv2`) and exchange **W3C Verifiable Presentations (`VerifiablePresentation`)** via the **`CredentialService` API** (`PresentationQueryMessage` → `PresentationResponseMessage`).
 
 ODGS interoperates with **Eclipse DCP** in both directions:
 
 | Direction | Eclipse DCP Construct (`https://w3id.org/dspace-dcp/v1.0/dcp.jsonld`) | ODGS Function & Mechanism |
 | :--- | :--- | :--- |
-| **Inbound (DCP $\rightarrow$ ODGS Runtime Context)** | `PresentationResponseMessage` carrying participant `VerifiablePresentation` / `VerifiableCredential` claims verified against the holder's `did:web` JWKS. | `extract_dcp_presentation_claims()` validates the DCP message type and expected `holder` DID (`did:web:...`) and extracts verified credential claims into the ODGS runtime evaluation context. |
-| **Outbound (ODGS `S-Cert` $\rightarrow$ DCP `CredentialService`)** | `PresentationResponseMessage` served in response to a counterparty or auditor `PresentationQueryMessage`. | `export_dcp_presentation_response()` wraps the Level 2 Ed25519/JWS-signed `S-Cert` and its `VerifiableCredential` (`cap:Declaration` + `cred:Evidence`) inside a DCP-compliant `PresentationResponseMessage` with `JsonWebSignature2020` proof linked to `issuing_jwk_url` (`did:web` JWKS). |
+| **Inbound (DCP → ODGS Runtime Context)** | `PresentationResponseMessage` carrying participant `VerifiablePresentation` / `VerifiableCredential` claims verified against the holder's `did:web` JWKS. | `extract_dcp_presentation_claims()` validates the DCP message type and expected `holder` DID (`did:web:...`) and extracts verified credential claims into the ODGS runtime evaluation context. |
+| **Outbound (ODGS `S-Cert` → DCP `CredentialService`)** | `PresentationResponseMessage` served in response to a counterparty or auditor `PresentationQueryMessage`. | `export_dcp_presentation_response()` wraps the Level 2 Ed25519/JWS-signed `S-Cert` and its `VerifiableCredential` (`cap:Declaration` + `cred:Evidence`) inside a DCP-compliant `PresentationResponseMessage` with `JsonWebSignature2020` proof linked to `issuing_jwk_url` (`did:web` JWKS). |
 
 ### Executable DCP Integration Example
 
@@ -154,20 +154,15 @@ verified_claims = extract_dcp_presentation_claims(
 
 ## 5. End-to-End EDWG Architecture Flow (`DSP` + `DCP` + `DRP` + `CAP`)
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant Provider as Data Provider Connector (DSP/DCP)
-    participant Consumer as Data Consumer Connector (DSP/DCP)
-    participant PEP as ODGS Data-Plane PEP (odgs.dataspace)
-    participant Verifier as Counterparty / Auditor DCP Verifier
+![Trustworthy Data Transaction Sequence](assets/fig3_tdt_sequence.svg)
 
-    Provider->>Consumer: 1. DSP dspace:ContractAgreementMessage (ODRL Agreement @id)
-    Provider->>Consumer: 2. DSP dspace:TransferStartMessage (dspace:agreementId + consumerPid)
-    Consumer->>PEP: 3. bind_dsp_contract_agreement(ContractAgreementMessage, TransferStartMessage)
-    Consumer->>PEP: 4. extract_dcp_presentation_claims(PresentationResponseMessage)
-    PEP->>PEP: 5. DataspaceRuntimePEP.evaluate(payload) -> HARD_STOP | SOFT_STOP | PASS
-    PEP-->>Consumer: 6. Emit Level 2 Ed25519 Signed S-Cert (RFC 8785 JCS + RFC 7515 JWS)
-    Verifier->>Consumer: 7. DCP PresentationQueryMessage (CredentialService API)
-    Consumer-->>Verifier: 8. DCP PresentationResponseMessage (VerifiablePresentation + CAP v2.2.1 Declaration VC)
-```
+| Step | Protocol / Boundary | Message / Function | Description |
+| :--- | :--- | :--- | :--- |
+| **1** | **Eclipse DSP (`ISO/IEC DIS 26450`)** | `dspace:ContractAgreementMessage` | Provider and Consumer finalize the contract (`odrl:Agreement` `@id`). |
+| **2** | **Eclipse DSP (`ISO/IEC DIS 26450`)** | `dspace:TransferStartMessage` | Provider initiates the data-plane transfer linked to `dspace:agreementId` and `dspace:consumerPid`. |
+| **3** | **ODGS Control-to-Data Bridge** | `bind_dsp_contract_agreement()` | Verifies `dspace:agreementId` continuity, compiles ODRL rules into deterministic AST checks, and binds `correlation_id`. |
+| **4** | **Eclipse DCP (`ISO/IEC DIS 26451`)** | `extract_dcp_presentation_claims()` | Validates incoming `PresentationResponseMessage` (`VerifiablePresentation`) claims against `did:web` JWKS. |
+| **5** | **ODGS Data-Plane PEP** | `DataspaceRuntimePEP.evaluate()` | Evaluates the data-plane payload in-memory (`HARD_STOP` \| `SOFT_STOP` \| `LOG_ONLY` \| `PASS`). |
+| **6** | **ODGS Cryptographic Attestation** | `sign_s_cert_ed25519()` | Emits a canonical `S-Cert` (RFC 8785 JCS + RFC 7515 Ed25519 JWS) bound to the DSP `correlation_id`. |
+| **7** | **Eclipse DCP (`ISO/IEC DIS 26451`)** | `PresentationQueryMessage` | Counterparty or auditor queries the participant's DCP `CredentialService` for post-transfer compliance proofs. |
+| **8** | **Eclipse DCP + CAP (`v2.2.1`)** | `export_dcp_presentation_response()` | Returns a DCP `PresentationResponseMessage` wrapping the `cap:Declaration` VC and `cred:Evidence` digest. |
