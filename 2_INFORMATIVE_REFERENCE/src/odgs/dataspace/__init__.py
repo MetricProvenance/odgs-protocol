@@ -36,10 +36,25 @@ from odgs.dataspace.cap_exporter import (
     export_nist_oscal_finding,
     export_w3c_prov_o,
     extract_dcp_presentation_claims,
+    handle_dcp_presentation_query,
+    verify_cap_declaration_vc,
 )
 from odgs.dataspace.dta_verifier import (
     sign_s_cert_ed25519,
     verify_dta_post_transfer_obligation,
+)
+from odgs.dataspace.signaling import (
+    TRUST_MODEL_CONSUMER_AUDIT_RECORD,
+    AgreementResolver,
+    ConstraintObservabilityReport,
+    ControlPlaneNotifier,
+    DataPlaneSignalingBridge,
+    FlowEvaluationResult,
+    PreparedDataFlow,
+    build_agreement_retrieval_path,
+    build_dsp_transfer_suspension_message,
+    build_dsp_transfer_termination_message,
+    inspect_odrl_constraint_observability,
 )
 
 __version__ = "0.1.0"
@@ -65,6 +80,19 @@ __all__ = [
     "export_nist_oscal_finding",
     "export_w3c_prov_o",
     "extract_dcp_presentation_claims",
+    "handle_dcp_presentation_query",
+    "verify_cap_declaration_vc",
     "sign_s_cert_ed25519",
     "verify_dta_post_transfer_obligation",
+    "TRUST_MODEL_CONSUMER_AUDIT_RECORD",
+    "AgreementResolver",
+    "ConstraintObservabilityReport",
+    "ControlPlaneNotifier",
+    "DataPlaneSignalingBridge",
+    "FlowEvaluationResult",
+    "PreparedDataFlow",
+    "build_agreement_retrieval_path",
+    "build_dsp_transfer_suspension_message",
+    "build_dsp_transfer_termination_message",
+    "inspect_odrl_constraint_observability",
 ]

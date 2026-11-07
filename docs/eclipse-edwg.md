@@ -1,168 +1,157 @@
-# Eclipse Dataspace Working Group (EDWG) Interoperability (`DSP`, `DCP`, `CAP v2.2.1`, `DRP`)
+# Eclipse Dataspace Working Group (EDWG) Integration (`Data Plane Signaling`, `DSP`, `DCP`, `CAP v2.2.1`, `DRP`)
 
-**ODGS (`v6.1.0`)** operates as the **Data-Plane Runtime Policy Enforcement Point (`PEP`) and Cryptographic Evidence Engine** for connectors implementing the **Eclipse Dataspace Working Group (EDWG)** protocol suite:
+**ODGS (`v6.1.0`)** integrates as a **consumer-side data-plane constraint evaluator and first-party cryptographic audit recorder** alongside connectors implementing the **Eclipse Dataspace Working Group (EDWG)** specifications:
 
-1. **Eclipse Dataspace Protocol (`DSP v2025-1` / `ISO/IEC DIS 26450`)** — Control-Plane Contract Negotiation & Transfer Process binding (`bind_dsp_contract_agreement`).
-2. **Eclipse Decentralized Claims Protocol (`DCP v1.0` / `ISO/IEC DIS 26451`)** — Verifiable Presentation & `CredentialService` exchange (`export_dcp_presentation_response`, `extract_dcp_presentation_claims`).
-3. **Eclipse Conformity Assessment Policy (`CAP v2.2.1`)** — Automated conformity declaration and `cred:Evidence` projection (`export_cap_declaration_vc`, `export_cap_cred_evidence`).
-4. **Eclipse Dataspace Rights Profile (`DRP`)** — Runtime enforcement of `delegationEvidence` license and target environment constraints (`bind_drp_delegation_evidence`).
+1. **Data Plane Signaling** — Runs as (or behind) a consumer data plane registered with the consumer control plane (`DataPlaneSignalingBridge`), handling `DataFlowPrepareMessage` / `DataFlowStartMessage` (`processId` / `dataFlowId` + `agreementId`) and retrieving the negotiated agreement via `GET /transfers/:dataFlowId/agreement`.
+2. **Eclipse Dataspace Protocol (`DSP v2025-1` / `ISO/IEC DIS 26450`)** — Drives evaluation from the negotiated `odrl:Agreement`, binds `agreementId` and transfer process ID into the `S-Cert` `correlation_id`, and emits `dspace:TransferSuspensionMessage` (`SOFT_STOP`) or `dspace:TransferTerminationMessage` (`HARD_STOP`) on violation so the consumer control plane can notify the provider.
+3. **Eclipse Decentralized Claims Protocol (`DCP v1.0` / `ISO/IEC DIS 26451`)** — Issues runtime audit evidence as a W3C Verifiable Credential (`cap:Declaration`) signed with a key from the consumer's `did:web` document, held in the consumer's `CredentialService`, and presented to a provider via `PresentationQueryMessage` → `PresentationResponseMessage` (`handle_dcp_presentation_query`) as a policy condition for subsequent negotiations or transfers.
+4. **Eclipse Conformity Assessment Policy (`CAP v2.2.1`)** — Projects `S-Cert` audit receipts into `cap:Declaration` (ISO/IEC 17000 first-party self-declaration) and `cred:Evidence` (`export_cap_declaration_vc`, `export_cap_cred_evidence`).
+5. **Eclipse Dataspace Rights Profile (`DRP`)** — Evaluates payload-observable `delegationEvidence` license and resource constraints (`bind_drp_delegation_evidence`).
+
+> **Scope Boundary (Integration vs. Re-Implementation):** ODGS does **not** re-implement control-plane contract negotiation, credential transport, or signaling state machines; instead, it integrates with a compliant consumer control plane (such as Eclipse EDC) at the control-to-data-plane boundary.
 
 ---
 
-## 1. Interoperability with Eclipse Dataspace Protocol (`DSP v2025-1` / `ISO/IEC DIS 26450`)
+## 1. Trust Model & Constraint Observability Boundary
 
-In the **Eclipse Dataspace Protocol (`DSP`)**, control-plane negotiation and transfer coordination occur across two state machines: the **Contract Negotiation Protocol** (`AGREED` → `VERIFIED` → `FINALIZED`) and the **Transfer Process Protocol** (`STARTED` → `COMPLETED`). However, DSP explicitly delegates **data-plane payload enforcement and post-transfer obligation verification** to the participating runtime environment.
+To ensure architectural precision in cross-organizational dataspace deployments, ODGS states its trust assumptions and observability boundaries explicitly:
 
-ODGS binds directly to DSP control-plane messages via `bind_dsp_contract_agreement()`:
+1. **Consumer-Signed First-Party Audit Record (`CONSUMER_FIRST_PARTY_AUDIT_RECORD`):**
+   - `S-Cert` receipts are generated and signed **by the consumer** within its own processing pipeline over payload values supplied by the consumer.
+   - Accordingly, an `S-Cert` (and its projected `cap:Declaration` Verifiable Credential under ISO/IEC 17000) records that **the consumer attests to having executed a deterministic check** over a specific payload digest (`payload_hash`) and rule digest (`semantic_hash`) under `agreementId`. It serves as a tamper-evident **audit record**, **not** provider-verified proof of policy enforcement.
+2. **Payload-Observable Constraints vs. Unobservable Usage Obligations (`inspect_odrl_constraint_observability`):**
+   - **Observable in-payload prior to processing:** Structural, schema, value-range, and aggregation constraints over payload fields (e.g., `aggregation_household_count >= 50`, value bounds, or schema completeness).
+   - **Not observable by pre-processing payload inspection:** Behavioral constraints on downstream use — such as **`purpose`** (`odrl:purpose`), **`retention`** (`odrl:elapsedTime` / `odrl:dateTime`), or **`onward sharing`** (`odrl:distribute` / `odrl:share`).
+   - `inspect_odrl_constraint_observability()` explicitly classifies every ODRL policy into `observable_payload_operands` and `unobservable_usage_constraints` so neither consumers nor providers mistake pre-processing payload checks for verification of downstream behavioral usage.
 
-| Eclipse DSP Message / Construct (`https://w3id.org/dspace/2025/1/context.jsonld`) | Control-Plane Role in DSP (`ISO/IEC DIS 26450`) | Data-Plane Role in ODGS (`odgs.dataspace`) |
-| :--- | :--- | :--- |
-| **`dspace:ContractAgreementMessage`** | Finalizes the negotiated contract between `dspace:providerId` and `dspace:consumerId`. | Ingested by `bind_dsp_contract_agreement()` to extract the agreement `@id` and compile the embedded `dspace:agreement` into deterministic AST rules. |
-| **`dspace:agreement` (`odrl:Agreement`)** | Contains `odrl:permission`, `odrl:prohibition`, and `odrl:obligation` (`odrl:duty`) rules over `odrl:target`. | Compiled into `ExecutableRule` objects with SHA-256 `semantic_hash` digests over the canonical ODRL rule clauses. |
-| **`dspace:TransferStartMessage` / `dspace:TransferCompletionMessage`** | Signals data-plane transfer execution via `dspace:consumerPid`, `dspace:providerPid`, and `dspace:agreementId`. | Verifies that `dspace:agreementId` matches the negotiated `dspace:agreement["@id"]` (rejecting spoofed or mismatched transfers) and binds `correlation_id = "<agreementId>#transfer:<consumerPid>"`. |
-| **Data-Plane Payload Execution** | Out of scope for the DSP control plane once bytes arrive at the `dspace:dataAddress` endpoint. | `DataspaceRuntimePEP.evaluate()` intercepts the payload in-memory, enforces `HARD_STOP` / `SOFT_STOP` / `LOG_ONLY`, and emits a signed **`S-Cert`** bound to the DSP `correlation_id`. |
+---
 
-### Executable DSP Integration Example
+## 2. Data Plane Signaling & DSP Transfer Lifecycle (`odgs.dataspace.signaling`)
+
+When deployed as (or behind) a consumer data plane registered with a consumer control plane:
+
+1. **Flow Preparation (`DataFlowPrepareMessage` / `DataFlowStartMessage`):** The consumer control plane sends a prepare/start signaling message containing `agreementId` and `processId` / `dataFlowId` (equal to the DSP transfer process ID).
+2. **Agreement Retrieval (`GET /transfers/:dataFlowId/agreement`):** `DataPlaneSignalingBridge` calls the control plane's agreement retrieval endpoint (`build_agreement_retrieval_path(data_flow_id)`) via `AgreementResolver` to fetch the negotiated `odrl:Agreement` and classify constraint observability.
+3. **Violation Signaling (`TransferSuspensionMessage` / `TransferTerminationMessage`):** If an observable payload constraint fails during `evaluate_flow()`, the bridge produces a `dspace:TransferTerminationMessage` (`HARD_STOP`) or `dspace:TransferSuspensionMessage` (`SOFT_STOP`) referencing the `dataFlowId` (`dspace:consumerPid`), `dspace:providerPid`, and `S-Cert` digest so the consumer control plane can suspend or terminate the transfer with the provider.
 
 ```python
 from odgs.dataspace import (
-    DataspaceRuntimePEP,
-    bind_dsp_contract_agreement,
+    DataPlaneSignalingBridge,
+    build_agreement_retrieval_path,
 )
 
-# 1. DSP Control-Plane ContractAgreementMessage (ISO/IEC DIS 26450)
-dsp_contract_agreement_msg = {
-    "@context": "https://w3id.org/dspace/2025/1/context.jsonld",
-    "@type": "dspace:ContractAgreementMessage",
-    "dspace:providerPid": "urn:uuid:dsp-provider-pid-101",
-    "dspace:consumerPid": "urn:uuid:dsp-consumer-pid-202",
-    "dspace:agreement": {
-        "@id": "urn:uuid:dsp-agreement-energy-2026-901",
-        "@type": "odrl:Agreement",
-        "odrl:target": "urn:uuid:dataset-smart-grid-2026",
-        "dspace:timestamp": "2026-11-05T12:00:00Z",
-        "dspace:consumerId": "did:web:consumer.energy-dataspace.eu",
-        "dspace:providerId": "did:web:provider.energy-dataspace.eu",
-        "odrl:obligation": [
-            {
-                "odrl:uid": "urn:odrl:duty:k-anonymity-min-50",
-                "odrl:action": "odrl:aggregate",
-                "odrl:constraint": [
-                    {
-                        "odrl:leftOperand": "aggregation_household_count",
-                        "odrl:operator": "odrl:gteq",
-                        "odrl:rightOperand": 50,
-                    }
-                ],
-            }
-        ],
+# Consumer data plane resolves GET /transfers/:dataFlowId/agreement on the consumer control plane
+bridge = DataPlaneSignalingBridge(
+    agreement_resolver=control_plane_client,
+    control_plane_notifier=control_plane_client,
+    system_id="consumer-dataplane-01",
+)
+
+# 1. Control plane sends DataFlowPrepareMessage (dataFlowId == DSP transfer process ID)
+response = bridge.prepare_flow(
+    signaling_message={
+        "@context": "https://w3id.org/dspace/2025/1/dps/context.jsonld",
+        "@type": "DataFlowPrepareMessage",
+        "processId": "urn:uuid:dsp-transfer-flow-7701",
+        "agreementId": "urn:uuid:dsp-agreement-grid-2026-44",
+        "providerPid": "urn:uuid:provider-transfer-pid-88",
     },
-}
-
-# 2. DSP Control-Plane TransferStartMessage
-dsp_transfer_start_msg = {
-    "@context": "https://w3id.org/dspace/2025/1/context.jsonld",
-    "@type": "dspace:TransferStartMessage",
-    "dspace:providerPid": "urn:uuid:transfer-provider-501",
-    "dspace:consumerPid": "urn:uuid:transfer-consumer-602",
-    "dspace:agreementId": "urn:uuid:dsp-agreement-energy-2026-901",
-}
-
-# 3. Compile DSP Agreement + Transfer Process into Data-Plane Runtime PEP
-process_urn = "urn:odgs:process:dsp-consumer:grid-load-ingestion"
-rules, binding = bind_dsp_contract_agreement(
-    dsp_agreement_message=dsp_contract_agreement_msg,
-    process_urn=process_urn,
-    transfer_message=dsp_transfer_start_msg,
+    process_urn="urn:odgs:process:consumer:dataplane-ingest",
 )
 
-pep = DataspaceRuntimePEP(rules=rules, bindings=[binding])
-s_cert = pep.evaluate(
-    process_urn=process_urn,
-    payload={"aggregation_household_count": 75, "region": "NL-ZH"},
+# 2. Evaluate incoming flow payload; on HARD_STOP emits dspace:TransferTerminationMessage
+result = bridge.evaluate_flow(
+    data_flow_id="urn:uuid:dsp-transfer-flow-7701",
+    payload={"aggregation_household_count": 82, "region": "NL-ZH"},
 )
-# s_cert.correlation_id == "urn:uuid:dsp-agreement-energy-2026-901#transfer:urn:uuid:transfer-consumer-602"
+# result.trust_model == "CONSUMER_FIRST_PARTY_AUDIT_RECORD"
+# result.s_cert.correlation_id == "urn:uuid:dsp-agreement-grid-2026-44#transfer:urn:uuid:dsp-transfer-flow-7701"
 ```
 
 ---
 
-## 2. Interoperability with Eclipse Decentralized Claims Protocol (`DCP v1.0` / `ISO/IEC DIS 26451`)
+## 3. Direct Eclipse DSP Binding (`DSP v2025-1` / `ISO/IEC DIS 26450`)
 
-The **Eclipse Decentralized Claims Protocol (`DCP`)** defines how Dataspace participants authenticate via **`did:web`** / Self-Issued ID Tokens (`SIOPv2`) and exchange **W3C Verifiable Presentations (`VerifiablePresentation`)** via the **`CredentialService` API** (`PresentationQueryMessage` → `PresentationResponseMessage`).
-
-ODGS interoperates with **Eclipse DCP** in both directions:
-
-| Direction | Eclipse DCP Construct (`https://w3id.org/dspace-dcp/v1.0/dcp.jsonld`) | ODGS Function & Mechanism |
+| Eclipse DSP Message / Construct (`https://w3id.org/dspace/2025/1/context.jsonld`) | Control-Plane Role in DSP (`ISO/IEC DIS 26450`) | Data-Plane Role in ODGS (`odgs.dataspace`) |
 | :--- | :--- | :--- |
-| **Inbound (DCP → ODGS Runtime Context)** | `PresentationResponseMessage` carrying participant `VerifiablePresentation` / `VerifiableCredential` claims verified against the holder's `did:web` JWKS. | `extract_dcp_presentation_claims()` validates the DCP message type and expected `holder` DID (`did:web:...`) and extracts verified credential claims into the ODGS runtime evaluation context. |
-| **Outbound (ODGS `S-Cert` → DCP `CredentialService`)** | `PresentationResponseMessage` served in response to a counterparty or auditor `PresentationQueryMessage`. | `export_dcp_presentation_response()` wraps the Level 2 Ed25519/JWS-signed `S-Cert` and its `VerifiableCredential` (`cap:Declaration` + `cred:Evidence`) inside a DCP-compliant `PresentationResponseMessage` with `JsonWebSignature2020` proof linked to `issuing_jwk_url` (`did:web` JWKS). |
+| **`dspace:ContractAgreementMessage` & `GET /transfers/:dataFlowId/agreement`** | Finalizes and exposes the negotiated `odrl:Agreement` between `dspace:providerId` and `dspace:consumerId`. | Ingested by `DataPlaneSignalingBridge` / `bind_dsp_contract_agreement()` to compile payload-observable constraints and classify unobservable usage terms. |
+| **`dspace:TransferStartMessage`** | Signals transfer execution via `dspace:consumerPid`, `dspace:providerPid`, and `dspace:agreementId`. | Verifies `dspace:agreementId` continuity and binds `correlation_id = "<agreementId>#transfer:<consumerPid>"` into emitted `S-Cert` audit records. |
+| **`dspace:TransferSuspensionMessage` / `dspace:TransferTerminationMessage`** | Notifies the provider when a consumer control plane suspends or terminates a transfer process. | Emitted by `build_dsp_transfer_suspension_message()` (`SOFT_STOP`) and `build_dsp_transfer_termination_message()` (`HARD_STOP`) with `S-Cert` event and digest references. |
 
-### Executable DCP Integration Example
+---
+
+## 4. Eclipse DCP Credential Issuance & Presentation (`DCP v1.0` / `ISO/IEC DIS 26451`)
+
+Under **Eclipse DCP**, runtime audit records can be issued as **W3C Verifiable Credentials (`cap:Declaration`)** signed directly with a key from the consumer's `did:web` document, stored in the consumer's `CredentialService`, and presented to a provider via a DCP `PresentationQueryMessage` → `PresentationResponseMessage` flow. A provider can require this audit credential in policy as a condition for subsequent contract negotiations or transfers:
 
 ```python
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from odgs.dataspace import (
-    export_dcp_presentation_response,
-    extract_dcp_presentation_claims,
+    export_cap_declaration_vc,
+    handle_dcp_presentation_query,
     sign_s_cert_ed25519,
+    verify_cap_declaration_vc,
 )
 
-# 1. Sign the S-Cert with the participant's Ed25519 key (published via did:web JWKS)
+consumer_did = "did:web:consumer.energy-dataspace.eu"
+did_key_id = f"{consumer_did}#key-ed25519-1"
 priv_key = Ed25519PrivateKey.generate()
+
+# 1. Sign S-Cert and issue a DID-signed cap:Declaration Verifiable Credential
 s_cert_l2 = sign_s_cert_ed25519(
-    s_cert=s_cert,
+    s_cert=result.s_cert,
     private_key=priv_key,
-    authority_id="did:web:consumer.energy-dataspace.eu",
+    authority_id=consumer_did,
     issuing_jwk_url="https://consumer.energy-dataspace.eu/.well-known/jwks.json",
+    kid=did_key_id,
 )
-
-# 2. Export as an Eclipse DCP v1.0 PresentationResponseMessage
-dcp_response = export_dcp_presentation_response(
+signed_vc = export_cap_declaration_vc(
     s_cert=s_cert_l2,
-    holder_did="did:web:consumer.energy-dataspace.eu",
+    issuer_did=consumer_did,
+    subject_did=f"{consumer_did}#dataplane-01",
+    private_key=priv_key,
+    verification_method=did_key_id,
 )
 
-# 3. Verify and extract claims on the Counterparty / Verifier side
-verified_claims = extract_dcp_presentation_claims(
-    dcp_presentation_message=dcp_response,
-    expected_holder_did="did:web:consumer.energy-dataspace.eu",
+# 2. Respond to Provider's DCP PresentationQueryMessage from Consumer CredentialService
+dcp_response = handle_dcp_presentation_query(
+    query_message={
+        "@context": ["https://w3id.org/dspace-dcp/v1.0/dcp.jsonld"],
+        "type": "PresentationQueryMessage",
+        "scope": ["org.eclipse.dspace.dcp.vc.type:cap:Declaration:read"],
+    },
+    stored_credentials=[signed_vc],
+    holder_did=consumer_did,
+    private_key=priv_key,
+    verification_method=did_key_id,
+)
+
+# 3. Provider verifies the consumer's DID-signed VC signature and issuer DID
+is_valid = verify_cap_declaration_vc(
+    vc=dcp_response["presentation"][0]["verifiableCredential"][0],
+    public_key=priv_key.public_key(),
+    expected_issuer_did=consumer_did,
 )
 ```
 
 ---
 
-## 3. Complementarity with Eclipse Conformity Assessment Policy (`CAP v2.2.1`)
+## 5. Complementarity with Eclipse CAP (`v2.2.1`) & Eclipse DRP
 
-- **Eclipse CAP v2.2.1 (`LinkML` Ontology)** defines the Verifiable Credential envelope (`cap:Declaration`, `cap:ConformityAssessment`, `cap:SpecifiedRequirement`, `cred:Evidence`).
-- **ODGS** provides the **automated runtime execution engine (`DataspaceRuntimePEP`)** that evaluates data-plane payloads and populates `cred:Evidence` (`export_cap_cred_evidence` & `export_cap_declaration_vc`) with a canonical `sha256-<digest>` and Ed25519 JWS signature.
-
-| Eclipse CAP v2.2.1 Class / Slot | ODGS Runtime Artifact Mapping |
-| :--- | :--- |
-| `cap:Declaration` (`VerifiableCredential`) | Output of `export_cap_declaration_vc(s_cert, issuer_did, subject_did)` |
-| `cap:assessedRequirement` (`cap:SpecifiedRequirement`) | Bound to `urn:odgs:rule:<rule_id>#sha256:<semantic_hash>` |
-| `cap:assessmentOutcome` | `"CONFORMANT"` (`Verdict.PASS`) or `"NON_CONFORMANT"` (`HARD_STOP` / `SOFT_STOP`) |
-| `cred:Evidence` (`cred:digest`) | Output of `export_cap_cred_evidence(s_cert)` (`sha256-<RFC 8785 JCS digest>`) |
+- **Eclipse CAP v2.2.1 (`LinkML` Ontology):** Formalizes ISO/IEC 17000 conformity-assessment classes (`cap:Declaration` first-party self-assessment, `cap:Certification` third-party assessment, `cred:Evidence`). Because an `S-Cert` is signed by the consumer over its own pipeline execution, ODGS maps it strictly to **`cap:Declaration`** (first-party consumer declaration) with `cred:Evidence` (`sha256-<RFC 8785 JCS digest>`).
+- **Eclipse DRP (`delegationEvidence`):** Defines `policyIssuer`, `target.accessSubject`, `target.environment.licenses`, and `Permit`/`Deny` rules. `bind_drp_delegation_evidence()` compiles payload-observable license/attribute checks into `HARD_STOP` rules and emits a consumer-signed `S-Cert` audit record of the check.
 
 ---
 
-## 4. Complementarity with Eclipse Dataspace Rights Profile (`DRP`)
-
-- **Eclipse DRP** defines `delegationEvidence` policies (`policyIssuer`, `target.accessSubject`, `target.environment.licenses`, and `Permit`/`Deny` rules) and includes a mandatory breach clause: if policy conditions are violated, the `accessSubject` **MUST NOT** process the resource.
-- **ODGS (`bind_drp_delegation_evidence`)** compiles DRP `delegationEvidence` into a deterministic runtime gate (`HARD_STOP`) that halts execution and emits a signed `S-Cert` proving the breach was prevented before downstream consumption.
-
----
-
-## 5. End-to-End EDWG Architecture Flow (`DSP` + `DCP` + `DRP` + `CAP`)
+## 6. End-to-End EDWG Architecture Flow (`Signaling` + `DSP` + `DCP` + `CAP` + `DRP`)
 
 ![Trustworthy Data Transaction Sequence](assets/fig3_tdt_sequence.svg)
 
-| Step | Protocol / Boundary | Message / Function | Description |
+| Step | Protocol / Boundary | Message / Endpoint / Function | Description |
 | :--- | :--- | :--- | :--- |
 | **1** | **Eclipse DSP (`ISO/IEC DIS 26450`)** | `dspace:ContractAgreementMessage` | Provider and Consumer finalize the contract (`odrl:Agreement` `@id`). |
-| **2** | **Eclipse DSP (`ISO/IEC DIS 26450`)** | `dspace:TransferStartMessage` | Provider initiates the data-plane transfer linked to `dspace:agreementId` and `dspace:consumerPid`. |
-| **3** | **ODGS Control-to-Data Bridge** | `bind_dsp_contract_agreement()` | Verifies `dspace:agreementId` continuity, compiles ODRL rules into deterministic AST checks, and binds `correlation_id`. |
-| **4** | **Eclipse DCP (`ISO/IEC DIS 26451`)** | `extract_dcp_presentation_claims()` | Validates incoming `PresentationResponseMessage` (`VerifiablePresentation`) claims against `did:web` JWKS. |
-| **5** | **ODGS Data-Plane PEP** | `DataspaceRuntimePEP.evaluate()` | Evaluates the data-plane payload in-memory (`HARD_STOP` \| `SOFT_STOP` \| `LOG_ONLY` \| `PASS`). |
-| **6** | **ODGS Cryptographic Attestation** | `sign_s_cert_ed25519()` | Emits a canonical `S-Cert` (RFC 8785 JCS + RFC 7515 Ed25519 JWS) bound to the DSP `correlation_id`. |
-| **7** | **Eclipse DCP (`ISO/IEC DIS 26451`)** | `PresentationQueryMessage` | Counterparty or auditor queries the participant's DCP `CredentialService` for post-transfer compliance proofs. |
-| **8** | **Eclipse DCP + CAP (`v2.2.1`)** | `export_dcp_presentation_response()` | Returns a DCP `PresentationResponseMessage` wrapping the `cap:Declaration` VC and `cred:Evidence` digest. |
+| **2** | **Data Plane Signaling** | `DataFlowPrepareMessage` / `DataFlowStartMessage` | Consumer control plane signals consumer data plane with `agreementId` and `processId` (`dataFlowId`). |
+| **3** | **Control-to-Data Agreement Fetch** | `GET /transfers/:dataFlowId/agreement` | `DataPlaneSignalingBridge.prepare_flow()` retrieves the DSP agreement, classifies constraint observability, and compiles payload-observable checks. |
+| **4** | **ODGS Data-Plane PEP** | `DataPlaneSignalingBridge.evaluate_flow()` | Evaluates observable payload fields (`PASS` \| `HARD_STOP` \| `SOFT_STOP` \| `LOG_ONLY`) and emits a consumer-signed `S-Cert` audit record. |
+| **5** | **Eclipse DSP Violation Callback** | `dspace:TransferSuspensionMessage` / `TransferTerminationMessage` | On `SOFT_STOP` or `HARD_STOP`, notifies the consumer control plane to suspend or terminate the DSP transfer with the provider. |
+| **6** | **Eclipse DCP + CAP (`v2.2.1`)** | `PresentationQueryMessage` → `PresentationResponseMessage` | Consumer issues a DID-signed `cap:Declaration` VC into its `CredentialService` and presents it via DCP when queried by the provider. |

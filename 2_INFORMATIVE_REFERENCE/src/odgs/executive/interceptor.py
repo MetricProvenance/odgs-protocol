@@ -12,7 +12,7 @@ try:
 except ImportError as _simpleeval_err:
     raise ImportError(
         "simpleeval is required for governance rule evaluation and must not be absent. "
-        "Install it with: pip install simpleeval==0.9.13\n"
+        "Install it with: pip install 'simpleeval>=1.0.0,<2.0.0'\n"
         f"Original error: {_simpleeval_err}"
     ) from _simpleeval_err
 

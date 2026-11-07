@@ -46,11 +46,13 @@ def verify_dta_post_transfer_obligation(
     public_key: Optional[Ed25519PublicKey] = None,
     require_level_2_signature: bool = True,
 ) -> DtaVerificationResult:
-    """Verify a consumer's Phase 6 S-Cert against a Phase 5 Gaia-X DTA TransferRequestResult.
+    """Verify a consumer's Phase 6 S-Cert audit record against a Phase 5 Gaia-X DTA TransferRequestResult.
 
-    Addresses Gaia-X Architecture Document 25.11 §4.8.4.2 (*Policy Enforcement*):
-    "In the last phase, the data consumer provides proof of the implemented policy
-    enforcement, which the data product provider verifies."
+    Aligns with Gaia-X Architecture Document 25.11 §4.8.4.2 (*Policy Enforcement*).
+    Note on trust model: because the S-Cert is generated and signed by the consumer over
+    consumer-supplied payload values, verification confirms cryptographic integrity, rule-hash
+    alignment, and correlation continuity of the consumer's first-party audit record (not
+    provider-verified enforcement of unobservable downstream usage).
     """
     expected_corr_id = str(
         transfer_request_result.get("agreement_id")

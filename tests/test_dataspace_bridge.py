@@ -426,6 +426,370 @@ def test_eclipse_dsp_contract_agreement_and_dcp_presentation_roundtrip() -> None
     assert "cap:Declaration" in extracted["credential_types"]
 
 
+def test_data_plane_signaling_prepare_and_agreement_retrieval_flow() -> None:
+    """Verify consumer data-plane registration flow: DataFlowPrepareMessage ->
+    GET /transfers/:dataFlowId/agreement -> payload evaluation -> S-Cert audit record."""
+    from odgs.dataspace import (
+        DataPlaneSignalingBridge,
+        build_agreement_retrieval_path,
+    )
+
+    data_flow_id = "urn:uuid:dsp-transfer-flow-7701"
+    agreement_id = "urn:uuid:dsp-agreement-grid-2026-44"
+
+    assert (
+        build_agreement_retrieval_path(data_flow_id)
+        == f"/transfers/{data_flow_id}/agreement"
+    )
+
+    stored_agreements = {
+        data_flow_id: {
+            "@context": "https://w3id.org/dspace/2025/1/context.jsonld",
+            "@id": agreement_id,
+            "@type": "odrl:Agreement",
+            "odrl:target": "urn:uuid:dataset-grid-load-2026",
+            "dspace:consumerId": "did:web:consumer.energy-dataspace.eu",
+            "dspace:providerId": "did:web:provider.energy-dataspace.eu",
+            "odrl:obligation": [
+                {
+                    "odrl:uid": "urn:odrl:duty:k-anonymity-min-50",
+                    "odrl:action": "odrl:aggregate",
+                    "odrl:constraint": [
+                        {
+                            "odrl:leftOperand": "aggregation_household_count",
+                            "odrl:operator": "odrl:gteq",
+                            "odrl:rightOperand": 50,
+                        }
+                    ],
+                }
+            ],
+        }
+    }
+
+    class MockControlPlaneClient:
+        def __init__(self) -> None:
+            self.requested_paths: list[str] = []
+            self.notifications: list[tuple[str, dict]] = []
+
+        def get_transfer_agreement(self, flow_id: str) -> dict:
+            self.requested_paths.append(build_agreement_retrieval_path(flow_id))
+            return stored_agreements[flow_id]
+
+        def notify_transfer_event(self, flow_id: str, dsp_message: dict) -> None:
+            self.notifications.append((flow_id, dsp_message))
+
+    cp_client = MockControlPlaneClient()
+    bridge = DataPlaneSignalingBridge(
+        agreement_resolver=cp_client,
+        control_plane_notifier=cp_client,
+        system_id="consumer-dataplane-01",
+    )
+
+    prepare_msg = {
+        "@context": "https://w3id.org/dspace/2025/1/dps/context.jsonld",
+        "@type": "DataFlowPrepareMessage",
+        "processId": data_flow_id,
+        "agreementId": agreement_id,
+        "participantId": "did:web:consumer.energy-dataspace.eu",
+        "counterPartyId": "did:web:provider.energy-dataspace.eu",
+        "providerPid": "urn:uuid:provider-transfer-pid-88",
+    }
+
+    prep_resp = bridge.prepare_flow(
+        signaling_message=prepare_msg,
+        process_urn="urn:odgs:process:consumer:dataplane-ingest",
+    )
+    assert prep_resp["@type"] == "DataFlowResponseMessage"
+    assert prep_resp["state"] == "PREPARED"
+    assert cp_client.requested_paths == [f"/transfers/{data_flow_id}/agreement"]
+
+    # 1. Conformant payload -> PASS S-Cert (Consumer First-Party Audit Record)
+    eval_pass = bridge.evaluate_flow(
+        data_flow_id=data_flow_id,
+        payload={"aggregation_household_count": 82, "region": "NL-ZH"},
+    )
+    assert eval_pass.verdict == Verdict.PASS
+    assert eval_pass.trust_model == "CONSUMER_FIRST_PARTY_AUDIT_RECORD"
+    assert eval_pass.dsp_control_message is None
+    assert (
+        eval_pass.s_cert.correlation_id
+        == f"{agreement_id}#transfer:{data_flow_id}"
+    )
+    jsonschema.validate(instance=eval_pass.s_cert.to_canonical_dict(), schema=SCERT_SCHEMA)
+
+    # 2. Violating payload -> HARD_STOP -> emits dspace:TransferTerminationMessage
+    eval_fail = bridge.evaluate_flow(
+        data_flow_id=data_flow_id,
+        payload={"aggregation_household_count": 14, "region": "NL-ZH"},
+    )
+    assert eval_fail.verdict == Verdict.HARD_STOP
+    assert eval_fail.dsp_control_message is not None
+    assert eval_fail.dsp_control_message["@type"] == "dspace:TransferTerminationMessage"
+    assert eval_fail.dsp_control_message["dspace:consumerPid"] == data_flow_id
+    assert (
+        eval_fail.dsp_control_message["dspace:providerPid"]
+        == "urn:uuid:provider-transfer-pid-88"
+    )
+    assert len(cp_client.notifications) == 1
+    assert cp_client.notifications[0][0] == data_flow_id
+    assert (
+        cp_client.notifications[0][1]["@type"]
+        == "dspace:TransferTerminationMessage"
+    )
+
+
+def test_dsp_transfer_suspension_message_on_soft_stop() -> None:
+    """Verify SOFT_STOP violation emits dspace:TransferSuspensionMessage when un-overridden."""
+    from odgs.dataspace import build_dsp_transfer_suspension_message
+
+    process_urn = "urn:odgs:process:consumer:latency-flow"
+    soft_rule = ExecutableRule(
+        rule_id="FLOW-SOFT-001",
+        pack_id="ODGS-DSP-SOFT",
+        legislative_source="DSP SLA Clause 3",
+        semantic_hash=compute_semantic_hash("batch_size <= 1000"),
+        verbatim_source_text="batch_size <= 1000",
+        expression="batch_size <= 1000",
+        fields_evaluated=("batch_size",),
+        verdict_on_fail=Verdict.SOFT_STOP,
+        plain_english_description="Suspend flow if batch_size exceeds 1000",
+        non_conformance_message="Batch size exceeded 1000",
+        bound_processes=(process_urn,),
+    )
+    binding = ProcessBinding(
+        process_urn=process_urn,
+        bound_rules=("FLOW-SOFT-001",),
+        correlation_id="urn:uuid:agr-1#transfer:urn:uuid:flow-1",
+    )
+    pep = DataspaceRuntimePEP(rules=[soft_rule], bindings=[binding])
+
+    with pytest.raises(SoftStopOverrideRequiredError) as exc_info:
+        pep.evaluate(process_urn=process_urn, payload={"batch_size": 2500})
+
+    susp_msg = build_dsp_transfer_suspension_message(
+        consumer_pid="urn:uuid:flow-1",
+        provider_pid="urn:uuid:prov-flow-1",
+        s_cert=exc_info.value.s_cert,
+        reason="SOFT_STOP triggered on batch_size constraint; awaiting override or remediation.",
+    )
+    assert susp_msg["@type"] == "dspace:TransferSuspensionMessage"
+    assert susp_msg["dspace:consumerPid"] == "urn:uuid:flow-1"
+    assert susp_msg["dspace:providerPid"] == "urn:uuid:prov-flow-1"
+    assert susp_msg["dspace:code"] == "ODGS_SOFT_STOP"
+    assert any(exc_info.value.s_cert.event_id in str(r) for r in susp_msg["dspace:reason"])
+
+
+def test_dcp_did_signed_vc_and_presentation_query_exchange() -> None:
+    """Verify runtime evidence issued as a DID-signed VC, held in consumer store,
+    and presented via DCP PresentationQueryMessage -> PresentationResponseMessage."""
+    from odgs.dataspace import (
+        handle_dcp_presentation_query,
+        verify_cap_declaration_vc,
+    )
+
+    consumer_did = "did:web:consumer.energy-dataspace.eu"
+    key_id = f"{consumer_did}#key-ed25519-1"
+    priv_key = Ed25519PrivateKey.generate()
+    pub_key = priv_key.public_key()
+
+    odrl_agreement = {
+        "@id": "urn:uuid:dsp-agreement-992",
+        "obligation": [
+            {
+                "uid": "urn:odrl:duty:min-records",
+                "constraint": [
+                    {"leftOperand": "record_count", "operator": "gteq", "rightOperand": 10}
+                ],
+            }
+        ],
+    }
+    process_urn = "urn:odgs:process:consumer:batch-transform"
+    rules, binding = bind_odrl_policy(odrl_agreement, process_urn=process_urn)
+    pep = DataspaceRuntimePEP(rules=rules, bindings=[binding])
+    s_cert = sign_s_cert_ed25519(
+        s_cert=pep.evaluate(process_urn=process_urn, payload={"record_count": 25}),
+        private_key=priv_key,
+        authority_id=consumer_did,
+        issuing_jwk_url="https://consumer.energy-dataspace.eu/.well-known/jwks.json",
+        kid=key_id,
+    )
+
+    signed_vc = export_cap_declaration_vc(
+        s_cert=s_cert,
+        issuer_did=consumer_did,
+        subject_did=f"{consumer_did}#dataplane",
+        private_key=priv_key,
+        verification_method=key_id,
+    )
+    assert "proof" in signed_vc
+    assert signed_vc["proof"]["verificationMethod"] == key_id
+    assert verify_cap_declaration_vc(
+        vc=signed_vc,
+        public_key=pub_key,
+        expected_issuer_did=consumer_did,
+    ) is True
+
+    # Provider sends DCP PresentationQueryMessage requesting cap:Declaration audit credentials
+    dcp_query = {
+        "@context": ["https://w3id.org/dspace-dcp/v1.0/dcp.jsonld"],
+        "type": "PresentationQueryMessage",
+        "scope": ["org.eclipse.dspace.dcp.vc.type:cap:Declaration:read"],
+    }
+    dcp_response = handle_dcp_presentation_query(
+        query_message=dcp_query,
+        stored_credentials=[signed_vc],
+        holder_did=consumer_did,
+        private_key=priv_key,
+        verification_method=key_id,
+    )
+    assert dcp_response["type"] == "PresentationResponseMessage"
+    returned_vc = dcp_response["presentation"][0]["verifiableCredential"][0]
+    assert verify_cap_declaration_vc(
+        vc=returned_vc,
+        public_key=pub_key,
+        expected_issuer_did=consumer_did,
+    ) is True
+
+
+def test_trust_model_constraint_observability_classification() -> None:
+    """Verify ODRL behavioral usage constraints (purpose, retention, onward sharing)
+    are explicitly flagged as unobservable via pre-processing payload inspection."""
+    from odgs.dataspace import inspect_odrl_constraint_observability
+
+    mixed_policy = {
+        "@id": "urn:uuid:agreement-mixed-observability",
+        "permission": [
+            {
+                "uid": "urn:odrl:perm:purpose-and-retention",
+                "action": "use",
+                "constraint": [
+                    {
+                        "leftOperand": "odrl:purpose",
+                        "operator": "eq",
+                        "rightOperand": "grid-capacity-planning",
+                    },
+                    {
+                        "leftOperand": "odrl:elapsedTime",
+                        "operator": "lteq",
+                        "rightOperand": "P30D",
+                    },
+                ],
+            }
+        ],
+        "prohibition": [
+            {
+                "uid": "urn:odrl:prohib:no-onward-sharing",
+                "action": "odrl:distribute",
+            }
+        ],
+        "obligation": [
+            {
+                "uid": "urn:odrl:duty:k-anonymity-50",
+                "action": "aggregate",
+                "constraint": [
+                    {
+                        "leftOperand": "aggregation_household_count",
+                        "operator": "gteq",
+                        "rightOperand": 50,
+                    }
+                ],
+            }
+        ],
+    }
+
+    report = inspect_odrl_constraint_observability(mixed_policy)
+    assert report.trust_model == "CONSUMER_FIRST_PARTY_AUDIT_RECORD"
+    assert "aggregation_household_count" in report.observable_payload_operands
+    assert any("purpose" in item for item in report.unobservable_usage_constraints)
+    assert any("elapsedTime" in item for item in report.unobservable_usage_constraints)
+    assert any("distribute" in item for item in report.unobservable_usage_constraints)
+    assert report.fully_observable_in_payload is False
+
+
+def test_signaling_and_vc_security_edge_cases() -> None:
+    """Verify security input validation, SOFT_STOP bridge suspension, and tampered VC rejection."""
+    from odgs.dataspace import (
+        DataPlaneSignalingBridge,
+        build_agreement_retrieval_path,
+        handle_dcp_presentation_query,
+        verify_cap_declaration_vc,
+    )
+
+    # Path traversal / invalid IDs rejected
+    for bad_id in ("", "   ", "../secret", "flow/../../etc"):
+        with pytest.raises(ValueError):
+            build_agreement_retrieval_path(bad_id)
+
+    class SoftAgreementResolver:
+        def get_transfer_agreement(self, flow_id: str) -> dict:
+            return {
+                "@id": "urn:uuid:agr-soft-1",
+                "obligation": [
+                    {
+                        "uid": "urn:odrl:duty:check-count",
+                        "constraint": [
+                            {"leftOperand": "count_val", "operator": "gteq", "rightOperand": 5}
+                        ],
+                    }
+                ],
+            }
+
+    events: list[tuple[str, dict]] = []
+
+    class Notifier:
+        def notify_transfer_event(self, flow_id: str, dsp_message: dict) -> None:
+            events.append((flow_id, dsp_message))
+
+    bridge = DataPlaneSignalingBridge(
+        agreement_resolver=SoftAgreementResolver(),
+        control_plane_notifier=Notifier(),
+    )
+
+    with pytest.raises(ValueError, match="Unsupported Data Plane Signaling"):
+        bridge.prepare_flow({"@type": "UnknownMessage"}, "urn:odgs:process:a:b")
+
+    with pytest.raises(ValueError, match="must include"):
+        bridge.prepare_flow({"@type": "DataFlowStartMessage"}, "urn:odgs:process:a:b")
+
+    with pytest.raises(KeyError):
+        bridge.evaluate_flow("urn:uuid:unprepared", {"count_val": 1})
+
+    start_resp = bridge.prepare_flow(
+        {
+            "@type": "DataFlowStartMessage",
+            "dataFlowId": "urn:uuid:flow-start-1",
+            "agreementId": "urn:uuid:agr-soft-1",
+        },
+        process_urn="urn:odgs:process:consumer:start-flow",
+    )
+    assert start_resp["state"] == "STARTED"
+
+    # Tampered VC verification fails closed
+    priv_key = Ed25519PrivateKey.generate()
+    wrong_key = Ed25519PrivateKey.generate()
+    eval_res = bridge.evaluate_flow("urn:uuid:flow-start-1", {"count_val": 10})
+    vc = export_cap_declaration_vc(
+        s_cert=eval_res.s_cert,
+        issuer_did="did:web:consumer.example.eu",
+        subject_did="did:web:consumer.example.eu#dp",
+        private_key=priv_key,
+    )
+    assert verify_cap_declaration_vc(vc, wrong_key.public_key()) is False
+    assert (
+        verify_cap_declaration_vc(
+            vc, priv_key.public_key(), expected_issuer_did="did:web:other.example.eu"
+        )
+        is False
+    )
+    tampered_vc = {**vc, "issuer": "did:web:attacker.example.eu"}
+    assert verify_cap_declaration_vc(tampered_vc, priv_key.public_key()) is False
+
+    with pytest.raises(ValueError, match="PresentationQueryMessage"):
+        handle_dcp_presentation_query(
+            {"type": "InvalidQuery"}, [vc], "did:web:consumer.example.eu"
+        )
+
+
 def test_iso_38505_and_25012_normative_schema_alignment() -> None:
     """Verify all 60 DQ dimensions and context bindings conform to ISO/IEC 25012 & ISO/IEC 38505-1."""
     dims_path = REPO_ROOT / "1_NORMATIVE_SPECIFICATION" / "schemas" / "legislative" / "standard_dq_dimensions.json"

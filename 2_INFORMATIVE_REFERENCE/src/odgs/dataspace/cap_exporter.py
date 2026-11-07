@@ -2,7 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+import json
+from typing import Any, Dict, List, Optional, Sequence
+
+import jwt
+from cryptography.hazmat.primitives.asymmetric.ed25519 import (
+    Ed25519PrivateKey,
+    Ed25519PublicKey,
+)
 
 from odgs.dataspace.models import SemanticCertificate, Verdict
 
@@ -34,16 +41,31 @@ def export_cap_cred_evidence(s_cert: SemanticCertificate) -> Dict[str, Any]:
     return evidence
 
 
+def _canonical_vc_claims(vc: Dict[str, Any]) -> Dict[str, Any]:
+    """Return canonical VC claims excluding any detached `proof` envelope."""
+    without_proof = {k: v for k, v in vc.items() if k != "proof"}
+    return json.loads(json.dumps(without_proof, sort_keys=True, separators=(",", ":")))
+
+
 def export_cap_declaration_vc(
     s_cert: SemanticCertificate,
     issuer_did: str,
     subject_did: str,
     scheme_uri: str = "https://w3id.org/eclipse-cap/v2.2.1/scheme/dataspace-governance",
     requirement_uri: Optional[str] = None,
+    private_key: Optional[Ed25519PrivateKey] = None,
+    verification_method: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Wrap an ODGS S-Cert inside an Eclipse CAP v2.2.1 `cap:Declaration` W3C Verifiable Credential v2.0."""
+    """Wrap an ODGS S-Cert inside an Eclipse CAP v2.2.1 `cap:Declaration` W3C Verifiable Credential v2.0.
+
+    Under the ODGS cross-party dataspace trust model, this credential represents a consumer-signed
+    **first-party audit declaration** (`cap:Declaration` per ISO/IEC 17000) recording that the
+    consumer evaluated payload-observable constraints against the referenced payload digest.
+    When `private_key` is supplied, the credential itself is signed with the key from the
+    consumer's DID document (`verification_method`).
+    """
     req_uri = requirement_uri or f"urn:odgs:rule:{s_cert.rule_id}#sha256:{s_cert.semantic_hash}"
-    return {
+    vc: Dict[str, Any] = {
         "@context": [
             "https://www.w3.org/ns/credentials/v2",
             "https://w3id.org/eclipse-cap/v2.2.1/",
@@ -68,6 +90,48 @@ def export_cap_declaration_vc(
         },
         "evidence": [export_cap_cred_evidence(s_cert)],
     }
+    if private_key is not None:
+        eff_vm = verification_method or f"{issuer_did}#key-1"
+        vc_jws = jwt.encode(
+            payload=_canonical_vc_claims(vc),
+            key=private_key,
+            algorithm="EdDSA",
+            headers={"kid": eff_vm, "typ": "vc+jwt"},
+        )
+        vc = {
+            **vc,
+            "proof": {
+                "type": "JsonWebSignature2020",
+                "created": s_cert.timestamp,
+                "verificationMethod": eff_vm,
+                "proofPurpose": "assertionMethod",
+                "jws": vc_jws,
+            },
+        }
+    return vc
+
+
+def verify_cap_declaration_vc(
+    vc: Dict[str, Any],
+    public_key: Ed25519PublicKey,
+    expected_issuer_did: Optional[str] = None,
+) -> bool:
+    """Cryptographically verify a DID-signed `cap:Declaration` Verifiable Credential."""
+    if expected_issuer_did and vc.get("issuer") != expected_issuer_did:
+        return False
+    proof = vc.get("proof")
+    if not isinstance(proof, dict) or not proof.get("jws"):
+        return False
+    try:
+        decoded = jwt.decode(
+            proof["jws"],
+            key=public_key,
+            algorithms=["EdDSA"],
+            options={"verify_aud": False},
+        )
+        return decoded == _canonical_vc_claims(vc)
+    except Exception:
+        return False
 
 
 def export_dcp_presentation_response(
@@ -76,14 +140,10 @@ def export_dcp_presentation_response(
     subject_did: Optional[str] = None,
     scheme_uri: str = "https://w3id.org/eclipse-cap/v2.2.1/scheme/dataspace-governance",
     requirement_uri: Optional[str] = None,
+    private_key: Optional[Ed25519PrivateKey] = None,
+    verification_method: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Export an ODGS S-Cert as an Eclipse DCP v1.0 (ISO/IEC DIS 26451) `PresentationResponseMessage`.
-
-    Wraps the `S-Cert` conformity Verifiable Credential inside a W3C `VerifiablePresentation`
-    envelope served by an Eclipse DCP `CredentialService` (`PresentationQueryMessage` ->
-    `PresentationResponseMessage`), binding the holder's `did:web` identifier and optional
-    Level 2 Ed25519 / RFC 7515 JWS cryptographic proof.
-    """
+    """Export an ODGS S-Cert as an Eclipse DCP v1.0 (ISO/IEC DIS 26451) `PresentationResponseMessage`."""
     eff_subject_did = subject_did or f"{holder_did}#{s_cert.system_id}"
     vc = export_cap_declaration_vc(
         s_cert=s_cert,
@@ -91,6 +151,8 @@ def export_dcp_presentation_response(
         subject_did=eff_subject_did,
         scheme_uri=scheme_uri,
         requirement_uri=requirement_uri,
+        private_key=private_key,
+        verification_method=verification_method,
     )
     vp: Dict[str, Any] = {
         "@context": [
@@ -103,18 +165,106 @@ def export_dcp_presentation_response(
         "holder": holder_did,
         "verifiableCredential": [vc],
     }
-    if s_cert.jws_signature:
-        vp["proof"] = {
-            "type": "JsonWebSignature2020",
-            "created": s_cert.timestamp,
-            "verificationMethod": s_cert.issuing_jwk_url or f"{holder_did}#key-1",
-            "proofPurpose": "authentication",
-            "jws": s_cert.jws_signature,
+    eff_vm = verification_method or s_cert.issuing_jwk_url or f"{holder_did}#key-1"
+    if private_key is not None:
+        vp_jws = jwt.encode(
+            payload=_canonical_vc_claims(vp),
+            key=private_key,
+            algorithm="EdDSA",
+            headers={"kid": eff_vm, "typ": "vp+jwt"},
+        )
+        vp = {
+            **vp,
+            "proof": {
+                "type": "JsonWebSignature2020",
+                "created": s_cert.timestamp,
+                "verificationMethod": eff_vm,
+                "proofPurpose": "authentication",
+                "jws": vp_jws,
+            },
+        }
+    elif s_cert.jws_signature:
+        vp = {
+            **vp,
+            "proof": {
+                "type": "JsonWebSignature2020",
+                "created": s_cert.timestamp,
+                "verificationMethod": eff_vm,
+                "proofPurpose": "authentication",
+                "jws": s_cert.jws_signature,
+            },
         }
     return {
         "@context": [
             "https://w3id.org/dspace-dcp/v1.0/dcp.jsonld",
         ],
+        "type": "PresentationResponseMessage",
+        "presentation": [vp],
+    }
+
+
+def handle_dcp_presentation_query(
+    query_message: Dict[str, Any],
+    stored_credentials: Sequence[Dict[str, Any]],
+    holder_did: str,
+    private_key: Optional[Ed25519PrivateKey] = None,
+    verification_method: Optional[str] = None,
+) -> Dict[str, Any]:
+    """Respond to an Eclipse DCP `PresentationQueryMessage` from a consumer credential store."""
+    msg_type = query_message.get("type") or query_message.get("@type")
+    if msg_type != "PresentationQueryMessage":
+        raise ValueError(
+            f"Expected Eclipse DCP 'PresentationQueryMessage', got '{msg_type}'."
+        )
+
+    scopes = [str(s) for s in query_message.get("scope", [])]
+    requested_types: List[str] = []
+    for scope in scopes:
+        # Format: org.eclipse.dspace.dcp.vc.type:<vcType>:<permission>
+        parts = scope.split("org.eclipse.dspace.dcp.vc.type:")
+        if len(parts) == 2:
+            vc_type_part = parts[1].rsplit(":", 1)[0]
+            if vc_type_part:
+                requested_types.append(vc_type_part)
+
+    matched: List[Dict[str, Any]] = []
+    for cred in stored_credentials:
+        c_types = cred.get("type", [])
+        if isinstance(c_types, str):
+            c_types = [c_types]
+        if not requested_types or any(rt in c_types for rt in requested_types):
+            matched.append(dict(cred))
+
+    vp: Dict[str, Any] = {
+        "@context": [
+            "https://www.w3.org/ns/credentials/v2",
+            "https://w3id.org/eclipse-cap/v2.2.1/",
+            "https://w3id.org/odgs/dataspace/v1",
+        ],
+        "type": ["VerifiablePresentation"],
+        "holder": holder_did,
+        "verifiableCredential": matched,
+    }
+    if private_key is not None:
+        eff_vm = verification_method or f"{holder_did}#key-1"
+        vp_jws = jwt.encode(
+            payload=_canonical_vc_claims(vp),
+            key=private_key,
+            algorithm="EdDSA",
+            headers={"kid": eff_vm, "typ": "vp+jwt"},
+        )
+        vp = {
+            **vp,
+            "proof": {
+                "type": "JsonWebSignature2020",
+                "verificationMethod": eff_vm,
+                "proofPurpose": "authentication",
+                "jws": vp_jws,
+            },
+        }
+
+    return {
+        "@context": ["https://w3id.org/dspace-dcp/v1.0/dcp.jsonld"],
         "type": "PresentationResponseMessage",
         "presentation": [vp],
     }

@@ -109,26 +109,35 @@ verify_dta_provenance(payload=payload, expected_provenance_hash=expected_hash)
 
 ---
 
-## 5. Eclipse DCP, CAP v2.2.1, Lineage & Audit Exporters (`odgs.dataspace.cap_exporter`)
+## 5. Eclipse Data Plane Signaling, DCP, CAP v2.2.1, Lineage & Audit (`odgs.dataspace.signaling` & `cap_exporter`)
 
-Projects canonical `S-Cert` receipts into **Eclipse DCP (`ISO/IEC DIS 26451`)**, **Eclipse CAP v2.2.1**, **W3C PROV-O**, and **NIST OSCAL v1.1.2**:
+Integrates consumer-side **Data Plane Signaling**, **DSP suspension/termination messages**, **Eclipse DCP (`ISO/IEC DIS 26451`)** DID-signed credentials, **Eclipse CAP v2.2.1**, **W3C PROV-O**, and **NIST OSCAL v1.1.2**:
 
 ```python
-from odgs.dataspace.cap_exporter import (
+from odgs.dataspace import (
+    DataPlaneSignalingBridge,
+    build_agreement_retrieval_path,
+    build_dsp_transfer_suspension_message,
+    build_dsp_transfer_termination_message,
+    inspect_odrl_constraint_observability,
     export_dcp_presentation_response,
     extract_dcp_presentation_claims,
+    handle_dcp_presentation_query,
     export_cap_declaration_vc,
+    verify_cap_declaration_vc,
     export_cap_cred_evidence,
     export_w3c_prov_o,
     export_nist_oscal_finding,
 )
 ```
 
-| Function | Target Standard | Output Artifact |
+| Function / Class | Target Standard | Output / Behavior |
 | :--- | :--- | :--- |
-| `export_dcp_presentation_response(s_cert, holder_did)` | **Eclipse DCP v1.0 (`ISO/IEC DIS 26451`)** | `PresentationResponseMessage` containing `VerifiablePresentation` & `JsonWebSignature2020` proof |
-| `extract_dcp_presentation_claims(dcp_presentation_message, expected_holder_did)` | **Eclipse DCP v1.0 (`ISO/IEC DIS 26451`)** | Verified participant claims dictionary extracted from `PresentationResponseMessage` |
-| `export_cap_declaration_vc(s_cert, issuer_did, subject_did)` | **Eclipse CAP v2.2.1** & **W3C VC 2.0** | `VerifiableCredential` containing `cap:Declaration` and `cred:Evidence` |
+| `DataPlaneSignalingBridge` | **Data Plane Signaling** & **Eclipse DSP** | Handles `DataFlowPrepareMessage` / `DataFlowStartMessage`, fetches `GET /transfers/:dataFlowId/agreement`, evaluates payloads, and emits DSP suspension/termination messages on violation |
+| `inspect_odrl_constraint_observability(odrl_policy)` | **W3C ODRL 2.2** & **Eclipse DSP** | Classifies payload-observable checks vs. unobservable behavioral usage constraints (`purpose`, `elapsedTime`, `distribute`) under `CONSUMER_FIRST_PARTY_AUDIT_RECORD` |
+| `handle_dcp_presentation_query(query_message, stored_credentials, holder_did)` | **Eclipse DCP v1.0 (`ISO/IEC DIS 26451`)** | Serves DID-signed `VerifiablePresentation` (`PresentationResponseMessage`) from consumer credentials in response to `PresentationQueryMessage` |
+| `export_cap_declaration_vc(s_cert, issuer_did, subject_did, private_key=...)` | **Eclipse CAP v2.2.1** & **W3C VC 2.0** | Consumer-signed first-party `cap:Declaration` VC with `JsonWebSignature2020` DID proof and `cred:Evidence` |
+| `verify_cap_declaration_vc(vc, public_key, expected_issuer_did)` | **Eclipse DCP / CAP v2.2.1** | Verifies consumer DID Ed25519/EdDSA proof and canonical claims on a `cap:Declaration` VC |
 | `export_w3c_prov_o(s_cert)` | **W3C PROV-O** | JSON-LD Provenance Graph (`prov:Activity`, `prov:Entity`, `prov:Agent`) |
 | `export_nist_oscal_finding(s_cert)` | **NIST OSCAL v1.1.2** | OSCAL Assessment Results `finding` and `observation` structure |
 

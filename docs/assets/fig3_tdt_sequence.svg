@@ -72,9 +72,9 @@
   <path d="M 965 308 L 965 338" stroke="#0D6E6E" stroke-width="2.5" marker-end="url(#arrowTeal)"/>
 
   <rect x="768" y="342" width="394" height="132" rx="6" fill="#EFF6FF" stroke="#1E3A8A" stroke-width="2"/>
-  <text x="782" y="364" font-size="12.5" font-weight="700" fill="#1E3A8A">4. Proof of Policy Enforcement (S-Cert)</text>
-  <text x="782" y="384" font-size="11.5" fill="#334155">• Zero-knowledge cryptographic receipt:</text>
-  <text x="782" y="400" font-size="11" font-style="italic" fill="#1E293B">  Proves policy enforcement without exposing raw payload</text>
+  <text x="782" y="364" font-size="12.5" font-weight="700" fill="#1E3A8A">4. Signed Consumer Audit Record (S-Cert)</text>
+  <text x="782" y="384" font-size="11.5" fill="#334155">• First-party cryptographic audit receipt:</text>
+  <text x="782" y="400" font-size="11" font-style="italic" fill="#1E293B">  Records consumer payload check without exposing raw data</text>
   <text x="782" y="418" font-size="11" class="mono" fill="#0D6E6E">• JWS(payload_hash, definition_hash, config_hash)</text>
   <text x="782" y="435" font-size="11" class="mono" fill="#0D6E6E">• Linked via decentralized correlation_id</text>
   <text x="782" y="454" font-size="11" font-weight="700" fill="#0B2545">• Zero raw payload or PII ever leaves participant boundary</text>

@@ -38,7 +38,7 @@ nav:
     - Conformance Levels (L1 & L2): conformance-levels.md
     - JSON Schemas, OWL 2 & LinkML: schemas-and-linkml.md
   - Dataspace Interoperability:
-    - Eclipse EDWG (DSP, DCP, CAP v2.2.1, DRP): eclipse-edwg.md
+    - Eclipse EDWG (Signaling, DSP, DCP, CAP, DRP): eclipse-edwg.md
     - Gaia-X Phase 6 & DTA Verification: gaia-x-dta.md
     - IDSA Rulebook, W3C PROV-O & NIST OSCAL: idsa-prov-oscal.md
   - Reference:

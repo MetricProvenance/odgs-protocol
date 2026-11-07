@@ -5,7 +5,7 @@
 Within the **Gaia-X Architecture Document (`25.11`)** and the **Gaia-X Data Transfer Agent (`DTA`)**:
 
 - **Phase 5 (Transfer):** The `DTA` evaluates pre-transfer access prerequisites (`odrl:read`) and records negotiated post-transfer consumer obligations on the `TransferRequestResult`.
-- **Phase 6 (Access & Usage):** Because a transfer agent's involvement ends when bytes land at the consumer boundary, post-transfer obligations (`odrl:Duty`, `odrl:Prohibition`, such as *k*-anonymity aggregation or trade-secret filtering) must be enforced inside the consumer's processing pipeline, and the consumer must provide cryptographic proof of implemented policy enforcement (**Gaia-X Architecture Document 25.11**, §4.8.4.2).
+- **Phase 6 (Access & Usage):** Because a transfer agent's involvement ends when bytes land at the consumer boundary, post-transfer payload-observable checks (such as *k*-anonymity aggregation counts or field bounds) execute inside the consumer's processing pipeline, emitting a consumer-signed `S-Cert` audit record aligned with **Gaia-X Architecture Document 25.11** (§4.8.4.2). *(Note on Trust Model: because `S-Cert` receipts are generated and signed by the consumer over consumer-supplied payloads, they constitute a verifiable first-party consumer audit record rather than provider-verified proof of downstream usage such as purpose, retention, or onward sharing.)*
 
 ## 2. Verification Workflow (`dta_verifier.py`)
 
